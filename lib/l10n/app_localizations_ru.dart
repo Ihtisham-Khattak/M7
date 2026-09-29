@@ -1448,6 +1448,14 @@ class AppLocalizationsRu extends AppLocalizations {
   String get backupFailed => 'Не удалось прочитать эту копию';
 
   @override
+  String get dataSkippedNotice =>
+      'Некоторые сохранённые данные не удалось прочитать, они пропущены. Копия твоих данных сохранена.';
+
+  @override
+  String get dataNewerNotice =>
+      'Твои данные сохранены более новой версией GymMane. Обнови приложение, чтобы их увидеть, — ничего не изменено.';
+
+  @override
   String get nothingToExport => 'Выгружать пока нечего — сначала запиши тренировку';
 
   @override

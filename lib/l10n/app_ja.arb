@@ -460,6 +460,8 @@
   "backupCopied": "バックアップをクリップボードにコピーしました",
   "backupImported": "バックアップを読み込みました",
   "backupFailed": "このバックアップを読み込めませんでした",
+  "dataSkippedNotice": "保存されたデータの一部を読み込めず、スキップしました。データのコピーは保管してあります。",
+  "dataNewerNotice": "データは新しいバージョンの GymMane で保存されています。アプリを更新すると表示されます。何も変更されていません。",
   "nothingToExport": "まだ書き出すデータがありません — まずワークアウトを記録してください",
   "athlete": "アスリート",
   "calculatorsCount": "トレーニング用計算ツール {n} 個",

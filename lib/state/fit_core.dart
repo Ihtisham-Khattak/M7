@@ -89,12 +89,13 @@ abstract class FitCore extends ChangeNotifier {
   String units = 'kg';
   int weekStartDay = DateTime.monday;
   bool _loading = false;
+  bool storeLocked = false;
   Timer? _saveDebounce;
 
   void refreshAwards({bool silent = false}) {}
 
   void _persist() {
-    if (_loading) return;
+    if (_loading || storeLocked) return;
     _saveDebounce?.cancel();
     _saveDebounce = Timer(const Duration(milliseconds: 400), persistNow);
   }
@@ -102,7 +103,7 @@ abstract class FitCore extends ChangeNotifier {
   void persistNow() {
     _saveDebounce?.cancel();
     _saveDebounce = null;
-    if (_loading) return;
+    if (_loading || storeLocked) return;
     Store.instance.save(toJson());
   }
 

@@ -1392,6 +1392,14 @@ class AppLocalizationsAr extends AppLocalizations {
   String get backupFailed => 'تعذر قراءة هذه النسخة الاحتياطية';
 
   @override
+  String get dataSkippedNotice =>
+      'تعذّرت قراءة بعض العناصر المحفوظة وتم تخطيها. تم الاحتفاظ بنسخة من بياناتك.';
+
+  @override
+  String get dataNewerNotice =>
+      'تم حفظ بياناتك بواسطة إصدار أحدث من GymMane. حدّث التطبيق لعرضها — لم يتم تغيير أي شيء.';
+
+  @override
   String get nothingToExport => 'لا يوجد شيء لتصديره بعد — سجّل تمرينًا أولًا';
 
   @override

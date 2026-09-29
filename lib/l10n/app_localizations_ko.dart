@@ -1363,6 +1363,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get backupFailed => '이 백업을 읽을 수 없습니다';
 
   @override
+  String get dataSkippedNotice => '저장된 항목 일부를 읽지 못해 건너뛰었어요. 데이터 사본은 보관해 두었어요.';
+
+  @override
+  String get dataNewerNotice => '더 새로운 버전의 GymMane에서 저장한 데이터예요. 앱을 업데이트하면 볼 수 있어요. 아무것도 변경되지 않았어요.';
+
+  @override
   String get nothingToExport => '아직 내보낼 내용이 없습니다 — 먼저 운동을 기록하세요';
 
   @override

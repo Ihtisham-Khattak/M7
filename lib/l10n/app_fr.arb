@@ -460,6 +460,8 @@
   "backupCopied": "Sauvegarde copiée dans le presse-papiers",
   "backupImported": "Sauvegarde importée",
   "backupFailed": "Impossible de lire cette sauvegarde",
+  "dataSkippedNotice": "Certaines données enregistrées n'ont pas pu être lues et ont été ignorées. Une copie de tes données a été conservée.",
+  "dataNewerNotice": "Tes données ont été enregistrées par une version plus récente de GymMane. Mets l'appli à jour pour les voir — rien n'a été modifié.",
   "nothingToExport": "Rien à exporter — enregistre d’abord une séance",
   "athlete": "Athlète",
   "calculatorsCount": "{n} calculateurs pour ton entraînement",

@@ -475,6 +475,8 @@
   "backupCopied": "Backup copiato negli appunti",
   "backupImported": "Backup importato",
   "backupFailed": "Impossibile leggere quel backup",
+  "dataSkippedNotice": "Alcuni dati salvati non si sono potuti leggere e sono stati ignorati. È stata conservata una copia.",
+  "dataNewerNotice": "I tuoi dati sono stati salvati da una versione più recente di GymMane. Aggiorna l'app per vederli: non è stato modificato nulla.",
   "nothingToExport": "Niente da esportare — registra prima una sessione",
   "athlete": "Atleta",
 

@@ -460,6 +460,8 @@
   "backupCopied": "Kopia zapasowa skopiowana do schowka",
   "backupImported": "Kopia zapasowa zaimportowana",
   "backupFailed": "Nie udało się odczytać kopii zapasowej",
+  "dataSkippedNotice": "Nie udało się odczytać części zapisanych danych, więc je pominięto. Kopia twoich danych została zachowana.",
+  "dataNewerNotice": "Twoje dane zapisała nowsza wersja GymMane. Zaktualizuj aplikację, aby je zobaczyć — nic nie zostało zmienione.",
   "nothingToExport": "Nie ma jeszcze czego eksportować — najpierw zapisz trening",
   "athlete": "Sportowiec",
   "calculatorsCount": "{n} kalkulatorów do treningu",

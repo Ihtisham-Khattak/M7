@@ -1400,6 +1400,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get backupFailed => 'Couldn\'t read that backup';
 
   @override
+  String get dataSkippedNotice =>
+      'Some saved items couldn\'t be read and were skipped. A copy of your data was kept.';
+
+  @override
+  String get dataNewerNotice =>
+      'Your data was saved by a newer version of GymMane. Update the app to see it — nothing was changed.';
+
+  @override
   String get nothingToExport => 'Nothing to export yet — log a session first';
 
   @override

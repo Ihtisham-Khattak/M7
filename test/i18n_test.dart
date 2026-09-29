@@ -31,6 +31,39 @@ void main() {
     }
   });
 
+  test('the generated localization classes are up to date with the ARB files', () {
+    String read(String path) => File(path).readAsStringSync();
+    Map<String, dynamic> arb(String code) =>
+        jsonDecode(read('lib/l10n/app_$code.arb')) as Map<String, dynamic>;
+
+    final keys = arb('en').keys.where((k) => !k.startsWith('@')).toList();
+    final base = read('lib/l10n/app_localizations.dart');
+    final stale = <String>[
+      for (final k in keys)
+        if (!RegExp('\\b$k\\b').hasMatch(base)) 'app_localizations.dart: $k',
+    ];
+
+    final codes = Directory('lib/l10n')
+        .listSync()
+        .whereType<File>()
+        .map((f) => f.uri.pathSegments.last)
+        .where((n) => n.startsWith('app_') && n.endsWith('.arb'))
+        .map((n) => n.substring(4, n.length - 4));
+    for (final code in codes) {
+      final file = 'app_localizations_${code.split('_').first}.dart';
+      final generated = File('lib/l10n/$file');
+      if (!generated.existsSync()) {
+        stale.add('missing $file');
+        continue;
+      }
+      final src = generated.readAsStringSync();
+      for (final k in arb(code).keys.where((k) => !k.startsWith('@'))) {
+        if (!RegExp('\\b$k\\b').hasMatch(src)) stale.add('$file ($code): $k');
+      }
+    }
+    expect(stale, isEmpty, reason: 'run `flutter gen-l10n` and commit the generated files');
+  });
+
   test('no key is left untranslated in any shipped language', () {
     Map<String, dynamic> arb(String code) =>
         jsonDecode(File('lib/l10n/app_$code.arb').readAsStringSync()) as Map<String, dynamic>;

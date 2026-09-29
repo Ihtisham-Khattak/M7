@@ -28,6 +28,9 @@ class LoggedSet {
   bool get counts => kind != SetKind.warmup;
   double get volume => reps * weight;
 
+  LoggedSet copyWith({int? reps, double? weight}) =>
+      LoggedSet(reps ?? this.reps, weight ?? this.weight, kind: kind, rpe: rpe, sec: sec, km: km);
+
   double get oneRm {
     if (reps <= 0) return 0;
     final pct = rpePercent(reps, rpe);

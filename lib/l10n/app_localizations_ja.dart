@@ -1350,6 +1350,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get backupFailed => 'このバックアップを読み込めませんでした';
 
   @override
+  String get dataSkippedNotice => '保存されたデータの一部を読み込めず、スキップしました。データのコピーは保管してあります。';
+
+  @override
+  String get dataNewerNotice => 'データは新しいバージョンの GymMane で保存されています。アプリを更新すると表示されます。何も変更されていません。';
+
+  @override
   String get nothingToExport => 'まだ書き出すデータがありません — まずワークアウトを記録してください';
 
   @override

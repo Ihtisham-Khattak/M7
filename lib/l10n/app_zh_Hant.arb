@@ -460,6 +460,8 @@
   "backupCopied": "備份已複製到剪貼簿",
   "backupImported": "備份已匯入",
   "backupFailed": "無法讀取此備份",
+  "dataSkippedNotice": "部分已儲存的內容無法讀取，已略過。已保留一份資料副本。",
+  "dataNewerNotice": "你的資料由較新版本的 GymMane 儲存。請更新應用程式後查看，目前沒有做任何變更。",
   "nothingToExport": "尚無可匯出的內容 — 請先記錄一次訓練",
   "athlete": "運動員",
   "calculatorsCount": "{n} 個訓練計算器",

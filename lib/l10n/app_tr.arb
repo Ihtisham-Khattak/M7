@@ -460,6 +460,8 @@
   "backupCopied": "Yedek panoya kopyalandı",
   "backupImported": "Yedek içe aktarıldı",
   "backupFailed": "Bu yedek okunamadı",
+  "dataSkippedNotice": "Kaydedilen bazı öğeler okunamadı ve atlandı. Verilerinin bir kopyası saklandı.",
+  "dataNewerNotice": "Verilerin GymMane'in daha yeni bir sürümüyle kaydedilmiş. Görmek için uygulamayı güncelle — hiçbir şey değiştirilmedi.",
   "nothingToExport": "Henüz dışa aktarılacak bir şey yok — önce bir antrenman kaydet",
   "athlete": "Sporcu",
   "calculatorsCount": "Antrenmanın için {n} hesaplayıcı",

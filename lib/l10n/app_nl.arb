@@ -460,6 +460,8 @@
   "backupCopied": "Back-up naar klembord gekopieerd",
   "backupImported": "Back-up geïmporteerd",
   "backupFailed": "Kon deze back-up niet lezen",
+  "dataSkippedNotice": "Sommige opgeslagen gegevens konden niet worden gelezen en zijn overgeslagen. Er is een kopie van je gegevens bewaard.",
+  "dataNewerNotice": "Je gegevens zijn opgeslagen door een nieuwere versie van GymMane. Werk de app bij om ze te zien — er is niets gewijzigd.",
   "nothingToExport": "Nog niets om te exporteren — log eerst een training",
   "athlete": "Atleet",
   "calculatorsCount": "{n} calculators voor je training",

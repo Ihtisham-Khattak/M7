@@ -91,10 +91,24 @@ class _AppShellState extends State<AppShell> with WidgetsBindingObserver {
     fit.addListener(_restOver);
     _queueCelebration();
     IncomingShare.listen(_receive);
+    WidgetsBinding.instance.addPostFrameCallback((_) => _announceLoadIssues());
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final text = await IncomingShare.take();
       if (text != null) _receive(text);
     });
+  }
+
+  void _announceLoadIssues() {
+    final newer = fit.storeLocked;
+    if (!mounted || (!newer && fit.loadSkipped == 0)) return;
+    fit.loadSkipped = 0;
+    showNotchToast(
+      context,
+      newer ? t.dataNewerNotice : t.dataSkippedNotice,
+      icon: PhosphorIconsFill.warningCircle,
+      accent: context.gc.warn,
+      duration: const Duration(seconds: 9),
+    );
   }
 
   void _receive(String text) {

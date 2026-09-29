@@ -1399,6 +1399,14 @@ class AppLocalizationsEs extends AppLocalizations {
   String get backupFailed => 'No he podido leer esa copia';
 
   @override
+  String get dataSkippedNotice =>
+      'No se pudieron leer algunos datos guardados y se omitieron. Se guardó una copia.';
+
+  @override
+  String get dataNewerNotice =>
+      'Tus datos se guardaron con una versión más nueva de GymMane. Actualiza la app para verlos; no se ha cambiado nada.';
+
+  @override
   String get nothingToExport => 'Nada que exportar aún — registra una sesión';
 
   @override

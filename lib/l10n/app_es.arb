@@ -436,6 +436,8 @@
   "backupCopied": "Copia guardada en el portapapeles",
   "backupImported": "Copia importada",
   "backupFailed": "No he podido leer esa copia",
+  "dataSkippedNotice": "No se pudieron leer algunos datos guardados y se omitieron. Se guardó una copia.",
+  "dataNewerNotice": "Tus datos se guardaron con una versión más nueva de GymMane. Actualiza la app para verlos; no se ha cambiado nada.",
   "nothingToExport": "Nada que exportar aún — registra una sesión",
   "athlete": "Atleta",
 

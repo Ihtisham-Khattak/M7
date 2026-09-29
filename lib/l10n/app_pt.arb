@@ -258,6 +258,8 @@
   "backupCopied": "Backup copiado para a área de transferência",
   "backupImported": "Backup importado",
   "backupFailed": "Não foi possível ler esse backup",
+  "dataSkippedNotice": "Alguns dados salvos não puderam ser lidos e foram ignorados. Uma cópia dos seus dados foi mantida.",
+  "dataNewerNotice": "Seus dados foram salvos por uma versão mais recente do GymMane. Atualize o app para vê-los — nada foi alterado.",
   "nothingToExport": "Ainda não há nada para exportar — registre uma sessão primeiro",
   "athlete": "Atleta",
   "calculatorsCount": "{n} calculadoras para o seu treinamento",

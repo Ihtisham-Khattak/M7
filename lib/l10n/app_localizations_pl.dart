@@ -1401,6 +1401,14 @@ class AppLocalizationsPl extends AppLocalizations {
   String get backupFailed => 'Nie udało się odczytać kopii zapasowej';
 
   @override
+  String get dataSkippedNotice =>
+      'Nie udało się odczytać części zapisanych danych, więc je pominięto. Kopia twoich danych została zachowana.';
+
+  @override
+  String get dataNewerNotice =>
+      'Twoje dane zapisała nowsza wersja GymMane. Zaktualizuj aplikację, aby je zobaczyć — nic nie zostało zmienione.';
+
+  @override
   String get nothingToExport => 'Nie ma jeszcze czego eksportować — najpierw zapisz trening';
 
   @override

@@ -1335,6 +1335,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get backupFailed => '无法读取该备份文件';
 
   @override
+  String get dataSkippedNotice => '部分已保存的内容无法读取，已跳过。已保留一份数据副本。';
+
+  @override
+  String get dataNewerNotice => '你的数据由更新版本的 GymMane 保存。请更新应用后查看，目前没有做任何更改。';
+
+  @override
   String get nothingToExport => '暂无可导出的数据 — 请先记录一次训练';
 
   @override
@@ -4326,6 +4332,12 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get backupFailed => '無法讀取此備份';
+
+  @override
+  String get dataSkippedNotice => '部分已儲存的內容無法讀取，已略過。已保留一份資料副本。';
+
+  @override
+  String get dataNewerNotice => '你的資料由較新版本的 GymMane 儲存。請更新應用程式後查看，目前沒有做任何變更。';
 
   @override
   String get nothingToExport => '尚無可匯出的內容 — 請先記錄一次訓練';

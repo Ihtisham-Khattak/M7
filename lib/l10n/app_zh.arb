@@ -258,6 +258,8 @@
   "backupCopied": "备份数据已复制到剪贴板",
   "backupImported": "备份已成功导入",
   "backupFailed": "无法读取该备份文件",
+  "dataSkippedNotice": "部分已保存的内容无法读取，已跳过。已保留一份数据副本。",
+  "dataNewerNotice": "你的数据由更新版本的 GymMane 保存。请更新应用后查看，目前没有做任何更改。",
   "nothingToExport": "暂无可导出的数据 — 请先记录一次训练",
   "athlete": "健身者",
   "calculatorsCount": "专为训练打造的 {n} 款实用计算器",

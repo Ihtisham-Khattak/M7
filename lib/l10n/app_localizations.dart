@@ -9,6 +9,7 @@ import 'app_localizations_ar.dart';
 import 'app_localizations_de.dart';
 import 'app_localizations_en.dart';
 import 'app_localizations_es.dart';
+import 'app_localizations_fa.dart';
 import 'app_localizations_fr.dart';
 import 'app_localizations_it.dart';
 import 'app_localizations_ja.dart';
@@ -108,6 +109,7 @@ abstract class AppLocalizations {
     Locale('de'),
     Locale('en'),
     Locale('es'),
+    Locale('fa'),
     Locale('fr'),
     Locale('it'),
     Locale('ja'),
@@ -2503,6 +2505,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Couldn\'t read that backup'**
   String get backupFailed;
+
+  /// No description provided for @dataSkippedNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Some saved items couldn\'t be read and were skipped. A copy of your data was kept.'**
+  String get dataSkippedNotice;
+
+  /// No description provided for @dataNewerNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Your data was saved by a newer version of GymMane. Update the app to see it — nothing was changed.'**
+  String get dataNewerNotice;
 
   /// No description provided for @nothingToExport.
   ///
@@ -5603,6 +5617,7 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
     'de',
     'en',
     'es',
+    'fa',
     'fr',
     'it',
     'ja',
@@ -5643,6 +5658,8 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
       return AppLocalizationsEn();
     case 'es':
       return AppLocalizationsEs();
+    case 'fa':
+      return AppLocalizationsFa();
     case 'fr':
       return AppLocalizationsFr();
     case 'it':

@@ -68,6 +68,17 @@ class MediaStore {
     } catch (_) {}
   }
 
+  static Future<void> retainOnly(Set<String> keep) async {
+    if (_dir == null) return;
+    try {
+      for (final f in Directory(_dir!).listSync()) {
+        if (f is! File) continue;
+        final name = f.uri.pathSegments.last;
+        if (!keep.contains(name)) await f.delete();
+      }
+    } catch (_) {}
+  }
+
   static Future<void> clearAll() async {
     if (_dir == null) return;
     try {

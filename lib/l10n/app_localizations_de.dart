@@ -1407,6 +1407,14 @@ class AppLocalizationsDe extends AppLocalizations {
   String get backupFailed => 'Dieses Backup konnte nicht gelesen werden';
 
   @override
+  String get dataSkippedNotice =>
+      'Einige gespeicherte Einträge konnten nicht gelesen werden und wurden übersprungen. Eine Kopie deiner Daten wurde aufbewahrt.';
+
+  @override
+  String get dataNewerNotice =>
+      'Deine Daten wurden mit einer neueren Version von GymMane gespeichert. Aktualisiere die App, um sie zu sehen – es wurde nichts verändert.';
+
+  @override
   String get nothingToExport => 'Noch nichts zu exportieren — protokolliere zuerst ein Training';
 
   @override

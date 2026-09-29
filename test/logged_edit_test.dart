@@ -60,6 +60,60 @@ void main() {
       expect(fit.sessions, isEmpty, reason: 'sin series no queda ejercicio ni sesión');
     });
 
+    test('correcting a set keeps its type, effort, time and distance', () {
+      final s = log(
+        sets: [
+          LoggedSet(10, 40, kind: SetKind.warmup),
+          LoggedSet(8, 80, kind: SetKind.failure, rpe: 9.5),
+          LoggedSet(0, 0, sec: 45),
+          LoggedSet(0, 0, sec: 1200, km: 4.2),
+        ],
+      );
+      final e = s.exercises.single;
+
+      fit.setLoggedReps(e, 0, 12);
+      fit.setLoggedWeight(e, 1, 82.5);
+      fit.setLoggedWeight(e, 2, 10);
+      fit.setLoggedReps(e, 3, 1);
+
+      expect(e.sets[0].kind, SetKind.warmup);
+      expect(e.sets[0].reps, 12);
+      expect(e.sets[1].kind, SetKind.failure);
+      expect(e.sets[1].rpe, 9.5);
+      expect(e.sets[1].weight, 82.5);
+      expect(e.sets[2].sec, 45);
+      expect(e.sets[3].km, 4.2);
+      expect(e.sets[3].sec, 1200);
+    });
+
+    test('a warm-up stays out of volume and records after it is edited', () {
+      final s = log(
+        sets: [
+          LoggedSet(10, 40, kind: SetKind.warmup),
+          LoggedSet(5, 100),
+        ],
+      );
+      final e = s.exercises.single;
+
+      fit.bumpLoggedWeight(e, 0, 1);
+      fit.bumpLoggedReps(e, 0, 1);
+
+      expect(e.sets[0].counts, false);
+      expect(s.volume, 5 * 100);
+      expect(e.topWeight, 100);
+    });
+
+    test('a set added to a timed or cardio exercise copies its time and distance', () {
+      final s = log(sets: [LoggedSet(0, 0, sec: 900, km: 2.5)]);
+      final e = s.exercises.single;
+
+      fit.addLoggedSet(e);
+
+      expect(e.sets[1].sec, 900);
+      expect(e.sets[1].km, 2.5);
+      expect(e.sets[1].rpe, isNull);
+    });
+
     test('the correction survives a restart', () async {
       final s = log();
       fit.setLoggedReps(s.exercises.single, 1, 6);

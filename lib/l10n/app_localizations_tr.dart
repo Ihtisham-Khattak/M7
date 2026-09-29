@@ -97,10 +97,10 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
-  String get pushDay => 'PUSH GÜNÜ';
+  String get pushDay => 'İTİŞ GÜNÜ';
 
   @override
-  String get pullDay => 'PULL GÜNÜ';
+  String get pullDay => 'ÇEKİŞ GÜNÜ';
 
   @override
   String get legDay => 'BACAK';
@@ -112,7 +112,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get pullFocus => 'Sırt · Biseps · Trapez';
 
   @override
-  String get legFocus => 'Quadriceps · Hamstring · Kalça';
+  String get legFocus => 'Ön bacak · Arka bacak · Kalça';
 
   @override
   String get train => 'ANTRENMAN';
@@ -262,7 +262,7 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
-  String get finishBodyDefault => 'Kaydedildi ve sayıldı. İlerlemeyi süreklilik getirir.';
+  String get finishBodyDefault => 'Kaydedildi ve hesaba katıldı. İlerlemenin sırrı istikrar.';
 
   @override
   String get vsLastTime => 'SON SEFERE GÖRE';
@@ -343,7 +343,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get totalVolume30d => 'TOPLAM HACİM · 30 GÜN';
 
   @override
-  String get volumeCumulative => 'Kaldırdığın tüm kiloların toplamı';
+  String get volumeCumulative => 'Kaldırdığın tüm ağırlıkların toplamı';
 
   @override
   String get volumeChartEmpty => 'Bir antrenman kaydet, grafik burada başlasın';
@@ -611,7 +611,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get placesHint =>
-      'Her yerde hangi ekipmanın olduğunu belirt; kütüphane yalnızca orada yapabileceklerini gösterir.';
+      'Her yerde hangi ekipmanların bulunduğunu belirt; kütüphanede yalnızca orada yapabileceğin egzersizler gösterilir.';
 
   @override
   String get placeAll => 'Her yerde';
@@ -650,7 +650,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get placeEmptyBody =>
-      'Bir yer, orada sahip olduğun ekipmanların listesidir. Başlamak için birini seç, sonra düzenle.';
+      'Bir yer, orada bulunan ekipmanların listesidir. Başlamak için birini seç; daha sonra düzenleyebilirsin.';
 
   @override
   String get placeDeleteTitle => 'Yeri sil';
@@ -797,7 +797,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get measures => 'ÖLÇÜLER';
 
   @override
-  String get measuresHint => 'Boyundan baldıra — sadece barı değil, vücudundaki değişimi de izle.';
+  String get measuresHint => 'Boyundan baldıra — yalnızca barı değil, vücudundaki değişimi de izle.';
 
   @override
   String measureCount(int n) {
@@ -956,7 +956,7 @@ class AppLocalizationsTr extends AppLocalizations {
       'Bir antrenman kaydet, kas haritan burada dolmaya başlasın — fotoğrafa gerek yok.';
 
   @override
-  String get timelineBodyHint => 'Kendi setlerinden oluşturulur — hiçbir şey yüklenmez.';
+  String get timelineBodyHint => 'Kendi setlerinden oluşturulur — internete hiçbir şey yüklenmez.';
 
   @override
   String timelineWindow(String from, String to) {
@@ -1109,7 +1109,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get routineName => 'Program adı';
 
   @override
-  String get schedule => 'PROGRAM';
+  String get schedule => 'TAKVİM';
 
   @override
   String get addFromList => 'Aşağıdaki listeden egzersiz ekle.';
@@ -1166,7 +1166,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get resetBody =>
-      'Antrenmanlar, rekorlar, programlar, notlar ve profil. Bu işlem geri alınamaz — gerekebilir diye önce yedek dışa aktar.';
+      'Antrenmanlar, rekorlar, programlar, notlar ve profil silinecek. Bu işlem geri alınamaz — gerekebilecekse önce bir yedek dışa aktar.';
 
   @override
   String get resetConfirm => 'Her şeyi sil';
@@ -1283,7 +1283,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get importHint =>
-      'GymMane\'den dışa aktarılmış bir .zip (veya eski .json) yedeği seç. Mevcut verilerin, medya dahil, değiştirilecek.';
+      'GymMane\'den dışa aktarılmış bir .zip (veya eski .json) yedeği seç. Medya dâhil mevcut verilerinin üzerine yazılacak.';
 
   @override
   String get import => 'İçe aktar';
@@ -1295,7 +1295,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get importFromApp => 'Başka bir uygulamadan içe aktar';
 
   @override
-  String get importUnknownFormat => 'Bu dosyada tarih, egzersiz, tekrar ve ağırlık sütunları olmalı';
+  String get importUnknownFormat => 'Bu dosya tarih, egzersiz, tekrar ve ağırlık sütunlarını içermeli';
 
   @override
   String get importZipNoWeights => 'Bu zip içinde ağırlık dosyası yok';
@@ -1341,7 +1341,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get yourProfile => 'PROFİLİN';
 
   @override
-  String get autofills => 'Hesaplayıcıları otomatik doldurur';
+  String get autofills => 'Hesaplayıcılardaki bilgileri otomatik doldurur';
 
   @override
   String get nameLabel => 'AD';
@@ -1399,6 +1399,14 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get backupFailed => 'Bu yedek okunamadı';
+
+  @override
+  String get dataSkippedNotice =>
+      'Kaydedilen bazı öğeler okunamadı ve atlandı. Verilerinin bir kopyası saklandı.';
+
+  @override
+  String get dataNewerNotice =>
+      'Verilerin GymMane\'in daha yeni bir sürümüyle kaydedilmiş. Görmek için uygulamayı güncelle — hiçbir şey değiştirilmedi.';
 
   @override
   String get nothingToExport => 'Henüz dışa aktarılacak bir şey yok — önce bir antrenman kaydet';
@@ -1497,7 +1505,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get toolHintRm => 'Tahmini 1 tekrar maksimumu (Epley formülü)';
 
   @override
-  String get toolHintCal => 'Günlük koruma ihtiyacı tahmini';
+  String get toolHintCal => 'Tahmini günlük kilo koruma kalorisi';
 
   @override
   String get toolHintBf => 'ABD Donanması yöntemine göre tahmin';
@@ -1521,7 +1529,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get toolDescBf => 'Vücut yağ oranı';
 
   @override
-  String get toolDescPlate => 'Ağırlık plakası hesaplayıcı';
+  String get toolDescPlate => 'Bar plakası hesaplayıcı';
 
   @override
   String get toolDescWarmup => 'Kademeli ısınma setleri';
@@ -1575,13 +1583,13 @@ class AppLocalizationsTr extends AppLocalizations {
   String get muscleAbdomen => 'Karın';
 
   @override
-  String get muscleObliques => 'Oblikler';
+  String get muscleObliques => 'Yan karın';
 
   @override
-  String get muscleQuads => 'Quadriceps';
+  String get muscleQuads => 'Ön bacak';
 
   @override
-  String get muscleHamstrings => 'Hamstring';
+  String get muscleHamstrings => 'Arka bacak';
 
   @override
   String get muscleGlutes => 'Kalça';
@@ -1605,10 +1613,10 @@ class AppLocalizationsTr extends AppLocalizations {
   String get mgArms => 'Kollar';
 
   @override
-  String get mgCore => 'Core';
+  String get mgCore => 'Merkez bölge';
 
   @override
-  String get equipBarbell => 'Barbell';
+  String get equipBarbell => 'Bar';
 
   @override
   String get equipDumbbell => 'Dambıl';
@@ -1667,10 +1675,10 @@ class AppLocalizationsTr extends AppLocalizations {
   String get fullyOffline => '%100 çevrimdışı';
 
   @override
-  String get fullyOfflineWhy => 'Hesap yok, sunucu yok. Antrenmanların bu telefondan asla çıkmaz.';
+  String get fullyOfflineWhy => 'Hesap yok, sunucu yok. Antrenman verilerin bu telefondan asla çıkmaz.';
 
   @override
-  String get yoursToTake => 'Verilerin senin';
+  String get yoursToTake => 'Verilerin sana ait';
 
   @override
   String get yoursToTakeWhy => 'İstediğin zaman CSV olarak dışa aktar ve her şeyi tek dokunuşla sil.';
@@ -1698,7 +1706,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get mathInsideWhy =>
-      'Hacim, rekorlar ve setler kendi verilerinden hesaplanır. Hiçbir şey sadece süs değil.';
+      'Hacim, rekorlar ve seriler kendi setlerinden hesaplanır. Buradaki hiçbir şey göstermelik değil.';
 
   @override
   String get yourNumbers => 'SAYILARIN';
@@ -1762,7 +1770,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get onbGoalTitle => 'Ne sıklıkla antrenman yapıyorsun?';
 
   @override
-  String get onbGoalWhy => 'Haftalık hedefini belirler. Gerçekçi ol, fazla iddialı olma.';
+  String get onbGoalWhy => 'Haftalık hedef halkasını belirler. İddialı değil, gerçekçi ol.';
 
   @override
   String perWeek(int n) {
@@ -1788,7 +1796,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get skip2 => 'Atla';
 
   @override
-  String get madeWithLoveBy => 'SEVGİYLE YAPAN';
+  String get madeWithLoveBy => 'SEVGİYLE GELİŞTİREN';
 
   @override
   String get sourceCode => 'KAYNAK KODU';
@@ -1819,7 +1827,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get continueWorkoutBody =>
-      'Antrenman, işaretlenmiş setlerle kaldığı yerden devam eder. Yeniden bitirdiğinde orijinal tarihine kaydedilir.';
+      'Antrenman yeniden devam ediyor durumuna alınır ve tamamlanan setler korunur. Tekrar bitirdiğinde ilk tarihine kaydedilir.';
 
   @override
   String get addBodyWidget => 'Kas haritası widget\'ı ekle';
@@ -1885,7 +1893,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String autoProgressHint(String w) {
-    return 'Tüm tekrarları tamamla, sonraki antrenman $w daha fazla ile başlasın.';
+    return 'Tüm tekrarları tamamladığında sonraki antrenman $w daha ağır başlar.';
   }
 
   @override
@@ -1896,7 +1904,12 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String platesOwned(int n) {
-    String _temp0 = intl.Intl.pluralLogic(n, locale: localeName, other: '$n boyut', one: '$n boyut');
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n plaka ağırlığı',
+      one: '$n plaka ağırlığı',
+    );
     return '$_temp0';
   }
 
@@ -1905,7 +1918,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String plateAchievable(String w) {
-    return 'En yakın uygulanabilir ağırlık: $w';
+    return 'Yükleyebileceğin en yakın ağırlık: $w';
   }
 
   @override
@@ -1918,7 +1931,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get trainReminder => 'Antrenman hatırlatıcısı';
 
   @override
-  String get trainReminderHint => 'Bu saatte, yalnızca programının olduğu günlerde bir hatırlatma.';
+  String get trainReminderHint => 'Yalnızca programının olduğu günlerde bu saatte hatırlatır.';
 
   @override
   String get notifTrainChannel => 'Antrenman hatırlatıcısı';
@@ -1957,10 +1970,10 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
-  String get planNothing => 'Bu dosyadaki hiçbir egzersiz kütüphanenle eşleşmiyor';
+  String get planNothing => 'Bu dosyadaki hiçbir egzersiz kütüphanenle eşleşmedi';
 
   @override
-  String get planFailed => 'Bu dosya GymMane\'in okuyabileceği bir program değil';
+  String get planFailed => 'Bu dosya GymMane\'in okuyabileceği bir program içermiyor';
 
   @override
   String get routineGroup => 'Grup';
@@ -1972,14 +1985,14 @@ class AppLocalizationsTr extends AppLocalizations {
   String get noGroup => 'Grup yok';
 
   @override
-  String get groupNameHint => 'Push / Pull / Bacak, 5×5…';
+  String get groupNameHint => 'İtiş / Çekiş / Bacak, 5×5…';
 
   @override
   String get filters => 'Filtreler';
 
   @override
   String get setsPlannedHint =>
-      'Her egzersiz için istediğin set sayısını seç. Antrenman her şey hazır olarak açılır.';
+      'Her egzersiz için istediğin set sayısını seç. Antrenman, setler hazır biçimde açılır.';
 
   @override
   String get nextTime => 'BİR DAHAKİ SEFER';
@@ -2052,7 +2065,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get templatesHint =>
-      'Kendi kütüphanenden oluşturulan klasik programlar. Sonradan her şeyi değiştirebilirsin.';
+      'Kendi kütüphanendeki egzersizlerle oluşturulan klasik programlar. Daha sonra her şeyi değiştirebilirsin.';
 
   @override
   String templateAdded(int n) {
@@ -2069,16 +2082,16 @@ class AppLocalizationsTr extends AppLocalizations {
   String get tplFullbody => 'Haftada üç tam vücut antrenmanı. Başlangıç için ideal.';
 
   @override
-  String get tplPpl => 'Push, pull ve bacak. Haftada üç veya altı gün.';
+  String get tplPpl => 'İtiş, çekiş ve bacak. Haftada üç veya altı gün.';
 
   @override
   String get tplUpperlower => 'Üst ve alt vücut, haftada dört gün.';
 
   @override
-  String get tplStronglifts => 'Dönüşümlü iki antrenman, beşe beş setler.';
+  String get tplStronglifts => 'Dönüşümlü iki antrenman; beş tekrardan beş set.';
 
   @override
-  String get tplStartingstrength => 'Her antrenmanda squat, dönüşümlü iki antrenman.';
+  String get tplStartingstrength => 'Her antrenmanda squat yapılan, dönüşümlü iki antrenman.';
 
   @override
   String get tplHome => 'Barfiks demiri ve zemin dışında hiçbir şey yok.';
@@ -2235,7 +2248,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get awardSaveImage => 'Görseli kaydet';
 
   @override
-  String get awardSaved => 'Galerine kaydedildi';
+  String get awardSaved => 'Galeriye kaydedildi';
 
   @override
   String get awardStreakBottom => 'seri';
@@ -2292,7 +2305,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get awardSets1000Name => 'Bin set';
 
   @override
-  String get awardSets1000Line => 'Teker teker set, ta ki bine kadar.';
+  String get awardSets1000Line => 'Her seferinde bir set; toplamda bin set.';
 
   @override
   String get profile => 'Profil';
@@ -2310,7 +2323,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get statWorkouts => 'Antrenmanlar';
 
   @override
-  String get statTrained => 'Antrenman';
+  String get statTrained => 'Antrenman süresi';
 
   @override
   String get statSets => 'Setler';
@@ -2337,13 +2350,13 @@ class AppLocalizationsTr extends AppLocalizations {
   String get snapNow => 'Şimdi çek';
 
   @override
-  String get calendarLegend => 'Antrenman · fotoğraflar';
+  String get calendarLegend => 'Antrenman · Fotoğraflar';
 
   @override
   String get addCover => 'Kapak ekle';
 
   @override
-  String get addTodayWidget => 'Bugünkü antrenman yapıldı mı';
+  String get addTodayWidget => 'Bugünkü antrenman durumu';
 
   @override
   String get monthTitle => 'Bu ay';
@@ -2379,7 +2392,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get tileVolume30 => 'Hacim · 30 g';
 
   @override
-  String get tileAddWeight => 'Kendininkini ekle';
+  String get tileAddWeight => 'Kilonu ekle';
 
   @override
   String get heatToneTitle => 'Isı haritası rengi';
@@ -2508,7 +2521,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get badgeHint =>
-      'Bir renk seç veya kaldırmak için mevcut olana dokun. Yalnızca senin için — hiçbir şey doğrulanmaz ve ücretli değildir.';
+      'Bir renk seç veya kaldırmak için seçili renge dokun. Bu rozet yalnızca sana özel; doğrulama veya ödeme gerektirmez.';
 
   @override
   String get momentsEmptyHint =>
@@ -2715,7 +2728,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get planFormatNotes =>
-      'Egzersiz adlarını tam listede göründüğü gibi kullan. \"sets\", \"reps\", \"weight\" (belirtilen birimde), saniye cinsinden \"rest\" ve \"days\" isteğe bağlıdır. \"superset\": true bir egzersizi sonrakine bağlar. Birkaç hafta için rutinleri ikinci örnekteki gibi \"weeks\" içinde grupla.';
+      'Egzersiz adlarını tam listede göründüğü gibi kullan. \"sets\", \"reps\", \"weight\" (belirtilen birimde), saniye cinsinden \"rest\" ve \"days\" isteğe bağlıdır. \"superset\": true bir egzersizi sonrakine bağlar. Birkaç hafta için programları ikinci örnekteki gibi \"weeks\" içinde grupla.';
 
   @override
   String get planSets => 'Setleri planla';
@@ -2734,13 +2747,13 @@ class AppLocalizationsTr extends AppLocalizations {
   String get planChip => 'Plan';
 
   @override
-  String get shareRoutine => 'Rutini paylaş';
+  String get shareRoutine => 'Programı paylaş';
 
   @override
   String get shareWeek => 'Haftamı paylaş';
 
   @override
-  String get shareWeekHint => 'Tüm rutinlerin ve her birinin günü.';
+  String get shareWeekHint => 'Tüm programların ve her birinin planlandığı gün.';
 
   @override
   String shareMessage(String name) {
@@ -2748,18 +2761,18 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
-  String get importRoutines => 'Rutinleri içe aktar';
+  String get importRoutines => 'Programları içe aktar';
 
   @override
   String get importPasteHint =>
-      'Buraya bir rutin yapıştır: GymMane\'den paylaşılan, bir yapay zekâ yanıtı, JSON veya CSV.';
+      'Buraya bir program yapıştır: GymMane\'den paylaşılan bir program, yapay zekâ yanıtı, JSON veya CSV olabilir.';
 
   @override
   String get pasteAction => 'Yapıştır';
 
   @override
   String routineCount(int n) {
-    String _temp0 = intl.Intl.pluralLogic(n, locale: localeName, other: '$n rutin', one: '1 rutin');
+    String _temp0 = intl.Intl.pluralLogic(n, locale: localeName, other: '$n program', one: '1 program');
     return '$_temp0';
   }
 
@@ -2770,15 +2783,15 @@ class AppLocalizationsTr extends AppLocalizations {
   String get useTheirScheduleHint => 'Getirdiği günler, o günlerde planladıklarının yerine geçer.';
 
   @override
-  String get addToMyRoutines => 'Rutinlerime ekle';
+  String get addToMyRoutines => 'Programlarıma ekle';
 
   @override
   String routinesAdded(int n) {
     String _temp0 = intl.Intl.pluralLogic(
       n,
       locale: localeName,
-      other: '$n rutin eklendi',
-      one: '1 rutin eklendi',
+      other: '$n program eklendi',
+      one: '1 program eklendi',
     );
     return '$_temp0';
   }
@@ -2838,7 +2851,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get recoveryHint =>
-      'Ne kadar toparlandığını görmek için bir kasa dokun. Yakın setler daha çok, daha zor olanlar (RPE\'ye göre) daha da çok sayılır.';
+      'Ne kadar toparlandığını görmek için bir kasa dokun. Yakın zamanda yapılan setler daha çok, daha zor olanlar (RPE\'ye göre) daha da fazla hesaba katılır.';
 
   @override
   String recoveryPct(int pct) {
@@ -2860,7 +2873,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get elapsedCaps => 'GEÇEN SÜRE';
 
   @override
-  String get tapToSkip => 'Geçmek için dokun';
+  String get tapToSkip => 'Atlamak için dokun';
 
   @override
   String get tapToStop => 'Durdurmak için dokun';
@@ -2911,7 +2924,7 @@ class AppLocalizationsTr extends AppLocalizations {
       'Taşımak için sürükle, boyutunu değiştirmek veya döndürmek için iki parmakla sıkıştır';
 
   @override
-  String get stickerSaved => 'Galerine kaydedildi';
+  String get stickerSaved => 'Galeriye kaydedildi';
 
   @override
   String get stickerWeek => 'Bu hafta';
@@ -2926,14 +2939,14 @@ class AppLocalizationsTr extends AppLocalizations {
   String get stickerCamera => 'Kamera';
 
   @override
-  String get shareIntroTitle => 'Bu rutini paylaş';
+  String get shareIntroTitle => 'Bu programı paylaş';
 
   @override
   String get shareIntroBody =>
-      'Partnerine, bir arkadaşına ya da ailene gönder. GymMane ile açılan küçük bir dosya alırlar; setleri ve ağırlıklarıyla tek dokunuşta eklenir.';
+      'Partnerine, bir arkadaşına ya da ailene gönder. GymMane ile açılan küçük dosyayı, setleri ve ağırlıklarıyla birlikte tek dokunuşla ekleyebilirler.';
 
   @override
-  String get removedFromRoutine => 'Rutinden çıkarıldı';
+  String get removedFromRoutine => 'Programdan çıkarıldı';
 
   @override
   String get radarTitle => 'Bu ay';
@@ -2975,7 +2988,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get rirHint => '0 bir tekrar daha yapamamak, 2 iki tekrar daha yapabilmek demek.';
 
   @override
-  String get addWeekWidget => 'Hafta widget’ı ekle';
+  String get addWeekWidget => 'Hafta widget\'ı ekle';
 
   @override
   String get gamificationSetting => 'Madalyalar ve seviyeler';

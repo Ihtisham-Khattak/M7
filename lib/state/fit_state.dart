@@ -26,6 +26,7 @@ import '../services/media_store.dart';
 import '../services/progress_reminder.dart';
 import '../services/plan_share.dart';
 import '../services/rest_alarm.dart';
+import '../services/schema.dart';
 import '../services/train_reminder.dart';
 import '../services/workout_import.dart';
 
@@ -43,23 +44,102 @@ part 'timeline_state.dart';
 part 'tools_state.dart';
 part 'workout_state.dart';
 
+Map<dynamic, dynamic> _mapOf(Object? v) => v is Map ? v : const {};
+
+List<dynamic> _listOf(Object? v) => v is List ? v : const [];
+
 class FitState extends FitCore
-    with ToolsState, LibraryState, SettingsState, NotesState, PlacesState, MeasuresState, MomentsState, TimelineState, StatsState, AwardsState, RoutinesState, WorkoutState {
+    with
+        ToolsState,
+        LibraryState,
+        SettingsState,
+        NotesState,
+        PlacesState,
+        MeasuresState,
+        MomentsState,
+        TimelineState,
+        StatsState,
+        AwardsState,
+        RoutinesState,
+        WorkoutState {
+  int loadSkipped = 0;
+
+  void _guard(void Function() body) {
+    try {
+      body();
+    } catch (_) {
+      loadSkipped++;
+    }
+  }
+
+  List<T> _readAll<T>(Object? raw, T Function(Map<String, dynamic> json) parse) {
+    final out = <T>[];
+    if (raw is! List) return out;
+    for (final e in raw) {
+      try {
+        out.add(parse((e as Map).cast<String, dynamic>()));
+      } catch (_) {
+        loadSkipped++;
+      }
+    }
+    return out;
+  }
+
+  Map<int, String> _readPlanDays(Object? raw) {
+    final out = <int, String>{};
+    if (raw is! Map) return out;
+    raw.forEach((k, v) {
+      try {
+        out[int.parse(k as String)] = v as String;
+      } catch (_) {
+        loadSkipped++;
+      }
+    });
+    return out;
+  }
+
   void loadFromStore() {
-    final data = Store.instance.load();
+    var data = Store.instance.load();
+    loadSkipped = 0;
+    storeLocked = false;
     _loading = true;
-    if (data['language'] == null) _adoptDeviceLanguage();
-    if (data.isNotEmpty) {
-      profile = Profile.fromJson((data['profile'] as Map?)?.cast<String, dynamic>() ?? {});
+    try {
+      if (data.isNotEmpty) {
+        try {
+          data = migrateDocument(data);
+        } on SchemaTooNew {
+          storeLocked = true;
+          data = {};
+        }
+      }
+      if (data['language'] == null) _adoptDeviceLanguage();
+      if (data.isNotEmpty) _applyStoredDocument(data);
+      _stampMemberSince();
+      _seedCalculatorsFromProfile();
+    } finally {
+      _loading = false;
+    }
+    if (loadSkipped > 0) Store.instance.keepCorruptCopy();
+    refreshAwards(silent: true);
+    pendingAwards.clear();
+    if (gamification) pendingAwards.addAll(unseenAwards);
+    notifyListeners();
+  }
+
+  void _applyStoredDocument(Map<String, dynamic> data) {
+    _guard(() {
+      profile = Profile.fromJson(_mapOf(data['profile']).cast<String, dynamic>());
       if (const {'Athlete', 'Atleta', 'Name'}.contains(profile.name)) {
         profile.name = kDefaultName;
       }
-
+    });
+    _guard(() {
       themePref = _themeFrom(data, fallback: 'dark');
       units = data['units'] as String? ?? 'kg';
-
       _applyLanguage(data['language'] as String? ?? language);
       restSeconds = (data['rest'] as num?)?.toInt() ?? 90;
+    });
+    _guard(() {
       alarmSound = data['alarmSound'] as String?;
       alarmSoundName = data['alarmSoundName'] as String?;
       RestAlarm.instance.customSoundPath = alarmSoundPath;
@@ -68,67 +148,58 @@ class FitState extends FitCore
         alarmSound = null;
         alarmSoundName = null;
       }
+    });
+    _guard(() {
       bgPattern = data['bg'] as String? ?? 'dots';
       heatTone = data['heatTone'] as String? ?? 'ember';
-      _loadToggles(data);
+    });
+    _loadToggles(data);
+    _guard(() {
       alarmAskedAt = (data['alarmAskedAt'] as num?)?.toInt();
       onboarded = data['onboarded'] as bool? ?? false;
+    });
+    _guard(() {
       favorites
         ..clear()
-        ..addAll(((data['favorites'] as Map?) ?? {}).map((k, v) => MapEntry(k as String, v as bool)));
-      _loadNotes(data);
-      _loadPlaces(data);
+        ..addAll((_mapOf(data['favorites'])).map((k, v) => MapEntry(k as String, v as bool)));
+    });
+    _loadNotes(data);
+    _loadPlaces(data);
+    _guard(() {
       checkins
         ..clear()
-        ..addAll(((data['checkins'] as List?) ?? []).cast<String>());
-      routines
-        ..clear()
-        ..addAll(((data['routines'] as List?) ?? [])
-            .map((e) => Routine.fromJson((e as Map).cast<String, dynamic>())));
-      weeklyPlan
-        ..clear()
-        ..addAll(((data['weeklyPlan'] as Map?) ?? {})
-            .map((k, v) => MapEntry(int.parse(k as String), v as String)));
-      _loadPlanExtras(data);
-      customExercises
-        ..clear()
-        ..addAll(((data['custom'] as List?) ?? [])
-            .map((e) => Exercise.fromJson((e as Map).cast<String, dynamic>())));
-      _loadMedia(data);
-      _loadRepsOnly(data);
-      _loadExerciseRest(data);
-      sessions
-        ..clear()
-        ..addAll(((data['sessions'] as List?) ?? [])
-            .map((e) => LoggedSession.fromJson((e as Map).cast<String, dynamic>())));
-      bodyweight
-        ..clear()
-        ..addAll(((data['bodyweight'] as List?) ?? [])
-            .map((e) => BodyweightEntry.fromJson((e as Map).cast<String, dynamic>())));
-      _loadMeasures(data);
-      _loadShots(data);
-      awards
-        ..clear()
-        ..addAll(((data['awards'] as Map?) ?? const {}).map((k, v) =>
-            MapEntry(k as String, DateTime.tryParse(v as String? ?? '') ?? DateTime.now())));
-      awardsSeen
-        ..clear()
-        ..addAll(((data['awardsSeen'] as List?) ?? const []).cast<String>());
-      moments
-        ..clear()
-        ..addAll(((data['moments'] as List?) ?? const [])
-            .map((e) => Moment.fromJson((e as Map).cast<String, dynamic>())));
+        ..addAll((_listOf(data['checkins'])).cast<String>());
+    });
+    routines
+      ..clear()
+      ..addAll(_readAll(data['routines'], Routine.fromJson));
+    weeklyPlan
+      ..clear()
+      ..addAll(_readPlanDays(data['weeklyPlan']));
+    _loadPlanExtras(data);
+    customExercises
+      ..clear()
+      ..addAll(_readAll(data['custom'], Exercise.fromJson));
+    _loadMedia(data);
+    _loadRepsOnly(data);
+    _loadExerciseRest(data);
+    sessions
+      ..clear()
+      ..addAll(_readAll(data['sessions'], LoggedSession.fromJson));
+    bodyweight
+      ..clear()
+      ..addAll(_readAll(data['bodyweight'], BodyweightEntry.fromJson));
+    _loadMeasures(data);
+    _loadShots(data);
+    _loadAwards(data);
+    moments
+      ..clear()
+      ..addAll(_readAll(data['moments'], Moment.fromJson));
+    _guard(() {
       photoIntervalDays = (data['photoEvery'] as num?)?.toInt() ?? 30;
       bodyTimeline = data['bodyTl'] as bool? ?? false;
-      _restoreLiveSession(data);
-    }
-    _stampMemberSince();
-    _seedCalculatorsFromProfile();
-    _loading = false;
-    refreshAwards(silent: true);
-    pendingAwards.clear();
-    if (gamification) pendingAwards.addAll(unseenAwards);
-    notifyListeners();
+    });
+    _guard(() => _restoreLiveSession(data));
   }
 
   void _stampMemberSince() {
@@ -149,61 +220,76 @@ class FitState extends FitCore
   }
 
   void _loadToggles(Map<String, dynamic> data) {
-    demoSize = data['demo'] as String? ?? 'large';
-    alarmStyle = data['alarmStyle'] as String? ?? 'quiet';
-    RestAlarm.instance.style = alarmStyle;
-    noSuggest
-      ..clear()
-      ..addAll(((data['noSuggest'] as List?) ?? const []).cast<String>());
-    archived
-      ..clear()
-      ..addAll(((data['archived'] as List?) ?? const []).cast<String>());
-    videoMarks
-      ..clear()
-      ..addAll(((data['marks'] as Map?) ?? const {}).map((k, v) => MapEntry(
-            k as String,
-            (v as Map).map((i, ms) => MapEntry(int.parse(i as String), (ms as num).toInt())),
-          )));
-    modeOverride
-      ..clear()
-      ..addAll(((data['exMode'] as Map?) ?? const {}).map((k, v) => MapEntry(k as String, v as String))
-        ..removeWhere((_, v) => !const ['weight', 'cardio', 'time'].contains(v)));
-    bgDim = (data['bgDim'] as num?)?.toDouble() ?? 0.55;
-    showFocus = data['showFocus'] as bool? ?? true;
-    showRecommended = data['showRecs'] as bool? ?? true;
-    multiPlan = data['multiPlan'] as bool? ?? false;
-    final weekStart = data['weekStart'];
-    weekStartDay = SettingsState.weekStarts.contains(weekStart) ? weekStart as int : DateTime.monday;
-    autoAdvance = data['autoAdvance'] as bool? ?? true;
-    keepScreenOn = data['keepAwake'] as bool? ?? true;
-    startCountdown = data['countdown'] as bool? ?? true;
-    gamification = data['gamify'] as bool? ?? true;
-    logRpe = data['rpe'] as bool? ?? false;
-    effortScale = data['effort'] == 'rir' ? 'rir' : 'rpe';
-    trainReminderMin = (data['trainAt'] as num?)?.toInt();
-    smartReminder = data['trainSmart'] as bool? ?? false;
-    progressStep
-      ..clear()
-      ..addAll(((data['progress'] as Map?) ?? const {})
-          .map((k, v) => MapEntry(k as String, (v as num).toDouble())));
-    autoWarmup
-      ..clear()
-      ..addAll(((data['warmup'] as List?) ?? const []).cast<String>());
+    _guard(() {
+      demoSize = data['demo'] as String? ?? 'large';
+      alarmStyle = data['alarmStyle'] as String? ?? 'quiet';
+      RestAlarm.instance.style = alarmStyle;
+    });
+    _guard(() {
+      noSuggest
+        ..clear()
+        ..addAll((_listOf(data['noSuggest'])).cast<String>());
+    });
+    _guard(() {
+      archived
+        ..clear()
+        ..addAll((_listOf(data['archived'])).cast<String>());
+    });
+    videoMarks.clear();
+    (_mapOf(data['marks'])).forEach((k, v) {
+      _guard(() {
+        videoMarks[k as String] = (v as Map).map(
+          (i, ms) => MapEntry(int.parse(i as String), (ms as num).toInt()),
+        );
+      });
+    });
+    modeOverride.clear();
+    (_mapOf(data['exMode'])).forEach((k, v) {
+      _guard(() {
+        if (const ['weight', 'cardio', 'time'].contains(v)) modeOverride[k as String] = v as String;
+      });
+    });
+    _guard(() {
+      bgDim = (data['bgDim'] as num?)?.toDouble() ?? 0.55;
+      showFocus = data['showFocus'] as bool? ?? true;
+      showRecommended = data['showRecs'] as bool? ?? true;
+      multiPlan = data['multiPlan'] as bool? ?? false;
+      final weekStart = data['weekStart'];
+      weekStartDay = SettingsState.weekStarts.contains(weekStart) ? weekStart as int : DateTime.monday;
+      autoAdvance = data['autoAdvance'] as bool? ?? true;
+      keepScreenOn = data['keepAwake'] as bool? ?? true;
+      startCountdown = data['countdown'] as bool? ?? true;
+      gamification = data['gamify'] as bool? ?? true;
+      logRpe = data['rpe'] as bool? ?? false;
+      effortScale = data['effort'] == 'rir' ? 'rir' : 'rpe';
+      trainReminderMin = (data['trainAt'] as num?)?.toInt();
+      smartReminder = data['trainSmart'] as bool? ?? false;
+    });
+    progressStep.clear();
+    (_mapOf(data['progress'])).forEach((k, v) {
+      _guard(() => progressStep[k as String] = (v as num).toDouble());
+    });
+    _guard(() {
+      autoWarmup
+        ..clear()
+        ..addAll((_listOf(data['warmup'])).cast<String>());
+    });
   }
 
   void _loadPlanExtras(Map<String, dynamic> data) {
-    planExtras
-      ..clear()
-      ..addAll(((data['planExtras'] as Map?) ?? const {}).map((k, v) => MapEntry(
-            int.parse(k as String),
-            (v as List).cast<String>().where((id) => id != weeklyPlan[int.parse(k)]).toList(),
-          )))
-      ..removeWhere((_, v) => v.isEmpty);
+    planExtras.clear();
+    (_mapOf(data['planExtras'])).forEach((k, v) {
+      _guard(() {
+        final day = int.parse(k as String);
+        planExtras[day] = (v as List).cast<String>().where((id) => id != weeklyPlan[day]).toList();
+      });
+    });
+    planExtras.removeWhere((_, v) => v.isEmpty);
   }
 
   void _restoreLiveSession(Map<String, dynamic> data) {
-    final live = data['live'] as Map?;
-    if (live == null) return;
+    final live = data['live'];
+    if (live is! Map) return;
     session = WorkoutSession.fromJson(live.cast<String, dynamic>());
     _elapsedBefore = (data['liveElapsed'] as num?)?.toInt() ?? 0;
     sessionPaused = data['livePaused'] as bool? ?? false;
@@ -224,41 +310,47 @@ class FitState extends FitCore
       exerciseMedia.addAll(restored);
       return;
     }
-    ((data['media'] as Map?) ?? {}).forEach((k, v) {
+    (_mapOf(data['media'])).forEach((k, v) {
       if (v is String && v.isNotEmpty) exerciseMedia[k as String] = v;
     });
-    for (final e in (data['custom'] as List?) ?? const []) {
-      final legacy = (e as Map)['m'];
-      final id = e['id'];
-      if (id is String && legacy is String && legacy.isNotEmpty) {
-        exerciseMedia.putIfAbsent(id, () => legacy);
-      }
+    for (final e in _listOf(data['custom'])) {
+      _guard(() {
+        final legacy = (e as Map)['m'];
+        final id = e['id'];
+        if (id is String && legacy is String && legacy.isNotEmpty) {
+          exerciseMedia.putIfAbsent(id, () => legacy);
+        }
+      });
     }
   }
 
   void _loadExerciseRest(Map<String, dynamic> data) {
     exerciseRest.clear();
-    ((data['exRest'] as Map?) ?? const {}).forEach((k, v) {
-      final n = (v as num?)?.toInt();
-      if (k is String && n != null) exerciseRest[k] = n.clamp(15, 600);
+    (_mapOf(data['exRest'])).forEach((k, v) {
+      _guard(() {
+        final n = (v as num?)?.toInt();
+        if (k is String && n != null) exerciseRest[k] = n.clamp(15, 600);
+      });
     });
   }
 
   void _loadRepsOnly(Map<String, dynamic> data) {
-    repsOnly
-      ..clear()
-      ..addAll(((data['repsOnly'] as List?) ?? const []).cast<String>());
-    repsOnlyOff
-      ..clear()
-      ..addAll(((data['repsOnlyOff'] as List?) ?? const []).cast<String>());
+    _guard(() {
+      repsOnly
+        ..clear()
+        ..addAll((_listOf(data['repsOnly'])).cast<String>());
+    });
+    _guard(() {
+      repsOnlyOff
+        ..clear()
+        ..addAll((_listOf(data['repsOnlyOff'])).cast<String>());
+    });
   }
 
   void _loadShots(Map<String, dynamic> data, {Map<String, String>? restored}) {
     shots
       ..clear()
-      ..addAll(((data['shots'] as List?) ?? const [])
-          .map((e) => ProgressEntry.fromJson((e as Map).cast<String, dynamic>()))
-          .where((e) => !e.isEmpty));
+      ..addAll(_readAll(data['shots'], ProgressEntry.fromJson).where((e) => !e.isEmpty));
     if (restored == null) return;
     for (var i = 0; i < shots.length; i++) {
       final e = shots[i];
@@ -275,18 +367,15 @@ class FitState extends FitCore
   void _loadMeasures(Map<String, dynamic> data) {
     measures
       ..clear()
-      ..addAll(((data['measures'] as List?) ?? const [])
-          .map((e) => BodyMeasure.fromJson((e as Map).cast<String, dynamic>()))
-          .where((m) => kMeasureKeys.contains(m.key)));
+      ..addAll(_readAll(data['measures'], BodyMeasure.fromJson).where((m) => kMeasureKeys.contains(m.key)));
   }
 
   void _loadPlaces(Map<String, dynamic> data) {
-    places.clear();
-    final raw = data['places'];
-    if (raw is List) {
-      places.addAll(raw.map((e) => GymPlace.fromJson((e as Map).cast<String, dynamic>())));
-    }
-    activePlaceId = data['place'] as String? ?? '';
+    places
+      ..clear()
+      ..addAll(_readAll(data['places'], GymPlace.fromJson));
+    final active = data['place'];
+    activePlaceId = active is String ? active : '';
     if (places.every((p) => p.id != activePlaceId)) activePlaceId = '';
   }
 
@@ -294,7 +383,7 @@ class FitState extends FitCore
     notes.clear();
     final raw = data['notes'];
     if (raw is List) {
-      notes.addAll(raw.map((e) => GymNote.fromJson((e as Map).cast<String, dynamic>())));
+      notes.addAll(_readAll(raw, GymNote.fromJson));
       return;
     }
 
@@ -308,87 +397,91 @@ class FitState extends FitCore
           createdAt: when,
         );
 
-    (data['exNotes'] as Map?)?.forEach((k, v) {
-      for (final e in (v as List)) {
-        final m = (e as Map).cast<String, dynamic>();
-        final text = ((m['t'] ?? '') as String).trim();
-        if (text.isEmpty) continue;
-        notes.add(legacy(
-            k as String, DateTime.tryParse((m['d'] ?? '') as String) ?? DateTime.now(), text));
-      }
+    _guard(() {
+      _mapOf(data['exNotes']).forEach((k, v) {
+        for (final e in (v as List)) {
+          final m = (e as Map).cast<String, dynamic>();
+          final text = ((m['t'] ?? '') as String).trim();
+          if (text.isEmpty) continue;
+          notes.add(legacy(k as String, DateTime.tryParse((m['d'] ?? '') as String) ?? DateTime.now(), text));
+        }
+      });
     });
     if (raw is Map) {
       raw.forEach((k, v) {
-        final text = (v as String).trim();
-        if (text.isNotEmpty) notes.add(legacy(k as String, DateTime.now(), text));
+        _guard(() {
+          final text = (v as String).trim();
+          if (text.isNotEmpty) notes.add(legacy(k as String, DateTime.now(), text));
+        });
       });
     }
   }
 
   @override
   Map<String, dynamic> toJson() => {
-        'profile': profile.toJson(),
-        'dark': dark,
-        'theme': themePref,
-        'units': units,
-        'language': language,
-        'rest': restSeconds,
-        'alarmSound': alarmSound,
-        'alarmSoundName': alarmSoundName,
-        'bg': bgPattern,
-        'heatTone': heatTone,
-        'bgDim': bgDim,
-        'showFocus': showFocus,
-        'showRecs': showRecommended,
-        'weekStart': weekStartDay,
-        'autoAdvance': autoAdvance,
-        'keepAwake': keepScreenOn,
-        'countdown': startCountdown,
-        'gamify': gamification,
-        'rpe': logRpe,
-        'effort': effortScale,
-        'demo': demoSize,
-        'alarmStyle': alarmStyle,
-        'noSuggest': noSuggest.toList(),
-        'archived': archived.toList(),
-        'marks': videoMarks.map((k, v) => MapEntry(k, v.map((i, ms) => MapEntry('$i', ms)))),
-        'exMode': modeOverride,
-        'trainAt': trainReminderMin,
-        'trainSmart': smartReminder,
-        'alarmAskedAt': alarmAskedAt,
-        'onboarded': onboarded,
-        'favorites': favorites,
-        'notes': notes.map((n) => n.toJson()).toList(),
-        'places': places.map((p) => p.toJson()).toList(),
-        'place': activePlaceId,
-        'checkins': checkins.toList(),
-        'routines': routines.map((r) => r.toJson()).toList(),
-        'weeklyPlan': weeklyPlan.map((k, v) => MapEntry(k.toString(), v)),
-        'planExtras': planExtras.map((k, v) => MapEntry(k.toString(), v)),
-        'multiPlan': multiPlan,
-        'custom': customExercises.map((e) => e.toJson()).toList(),
-        'media': exerciseMedia,
-        'exRest': exerciseRest,
-        'progress': progressStep,
-        'warmup': autoWarmup.toList(),
-        'repsOnly': repsOnly.toList(),
-        'repsOnlyOff': repsOnlyOff.toList(),
-        'sessions': sessions.map((s) => s.toJson()).toList(),
-        'bodyweight': bodyweight.map((b) => b.toJson()).toList(),
-        'measures': measures.map((m) => m.toJson()).toList(),
-        'shots': shots.map((s) => s.toJson()).toList(),
-        'awards': awards.map((k, v) => MapEntry(k, v.toIso8601String())),
-        'awardsSeen': awardsSeen.toList(),
-        'moments': moments.map((m) => m.toJson()).toList(),
-        'photoEvery': photoIntervalDays,
-        'bodyTl': bodyTimeline,
-        if (session != null && !session!.complete) ...{
-          'live': session!.toJson(),
-          'liveStart': _runningSince?.toIso8601String(),
-          'liveElapsed': _elapsedBefore,
-          'livePaused': sessionPaused,
-        },
-      };
+    kSchemaKey: kSchemaVersion,
+    'profile': profile.toJson(),
+    'dark': dark,
+    'theme': themePref,
+    'units': units,
+    'language': language,
+    'rest': restSeconds,
+    'alarmSound': alarmSound,
+    'alarmSoundName': alarmSoundName,
+    'bg': bgPattern,
+    'heatTone': heatTone,
+    'bgDim': bgDim,
+    'showFocus': showFocus,
+    'showRecs': showRecommended,
+    'weekStart': weekStartDay,
+    'autoAdvance': autoAdvance,
+    'keepAwake': keepScreenOn,
+    'countdown': startCountdown,
+    'gamify': gamification,
+    'rpe': logRpe,
+    'effort': effortScale,
+    'demo': demoSize,
+    'alarmStyle': alarmStyle,
+    'noSuggest': noSuggest.toList(),
+    'archived': archived.toList(),
+    'marks': videoMarks.map((k, v) => MapEntry(k, v.map((i, ms) => MapEntry('$i', ms)))),
+    'exMode': modeOverride,
+    'trainAt': trainReminderMin,
+    'trainSmart': smartReminder,
+    'alarmAskedAt': alarmAskedAt,
+    'onboarded': onboarded,
+    'favorites': favorites,
+    'notes': notes.map((n) => n.toJson()).toList(),
+    'places': places.map((p) => p.toJson()).toList(),
+    'place': activePlaceId,
+    'checkins': checkins.toList(),
+    'routines': routines.map((r) => r.toJson()).toList(),
+    'weeklyPlan': weeklyPlan.map((k, v) => MapEntry(k.toString(), v)),
+    'planExtras': planExtras.map((k, v) => MapEntry(k.toString(), v)),
+    'multiPlan': multiPlan,
+    'custom': customExercises.map((e) => e.toJson()).toList(),
+    'media': exerciseMedia,
+    'exRest': exerciseRest,
+    'progress': progressStep,
+    'warmup': autoWarmup.toList(),
+    'repsOnly': repsOnly.toList(),
+    'repsOnlyOff': repsOnlyOff.toList(),
+    'sessions': sessions.map((s) => s.toJson()).toList(),
+    'bodyweight': bodyweight.map((b) => b.toJson()).toList(),
+    'measures': measures.map((m) => m.toJson()).toList(),
+    'shots': shots.map((s) => s.toJson()).toList(),
+    'awards': awards.map((k, v) => MapEntry(k, v.toIso8601String())),
+    'awardsSeen': awardsSeen.toList(),
+    'moments': moments.map((m) => m.toJson()).toList(),
+    'photoEvery': photoIntervalDays,
+    'bodyTl': bodyTimeline,
+    if (session != null && !session!.complete) ...{
+      'live': session!.toJson(),
+      'liveStart': _runningSince?.toIso8601String(),
+      'liveElapsed': _elapsedBefore,
+      'livePaused': sessionPaused,
+    },
+  };
 
   void resetAllData() {
     _saveDebounce?.cancel();
@@ -455,6 +548,7 @@ class FitState extends FitCore
     _seedCalculatorsFromProfile();
     resetRoute('home');
     trainStep = 'select';
+    storeLocked = false;
     persistNow();
     _refreshWidgets();
     notifyListeners();
@@ -464,60 +558,108 @@ class FitState extends FitCore
 
   String exportCsv() => Store.instance.exportCsv(sessions);
 
+  Set<String> referencedMedia() => {
+    ...exerciseMedia.values,
+    for (final n in notes) ...n.media,
+    for (final e in shots) ...e.media,
+    for (final m in moments) m.file,
+  };
+
   bool importJson(String raw) {
     final map = Store.instance.tryParse(raw);
     if (map == null) return false;
-    applyBackup(map);
+    return applyBackup(map);
+  }
+
+  bool applyBackup(
+    Map<String, dynamic> map, {
+    Map<String, String>? restoredMedia,
+    Map<String, String>? restoredNoteMedia,
+    Map<String, String>? restoredShots,
+    Map<String, String>? restoredMoments,
+  }) {
+    if (checkDocument(map) != null) return false;
+    final Map<String, dynamic> doc;
+    try {
+      doc = migrateDocument(map);
+    } on SchemaTooNew {
+      return false;
+    }
+
+    final before = toJson();
+    _saveDebounce?.cancel();
+    _loading = true;
+    try {
+      _applyBackupDocument(
+        doc,
+        restoredMedia: restoredMedia,
+        restoredNoteMedia: restoredNoteMedia,
+        restoredShots: restoredShots,
+        restoredMoments: restoredMoments,
+      );
+    } catch (_) {
+      try {
+        _applyBackupDocument(before);
+      } catch (_) {}
+      _loading = false;
+      _refreshWidgets();
+      notifyListeners();
+      return false;
+    }
+    _loading = false;
+    storeLocked = false;
+    _persist();
+    _refreshWidgets();
+    syncTrainReminder();
+    syncPhotoReminder();
+    notifyListeners();
     return true;
   }
 
-  void applyBackup(Map<String, dynamic> map,
-      {Map<String, String>? restoredMedia,
-      Map<String, String>? restoredNoteMedia,
-      Map<String, String>? restoredShots,
-      Map<String, String>? restoredMoments}) {
-    _loading = true;
-    profile = Profile.fromJson((map['profile'] as Map?)?.cast<String, dynamic>() ?? {});
+  void _applyBackupDocument(
+    Map<String, dynamic> map, {
+    Map<String, String>? restoredMedia,
+    Map<String, String>? restoredNoteMedia,
+    Map<String, String>? restoredShots,
+    Map<String, String>? restoredMoments,
+  }) {
+    profile = Profile.fromJson(_mapOf(map['profile']).cast<String, dynamic>());
     themePref = _themeFrom(map, fallback: themePref);
     units = map['units'] as String? ?? units;
     _applyLanguage(map['language'] as String? ?? language);
     restSeconds = (map['rest'] as num?)?.toInt() ?? restSeconds;
     bgPattern = map['bg'] as String? ?? bgPattern;
+    heatTone = map['heatTone'] as String? ?? heatTone;
     _loadToggles(map);
     onboarded = map['onboarded'] as bool? ?? onboarded;
     favorites
       ..clear()
-      ..addAll(((map['favorites'] as Map?) ?? {}).map((k, v) => MapEntry(k as String, v as bool)));
+      ..addAll((_mapOf(map['favorites'])).map((k, v) => MapEntry(k as String, v as bool)));
     _loadPlaces(map);
     _loadNotes(map);
     if (restoredNoteMedia != null) _remapNoteMedia(restoredNoteMedia);
     checkins
       ..clear()
-      ..addAll(((map['checkins'] as List?) ?? []).cast<String>());
+      ..addAll((_listOf(map['checkins'])).cast<String>());
     routines
       ..clear()
-      ..addAll(((map['routines'] as List?) ?? [])
-          .map((e) => Routine.fromJson((e as Map).cast<String, dynamic>())));
+      ..addAll(_readAll(map['routines'], Routine.fromJson));
     weeklyPlan
       ..clear()
-      ..addAll(((map['weeklyPlan'] as Map?) ?? {})
-          .map((k, v) => MapEntry(int.parse(k as String), v as String)));
+      ..addAll(_readPlanDays(map['weeklyPlan']));
     _loadPlanExtras(map);
     customExercises
       ..clear()
-      ..addAll(((map['custom'] as List?) ?? [])
-          .map((e) => Exercise.fromJson((e as Map).cast<String, dynamic>())));
+      ..addAll(_readAll(map['custom'], Exercise.fromJson));
     _loadMedia(map, restored: restoredMedia);
     _loadRepsOnly(map);
     _loadExerciseRest(map);
     sessions
       ..clear()
-      ..addAll(((map['sessions'] as List?) ?? [])
-          .map((e) => LoggedSession.fromJson((e as Map).cast<String, dynamic>())));
+      ..addAll(_readAll(map['sessions'], LoggedSession.fromJson));
     bodyweight
       ..clear()
-      ..addAll(((map['bodyweight'] as List?) ?? [])
-          .map((e) => BodyweightEntry.fromJson((e as Map).cast<String, dynamic>())));
+      ..addAll(_readAll(map['bodyweight'], BodyweightEntry.fromJson));
     _loadMeasures(map);
     _loadShots(map, restored: restoredShots);
     _loadAwards(map);
@@ -525,32 +667,29 @@ class FitState extends FitCore
     photoIntervalDays = (map['photoEvery'] as num?)?.toInt() ?? photoIntervalDays;
     bodyTimeline = map['bodyTl'] as bool? ?? bodyTimeline;
     _seedCalculatorsFromProfile();
-    _loading = false;
-    _persist();
-    _refreshWidgets();
-    notifyListeners();
   }
 
   void _loadAwards(Map<String, dynamic> map) {
-    awards
-      ..clear()
-      ..addAll(((map['awards'] as Map?) ?? const {}).map((k, v) =>
-          MapEntry(k as String, DateTime.tryParse(v as String? ?? '') ?? DateTime.now())));
-    awardsSeen
-      ..clear()
-      ..addAll(((map['awardsSeen'] as List?) ?? const []).cast<String>());
+    awards.clear();
+    (_mapOf(map['awards'])).forEach((k, v) {
+      _guard(() => awards[k as String] = DateTime.tryParse(v as String? ?? '') ?? DateTime.now());
+    });
+    _guard(() {
+      awardsSeen
+        ..clear()
+        ..addAll((_listOf(map['awardsSeen'])).cast<String>());
+    });
     pendingAwards.clear();
   }
 
   void _loadMoments(Map<String, dynamic> map, {Map<String, String>? restored}) {
     moments
       ..clear()
-      ..addAll(((map['moments'] as List?) ?? const [])
-          .map((e) => Moment.fromJson((e as Map).cast<String, dynamic>()))
-          .map((m) => restored == null
-              ? m
-              : Moment(m.date, restored[m.file] ?? m.file, note: m.note))
-          .where((m) => m.file.isNotEmpty));
+      ..addAll(
+        _readAll(map['moments'], Moment.fromJson)
+            .map((m) => restored == null ? m : Moment(m.date, restored[m.file] ?? m.file, note: m.note))
+            .where((m) => m.file.isNotEmpty),
+      );
   }
 
   void _remapNoteMedia(Map<String, String> restored) {

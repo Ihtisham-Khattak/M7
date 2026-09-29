@@ -473,6 +473,8 @@
   "backupCopied": "Backup in die Zwischenablage kopiert",
   "backupImported": "Backup importiert",
   "backupFailed": "Dieses Backup konnte nicht gelesen werden",
+  "dataSkippedNotice": "Einige gespeicherte Einträge konnten nicht gelesen werden und wurden übersprungen. Eine Kopie deiner Daten wurde aufbewahrt.",
+  "dataNewerNotice": "Deine Daten wurden mit einer neueren Version von GymMane gespeichert. Aktualisiere die App, um sie zu sehen – es wurde nichts verändert.",
   "nothingToExport": "Noch nichts zu exportieren — protokolliere zuerst ein Training",
   "athlete": "Athlet",
 

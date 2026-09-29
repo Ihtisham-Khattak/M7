@@ -475,6 +475,8 @@
   "backupCopied": "Backup copied to clipboard",
   "backupImported": "Backup imported",
   "backupFailed": "Couldn't read that backup",
+  "dataSkippedNotice": "Some saved items couldn't be read and were skipped. A copy of your data was kept.",
+  "dataNewerNotice": "Your data was saved by a newer version of GymMane. Update the app to see it — nothing was changed.",
   "nothingToExport": "Nothing to export yet — log a session first",
   "athlete": "Athlete",
 

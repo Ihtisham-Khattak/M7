@@ -26,6 +26,18 @@ class Store {
     }
   }
 
+  static const corruptKey = 'gymmane_v1_corrupt';
+
+  Future<void> keepCorruptCopy() async {
+    final raw = _prefs?.getString(_key);
+    if (raw == null || raw.isEmpty) return;
+    try {
+      await _prefs?.setString(corruptKey, raw);
+    } catch (_) {}
+  }
+
+  String? corruptCopy() => _prefs?.getString(corruptKey);
+
   String? note(String key) => _prefs?.getString('gm_$key');
 
   void setNote(String key, String value) => _prefs?.setString('gm_$key', value);
