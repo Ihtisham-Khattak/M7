@@ -1747,6 +1747,94 @@ class AppLocalizationsPl extends AppLocalizations {
   String get welcomeStart => 'ZACZNIJ';
 
   @override
+  String get onbGoalQTitle => 'Jaki jest twój cel?';
+
+  @override
+  String get onbGoalQWhy => 'Wybierz to, co pasuje najlepiej. Możesz to zmienić w każdej chwili.';
+
+  @override
+  String get goalLeanTitle => 'Wyrzeźbiona i proporcjonalna';
+
+  @override
+  String get goalLeanBody => 'Zrównoważona, proporcjonalna sylwetka. Regularny, zrównoważony trening.';
+
+  @override
+  String get goalStrengthTitle => 'Mięśnie i siła';
+
+  @override
+  String get goalStrengthBody =>
+      'Zyskaj siłę i masę dzięki ciężkim ćwiczeniom wielostawowym i progresywnemu przeciążeniu.';
+
+  @override
+  String get onbTrainTitle => 'Jak trenujesz?';
+
+  @override
+  String get onbTrainWhy => 'Nadaje kształt twojemu planowi. Bądź szczery, nie ambitny.';
+
+  @override
+  String get expLabel => 'DOŚWIADCZENIE';
+
+  @override
+  String get expBeginner => 'Początkujący';
+
+  @override
+  String get expBeginnerHint => 'Mniej niż 6 miesięcy';
+
+  @override
+  String get expIntermediate => 'Trochę doświadczenia';
+
+  @override
+  String get expIntermediateHint => 'Od 6 miesięcy do 2 lat';
+
+  @override
+  String get expAdvanced => 'Doświadczony';
+
+  @override
+  String get expAdvancedHint => 'Ponad 2 lata';
+
+  @override
+  String get daysLabel => 'DNI W TYGODNIU';
+
+  @override
+  String get minutesLabel => 'CZAS TRENINGU';
+
+  @override
+  String minutesOption(int n) {
+    return '$n min';
+  }
+
+  @override
+  String minutesPlus(int n) {
+    return '$n+ min';
+  }
+
+  @override
+  String get onbFocusTitle => 'Na których mięśniach się skupić?';
+
+  @override
+  String get onbFocusWhy => 'Opcjonalne. Wybierz do trzech, a poświęcimy im więcej uwagi.';
+
+  @override
+  String get onbAboutTitle => 'O tobie';
+
+  @override
+  String get onbAboutWhy =>
+      'Wszystko opcjonalne. Używane tylko w kalkulatorach i nigdy nie opuszcza telefonu.';
+
+  @override
+  String get personalizeTitle => 'Zdobądź plan stworzony pod twój cel';
+
+  @override
+  String get personalizeBody =>
+      'Odpowiedz na kilka szybkich pytań. Twoje rutyny i historia pozostaną nietknięte.';
+
+  @override
+  String get personalizeCta => 'Personalizuj';
+
+  @override
+  String get notNow => 'Nie teraz';
+
+  @override
   String onbStep(int i, int n) {
     return 'KROK $i Z $n';
   }

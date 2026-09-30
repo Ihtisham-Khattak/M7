@@ -1738,6 +1738,92 @@ class AppLocalizationsFa extends AppLocalizations {
   String get welcomeStart => 'شروع کن';
 
   @override
+  String get onbGoalQTitle => 'هدفت چیست؟';
+
+  @override
+  String get onbGoalQWhy => 'مناسب‌ترین گزینه را انتخاب کن. هر زمان می‌توانی تغییرش بدهی.';
+
+  @override
+  String get goalLeanTitle => 'خوش‌فرم و متعادل';
+
+  @override
+  String get goalLeanBody => 'بدنی متعادل و متناسب. تمرین منظم و پایدار.';
+
+  @override
+  String get goalStrengthTitle => 'عضله و قدرت';
+
+  @override
+  String get goalStrengthBody => 'با حرکات چندمفصلی سنگین و افزایش تدریجی فشار، قوی‌تر شو و عضله بساز.';
+
+  @override
+  String get onbTrainTitle => 'چطور تمرین می‌کنی؟';
+
+  @override
+  String get onbTrainWhy => 'شکل برنامه‌ات را مشخص می‌کند. صادق باش، نه جاه‌طلب.';
+
+  @override
+  String get expLabel => 'تجربه';
+
+  @override
+  String get expBeginner => 'تازه‌کار';
+
+  @override
+  String get expBeginnerHint => 'کمتر از ۶ ماه';
+
+  @override
+  String get expIntermediate => 'کمی تجربه';
+
+  @override
+  String get expIntermediateHint => '۶ ماه تا ۲ سال';
+
+  @override
+  String get expAdvanced => 'باتجربه';
+
+  @override
+  String get expAdvancedHint => 'بیش از ۲ سال';
+
+  @override
+  String get daysLabel => 'روز در هفته';
+
+  @override
+  String get minutesLabel => 'مدت هر تمرین';
+
+  @override
+  String minutesOption(int n) {
+    return '$n دقیقه';
+  }
+
+  @override
+  String minutesPlus(int n) {
+    return '$n+ دقیقه';
+  }
+
+  @override
+  String get onbFocusTitle => 'عضله‌ای برای تمرکز بیشتر هست؟';
+
+  @override
+  String get onbFocusWhy => 'اختیاری. تا سه مورد انتخاب کن تا توجه بیشتری بگیرند.';
+
+  @override
+  String get onbAboutTitle => 'درباره تو';
+
+  @override
+  String get onbAboutWhy =>
+      'همه‌چیز اختیاری است. فقط برای ماشین‌حساب‌ها استفاده می‌شود و هرگز از گوشی بیرون نمی‌رود.';
+
+  @override
+  String get personalizeTitle => 'برنامه‌ای متناسب با هدفت بگیر';
+
+  @override
+  String get personalizeBody => 'به چند سؤال کوتاه جواب بده. روتین‌ها و سابقه‌ات دست‌نخورده می‌مانند.';
+
+  @override
+  String get personalizeCta => 'شخصی‌سازی';
+
+  @override
+  String get notNow => 'حالا نه';
+
+  @override
   String onbStep(int i, int n) {
     return 'مرحله $i از $n';
   }

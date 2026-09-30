@@ -205,6 +205,61 @@ mixin SettingsState on FitCore, ToolsState, LibraryState {
 
   DateTime get memberSince => profile.since ?? DateTime.now();
 
+  bool Function()? personalizeBack;
+
+  void goPersonalize() => pushRoute('personalize');
+
+  int get trainingDays => profile.weeklyGoal;
+
+  void setTrainingDays(int days) => updateProfile(weeklyGoalDelta: days - profile.weeklyGoal);
+
+  void setTrainingGoal(TrainingGoal goal) {
+    training.goal = goal;
+    _persist();
+    notifyListeners();
+  }
+
+  void setTrainingExperience(Experience level) {
+    training.experience = level;
+    _persist();
+    notifyListeners();
+  }
+
+  void setSessionMinutes(int minutes) {
+    training.sessionMinutes = kSessionMinutes.contains(minutes) ? minutes : 45;
+    _persist();
+    notifyListeners();
+  }
+
+  void setTrainingSetting(String setting) {
+    training.setting = setting;
+    _persist();
+    notifyListeners();
+  }
+
+  void toggleFocusGroup(String group) {
+    if (!training.focus.remove(group)) {
+      if (training.focus.length >= kMaxFocusGroups) return;
+      training.focus.add(group);
+    }
+    _persist();
+    notifyListeners();
+  }
+
+  void clearFocusGroups() {
+    training.focus.clear();
+    _persist();
+    notifyListeners();
+  }
+
+  bool get canOfferPersonalize => onboarded && !training.isSet && !personalizeDismissed;
+
+  void dismissPersonalize() {
+    personalizeDismissed = true;
+    _persist();
+    notifyListeners();
+  }
+
   void completeOnboarding() {
     onboarded = true;
     refreshAwards();

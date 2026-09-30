@@ -40,6 +40,7 @@ GymMane/
 ├── l10n.yaml                       gen-l10n config (arb-dir lib/l10n, template app_en.arb, output committed)
 ├── crowdin.yml                     Crowdin mapping (zh-TW → zh_Hant); see PROJECT_CONTEXT §8.3
 ├── README.md / CONTRIBUTING.md / TRANSLATING.md / CREDITS.md / LICENSE   (+ docs/readme/README.{es,it,zh}.md)
+├── .agents/ .claude/ skills-lock.json   local AI-agent tooling (installed skills) — git-ignored, not part of the app
 ├── .github/
 │   ├── workflows/build-apk.yml     PR: analyze+test+build; manual dispatch: signed reproducible release
 │   ├── ISSUE_TEMPLATE/*, FUNDING.yml
@@ -96,7 +97,7 @@ GymMane/
 │   │   ├── incoming_share.dart, gallery.dart, device_kind.dart, screen_awake.dart   thin MethodChannel wrappers
 │   ├── screens/                    one file per screen (+ bottom-sheet flows): home, train, session, progress, exercises, exercise_detail, routines, routine_edit, settings (=Preferences), profile (=route 'settings'), onboarding, measures, places, notes, note_edit, moments, timeline, compare, awards, tools, tool_detail, ai_plan, plan_import_sheet, start_sheet, share_sheet, sticker_screen, about
 │   ├── widgets/                    shared UI kit (ui_kit, glass, dialogs, charts, body_map, muscle_radar, exercise_art/media/preview, medal, celebration, rulers/pickers, home_widget_views, wear timer_panel, …)
-│   ├── theme/                      app_colors.dart (GymColors ThemeExtension), app_theme.dart (AppTheme.f/s/d text styles)
+│   ├── theme/                      app_colors.dart (GymColors ThemeExtension, AA-checked; + success/progress/streak), app_theme.dart (AppTheme.f/s/d text styles), tokens.dart (GymSpace / GymRadius / GymText scales)
 │   ├── l10n/                       app_*.arb (17), generated app_localizations*.dart (17 locales + base), l10n.dart (globals `t`, `appLanguage`, extension GymL10n), catalog_{es,it,zh}.dart (exercise names/steps)
 │   └── wear/                       wear_app.dart, wear_shell.dart (Wear OS UI)
 └── test/                           55 test files; see DEVELOPMENT_GUIDELINES §13
@@ -146,6 +147,7 @@ Implemented in `FitCore` (`lib/state/fit_core.dart`) and `AppShell`:
 | `exercises` | `ExercisesScreen` | tab 3 |
 | `settings` | `ProfileScreen` | tab 4 |
 | `preferences` | `SettingsScreen` | pushed from profile |
+| `personalize` | `OnboardingScreen(personalize: true)` | opt-in questionnaire for existing users; back handled through `fit.personalizeBack` |
 | `train` | `TrainScreen` | body-map picker (`trainStep`: `select` → `review`) |
 | `session` | `SessionScreen` | live/finished workout |
 | `exercise-detail` | `ExerciseDetailScreen` | uses `activeExerciseId` |

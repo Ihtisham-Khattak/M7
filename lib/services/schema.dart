@@ -51,6 +51,7 @@ const _listKeys = [
 
 const _mapKeys = [
   'profile',
+  'training',
   'favorites',
   'weeklyPlan',
   'planExtras',

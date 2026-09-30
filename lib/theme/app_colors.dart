@@ -27,6 +27,9 @@ class GymColors extends ThemeExtension<GymColors> {
     required this.info,
     required this.warn,
     required this.danger,
+    required this.success,
+    required this.progress,
+    required this.streak,
   });
 
   final Color pageBg;
@@ -53,6 +56,9 @@ class GymColors extends ThemeExtension<GymColors> {
   final Color info;
   final Color warn;
   final Color danger;
+  final Color success;
+  final Color progress;
+  final Color streak;
 
   static const dark = GymColors(
     pageBg: Color(0xFF0A0908),
@@ -62,8 +68,8 @@ class GymColors extends ThemeExtension<GymColors> {
     border: Color(0xFF3E3E3E),
     navBg: Color(0xD90A0A0A),
     text: Color(0xFFFFFFFF),
-    textSecondary: Color(0xFF9A9A9A),
-    textTertiary: Color(0xFF666666),
+    textSecondary: Color(0xFFA8A8A8),
+    textTertiary: Color(0xFF949494),
     ember: Color(0xFFFFFFFF),
     emberDeep: Color(0xFFD0D0D0),
     onEmber: Color(0xFF0A0A0A),
@@ -79,6 +85,9 @@ class GymColors extends ThemeExtension<GymColors> {
     info: Color(0xFF7FA8C9),
     warn: Color(0xFFE0B15A),
     danger: Color(0xFFE5674C),
+    success: Color(0xFF6FBF8A),
+    progress: Color(0xFF8FB98A),
+    streak: Color(0xFFF0A34A),
   );
 
   static const light = GymColors(
@@ -89,8 +98,8 @@ class GymColors extends ThemeExtension<GymColors> {
     border: Color(0xFFE0DBD5),
     navBg: Color(0xF2FFFEFD),
     text: Color(0xFF1A1713),
-    textSecondary: Color(0xFF5F574F),
-    textTertiary: Color(0xFF8A8179),
+    textSecondary: Color(0xFF4F4841),
+    textTertiary: Color(0xFF6E665F),
     ember: Color(0xFF1A1713),
     emberDeep: Color(0xFF000000),
     onEmber: Color(0xFFFFFFFF),
@@ -98,14 +107,17 @@ class GymColors extends ThemeExtension<GymColors> {
     emberShadow: Color(0x1F1A1713),
     accent: Color(0xFF9E4E27),
     accentSoft: Color(0x1F9E4E27),
-    brass: Color(0xFF8A6B41),
+    brass: Color(0xFF7F6238),
     sage: Color(0xFF3D7A52),
     sageSoft: Color(0x1F3D7A52),
     mutedFill: Color(0xFFE9E4DE),
     heatEmpty: Color(0xFFE7E2DC),
     info: Color(0xFF3268A0),
-    warn: Color(0xFF9A6A12),
+    warn: Color(0xFF8A5F0E),
     danger: Color(0xFFC0392B),
+    success: Color(0xFF2F7A4B),
+    progress: Color(0xFF3D7A52),
+    streak: Color(0xFFA35A00),
   );
 
   @override
@@ -134,6 +146,9 @@ class GymColors extends ThemeExtension<GymColors> {
     Color? info,
     Color? warn,
     Color? danger,
+    Color? success,
+    Color? progress,
+    Color? streak,
   }) {
     return GymColors(
       pageBg: pageBg ?? this.pageBg,
@@ -160,6 +175,9 @@ class GymColors extends ThemeExtension<GymColors> {
       info: info ?? this.info,
       warn: warn ?? this.warn,
       danger: danger ?? this.danger,
+      success: success ?? this.success,
+      progress: progress ?? this.progress,
+      streak: streak ?? this.streak,
     );
   }
 
@@ -192,6 +210,9 @@ class GymColors extends ThemeExtension<GymColors> {
       info: c(info, other.info),
       warn: c(warn, other.warn),
       danger: c(danger, other.danger),
+      success: c(success, other.success),
+      progress: c(progress, other.progress),
+      streak: c(streak, other.streak),
     );
   }
 }

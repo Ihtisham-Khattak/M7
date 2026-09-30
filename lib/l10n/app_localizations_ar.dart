@@ -1738,6 +1738,91 @@ class AppLocalizationsAr extends AppLocalizations {
   String get welcomeStart => 'ابدأ';
 
   @override
+  String get onbGoalQTitle => 'ما هدفك؟';
+
+  @override
+  String get onbGoalQWhy => 'اختر الأنسب لك. يمكنك تغييره في أي وقت.';
+
+  @override
+  String get goalLeanTitle => 'متناسق وممشوق';
+
+  @override
+  String get goalLeanBody => 'جسم متوازن ومتناسق. تدريب ثابت ومستدام.';
+
+  @override
+  String get goalStrengthTitle => 'عضلات وقوة';
+
+  @override
+  String get goalStrengthBody => 'ازدد قوة وابنِ العضلات بتمارين مركبة ثقيلة وزيادة تدريجية في الحمل.';
+
+  @override
+  String get onbTrainTitle => 'كيف تتدرب؟';
+
+  @override
+  String get onbTrainWhy => 'يحدد شكل خطتك. كن صادقًا لا طموحًا.';
+
+  @override
+  String get expLabel => 'الخبرة';
+
+  @override
+  String get expBeginner => 'مبتدئ في رفع الأثقال';
+
+  @override
+  String get expBeginnerHint => 'أقل من 6 أشهر';
+
+  @override
+  String get expIntermediate => 'بعض الخبرة';
+
+  @override
+  String get expIntermediateHint => 'من 6 أشهر إلى سنتين';
+
+  @override
+  String get expAdvanced => 'ذو خبرة';
+
+  @override
+  String get expAdvancedHint => 'أكثر من سنتين';
+
+  @override
+  String get daysLabel => 'أيام التدريب أسبوعيًا';
+
+  @override
+  String get minutesLabel => 'مدة كل حصة';
+
+  @override
+  String minutesOption(int n) {
+    return '$n د';
+  }
+
+  @override
+  String minutesPlus(int n) {
+    return '$n+ د';
+  }
+
+  @override
+  String get onbFocusTitle => 'هل هناك عضلات تريد التركيز عليها؟';
+
+  @override
+  String get onbFocusWhy => 'اختياري. اختر حتى ثلاث عضلات وسنمنحها اهتمامًا إضافيًا.';
+
+  @override
+  String get onbAboutTitle => 'عنك';
+
+  @override
+  String get onbAboutWhy => 'كل شيء اختياري. يُستخدم في الحاسبات فقط ولا يغادر هاتفك أبدًا.';
+
+  @override
+  String get personalizeTitle => 'احصل على خطة مصممة لهدفك';
+
+  @override
+  String get personalizeBody => 'أجب عن بضعة أسئلة سريعة. تبقى روتيناتك وسجلك كما هي.';
+
+  @override
+  String get personalizeCta => 'تخصيص';
+
+  @override
+  String get notNow => 'ليس الآن';
+
+  @override
   String onbStep(int i, int n) {
     return 'الخطوة $i من $n';
   }

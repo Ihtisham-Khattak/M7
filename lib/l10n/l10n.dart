@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 
+import '../catalog/exercise_meta.dart';
 import 'app_localizations.dart';
 import 'catalog_es.dart';
 import 'catalog_it.dart';
@@ -148,6 +149,19 @@ extension GymL10n on AppLocalizations {
         'glutes' => muscleGlutes,
         'calves' => muscleCalves,
         _ => id,
+      };
+
+  String groupLabel(MuscleGroup g) => switch (g) {
+        MuscleGroup.chest => muscleChest,
+        MuscleGroup.back => muscleBack,
+        MuscleGroup.shoulders => muscleShoulders,
+        MuscleGroup.biceps => muscleBiceps,
+        MuscleGroup.triceps => muscleTriceps,
+        MuscleGroup.legs => mgLegs,
+        MuscleGroup.glutes => muscleGlutes,
+        MuscleGroup.calves => muscleCalves,
+        MuscleGroup.core => mgCore,
+        MuscleGroup.forearms => muscleForearm,
       };
 
   String poseName(String pose) => switch (pose) {

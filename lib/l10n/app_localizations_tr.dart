@@ -1747,6 +1747,92 @@ class AppLocalizationsTr extends AppLocalizations {
   String get welcomeStart => 'BAŞLA';
 
   @override
+  String get onbGoalQTitle => 'Hedefin ne?';
+
+  @override
+  String get onbGoalQWhy => 'En uygun olanı seç. İstediğin zaman değiştirebilirsin.';
+
+  @override
+  String get goalLeanTitle => 'Kaslı ve dengeli';
+
+  @override
+  String get goalLeanBody => 'Dengeli, orantılı bir vücut. Düzenli ve sürdürülebilir antrenman.';
+
+  @override
+  String get goalStrengthTitle => 'Kas ve güç';
+
+  @override
+  String get goalStrengthBody => 'Ağır bileşik hareketler ve kademeli yüklenme ile güçlen ve kas kazan.';
+
+  @override
+  String get onbTrainTitle => 'Nasıl antrenman yapıyorsun?';
+
+  @override
+  String get onbTrainWhy => 'Planının şeklini belirler. Dürüst ol, hırslı değil.';
+
+  @override
+  String get expLabel => 'DENEYİM';
+
+  @override
+  String get expBeginner => 'Yeni başlayan';
+
+  @override
+  String get expBeginnerHint => '6 aydan az';
+
+  @override
+  String get expIntermediate => 'Biraz deneyimli';
+
+  @override
+  String get expIntermediateHint => '6 aydan 2 yıla';
+
+  @override
+  String get expAdvanced => 'Deneyimli';
+
+  @override
+  String get expAdvancedHint => '2 yıldan fazla';
+
+  @override
+  String get daysLabel => 'HAFTADA GÜN';
+
+  @override
+  String get minutesLabel => 'ANTRENMAN SÜRESİ';
+
+  @override
+  String minutesOption(int n) {
+    return '$n dk';
+  }
+
+  @override
+  String minutesPlus(int n) {
+    return '$n+ dk';
+  }
+
+  @override
+  String get onbFocusTitle => 'Odaklanmak istediğin kaslar var mı?';
+
+  @override
+  String get onbFocusWhy => 'İsteğe bağlı. En fazla üç seç, onlara ekstra özen gösterelim.';
+
+  @override
+  String get onbAboutTitle => 'Senin hakkında';
+
+  @override
+  String get onbAboutWhy =>
+      'Hepsi isteğe bağlı. Yalnızca hesaplayıcılarda kullanılır ve telefonundan asla çıkmaz.';
+
+  @override
+  String get personalizeTitle => 'Hedefine göre hazırlanmış bir plan al';
+
+  @override
+  String get personalizeBody => 'Birkaç hızlı soruyu yanıtla. Rutinlerin ve geçmişin olduğu gibi kalır.';
+
+  @override
+  String get personalizeCta => 'Kişiselleştir';
+
+  @override
+  String get notNow => 'Şimdi değil';
+
+  @override
   String onbStep(int i, int n) {
     return 'ADIM $i / $n';
   }

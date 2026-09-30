@@ -3160,6 +3160,168 @@ abstract class AppLocalizations {
   /// **'GET STARTED'**
   String get welcomeStart;
 
+  /// No description provided for @onbGoalQTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What\'s your goal?'**
+  String get onbGoalQTitle;
+
+  /// No description provided for @onbGoalQWhy.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick what fits best. You can change it any time.'**
+  String get onbGoalQWhy;
+
+  /// No description provided for @goalLeanTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Lean & defined'**
+  String get goalLeanTitle;
+
+  /// No description provided for @goalLeanBody.
+  ///
+  /// In en, this message translates to:
+  /// **'A balanced, proportional physique. Steady, sustainable training.'**
+  String get goalLeanBody;
+
+  /// No description provided for @goalStrengthTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Muscle & strength'**
+  String get goalStrengthTitle;
+
+  /// No description provided for @goalStrengthBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Get stronger and build muscle with heavy compound lifts and progressive overload.'**
+  String get goalStrengthBody;
+
+  /// No description provided for @onbTrainTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How do you train?'**
+  String get onbTrainTitle;
+
+  /// No description provided for @onbTrainWhy.
+  ///
+  /// In en, this message translates to:
+  /// **'Sets the shape of your plan. Be honest, not ambitious.'**
+  String get onbTrainWhy;
+
+  /// No description provided for @expLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'EXPERIENCE'**
+  String get expLabel;
+
+  /// No description provided for @expBeginner.
+  ///
+  /// In en, this message translates to:
+  /// **'New to lifting'**
+  String get expBeginner;
+
+  /// No description provided for @expBeginnerHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Under 6 months'**
+  String get expBeginnerHint;
+
+  /// No description provided for @expIntermediate.
+  ///
+  /// In en, this message translates to:
+  /// **'Some experience'**
+  String get expIntermediate;
+
+  /// No description provided for @expIntermediateHint.
+  ///
+  /// In en, this message translates to:
+  /// **'6 months to 2 years'**
+  String get expIntermediateHint;
+
+  /// No description provided for @expAdvanced.
+  ///
+  /// In en, this message translates to:
+  /// **'Experienced'**
+  String get expAdvanced;
+
+  /// No description provided for @expAdvancedHint.
+  ///
+  /// In en, this message translates to:
+  /// **'More than 2 years'**
+  String get expAdvancedHint;
+
+  /// No description provided for @daysLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'DAYS PER WEEK'**
+  String get daysLabel;
+
+  /// No description provided for @minutesLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'TIME PER WORKOUT'**
+  String get minutesLabel;
+
+  /// No description provided for @minutesOption.
+  ///
+  /// In en, this message translates to:
+  /// **'{n} min'**
+  String minutesOption(int n);
+
+  /// No description provided for @minutesPlus.
+  ///
+  /// In en, this message translates to:
+  /// **'{n}+ min'**
+  String minutesPlus(int n);
+
+  /// No description provided for @onbFocusTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Any muscles to focus on?'**
+  String get onbFocusTitle;
+
+  /// No description provided for @onbFocusWhy.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional. Pick up to three and we\'ll give them extra attention.'**
+  String get onbFocusWhy;
+
+  /// No description provided for @onbAboutTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'About you'**
+  String get onbAboutTitle;
+
+  /// No description provided for @onbAboutWhy.
+  ///
+  /// In en, this message translates to:
+  /// **'All optional. Used only for the calculators, and it never leaves your phone.'**
+  String get onbAboutWhy;
+
+  /// No description provided for @personalizeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Get a plan built for your goal'**
+  String get personalizeTitle;
+
+  /// No description provided for @personalizeBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Answer a few quick questions. Your routines and history stay untouched.'**
+  String get personalizeBody;
+
+  /// No description provided for @personalizeCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Personalize'**
+  String get personalizeCta;
+
+  /// No description provided for @notNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Not now'**
+  String get notNow;
+
   /// No description provided for @onbStep.
   ///
   /// In en, this message translates to:

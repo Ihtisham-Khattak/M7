@@ -403,6 +403,8 @@ class _AppShellState extends State<AppShell> with WidgetsBindingObserver {
         return RoutinesScreen();
       case 'ai-plan':
         return AiPlanScreen();
+      case 'personalize':
+        return const OnboardingScreen(personalize: true);
       case 'routine-edit':
         return RoutineEditScreen(key: ValueKey(fit.activeRoutineId));
       case 'measures':

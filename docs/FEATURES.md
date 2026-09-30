@@ -16,14 +16,14 @@ Feature index:
 First-run setup and a local "identity" (no account) used for calculators, level and share cards.
 
 ### User Flow
-`AppShell` shows `OnboardingScreen` until `fit.onboarded` (6 pages, `_last = 5`): welcome page (with short "promise" rows) → name → units (kg/lb) → body (sex/age/height/weight) → goal (weekly sessions) → places/gear → finish. `_finish()` saves the name, creates one `GymPlace` per selected preset (`gym|home|outdoors`), activates the first, then `completeOnboarding()`.
+`AppShell` shows `OnboardingScreen` until `fit.onboarded`. The step list is data-driven (`lib/services/onboarding_flow.dart › visibleSteps`): **welcome** (privacy promises) → **goal** (Lean & defined / Muscle & strength, required) → **training** (experience — required —, days per week 2–6, minutes 30/45/60/75+) → **place** (gym/home/outdoors presets; gear pills only from `gearChoices(preset)` — no machines/cables for home or outdoors) → **focus** (only when goal is Lean aesthetic or experience isn't beginner; up to 3 of the 10 display muscle groups) → **about you** (optional: units, name, sex/age/height/weight). Never more than 6 steps. Skip (top right) finishes immediately; Back keeps answers. `_finish()` saves the name, creates one `GymPlace` per selected preset, activates the first, stores `training.setting`, then `completeOnboarding()`. Existing users (already `onboarded`, no `training` answers) see a dismissible Home card (`canOfferPersonalize`) that opens the same flow without the welcome page at route `personalize`; finishing it never removes routines/history and skips places that already exist. Answers live in `TrainingProfile` (DATA_MODEL §3); the plan generator that consumes them is **not implemented** (roadmap GM-51…GM-53).
 Profile tab (`ProfileScreen`, route `settings`): avatar/banner (image picker, stored as base64 in the profile), handle, badge colour, level, medal shelf, "Snapshots" strip, streak/lifted/trained totals, gear button → Preferences.
 
 ### Implementation
 `lib/screens/onboarding_screen.dart`, `profile_screen.dart`; `SettingsState.updateProfile/setProfilePhoto/setProfileBanner/setProfileHandle/setProfileBadge/completeOnboarding`; model `lib/models/profile.dart`.
 
 ### Business Rules
-- Clamps in `updateProfile`: age 10–90, height 100–250 cm, weight 30–250 kg, weekly goal 1–14.
+- Clamps in `updateProfile` (unchanged): age 10–90, height 100–250 cm, weight 30–250 kg, weekly goal 1–14.
 - Default name `kDefaultName = 'InlitX'`; legacy placeholder names `Athlete|Atleta|Name` are rewritten to it on load (`loadFromStore`).
 - Handle: only `[A-Za-z0-9_.]` kept; if empty, derived from the display name (`profileHandle`).
 - `since` (member-since) is stamped on first load from the earliest session or today.

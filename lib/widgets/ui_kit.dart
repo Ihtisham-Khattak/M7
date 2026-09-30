@@ -5,6 +5,7 @@ import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
+import '../theme/tokens.dart';
 import 'rolling_text.dart';
 import 'svg_icon.dart';
 
@@ -12,8 +13,8 @@ class SoftCard extends StatelessWidget {
   const SoftCard({
     super.key,
     required this.child,
-    this.padding = const EdgeInsets.all(20),
-    this.radius = 20,
+    this.padding = const EdgeInsets.all(GymSpace.xl),
+    this.radius = GymRadius.lg,
     this.borderColor,
     this.color,
     this.clip = false,
@@ -64,10 +65,10 @@ class SearchField extends StatelessWidget {
     final gc = context.gc;
     return Container(
       height: 48,
-      padding: const EdgeInsets.only(left: 16, right: 6),
+      padding: const EdgeInsets.only(left: GymSpace.lg, right: 6),
       decoration: BoxDecoration(
         color: color ?? gc.bgRaised,
-        borderRadius: BorderRadius.circular(100),
+        borderRadius: BorderRadius.circular(GymRadius.pill),
       ),
       child: Row(children: [
         SvgPathIcon(Ic.search, size: 16, color: gc.textSecondary),
@@ -76,13 +77,13 @@ class SearchField extends StatelessWidget {
           child: TextField(
             controller: controller,
             onChanged: onChanged,
-            style: AppTheme.f(14, weight: FontWeight.w500, color: gc.text),
+            style: AppTheme.f(GymText.bodySize, weight: FontWeight.w500, color: gc.text),
             cursorColor: gc.accent,
             decoration: InputDecoration(
               isCollapsed: true,
               border: InputBorder.none,
               hintText: hint,
-              hintStyle: AppTheme.f(14, weight: FontWeight.w500, color: gc.textSecondary),
+              hintStyle: AppTheme.f(GymText.bodySize, weight: FontWeight.w500, color: gc.textSecondary),
             ),
           ),
         ),
@@ -135,7 +136,7 @@ class TinySwitch extends StatelessWidget {
       alignment: on ? Alignment.centerRight : Alignment.centerLeft,
       decoration: BoxDecoration(
         color: on ? gc.ember : gc.bgRaised2,
-        borderRadius: BorderRadius.circular(100),
+        borderRadius: BorderRadius.circular(GymRadius.pill),
         border: Border.all(color: on ? gc.ember : gc.border),
       ),
       child: Container(
@@ -202,11 +203,11 @@ class GhostButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         height: 46,
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: GymSpace.xl),
         alignment: Alignment.center,
         decoration: BoxDecoration(
           color: context.gc.bgRaised2,
-          borderRadius: BorderRadius.circular(100),
+          borderRadius: BorderRadius.circular(GymRadius.pill),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -214,7 +215,7 @@ class GhostButton extends StatelessWidget {
             Icon(icon, size: 16, color: gc.ember),
             const SizedBox(width: 8),
             Text(titleCase(label),
-                style: AppTheme.f(13.5, weight: FontWeight.w700, color: gc.text)),
+                style: AppTheme.f(GymText.labelSize, weight: FontWeight.w700, color: gc.text)),
           ],
         ),
       ),
@@ -254,12 +255,12 @@ class SheetTitle extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(text, textAlign: TextAlign.center, style: AppTheme.f(17, weight: FontWeight.w700, color: gc.text)),
+        Text(text, textAlign: TextAlign.center, style: AppTheme.f(GymText.titleSize, weight: FontWeight.w700, color: gc.text)),
         if (subtitle != null) ...[
           const SizedBox(height: 4),
           Text(subtitle!,
               textAlign: TextAlign.center,
-              style: AppTheme.f(12, weight: FontWeight.w500, color: gc.textSecondary, height: 1.35)),
+              style: AppTheme.f(GymText.captionSize, weight: FontWeight.w500, color: gc.textSecondary, height: 1.35)),
         ],
       ],
     );
@@ -314,7 +315,7 @@ class OptionGroup extends StatelessWidget {
             ],
           );
     return ClipRRect(
-      borderRadius: BorderRadius.circular(18),
+      borderRadius: BorderRadius.circular(GymRadius.md),
       child: ColoredBox(color: gc.bgRaised2, child: body),
     );
   }
@@ -338,7 +339,7 @@ class _OptionRow extends StatelessWidget {
         child: ConstrainedBox(
           constraints: const BoxConstraints(minHeight: 50),
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: o.detail == null ? 0 : 11),
+            padding: EdgeInsets.symmetric(horizontal: GymSpace.lg, vertical: o.detail == null ? 0 : 11),
             child: Row(children: [
               if (o.leading != null) ...[
                 o.leading!,
@@ -353,12 +354,12 @@ class _OptionRow extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(o.label,
-                        style: AppTheme.f(14.5,
+                        style: AppTheme.f(GymText.bodyLargeSize,
                             weight: o.selected ? FontWeight.w800 : FontWeight.w600, color: tone)),
                     if (o.detail != null) ...[
                       const SizedBox(height: 2),
                       Text(o.detail!,
-                          style: AppTheme.f(12, weight: FontWeight.w500, color: gc.textSecondary, height: 1.3)),
+                          style: AppTheme.f(GymText.captionSize, weight: FontWeight.w500, color: gc.textSecondary, height: 1.3)),
                     ],
                   ],
                 ),
@@ -458,7 +459,7 @@ class ScreenHeader extends StatelessWidget {
               if (subtitle != null) ...[
                 const SizedBox(height: 2),
                 Text(subtitle!,
-                    style: AppTheme.f(12.5,
+                    style: AppTheme.f(GymText.labelSize,
                         weight: FontWeight.w500, color: gc.textSecondary)),
               ],
             ],
@@ -585,7 +586,7 @@ class ToolRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SoftCard(
-      radius: 20,
+      radius: GymRadius.lg,
       borderColor: Colors.transparent,
       padding: EdgeInsets.zero,
       child: _line(context),
@@ -597,11 +598,11 @@ class ToolRow extends StatelessWidget {
     return ConstrainedBox(
       constraints: const BoxConstraints(minHeight: 56),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: GymSpace.lg, vertical: GymSpace.sm),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Flexible(child: Text(sentenceCase(label), style: AppTheme.f(14.5, weight: FontWeight.w500, color: gc.text))),
+            Flexible(child: Text(sentenceCase(label), style: AppTheme.f(GymText.bodyLargeSize, weight: FontWeight.w500, color: gc.text))),
             const SizedBox(width: 12),
             control,
           ],
@@ -620,7 +621,7 @@ class ToolGroup extends StatelessWidget {
   Widget build(BuildContext context) {
     final gc = context.gc;
     return ClipRRect(
-      borderRadius: BorderRadius.circular(20),
+      borderRadius: BorderRadius.circular(GymRadius.lg),
       child: ColoredBox(
         color: gc.bgRaised,
         child: Column(children: [
@@ -653,7 +654,7 @@ class SegToggle extends StatelessWidget {
     final gc = context.gc;
     return Container(
       padding: const EdgeInsets.all(3),
-      decoration: BoxDecoration(color: gc.bgRaised2, borderRadius: BorderRadius.circular(100)),
+      decoration: BoxDecoration(color: gc.bgRaised2, borderRadius: BorderRadius.circular(GymRadius.pill)),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -664,7 +665,7 @@ class SegToggle extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: hPad, vertical: vPad),
                 decoration: BoxDecoration(
                   color: o.selected ? gc.ember : Colors.transparent,
-                  borderRadius: BorderRadius.circular(100),
+                  borderRadius: BorderRadius.circular(GymRadius.pill),
                 ),
                 child: Text(o.label,
                     style: AppTheme.f(fontSize,
@@ -747,7 +748,7 @@ class Pill extends StatelessWidget {
       scale: 0.94,
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: hPad, vertical: vPad),
-        decoration: BoxDecoration(color: bg, borderRadius: BorderRadius.circular(100)),
+        decoration: BoxDecoration(color: bg, borderRadius: BorderRadius.circular(GymRadius.pill)),
         child: Text(titleCase(label),
             style: AppTheme.f(fontSize, weight: FontWeight.w600, color: fg)),
       ),
@@ -781,8 +782,8 @@ class PrimaryButton extends StatelessWidget {
       child: Container(
         width: double.infinity,
         height: height,
-        decoration: BoxDecoration(color: bg ?? gc.ember, borderRadius: BorderRadius.circular(100)),
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        decoration: BoxDecoration(color: bg ?? gc.ember, borderRadius: BorderRadius.circular(GymRadius.pill)),
+        padding: const EdgeInsets.symmetric(horizontal: GymSpace.lg),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -795,7 +796,7 @@ class PrimaryButton extends StatelessWidget {
                 fit: BoxFit.scaleDown,
                 child: Text(titleCase(label),
                     maxLines: 1,
-                    style: AppTheme.f(15.5, weight: FontWeight.w700, color: f, letterSpacing: 0.2)),
+                    style: AppTheme.f(GymText.bodyLargeSize, weight: FontWeight.w700, color: f, letterSpacing: 0.2)),
               ),
             ),
           ],

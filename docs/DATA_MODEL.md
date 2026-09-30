@@ -62,6 +62,8 @@ Owner prefixes in media file names: an exercise id (incl. `bg`, the background p
 |---|---|---|---|
 | `schema` | integer format version (1) | migrated first | migrated first |
 | `profile` | `Profile` object | ✓ | ✓ |
+| `training` | `TrainingProfile` (omitted until a goal is chosen) | ✓ | ✓ |
+| `persDismissed` | `true` once the Home "personalize" card was dismissed | ✓ | ✓ |
 | `dark` | legacy bool mirror of theme | read only as fallback | fallback |
 | `theme` | `'system'|'dark'|'light'` (default `dark`) | ✓ | ✓ |
 | `units` | `'kg'|'lb'` (lb also ⇒ miles/inches) | ✓ | ✓ |
@@ -117,6 +119,12 @@ Owner prefixes in media file names: an exercise id (incl. `bg`, the background p
 - Fields: `name`(`name`, default `'InlitX'`), `sex`(`sex` `male|female`), `age`(`age`, 28), `heightCm`(`h`,175), `weightKg`(`w`,75), `activity`(`act`,1.55), `weeklyGoal`(`goal`,4), `photo`(`photo` base64, optional), `handle`(`handle`), `badge`(`badge`,'blue'), `banner`(`banner` base64), `since`(`since` ISO).
 - Relationships: `weightKg` mirrors latest `BodyweightEntry`.
 - Created by: default ctor / `resetAllData`; Updated by: `SettingsState.updateProfile/setProfile*`, `addBodyweight`, `deleteBodyweight`, `importParsedWeights`; Persisted: root `profile`; Used by: calculators, `weeklyTarget`, `planRequestText`, profile UI.
+
+**Model: `TrainingProfile`** (`lib/models/training_profile.dart`)
+- Purpose: answers of the personalization questionnaire (inputs for the future plan generator).
+- Fields: `goal` (`g`: `leanAesthetic|muscleStrength`), `experience` (`x`: `beginner|intermediate|advanced`), `sessionMinutes` (`m`: 30/45/60/75, nearest on read, default 45), `setting` (`s`: `gym|home|outdoors|''`), `focus` (`f`: ≤3 `MuscleGroup` names). Enums persist as **names**. Days per week is deliberately *not* stored here — it is `Profile.weeklyGoal` (`fit.trainingDays` / `setTrainingDays`), one source of truth.
+- Created/updated by: onboarding (`SettingsState.setTraining*`, `toggleFocusGroup`); Persisted: root `training`; Reset: cleared; Backup: included. `isSet` = goal chosen. Lenient reader.
+- Static taxonomy: `lib/catalog/exercise_meta.dart` — `MuscleGroup` (10 display groups) → `kGroupMuscles` → the 13 muscle ids; `ExerciseKind`, `MovementPattern`, `ExerciseMeta`, `kExerciseMeta` (**empty until curated**, cards GM-41/43/44), `metaOf(id)` (null for unknown/custom exercises).
 
 **Model: `Exercise`** (`lib/models/exercise.dart`)
 - Purpose: catalogue entry (built-in, `const`) or user-created.

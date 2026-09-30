@@ -65,7 +65,7 @@ maintainer statement rather than something enforced by code/tests, it says so. R
 
 ## 5. Widget Rules
 
-- Access theme via `final gc = context.gc;` and `AppTheme.f/s/d(...)`. **Do not hard-code colours** except in painters/share cards where the design uses fixed palettes already; do not introduce new fonts.
+- Access theme via `final gc = context.gc;`. Use the scales in `lib/theme/tokens.dart` — `GymSpace` (4/8/12/16/20/24/32, `minTarget` 48), `GymRadius` (8/12/16/20/24/28/pill) and `GymText` roles (caption 12, label 13, body 14, bodyLarge 15, title 17, headline 20, display 34) — instead of new literals; `ui_kit.dart`, `dialogs.dart` and `choice.dart` already do (screens are being migrated). Text colors must keep ≥4.5:1 on `bg/bgRaised/bgRaised2` (`test/contrast_test.dart`). Selectable options use `ChoiceCard` / `SelectChip` (`lib/widgets/choice.dart`: 48dp targets, `Semantics(selected)`) and `StepProgress`. Also `AppTheme.f/s/d(...)` remain available. **Do not hard-code colours** except in painters/share cards where the design uses fixed palettes already; do not introduce new fonts.
 - Prefer existing components: `SoftCard`, `Pressable`, `PrimaryButton`, `GhostButton`, `RoundBtn`, `SegToggle`, `StepperControl`, `OptionGroup`, `ScreenHeader/ScreenTitle`, `SheetHandle/SheetTitle`, `showAppSheet`, `showAppDialog`, `askConfirm/askText/askNumber`, `showNotchToast`, `GlassSurface`, `Rise/RiseScope` for entrance animation.
 - Screens read `fit.*` directly and are rebuilt through `AnimatedBuilder(animation: fit)` at the shell; nested `ListenableBuilder` is used for local rebuilds. Do not cache `fit` values in widget state unless they are edit drafts.
 - Business logic does **not** belong in widgets: put calculations in `lib/state` (or `lib/services`) and call them. Widget-level code may do layout, formatting via `fit` helpers, animation and gesture handling.
@@ -218,7 +218,8 @@ Full detail: [DATA_MODEL.md](DATA_MODEL.md) §9–§12. Checklist when touching 
 - Branch from `main`; PRs target `main` (CI: analyze → test → split APK build).
 - One topic per PR; description says *what and why*, with a screenshot for visual changes (`CONTRIBUTING.md`). Bug fixes/small changes: PR directly; larger: open an issue first.
 - Commit messages carry the reasoning (there are no code comments); recent history uses short imperative sentences and conventional-commit prefixes for translation PRs (`feat(i18n): …`, `fix(i18n): …`).
-- Do not commit: build outputs, keystores (`*.jks`, `key.properties`), `test/fixtures`, `doc-personal/`, `tool/`, `fdroid/`, `site/` (git-ignored).
+- Do not commit: build outputs, keystores (`*.jks`, `key.properties`), `test/fixtures`, `doc-personal/`, `tool/`, `fdroid/`, `site/`, and the local AI-agent tooling — `.agents/`, `.claude/` (installed skills, agent settings) and `skills-lock.json` — all git-ignored. They are developer-machine files, not part of the app; never `git add -f` them, and check `git status` for stray copies before committing.
+- Before a commit run `git status` and stage only source, tests, ARB + regenerated l10n, and the five core docs. Running `flutter test`/`pub get` can rewrite `pubspec.lock`; revert it unless you changed dependencies.
 - Contributions are GPL-3.0; exercise art additions must be CC BY-SA 4.0-compatible and credited in `CREDITS.md`.
 - Regenerate, don't hand-edit, generated l10n files.
 

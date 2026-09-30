@@ -71,6 +71,7 @@ first-class concern: full ZIP backup, CSV export, and importers for six other ap
 | Shaders | 2 fragment shaders (`medal.frag`, `edge_fade.frag`) | `pubspec.yaml`, `lib/widgets/medal.dart` |
 | Tests | `flutter_test` only; no mocking package | `test/*` |
 | CI | GitHub Actions `build-apk.yml`: analyze → test → split-ABI release build; manual dispatch publishes a signed release | `.github/workflows/build-apk.yml` |
+| Local agent tooling | `.agents/`, `.claude/`, `skills-lock.json` (installed design/animation skills) are git-ignored and never shipped | `.gitignore` |
 | Translations tooling | `crowdin.yml` exists, but `TRANSLATING.md` says there is no translation website yet | see §8.3 |
 
 Declared but unused: `cupertino_icons` (no `CupertinoIcons` reference anywhere in `lib/`).
@@ -206,6 +207,8 @@ Tracked as 61 cards (`GM-01…GM-86`, labels `P0-Critical…P3-Low` + category l
 | 5 | Workout tracking: preview, streamlined session, completion, plan linkage, partial workouts, screen splits | GM-60…GM-65 |
 | 6 | Motivation: longest streak + badge, weekly plan completion, milestones, gentle messaging | GM-70…GM-73 |
 | 7 | QA & stabilization: offline, accessibility, migrations, performance, localization, persistence port, docs | GM-80…GM-86 |
+
+Progress (Testing, unmerged): GM-01…05 (data safety), GM-11 (contrast + semantic colors), GM-30…34, GM-36, GM-40, GM-84 (questionnaire: goal/experience/days/duration/place/focus, `TrainingProfile`, taxonomy schema, Home opt-in card). Partially done: GM-10 (tokens exist; only `ui_kit`/`dialogs`/`choice` migrated), GM-12 (only `ChoiceCard`/`SelectChip`/`StepProgress`). Not started: everything else, incl. the plan generator — the questionnaire currently stores answers but does not yet change what the app suggests.
 
 Audit facts behind the roadmap (verified): the exercise data has no compound/isolation, movement-pattern,
 goal or impact data (only `primary`, `secondary` 0–3, equipment, difficulty, steps); onboarding has no physique

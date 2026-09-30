@@ -1692,6 +1692,91 @@ class AppLocalizationsJa extends AppLocalizations {
   String get welcomeStart => '始める';
 
   @override
+  String get onbGoalQTitle => 'あなたの目標は？';
+
+  @override
+  String get onbGoalQWhy => 'いちばん合うものを選んでください。あとからいつでも変更できます。';
+
+  @override
+  String get goalLeanTitle => '引き締めてバランスよく';
+
+  @override
+  String get goalLeanBody => 'バランスの取れた均整のとれた体づくり。無理なく続けられるトレーニング。';
+
+  @override
+  String get goalStrengthTitle => '筋肉とパワー';
+
+  @override
+  String get goalStrengthBody => '高重量の多関節種目と漸進的な負荷で、強く大きくなります。';
+
+  @override
+  String get onbTrainTitle => 'どのようにトレーニングしていますか？';
+
+  @override
+  String get onbTrainWhy => 'プランの形を決めます。背伸びせず、正直に。';
+
+  @override
+  String get expLabel => '経験';
+
+  @override
+  String get expBeginner => '初心者';
+
+  @override
+  String get expBeginnerHint => '6か月未満';
+
+  @override
+  String get expIntermediate => '多少の経験あり';
+
+  @override
+  String get expIntermediateHint => '6か月〜2年';
+
+  @override
+  String get expAdvanced => '経験豊富';
+
+  @override
+  String get expAdvancedHint => '2年以上';
+
+  @override
+  String get daysLabel => '週あたりの日数';
+
+  @override
+  String get minutesLabel => '1回のトレーニング時間';
+
+  @override
+  String minutesOption(int n) {
+    return '$n分';
+  }
+
+  @override
+  String minutesPlus(int n) {
+    return '$n分以上';
+  }
+
+  @override
+  String get onbFocusTitle => '重点的に鍛えたい部位はありますか？';
+
+  @override
+  String get onbFocusWhy => '任意です。最大3つまで選ぶと、優先して組み込みます。';
+
+  @override
+  String get onbAboutTitle => 'あなたについて';
+
+  @override
+  String get onbAboutWhy => 'すべて任意です。計算ツールだけに使われ、スマホの外には出ません。';
+
+  @override
+  String get personalizeTitle => '目標に合ったプランを手に入れよう';
+
+  @override
+  String get personalizeBody => 'いくつかの簡単な質問に答えるだけ。ルーティンや履歴はそのまま残ります。';
+
+  @override
+  String get personalizeCta => '設定する';
+
+  @override
+  String get notNow => '今はしない';
+
+  @override
   String onbStep(int i, int n) {
     return 'ステップ $i/$n';
   }

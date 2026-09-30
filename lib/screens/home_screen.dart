@@ -41,6 +41,10 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(height: 14),
             ],
             _weekCard(context, gc),
+            if (fit.canOfferPersonalize) ...[
+              const SizedBox(height: 14),
+              _personalizeNudge(gc),
+            ],
             if (fit.photoDue) ...[
               const SizedBox(height: 14),
               _photoNudge(gc),
@@ -377,6 +381,56 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ],
+      ),
+    );
+  }
+
+  Widget _personalizeNudge(GymColors gc) {
+    return SoftCard(
+      radius: 22,
+      padding: const EdgeInsets.fromLTRB(18, 16, 12, 16),
+      child: Row(
+        children: [
+          Icon(PhosphorIconsRegular.sparkle, size: 19, color: gc.accent),
+          const SizedBox(width: 14),
+          Expanded(
+            child: Semantics(
+              button: true,
+              label: '${t.personalizeTitle}. ${t.personalizeBody}',
+              excludeSemantics: true,
+              onTap: fit.goPersonalize,
+              child: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: fit.goPersonalize,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(t.personalizeTitle, style: AppTheme.f(14.5, color: gc.text)),
+                    const SizedBox(height: 2),
+                    Text(t.personalizeBody,
+                        style: AppTheme.f(12, weight: FontWeight.w500, color: gc.textSecondary, height: 1.35)),
+                    const SizedBox(height: 6),
+                    Text(t.personalizeCta, style: AppTheme.f(13, weight: FontWeight.w700, color: gc.accent)),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Semantics(
+            button: true,
+            label: t.notNow,
+            excludeSemantics: true,
+            onTap: fit.dismissPersonalize,
+            child: GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: fit.dismissPersonalize,
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
+                child: Center(child: Icon(PhosphorIconsBold.x, size: 15, color: gc.textTertiary)),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

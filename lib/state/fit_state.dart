@@ -15,6 +15,7 @@ import '../models/live_session.dart';
 import '../models/measure.dart';
 import '../models/note.dart';
 import '../models/place.dart';
+import '../models/training_profile.dart';
 import '../models/profile.dart';
 import '../models/progress_shot.dart';
 import '../models/workout.dart';
@@ -199,6 +200,7 @@ class FitState extends FitCore
       photoIntervalDays = (data['photoEvery'] as num?)?.toInt() ?? 30;
       bodyTimeline = data['bodyTl'] as bool? ?? false;
     });
+    _loadTraining(data);
     _guard(() => _restoreLiveSession(data));
   }
 
@@ -475,6 +477,8 @@ class FitState extends FitCore
     'moments': moments.map((m) => m.toJson()).toList(),
     'photoEvery': photoIntervalDays,
     'bodyTl': bodyTimeline,
+    if (training.isSet) 'training': training.toJson(),
+    if (personalizeDismissed) 'persDismissed': true,
     if (session != null && !session!.complete) ...{
       'live': session!.toJson(),
       'liveStart': _runningSince?.toIso8601String(),
@@ -541,6 +545,8 @@ class FitState extends FitCore
     TrainReminder.instance.cancel();
     onboarded = false;
     strengthExerciseId = null;
+    training = TrainingProfile();
+    personalizeDismissed = false;
     _photoBytes = null;
     _photoCacheKey = null;
     _bannerBytes = null;
@@ -666,7 +672,15 @@ class FitState extends FitCore
     _loadMoments(map, restored: restoredMoments);
     photoIntervalDays = (map['photoEvery'] as num?)?.toInt() ?? photoIntervalDays;
     bodyTimeline = map['bodyTl'] as bool? ?? bodyTimeline;
+    _loadTraining(map);
     _seedCalculatorsFromProfile();
+  }
+
+  void _loadTraining(Map<String, dynamic> data) {
+    _guard(() {
+      training = TrainingProfile.fromJson(_mapOf(data['training']).cast<String, dynamic>());
+      personalizeDismissed = data['persDismissed'] as bool? ?? false;
+    });
   }
 
   void _loadAwards(Map<String, dynamic> map) {
@@ -1098,6 +1112,8 @@ class FitState extends FitCore
         backFromAwards();
       case 'ai-plan':
         backFromAiPlan();
+      case 'personalize':
+        if (personalizeBack?.call() != true) popRoute();
       case 'progress':
       case 'exercises':
       case 'settings':

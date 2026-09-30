@@ -1749,6 +1749,94 @@ class AppLocalizationsNl extends AppLocalizations {
   String get welcomeStart => 'BEGINNEN';
 
   @override
+  String get onbGoalQTitle => 'Wat is je doel?';
+
+  @override
+  String get onbGoalQWhy => 'Kies wat het beste past. Je kunt het altijd wijzigen.';
+
+  @override
+  String get goalLeanTitle => 'Strak en evenwichtig';
+
+  @override
+  String get goalLeanBody => 'Een evenwichtig, proportioneel lichaam. Regelmatig, duurzaam trainen.';
+
+  @override
+  String get goalStrengthTitle => 'Spieren en kracht';
+
+  @override
+  String get goalStrengthBody =>
+      'Word sterker en bouw spieren op met zware samengestelde oefeningen en progressieve overload.';
+
+  @override
+  String get onbTrainTitle => 'Hoe train je?';
+
+  @override
+  String get onbTrainWhy => 'Bepaalt de vorm van je schema. Wees eerlijk, niet ambitieus.';
+
+  @override
+  String get expLabel => 'ERVARING';
+
+  @override
+  String get expBeginner => 'Nieuw met krachttraining';
+
+  @override
+  String get expBeginnerHint => 'Minder dan 6 maanden';
+
+  @override
+  String get expIntermediate => 'Enige ervaring';
+
+  @override
+  String get expIntermediateHint => '6 maanden tot 2 jaar';
+
+  @override
+  String get expAdvanced => 'Ervaren';
+
+  @override
+  String get expAdvancedHint => 'Meer dan 2 jaar';
+
+  @override
+  String get daysLabel => 'DAGEN PER WEEK';
+
+  @override
+  String get minutesLabel => 'TIJD PER TRAINING';
+
+  @override
+  String minutesOption(int n) {
+    return '$n min';
+  }
+
+  @override
+  String minutesPlus(int n) {
+    return '$n+ min';
+  }
+
+  @override
+  String get onbFocusTitle => 'Spieren om op te focussen?';
+
+  @override
+  String get onbFocusWhy => 'Optioneel. Kies er maximaal drie, die krijgen extra aandacht.';
+
+  @override
+  String get onbAboutTitle => 'Over jou';
+
+  @override
+  String get onbAboutWhy =>
+      'Alles is optioneel. Alleen gebruikt voor de rekenhulpen en het verlaat je telefoon nooit.';
+
+  @override
+  String get personalizeTitle => 'Krijg een schema op maat van je doel';
+
+  @override
+  String get personalizeBody =>
+      'Beantwoord een paar snelle vragen. Je routines en geschiedenis blijven ongemoeid.';
+
+  @override
+  String get personalizeCta => 'Personaliseren';
+
+  @override
+  String get notNow => 'Nu niet';
+
+  @override
   String onbStep(int i, int n) {
     return 'STAP $i VAN $n';
   }

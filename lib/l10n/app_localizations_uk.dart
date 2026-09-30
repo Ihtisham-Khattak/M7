@@ -1746,6 +1746,94 @@ class AppLocalizationsUk extends AppLocalizations {
   String get welcomeStart => 'ПОЧАТИ';
 
   @override
+  String get onbGoalQTitle => 'Яка твоя мета?';
+
+  @override
+  String get onbGoalQWhy => 'Обери те, що підходить найкраще. Це можна змінити будь-коли.';
+
+  @override
+  String get goalLeanTitle => 'Рельєф і баланс';
+
+  @override
+  String get goalLeanBody => 'Збалансоване, пропорційне тіло. Регулярні й сталі тренування.';
+
+  @override
+  String get goalStrengthTitle => 'М\'язи та сила';
+
+  @override
+  String get goalStrengthBody =>
+      'Ставай сильнішим і нарощуй м\'язи за допомогою важких базових вправ і прогресивного навантаження.';
+
+  @override
+  String get onbTrainTitle => 'Як ти тренуєшся?';
+
+  @override
+  String get onbTrainWhy => 'Визначає форму твого плану. Будь чесним, а не амбітним.';
+
+  @override
+  String get expLabel => 'ДОСВІД';
+
+  @override
+  String get expBeginner => 'Новачок';
+
+  @override
+  String get expBeginnerHint => 'Менше ніж 6 місяців';
+
+  @override
+  String get expIntermediate => 'Трохи досвіду';
+
+  @override
+  String get expIntermediateHint => 'Від 6 місяців до 2 років';
+
+  @override
+  String get expAdvanced => 'Досвідчений';
+
+  @override
+  String get expAdvancedHint => 'Понад 2 роки';
+
+  @override
+  String get daysLabel => 'ДНІВ НА ТИЖДЕНЬ';
+
+  @override
+  String get minutesLabel => 'ТРИВАЛІСТЬ ТРЕНУВАННЯ';
+
+  @override
+  String minutesOption(int n) {
+    return '$n хв';
+  }
+
+  @override
+  String minutesPlus(int n) {
+    return '$n+ хв';
+  }
+
+  @override
+  String get onbFocusTitle => 'Є м\'язи, на яких зосередитися?';
+
+  @override
+  String get onbFocusWhy => 'Необов\'язково. Обери до трьох — їм приділимо більше уваги.';
+
+  @override
+  String get onbAboutTitle => 'Про тебе';
+
+  @override
+  String get onbAboutWhy =>
+      'Усе необов\'язково. Використовується лише в калькуляторах і ніколи не залишає телефон.';
+
+  @override
+  String get personalizeTitle => 'Отримай план під свою мету';
+
+  @override
+  String get personalizeBody =>
+      'Дай відповідь на кілька швидких запитань. Твої програми та історія залишаться недоторканими.';
+
+  @override
+  String get personalizeCta => 'Налаштувати';
+
+  @override
+  String get notNow => 'Не зараз';
+
+  @override
   String onbStep(int i, int n) {
     return 'КРОК $i З $n';
   }

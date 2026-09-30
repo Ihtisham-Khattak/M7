@@ -1746,6 +1746,92 @@ class AppLocalizationsEn extends AppLocalizations {
   String get welcomeStart => 'GET STARTED';
 
   @override
+  String get onbGoalQTitle => 'What\'s your goal?';
+
+  @override
+  String get onbGoalQWhy => 'Pick what fits best. You can change it any time.';
+
+  @override
+  String get goalLeanTitle => 'Lean & defined';
+
+  @override
+  String get goalLeanBody => 'A balanced, proportional physique. Steady, sustainable training.';
+
+  @override
+  String get goalStrengthTitle => 'Muscle & strength';
+
+  @override
+  String get goalStrengthBody =>
+      'Get stronger and build muscle with heavy compound lifts and progressive overload.';
+
+  @override
+  String get onbTrainTitle => 'How do you train?';
+
+  @override
+  String get onbTrainWhy => 'Sets the shape of your plan. Be honest, not ambitious.';
+
+  @override
+  String get expLabel => 'EXPERIENCE';
+
+  @override
+  String get expBeginner => 'New to lifting';
+
+  @override
+  String get expBeginnerHint => 'Under 6 months';
+
+  @override
+  String get expIntermediate => 'Some experience';
+
+  @override
+  String get expIntermediateHint => '6 months to 2 years';
+
+  @override
+  String get expAdvanced => 'Experienced';
+
+  @override
+  String get expAdvancedHint => 'More than 2 years';
+
+  @override
+  String get daysLabel => 'DAYS PER WEEK';
+
+  @override
+  String get minutesLabel => 'TIME PER WORKOUT';
+
+  @override
+  String minutesOption(int n) {
+    return '$n min';
+  }
+
+  @override
+  String minutesPlus(int n) {
+    return '$n+ min';
+  }
+
+  @override
+  String get onbFocusTitle => 'Any muscles to focus on?';
+
+  @override
+  String get onbFocusWhy => 'Optional. Pick up to three and we\'ll give them extra attention.';
+
+  @override
+  String get onbAboutTitle => 'About you';
+
+  @override
+  String get onbAboutWhy => 'All optional. Used only for the calculators, and it never leaves your phone.';
+
+  @override
+  String get personalizeTitle => 'Get a plan built for your goal';
+
+  @override
+  String get personalizeBody => 'Answer a few quick questions. Your routines and history stay untouched.';
+
+  @override
+  String get personalizeCta => 'Personalize';
+
+  @override
+  String get notNow => 'Not now';
+
+  @override
   String onbStep(int i, int n) {
     return 'STEP $i OF $n';
   }

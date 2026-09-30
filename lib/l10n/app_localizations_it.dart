@@ -1747,6 +1747,93 @@ class AppLocalizationsIt extends AppLocalizations {
   String get welcomeStart => 'INIZIA';
 
   @override
+  String get onbGoalQTitle => 'Qual è il tuo obiettivo?';
+
+  @override
+  String get onbGoalQWhy => 'Scegli quello che ti si addice di più. Puoi cambiarlo quando vuoi.';
+
+  @override
+  String get goalLeanTitle => 'Definito ed equilibrato';
+
+  @override
+  String get goalLeanBody => 'Un fisico proporzionato ed equilibrato. Allenamento costante e sostenibile.';
+
+  @override
+  String get goalStrengthTitle => 'Muscoli e forza';
+
+  @override
+  String get goalStrengthBody =>
+      'Diventa più forte e costruisci muscoli con sollevamenti composti pesanti e sovraccarico progressivo.';
+
+  @override
+  String get onbTrainTitle => 'Come ti alleni?';
+
+  @override
+  String get onbTrainWhy => 'Dà forma al tuo piano. Sii onesto, non ambizioso.';
+
+  @override
+  String get expLabel => 'ESPERIENZA';
+
+  @override
+  String get expBeginner => 'Alle prime armi';
+
+  @override
+  String get expBeginnerHint => 'Meno di 6 mesi';
+
+  @override
+  String get expIntermediate => 'Un po\' di esperienza';
+
+  @override
+  String get expIntermediateHint => 'Da 6 mesi a 2 anni';
+
+  @override
+  String get expAdvanced => 'Esperto';
+
+  @override
+  String get expAdvancedHint => 'Più di 2 anni';
+
+  @override
+  String get daysLabel => 'GIORNI A SETTIMANA';
+
+  @override
+  String get minutesLabel => 'DURATA DELL\'ALLENAMENTO';
+
+  @override
+  String minutesOption(int n) {
+    return '$n min';
+  }
+
+  @override
+  String minutesPlus(int n) {
+    return '$n+ min';
+  }
+
+  @override
+  String get onbFocusTitle => 'Muscoli su cui concentrarti?';
+
+  @override
+  String get onbFocusWhy => 'Facoltativo. Scegline fino a tre e daremo loro più attenzione.';
+
+  @override
+  String get onbAboutTitle => 'Su di te';
+
+  @override
+  String get onbAboutWhy => 'Tutto facoltativo. Serve solo per i calcolatori e non lascia mai il telefono.';
+
+  @override
+  String get personalizeTitle => 'Ottieni un piano pensato per il tuo obiettivo';
+
+  @override
+  String get personalizeBody =>
+      'Rispondi a poche domande veloci. Le tue routine e la cronologia restano intatte.';
+
+  @override
+  String get personalizeCta => 'Personalizza';
+
+  @override
+  String get notNow => 'Non ora';
+
+  @override
   String onbStep(int i, int n) {
     return 'PASSO $i DI $n';
   }

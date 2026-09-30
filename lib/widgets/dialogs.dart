@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../l10n/l10n.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
+import '../theme/tokens.dart';
 import 'glass.dart';
 import 'ui_kit.dart';
 
@@ -15,10 +16,10 @@ AlertDialog appDialog(
     AlertDialog(
       backgroundColor: gc.bgRaised,
       insetPadding: const EdgeInsets.symmetric(horizontal: 28),
-      titlePadding: const EdgeInsets.fromLTRB(24, 24, 24, 10),
-      contentPadding: const EdgeInsets.fromLTRB(24, 0, 24, 8),
-      actionsPadding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(26)),
+      titlePadding: const EdgeInsets.fromLTRB(GymSpace.xxl, GymSpace.xxl, GymSpace.xxl, 10),
+      contentPadding: const EdgeInsets.fromLTRB(GymSpace.xxl, 0, GymSpace.xxl, GymSpace.sm),
+      actionsPadding: const EdgeInsets.fromLTRB(GymSpace.lg, 0, GymSpace.lg, GymSpace.md),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(GymRadius.xl)),
       title: title,
       content: content,
       actions: actions,
@@ -28,11 +29,11 @@ Widget dialogAction(String label, Color color, VoidCallback onPressed, {bool str
     TextButton(
       onPressed: onPressed,
       style: TextButton.styleFrom(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+        padding: const EdgeInsets.symmetric(horizontal: GymSpace.lg, vertical: GymSpace.md),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(GymRadius.pill)),
       ),
       child: Text(titleCase(label),
-          style: AppTheme.f(14,
+          style: AppTheme.f(GymText.bodySize,
               weight: strong ? FontWeight.w700 : FontWeight.w600, color: color)),
     );
 
@@ -49,9 +50,9 @@ Future<bool> askConfirm(
     context: context,
     builder: (dctx) => appDialog(
       gc,
-      title: Text(title, style: AppTheme.f(19, weight: FontWeight.w800, color: gc.text)),
+      title: Text(title, style: AppTheme.f(GymText.headlineSize, weight: FontWeight.w800, color: gc.text)),
       content: Text(body,
-          style: AppTheme.f(13.5,
+          style: AppTheme.f(GymText.labelSize,
               weight: FontWeight.w500, color: gc.textSecondary, height: 1.45)),
       actions: [
         dialogAction(cancelLabel ?? t.cancel, gc.textSecondary, () => Navigator.of(dctx).pop(false),
@@ -76,16 +77,16 @@ Future<String?> askText(
     context: context,
     builder: (dctx) => appDialog(
       gc,
-      title: Text(title, style: AppTheme.d(18, weight: FontWeight.w700, color: gc.text)),
+      title: Text(title, style: AppTheme.d(GymText.titleSize, weight: FontWeight.w700, color: gc.text)),
       content: TextField(
         controller: controller,
         autofocus: true,
         textCapitalization: TextCapitalization.sentences,
-        style: AppTheme.s(15, color: gc.text),
+        style: AppTheme.s(GymText.bodyLargeSize, color: gc.text),
         cursorColor: gc.accent,
         decoration: InputDecoration(
           hintText: hint,
-          hintStyle: AppTheme.s(15, color: gc.textTertiary),
+          hintStyle: AppTheme.s(GymText.bodyLargeSize, color: gc.textTertiary),
           enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: gc.border)),
           focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: gc.accent)),
         ),
@@ -116,20 +117,20 @@ Future<double?> askNumber(
     context: context,
     builder: (dctx) => appDialog(
       gc,
-      title: Text(titleCase(title), style: AppTheme.f(19, weight: FontWeight.w800, color: gc.text)),
+      title: Text(titleCase(title), style: AppTheme.f(GymText.headlineSize, weight: FontWeight.w800, color: gc.text)),
       content: TextField(
         controller: controller,
         autofocus: true,
         keyboardType: TextInputType.numberWithOptions(decimal: decimal),
         textAlign: TextAlign.center,
-        style: AppTheme.f(34, weight: FontWeight.w800, color: gc.text, height: 1.1),
+        style: AppTheme.f(GymText.displaySize, weight: FontWeight.w800, color: gc.text, height: 1.1),
         cursorColor: gc.accent,
         onSubmitted: (v) => Navigator.of(dctx).pop(v),
         decoration: InputDecoration(
           filled: true,
           fillColor: gc.bgRaised2,
-          contentPadding: const EdgeInsets.symmetric(vertical: 18, horizontal: 16),
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(18), borderSide: BorderSide.none),
+          contentPadding: const EdgeInsets.symmetric(vertical: 18, horizontal: GymSpace.lg),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(GymRadius.md), borderSide: BorderSide.none),
         ),
       ),
       actions: [

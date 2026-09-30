@@ -37,6 +37,8 @@ abstract class FitCore extends ChangeNotifier {
   final Map<String, bool> favorites = {};
 
   Profile profile = Profile();
+  TrainingProfile training = TrainingProfile();
+  bool personalizeDismissed = false;
 
   final List<LoggedSession> sessions = [];
   final List<BodyweightEntry> bodyweight = [];

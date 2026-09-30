@@ -1677,6 +1677,91 @@ class AppLocalizationsZh extends AppLocalizations {
   String get welcomeStart => '立即开始';
 
   @override
+  String get onbGoalQTitle => '你的目标是什么？';
+
+  @override
+  String get onbGoalQWhy => '选最适合你的一项，之后随时可以更改。';
+
+  @override
+  String get goalLeanTitle => '紧致匀称';
+
+  @override
+  String get goalLeanBody => '均衡、比例协调的体型。稳定、可持续的训练。';
+
+  @override
+  String get goalStrengthTitle => '增肌与力量';
+
+  @override
+  String get goalStrengthBody => '通过大重量复合动作和渐进超负荷，变得更强、更壮。';
+
+  @override
+  String get onbTrainTitle => '你是怎么训练的？';
+
+  @override
+  String get onbTrainWhy => '决定计划的样子。如实回答就好，不必逞强。';
+
+  @override
+  String get expLabel => '训练经验';
+
+  @override
+  String get expBeginner => '刚接触力量训练';
+
+  @override
+  String get expBeginnerHint => '不到 6 个月';
+
+  @override
+  String get expIntermediate => '有一些经验';
+
+  @override
+  String get expIntermediateHint => '6 个月到 2 年';
+
+  @override
+  String get expAdvanced => '经验丰富';
+
+  @override
+  String get expAdvancedHint => '2 年以上';
+
+  @override
+  String get daysLabel => '每周训练天数';
+
+  @override
+  String get minutesLabel => '每次训练时长';
+
+  @override
+  String minutesOption(int n) {
+    return '$n 分钟';
+  }
+
+  @override
+  String minutesPlus(int n) {
+    return '$n+ 分钟';
+  }
+
+  @override
+  String get onbFocusTitle => '有想重点练的部位吗？';
+
+  @override
+  String get onbFocusWhy => '可选。最多选三个，我们会多安排一些。';
+
+  @override
+  String get onbAboutTitle => '关于你';
+
+  @override
+  String get onbAboutWhy => '全部可选。仅用于计算器，绝不会离开你的手机。';
+
+  @override
+  String get personalizeTitle => '获取为你的目标定制的计划';
+
+  @override
+  String get personalizeBody => '回答几个简单的问题。你的训练模板和历史记录不会被改动。';
+
+  @override
+  String get personalizeCta => '个性化';
+
+  @override
+  String get notNow => '以后再说';
+
+  @override
   String onbStep(int i, int n) {
     return '第 $i 步 / 共 $n 步';
   }
@@ -4674,6 +4759,91 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get welcomeStart => '開始';
+
+  @override
+  String get onbGoalQTitle => '你的目標是什麼？';
+
+  @override
+  String get onbGoalQWhy => '選最適合你的一項，之後隨時可以更改。';
+
+  @override
+  String get goalLeanTitle => '緊實勻稱';
+
+  @override
+  String get goalLeanBody => '均衡、比例協調的體型。穩定、可持續的訓練。';
+
+  @override
+  String get goalStrengthTitle => '增肌與力量';
+
+  @override
+  String get goalStrengthBody => '透過大重量複合動作與漸進式超負荷，變得更強、更壯。';
+
+  @override
+  String get onbTrainTitle => '你是怎麼訓練的？';
+
+  @override
+  String get onbTrainWhy => '決定計畫的樣子。如實回答就好，不必逞強。';
+
+  @override
+  String get expLabel => '訓練經驗';
+
+  @override
+  String get expBeginner => '剛接觸重量訓練';
+
+  @override
+  String get expBeginnerHint => '不到 6 個月';
+
+  @override
+  String get expIntermediate => '有一些經驗';
+
+  @override
+  String get expIntermediateHint => '6 個月到 2 年';
+
+  @override
+  String get expAdvanced => '經驗豐富';
+
+  @override
+  String get expAdvancedHint => '2 年以上';
+
+  @override
+  String get daysLabel => '每週訓練天數';
+
+  @override
+  String get minutesLabel => '每次訓練時間';
+
+  @override
+  String minutesOption(int n) {
+    return '$n 分鐘';
+  }
+
+  @override
+  String minutesPlus(int n) {
+    return '$n+ 分鐘';
+  }
+
+  @override
+  String get onbFocusTitle => '有想重點訓練的部位嗎？';
+
+  @override
+  String get onbFocusWhy => '選填。最多選三個，我們會多安排一些。';
+
+  @override
+  String get onbAboutTitle => '關於你';
+
+  @override
+  String get onbAboutWhy => '全部選填。僅用於計算器，絕不會離開你的手機。';
+
+  @override
+  String get personalizeTitle => '取得為你的目標量身打造的計畫';
+
+  @override
+  String get personalizeBody => '回答幾個簡單的問題。你的訓練組合與歷史紀錄不會被更動。';
+
+  @override
+  String get personalizeCta => '個人化';
+
+  @override
+  String get notNow => '稍後再說';
 
   @override
   String onbStep(int i, int n) {
