@@ -10,6 +10,7 @@ import '../catalog/medal_look.dart';
 import '../l10n/l10n.dart';
 import '../state/fit_state.dart';
 import '../theme/app_theme.dart';
+import '../theme/motion.dart';
 
 const double _restTilt = 0.13;
 
@@ -139,7 +140,7 @@ class _MedalSpinState extends State<MedalSpin> with SingleTickerProviderStateMix
   @override
   void initState() {
     super.initState();
-    if (widget.spinIn) {
+    if (widget.spinIn && !GymMotion.platformReduced) {
       _yaw = -math.pi * 2;
       _yawVel = 13;
       _landed = false;

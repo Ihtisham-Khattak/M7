@@ -94,17 +94,18 @@ class SelectChip extends StatelessWidget {
       onTap: enabled ? onTap : null,
       child: Pressable(
         onTap: enabled ? onTap : null,
-        child: ConstrainedBox(
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 160),
+          curve: Curves.easeOut,
           constraints: const BoxConstraints(minHeight: GymSpace.minTarget, minWidth: GymSpace.minTarget),
-          child: AnimatedContainer(
-            duration: const Duration(milliseconds: 160),
-            curve: Curves.easeOut,
-            alignment: Alignment.center,
-            padding: const EdgeInsets.symmetric(horizontal: GymSpace.lg, vertical: GymSpace.sm),
-            decoration: BoxDecoration(
-              color: selected ? gc.ember : gc.bgRaised,
-              borderRadius: BorderRadius.circular(GymRadius.pill),
-            ),
+          padding: const EdgeInsets.symmetric(horizontal: GymSpace.lg, vertical: GymSpace.sm),
+          decoration: BoxDecoration(
+            color: selected ? gc.ember : gc.bgRaised,
+            borderRadius: BorderRadius.circular(GymRadius.sm),
+          ),
+          child: Center(
+            widthFactor: 1,
+            heightFactor: 1,
             child: Text(
               label,
               style: GymText.body(
@@ -138,14 +139,72 @@ class StepProgress extends StatelessWidget {
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
                 curve: Curves.easeOut,
-                margin: const EdgeInsets.only(right: 6),
+                margin: const EdgeInsets.only(right: GymSpace.sm),
                 height: 3,
                 decoration: BoxDecoration(
                   color: i <= index ? gc.text : gc.bgRaised2,
-                  borderRadius: BorderRadius.circular(3),
+                  borderRadius: BorderRadius.circular(GymRadius.hair),
                 ),
               ),
             ),
+        ],
+      ),
+    );
+  }
+}
+
+class GymSlider extends StatelessWidget {
+  const GymSlider({
+    super.key,
+    required this.label,
+    required this.value,
+    required this.min,
+    required this.max,
+    required this.onChanged,
+    this.display,
+  });
+
+  final String label;
+  final double value;
+  final double min;
+  final double max;
+  final ValueChanged<double> onChanged;
+  final String? display;
+
+  @override
+  Widget build(BuildContext context) {
+    final gc = context.gc;
+    return Semantics(
+      container: true,
+      label: label,
+      value: display ?? value.toStringAsFixed(2),
+      child: Row(
+        children: [
+          SizedBox(
+            width: 96,
+            child: Text(label, style: GymText.label(color: gc.textSecondary, weight: FontWeight.w600)),
+          ),
+          Expanded(
+            child: SliderTheme(
+              data: SliderTheme.of(context).copyWith(
+                trackHeight: 3,
+                activeTrackColor: gc.ember,
+                inactiveTrackColor: gc.bgRaised2,
+                thumbColor: gc.ember,
+                overlayColor: gc.emberSoft,
+                thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 9),
+              ),
+              child: Slider(value: value.clamp(min, max), min: min, max: max, onChanged: onChanged),
+            ),
+          ),
+          SizedBox(
+            width: 44,
+            child: Text(
+              display ?? '',
+              textAlign: TextAlign.end,
+              style: GymText.numeric(GymText.captionSize, color: gc.textTertiary),
+            ),
+          ),
         ],
       ),
     );

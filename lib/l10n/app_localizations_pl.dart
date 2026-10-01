@@ -1270,6 +1270,28 @@ class AppLocalizationsPl extends AppLocalizations {
   String get bgDots => 'Kropki';
 
   @override
+  String get bgAncient => 'Papier washi';
+
+  @override
+  String get bgZoom => 'Zoom';
+
+  @override
+  String get bgOpacity => 'Krycie';
+
+  @override
+  String get bgOverlay => 'Nakładka';
+
+  @override
+  String get bgBlur => 'Rozmycie';
+
+  @override
+  String get bgDragHint => 'Przeciągnij podgląd, aby ustawić obraz.';
+
+  @override
+  String get bgGuardHint =>
+      'Tekst zawsze pozostaje czytelny: nakładka sama się wzmacnia przy bardzo jasnych lub ciemnych obrazach.';
+
+  @override
   String get bgGrid => 'Siatka';
 
   @override

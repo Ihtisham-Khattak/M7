@@ -1313,6 +1313,28 @@ class AppLocalizationsRu extends AppLocalizations {
   String get bgDots => 'Точки';
 
   @override
+  String get bgAncient => 'Бумага васи';
+
+  @override
+  String get bgZoom => 'Масштаб';
+
+  @override
+  String get bgOpacity => 'Прозрачность';
+
+  @override
+  String get bgOverlay => 'Наложение';
+
+  @override
+  String get bgBlur => 'Размытие';
+
+  @override
+  String get bgDragHint => 'Перетащи предпросмотр, чтобы расположить картинку.';
+
+  @override
+  String get bgGuardHint =>
+      'Текст всегда читается: наложение само усиливается для очень светлых или тёмных картинок.';
+
+  @override
   String get bgGrid => 'Сетка';
 
   @override

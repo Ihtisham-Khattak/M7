@@ -11,9 +11,11 @@ import '../services/media_store.dart';
 import '../state/fit_state.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
+import '../theme/tokens.dart';
 import '../widgets/exercise_media.dart';
 import '../widgets/glass.dart';
 import '../widgets/svg_icon.dart';
+import '../widgets/components.dart';
 import '../widgets/ui_kit.dart';
 
 class ExercisesScreen extends StatefulWidget {
@@ -284,63 +286,40 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
   Widget _row(GymColors gc, Exercise ex, {required bool first, required bool last}) {
     final fav = fit.favorites[ex.id] ?? false;
     return Container(
+      clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         color: gc.bgRaised,
         borderRadius: BorderRadius.vertical(
-          top: Radius.circular(first ? 20 : 0),
-          bottom: Radius.circular(last ? 20 : 0),
+          top: Radius.circular(first ? GymRadius.xl : 0),
+          bottom: Radius.circular(last ? GymRadius.xl : 0),
         ),
       ),
-      child: Column(
-        children: [
-          GestureDetector(
+      child: ListRow(
+        leading: SizedBox(
+          width: 52,
+          child: ExerciseMedia(ex: ex, height: 52, radius: GymRadius.md, bordered: false),
+        ),
+        title: exerciseName(ex),
+        subtitle: '${t.equipment(ex.equipment)} · ${t.difficulty(ex.difficulty)}',
+        minHeight: 70,
+        padding: const EdgeInsets.fromLTRB(GymSpace.md, 0, 0, 0),
+        divider: !last,
+        dividerInset: 77,
+        onTap: () => fit.openExercise(ex.id),
+        trailing: Semantics(
+          button: true,
+          label: t.favouritesOnly,
+          selected: fav,
+          child: GestureDetector(
             behavior: HitTestBehavior.opaque,
-            onTap: () => fit.openExercise(ex.id),
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(12, 9, 6, 9),
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: 52,
-                    child: ExerciseMedia(ex: ex, height: 52, radius: 15, bordered: false),
-                  ),
-                  const SizedBox(width: 13),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(exerciseName(ex),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: AppTheme.f(14.5, weight: FontWeight.w600, color: gc.text)),
-                        const SizedBox(height: 4),
-                        Text('${t.equipment(ex.equipment)} · ${t.difficulty(ex.difficulty)}',
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: AppTheme.f(12,
-                                weight: FontWeight.w500, color: gc.textSecondary)),
-                      ],
-                    ),
-                  ),
-                  GestureDetector(
-                    behavior: HitTestBehavior.opaque,
-                    onTap: () => fit.toggleFavorite(ex.id),
-                    child: Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: _star(gc, fav),
-                    ),
-                  ),
-                ],
-              ),
+            onTap: () => fit.toggleFavorite(ex.id),
+            child: SizedBox(
+              width: GymSpace.minTarget,
+              height: GymSpace.minTarget,
+              child: Center(child: _star(gc, fav)),
             ),
           ),
-          if (!last)
-            Container(
-              margin: const EdgeInsets.only(left: 77),
-              height: 1,
-              color: gc.border.withValues(alpha: 0.55),
-            ),
-        ],
+        ),
       ),
     );
   }
@@ -417,9 +396,9 @@ void showCreateExerciseSheet(BuildContext context,
                       fillColor: gc.bgRaised2,
                       contentPadding: const EdgeInsets.all(14),
                       enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(14), borderSide: BorderSide(color: gc.border)),
+                          borderRadius: BorderRadius.circular(GymRadius.md), borderSide: BorderSide(color: gc.border)),
                       focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(14), borderSide: BorderSide(color: gc.accent)),
+                          borderRadius: BorderRadius.circular(GymRadius.md), borderSide: BorderSide(color: gc.accent)),
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -500,9 +479,9 @@ void showCreateExerciseSheet(BuildContext context,
                       fillColor: gc.bgRaised2,
                       contentPadding: const EdgeInsets.all(14),
                       enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(14), borderSide: BorderSide(color: gc.border)),
+                          borderRadius: BorderRadius.circular(GymRadius.md), borderSide: BorderSide(color: gc.border)),
                       focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(14), borderSide: BorderSide(color: gc.accent)),
+                          borderRadius: BorderRadius.circular(GymRadius.md), borderSide: BorderSide(color: gc.accent)),
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -532,7 +511,7 @@ void showCreateExerciseSheet(BuildContext context,
                           height: 120,
                           decoration: BoxDecoration(
                             color: gc.bgRaised2,
-                            borderRadius: BorderRadius.circular(16),
+                            borderRadius: BorderRadius.circular(GymRadius.lg),
                             border: Border.all(color: gc.border),
                           ),
                           child: Column(
@@ -554,7 +533,7 @@ void showCreateExerciseSheet(BuildContext context,
                             height: 160,
                             decoration: BoxDecoration(
                               color: gc.bgRaised2,
-                              borderRadius: BorderRadius.circular(16),
+                              borderRadius: BorderRadius.circular(GymRadius.lg),
                               border: Border.all(color: gc.border),
                             ),
                             clipBehavior: Clip.antiAlias,

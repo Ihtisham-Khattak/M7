@@ -11,6 +11,7 @@ import '../services/media_store.dart';
 import '../state/fit_state.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
+import '../theme/tokens.dart';
 import '../widgets/body_map.dart';
 import '../widgets/charts.dart';
 import '../widgets/dialogs.dart';
@@ -114,7 +115,7 @@ class ProgressScreen extends StatelessWidget {
       onTap: onTap,
       child: Container(
       padding: const EdgeInsets.fromLTRB(18, 16, 18, 16),
-      decoration: BoxDecoration(color: gc.bgRaised, borderRadius: BorderRadius.circular(22)),
+      decoration: BoxDecoration(color: gc.bgRaised, borderRadius: BorderRadius.circular(GymRadius.lg)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -225,7 +226,7 @@ class ProgressScreen extends StatelessWidget {
   Widget _consistency(BuildContext context, GymColors gc) {
     return Container(
       padding: const EdgeInsets.fromLTRB(18, 16, 18, 18),
-      decoration: BoxDecoration(color: gc.bgRaised, borderRadius: BorderRadius.circular(22)),
+      decoration: BoxDecoration(color: gc.bgRaised, borderRadius: BorderRadius.circular(GymRadius.lg)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -311,7 +312,7 @@ class ProgressScreen extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.fromLTRB(18, 16, 18, 16),
-      decoration: BoxDecoration(color: gc.bgRaised, borderRadius: BorderRadius.circular(22)),
+      decoration: BoxDecoration(color: gc.bgRaised, borderRadius: BorderRadius.circular(GymRadius.lg)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -406,7 +407,7 @@ class ProgressScreen extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(18, 16, 18, 8),
       decoration: BoxDecoration(
         color: gc.bgRaised,
-        borderRadius: BorderRadius.circular(22),
+        borderRadius: BorderRadius.circular(GymRadius.lg),
         border: Border.all(color: gc.border),
       ),
       child: Column(
@@ -471,7 +472,7 @@ class ProgressScreen extends StatelessWidget {
       behavior: HitTestBehavior.opaque,
       onTap: fit.goTimeline,
       child: SoftCard(
-        radius: 20,
+        radius: GymRadius.lg,
         padding: const EdgeInsets.fromLTRB(18, 16, 18, 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -514,7 +515,7 @@ class ProgressScreen extends StatelessWidget {
                       aspectRatio: 0.78,
                       child: Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(GymRadius.md),
                           border: Border.all(color: gc.border, width: 1.4),
                         ),
                         child: Icon(PhosphorIconsRegular.plus, size: 16, color: gc.textTertiary),
@@ -610,7 +611,7 @@ class ProgressScreen extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: gc.bgRaised2,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(GymRadius.md),
           border: Border.all(color: gc.border),
         ),
         clipBehavior: Clip.antiAlias,
@@ -629,7 +630,7 @@ class ProgressScreen extends StatelessWidget {
       behavior: HitTestBehavior.opaque,
       onTap: fit.goMeasures,
       child: SoftCard(
-        radius: 20,
+        radius: GymRadius.lg,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -666,7 +667,7 @@ class ProgressScreen extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 9),
       decoration: BoxDecoration(
         color: gc.bgRaised2,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(GymRadius.md),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -742,7 +743,7 @@ class _MuscleMapCardState extends State<_MuscleMapCard> {
     final behind = fit.neglectedMuscles(_days);
 
     return SoftCard(
-      radius: 20,
+      radius: GymRadius.lg,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -816,7 +817,7 @@ class _MuscleMapCardState extends State<_MuscleMapCard> {
     final tired = fit.stillRecovering();
     final focus = _focus;
     return SoftCard(
-      radius: 20,
+      radius: GymRadius.lg,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -947,7 +948,7 @@ class _StrengthCard extends StatelessWidget {
     final id = fit.activeStrengthId;
 
     return SoftCard(
-      radius: 20,
+      radius: GymRadius.lg,
       padding: const EdgeInsets.fromLTRB(18, 18, 18, 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1151,7 +1152,7 @@ class _PrCardState extends State<_PrCard> {
     final rows = _all ? prs : prs.take(_shown).toList();
     final hidden = prs.length - rows.length;
     return SoftCard(
-      radius: 20,
+      radius: GymRadius.lg,
       padding: const EdgeInsets.fromLTRB(18, 18, 18, 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1482,7 +1483,7 @@ class _DaySheet extends StatelessWidget {
     Widget fit1(Widget child) =>
         FittedBox(fit: BoxFit.scaleDown, alignment: Alignment.centerLeft, child: child);
     return SoftCard(
-      radius: 14,
+      radius: GymRadius.md,
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1614,7 +1615,7 @@ void showEditLoggedSheet(BuildContext context, LoggedSession s, LoggedExercise e
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
                         border: Border.all(color: gc.border),
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(GymRadius.md),
                       ),
                       child: Text(t.addSet,
                           style: AppTheme.s(13,
@@ -1637,7 +1638,7 @@ Widget _editSetRow(GymColors gc, LoggedSession s, LoggedExercise e, int i, bool 
   final set = e.sets[i];
   return Container(
     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-    decoration: BoxDecoration(color: gc.bgRaised2, borderRadius: BorderRadius.circular(14)),
+    decoration: BoxDecoration(color: gc.bgRaised2, borderRadius: BorderRadius.circular(GymRadius.md)),
     child: Row(
       children: [
         SizedBox(
@@ -1746,7 +1747,7 @@ class _HeatToneSheetState extends State<_HeatToneSheet> {
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
                 decoration: BoxDecoration(
                   color: gc.bgRaised2,
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(GymRadius.lg),
                   border: Border.all(
                       color: fit.heatTone == tone ? gc.text : Colors.transparent, width: 1.4),
                 ),

@@ -7,6 +7,7 @@ import '../models/exercise.dart';
 import '../state/fit_state.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
+import '../theme/tokens.dart';
 import '../widgets/body_map.dart';
 import '../widgets/exercise_media.dart';
 import '../widgets/exercise_preview.dart';
@@ -106,7 +107,7 @@ class _TrainScreenState extends State<TrainScreen> {
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
             color: gc.bgRaised,
-            borderRadius: BorderRadius.circular(24),
+            borderRadius: BorderRadius.circular(GymRadius.xl),
           ),
           child: BodyMap(
             selected: fit.selectedMuscles.toSet(),
@@ -159,12 +160,12 @@ class _TrainScreenState extends State<TrainScreen> {
         onTap: () => fit.startKindWorkout(kind),
         child: Container(
           padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(color: gc.bgRaised, borderRadius: BorderRadius.circular(20)),
+          decoration: BoxDecoration(color: gc.bgRaised, borderRadius: BorderRadius.circular(GymRadius.lg)),
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Container(
               width: 36,
               height: 36,
-              decoration: BoxDecoration(color: gc.accentSoft, borderRadius: BorderRadius.circular(12)),
+              decoration: BoxDecoration(color: gc.accentSoft, borderRadius: BorderRadius.circular(GymRadius.md)),
               child: Icon(icon, size: 19, color: gc.accent),
             ),
             const SizedBox(height: 14),
@@ -332,7 +333,7 @@ class _TrainScreenState extends State<TrainScreen> {
             height: 48,
             decoration: BoxDecoration(
               color: fit.sessionPicks.isNotEmpty ? gc.emberSoft : gc.bgRaised,
-              borderRadius: BorderRadius.circular(14),
+              borderRadius: BorderRadius.circular(GymRadius.md),
               border: Border.all(
                 color: fit.sessionPicks.isNotEmpty ? gc.ember.withValues(alpha: 0.3) : gc.border,
               ),
@@ -355,7 +356,7 @@ class _TrainScreenState extends State<TrainScreen> {
             height: 48,
             decoration: BoxDecoration(
               color: gc.emberSoft,
-              borderRadius: BorderRadius.circular(14),
+              borderRadius: BorderRadius.circular(GymRadius.md),
             ),
             child: Icon(PhosphorIconsRegular.plus, size: 20, color: gc.ember),
           ),
@@ -415,7 +416,7 @@ class _TrainScreenState extends State<TrainScreen> {
         decoration: BoxDecoration(
           color: gc.bgRaised,
           border: Border.all(color: picked ? gc.ember : gc.border),
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(GymRadius.lg),
         ),
         child: Row(children: [
           GestureDetector(

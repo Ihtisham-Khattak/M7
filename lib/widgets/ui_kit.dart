@@ -7,6 +7,7 @@ import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
 import '../theme/tokens.dart';
 import 'rolling_text.dart';
+import 'components.dart';
 import 'svg_icon.dart';
 
 class SoftCard extends StatelessWidget {
@@ -44,7 +45,7 @@ class SoftCard extends StatelessWidget {
 }
 
 EdgeInsets sheetPad(BuildContext context, {double bottom = 28}) =>
-    EdgeInsets.fromLTRB(20, 12, 20, bottom + MediaQuery.paddingOf(context).bottom);
+    EdgeInsets.fromLTRB(GymSpace.xl, GymSpace.md, GymSpace.xl, bottom + MediaQuery.paddingOf(context).bottom);
 
 class SearchField extends StatelessWidget {
   const SearchField({
@@ -65,10 +66,10 @@ class SearchField extends StatelessWidget {
     final gc = context.gc;
     return Container(
       height: 48,
-      padding: const EdgeInsets.only(left: GymSpace.lg, right: 6),
+      padding: const EdgeInsets.only(left: GymSpace.lg, right: GymSpace.sm),
       decoration: BoxDecoration(
         color: color ?? gc.bgRaised,
-        borderRadius: BorderRadius.circular(GymRadius.pill),
+        borderRadius: BorderRadius.circular(GymRadius.md),
       ),
       child: Row(children: [
         SvgPathIcon(Ic.search, size: 16, color: gc.textSecondary),
@@ -132,7 +133,7 @@ class TinySwitch extends StatelessWidget {
       duration: const Duration(milliseconds: 140),
       width: 44,
       height: 26,
-      padding: const EdgeInsets.all(3),
+      padding: const EdgeInsets.all(GymSpace.xs),
       alignment: on ? Alignment.centerRight : Alignment.centerLeft,
       decoration: BoxDecoration(
         color: on ? gc.ember : gc.bgRaised2,
@@ -152,7 +153,7 @@ class TinySwitch extends StatelessWidget {
 }
 
 class Pressable extends StatefulWidget {
-  const Pressable({super.key, required this.child, required this.onTap, this.scale = 0.965, this.onLongPress});
+  const Pressable({super.key, required this.child, required this.onTap, this.scale = 0.97, this.onLongPress});
 
   final Widget child;
   final VoidCallback? onTap;
@@ -181,8 +182,10 @@ class _PressableState extends State<Pressable> {
       onTapCancel: () => _set(false),
       child: AnimatedScale(
         scale: _down ? widget.scale : 1,
-        duration: Duration(milliseconds: _down ? 90 : 260),
-        curve: _down ? Curves.easeOut : Curves.easeOutBack,
+        duration: MediaQuery.maybeDisableAnimationsOf(context) == true
+            ? Duration.zero
+            : Duration(milliseconds: _down ? 100 : 160),
+        curve: Curves.easeOut,
         child: widget.child,
       ),
     );
@@ -197,30 +200,14 @@ class GhostButton extends StatelessWidget {
   final VoidCallback onTap;
 
   @override
-  Widget build(BuildContext context) {
-    final gc = context.gc;
-    return Pressable(
-      onTap: onTap,
-      child: Container(
-        height: 46,
-        padding: const EdgeInsets.symmetric(horizontal: GymSpace.xl),
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: context.gc.bgRaised2,
-          borderRadius: BorderRadius.circular(GymRadius.pill),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(icon, size: 16, color: gc.ember),
-            const SizedBox(width: 8),
-            Text(titleCase(label),
-                style: AppTheme.f(GymText.labelSize, weight: FontWeight.w700, color: gc.text)),
-          ],
-        ),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => GymButton(
+        label: label,
+        onTap: onTap,
+        kind: GymButtonKind.secondary,
+        size: GymButtonSize.compact,
+        expand: false,
+        leading: Icon(icon, size: GymSpace.lg, color: context.gc.ember),
+      );
 }
 
 class SheetHandle extends StatelessWidget {
@@ -237,7 +224,7 @@ class SheetHandle extends StatelessWidget {
           margin: margin,
           decoration: BoxDecoration(
             color: color ?? context.gc.bgRaised2,
-            borderRadius: BorderRadius.circular(2),
+            borderRadius: BorderRadius.circular(GymRadius.hair),
           ),
         ),
       );
@@ -339,7 +326,7 @@ class _OptionRow extends StatelessWidget {
         child: ConstrainedBox(
           constraints: const BoxConstraints(minHeight: 50),
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: GymSpace.lg, vertical: o.detail == null ? 0 : 11),
+            padding: EdgeInsets.symmetric(horizontal: GymSpace.lg, vertical: o.detail == null ? 0 : GymSpace.md),
             child: Row(children: [
               if (o.leading != null) ...[
                 o.leading!,
@@ -653,8 +640,8 @@ class SegToggle extends StatelessWidget {
   Widget build(BuildContext context) {
     final gc = context.gc;
     return Container(
-      padding: const EdgeInsets.all(3),
-      decoration: BoxDecoration(color: gc.bgRaised2, borderRadius: BorderRadius.circular(GymRadius.pill)),
+      padding: const EdgeInsets.all(GymSpace.xs),
+      decoration: BoxDecoration(color: gc.bgRaised2, borderRadius: BorderRadius.circular(GymRadius.sm)),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -665,7 +652,7 @@ class SegToggle extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: hPad, vertical: vPad),
                 decoration: BoxDecoration(
                   color: o.selected ? gc.ember : Colors.transparent,
-                  borderRadius: BorderRadius.circular(GymRadius.pill),
+                  borderRadius: BorderRadius.circular(GymRadius.xs),
                 ),
                 child: Text(o.label,
                     style: AppTheme.f(fontSize,
@@ -748,7 +735,7 @@ class Pill extends StatelessWidget {
       scale: 0.94,
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: hPad, vertical: vPad),
-        decoration: BoxDecoration(color: bg, borderRadius: BorderRadius.circular(GymRadius.pill)),
+        decoration: BoxDecoration(color: bg, borderRadius: BorderRadius.circular(GymRadius.sm)),
         child: Text(titleCase(label),
             style: AppTheme.f(fontSize, weight: FontWeight.w600, color: fg)),
       ),
@@ -775,33 +762,14 @@ class PrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final gc = context.gc;
-    final f = fg ?? gc.onEmber;
-    return Pressable(
+    final f = fg ?? context.gc.onEmber;
+    return GymButton(
+      label: label,
       onTap: onTap,
-      child: Container(
-        width: double.infinity,
-        height: height,
-        decoration: BoxDecoration(color: bg ?? gc.ember, borderRadius: BorderRadius.circular(GymRadius.pill)),
-        padding: const EdgeInsets.symmetric(horizontal: GymSpace.lg),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (icon != null) ...[
-              SvgPathIcon(icon!, size: 15, color: f),
-              const SizedBox(width: 9),
-            ],
-            Flexible(
-              child: FittedBox(
-                fit: BoxFit.scaleDown,
-                child: Text(titleCase(label),
-                    maxLines: 1,
-                    style: AppTheme.f(GymText.bodyLargeSize, weight: FontWeight.w700, color: f, letterSpacing: 0.2)),
-              ),
-            ),
-          ],
-        ),
-      ),
+      height: height,
+      background: bg,
+      foreground: f,
+      leading: icon == null ? null : SvgPathIcon(icon!, size: 15, color: f),
     );
   }
 }

@@ -6,6 +6,7 @@ import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import '../l10n/l10n.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
+import '../theme/tokens.dart';
 import 'ui_kit.dart';
 
 class StopwatchCard extends StatefulWidget {
@@ -56,7 +57,7 @@ class _StopwatchCardState extends State<StopwatchCard> {
       padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
       decoration: BoxDecoration(
         color: gc.bgRaised,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(GymRadius.lg),
       ),
       child: Row(
         children: [

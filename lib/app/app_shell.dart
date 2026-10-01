@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ui' show ImageFilter;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -35,6 +34,9 @@ import '../services/incoming_share.dart';
 import '../state/fit_state.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
+import '../theme/motion.dart';
+import '../widgets/screen_switcher.dart';
+import '../theme/tokens.dart';
 import '../widgets/app_background.dart';
 import '../widgets/award_celebration.dart';
 import '../widgets/dialogs.dart';
@@ -233,6 +235,11 @@ class _AppShellState extends State<AppShell> with WidgetsBindingObserver {
                     pattern: fit.bgPattern,
                     photo: fit.bgPhotoPath,
                     dim: fit.bgDim,
+                    zoom: fit.bgZoom,
+                    dx: fit.bgDx,
+                    dy: fit.bgDy,
+                    opacity: fit.bgOpacity,
+                    blur: fit.bgBlur,
                   ),
                 ),
                 Scaffold(
@@ -276,15 +283,17 @@ class _AppShellState extends State<AppShell> with WidgetsBindingObserver {
                     right: 18,
                     bottom: 18 + _NavBarState.height + 10 + MediaQuery.viewPaddingOf(context).bottom,
                     child: AnimatedSwitcher(
-                      duration: const Duration(milliseconds: 320),
-                      switchInCurve: Curves.easeOutCubic,
+                      duration: GymMotion.of(context, GymMotion.push),
+                      switchInCurve: GymMotion.curve,
                       switchOutCurve: Curves.easeInCubic,
                       transitionBuilder: (child, a) => FadeTransition(
                         opacity: a,
-                        child: SlideTransition(
-                          position: Tween(begin: const Offset(0, 0.4), end: Offset.zero).animate(a),
-                          child: child,
-                        ),
+                        child: GymMotion.reduced(context)
+                            ? child
+                            : SlideTransition(
+                                position: Tween(begin: const Offset(0, 0.4), end: Offset.zero).animate(a),
+                                child: child,
+                              ),
                       ),
                       child: parked ? const _ParkedPill() : const SizedBox(width: double.infinity),
                     ),
@@ -333,43 +342,25 @@ class _AppShellState extends State<AppShell> with WidgetsBindingObserver {
     final sideways = _sideways;
     final dir = _forward ? 1.0 : -1.0;
 
-    return AnimatedSwitcher(
-      duration: const Duration(milliseconds: 380),
-      switchInCurve: const Interval(0.3, 1, curve: Curves.easeOutCubic),
-      switchOutCurve: const Interval(0.7, 1, curve: Curves.easeInCubic),
-      transitionBuilder: (child, animation) {
-        final incoming = (child.key as ValueKey?)?.value == fit.route;
+    final reduced = GymMotion.reduced(context);
+    return ScreenSwitcher(
+      screenKey: route,
+      duration: reduced ? GymMotion.reducedFade : (sideways ? GymMotion.tab : GymMotion.push),
+      inCurve: const Interval(0.3, 1, curve: GymMotion.curve),
+      outCurve: const Interval(0.7, 1, curve: Curves.easeInCubic),
+      builder: (context, child, animation, incoming) {
+        if (reduced || sideways) return FadeTransition(opacity: animation, child: child);
         return AnimatedBuilder(
           animation: animation,
           child: child,
           builder: (_, inner) {
             final v = animation.value.clamp(0.0, 1.0);
-            final away = 1 - v;
-            final shift = sideways
-                ? Offset((incoming ? 26 : -18) * dir * away, 0)
-                : Offset(0, incoming ? 22 * dir * away : -8 * dir * away);
-            final blur = 10 * away;
-            return Opacity(
-              opacity: v,
-              child: ImageFiltered(
-                enabled: blur > 0.25,
-                imageFilter: ImageFilter.blur(sigmaX: blur, sigmaY: blur, tileMode: TileMode.decal),
-                child: Transform.translate(
-                  offset: shift,
-                  child: Transform.scale(scale: incoming ? 1 + 0.03 * away : 1 - 0.04 * away, child: inner),
-                ),
-              ),
-            );
+            final dy = (incoming ? GymMotion.pushShift : -GymMotion.pushShift / 2) * dir * (1 - v);
+            return Opacity(opacity: v, child: Transform.translate(offset: Offset(0, dy), child: inner));
           },
         );
       },
-      layoutBuilder: (currentChild, previousChildren) => Stack(
-        children: <Widget>[
-          for (final c in previousChildren) Positioned.fill(key: c.key, child: c),
-          if (currentChild != null) Positioned.fill(key: currentChild.key, child: currentChild),
-        ],
-      ),
-      child: KeyedSubtree(key: ValueKey(fit.route), child: _screen()),
+      child: _screen(),
     );
   }
 
@@ -461,11 +452,11 @@ class _ParkedPill extends StatelessWidget {
         label: t.resumeWorkout,
         child: DecoratedBox(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(22),
-            boxShadow: const [BoxShadow(color: Color(0x40000000), blurRadius: 24, offset: Offset(0, 10))],
+            borderRadius: BorderRadius.circular(GymRadius.lg),
+            boxShadow: GymElevation.overlay(context.gc),
           ),
           child: GlassSurface(
-            radius: 22,
+            radius: GymRadius.lg,
             blur: 16,
             padding: const EdgeInsets.fromLTRB(16, 8, 8, 8),
             child: Material(
@@ -504,6 +495,17 @@ class _ParkedPill extends StatelessWidget {
     );
   }
 }
+
+/// Tab labels read the same in every language: cased scripts that ship in capitals
+/// ("HOME", "ПРОГРЕСС") are shown in sentence case, whatever their length.
+String navLabel(String s) {
+  if (s.isEmpty || s != s.toUpperCase() || s == s.toLowerCase()) return s;
+  return s[0] + s.substring(1).toLowerCase();
+}
+
+/// Tab label metrics, shared with the label-fit test.
+const double kNavLabelSize = 10.5;
+const double kNavLabelWidth = 58 - 4;
 
 class _NavBar extends StatefulWidget {
   const _NavBar();
@@ -582,12 +584,10 @@ class _NavBarState extends State<_NavBar> {
               Positioned.fill(
                 child: DecoratedBox(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(28),
-                    boxShadow: [
-                      BoxShadow(color: const Color(0x4D000000), blurRadius: 32, offset: const Offset(0, 12)),
-                    ],
+                    borderRadius: BorderRadius.circular(GymRadius.xl),
+                    boxShadow: GymElevation.overlay(gc),
                   ),
-                  child: const GlassSurface(radius: 28, blur: 16, child: SizedBox.expand()),
+                  child: const GlassSurface(radius: GymRadius.xl, blur: 16, child: SizedBox.expand()),
                 ),
               ),
               Positioned(
@@ -650,8 +650,8 @@ class _NavBarState extends State<_NavBar> {
     final gc = context.gc;
     final selected = _selectedIndex == index;
     final lifted = selected && _dragX != null;
-    final color = selected ? gc.text : gc.textTertiary;
-    const dur = Duration(milliseconds: 300);
+    final color = selected ? gc.ember : gc.textTertiary;
+    final dur = GymMotion.of(context, GymMotion.fast);
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
@@ -667,8 +667,8 @@ class _NavBarState extends State<_NavBar> {
       },
       child: AnimatedScale(
         scale: lifted ? 1.06 : 1,
-        duration: const Duration(milliseconds: 220),
-        curve: Curves.easeOutCubic,
+        duration: GymMotion.of(context, GymMotion.fast),
+        curve: GymMotion.curve,
         child: SizedBox(
         width: _iw,
         child: Column(
@@ -681,19 +681,19 @@ class _NavBarState extends State<_NavBar> {
               builder: (context, t, _) => Icon(
                 selected ? iconFill : icon,
                 size: 22,
-                color: Color.lerp(gc.textTertiary, gc.text, t),
+                color: Color.lerp(gc.textTertiary, gc.ember, t),
               ),
             ),
             const SizedBox(height: 3),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 6),
+              padding: const EdgeInsets.symmetric(horizontal: 2),
               child: FittedBox(
                 fit: BoxFit.scaleDown,
                 child: AnimatedDefaultTextStyle(
                   duration: dur,
                   curve: Curves.easeOut,
-                  style: AppTheme.s(9.5, weight: FontWeight.w600, color: color, letterSpacing: 0.2),
-                  child: Text(label, maxLines: 1, softWrap: false),
+                  style: AppTheme.s(kNavLabelSize, weight: FontWeight.w600, color: color),
+                  child: Text(navLabel(label), maxLines: 1, softWrap: false),
                 ),
               ),
             ),
@@ -726,17 +726,13 @@ class _NavBarState extends State<_NavBar> {
         width: 54,
         height: 54,
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [gc.accent, gc.brass],
-          ),
+          color: gc.ember,
           shape: BoxShape.circle,
           boxShadow: [
-            BoxShadow(color: gc.accent.withValues(alpha: 0.45), blurRadius: 18, offset: const Offset(0, 6)),
+            BoxShadow(color: gc.ember.withValues(alpha: 0.32), blurRadius: 16, offset: const Offset(0, 5)),
           ],
         ),
-        child: Icon(PhosphorIconsFill.play, size: 24, color: gc.bg),
+        child: Icon(PhosphorIconsFill.play, size: 24, color: gc.onEmber),
       ),
     );
   }
@@ -756,11 +752,11 @@ class _LiquidPill extends StatefulWidget {
 
 class _LiquidPillState extends State<_LiquidPill> with TickerProviderStateMixin {
   late final AnimationController _move =
-      AnimationController(vsync: this, duration: const Duration(milliseconds: 460), value: 1);
+      AnimationController(vsync: this, duration: GymMotion.push, value: 1);
   late final AnimationController _lift = AnimationController(
     vsync: this,
-    duration: const Duration(milliseconds: 260),
-    reverseDuration: const Duration(milliseconds: 380),
+    duration: GymMotion.fast,
+    reverseDuration: GymMotion.tab,
   );
   late double _from = widget.left;
   late double _shown = widget.left;
@@ -770,17 +766,22 @@ class _LiquidPillState extends State<_LiquidPill> with TickerProviderStateMixin 
     super.didUpdateWidget(old);
     final dragging = widget.dragLeft != null;
     if (dragging != (old.dragLeft != null)) {
-      dragging ? _lift.forward() : _lift.reverse();
+      if (GymMotion.reduced(context)) {
+        _lift.value = dragging ? 1 : 0;
+      } else {
+        dragging ? _lift.forward() : _lift.reverse();
+      }
     }
     if (dragging) return;
     if (old.left == widget.left && old.dragLeft == null) return;
     _from = _shown;
+    _move.duration = GymMotion.of(context, GymMotion.push);
     _move.forward(from: 0);
   }
 
   static double _lerp(double a, double b, double t) => a + (b - a) * t;
 
-  static const _liftCurve = Cubic(0.3, 1.25, 0.5, 1);
+  static const _liftCurve = GymMotion.curve;
 
   @override
   void dispose() {
@@ -825,7 +826,7 @@ class _LiquidPillState extends State<_LiquidPill> with TickerProviderStateMixin 
               bottom: inset,
               child: DecoratedBox(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(24),
+                  borderRadius: BorderRadius.circular(GymRadius.xl),
                   border: Border.all(color: Colors.white.withValues(alpha: 0.16 * lift), width: 1),
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,

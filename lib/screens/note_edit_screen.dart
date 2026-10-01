@@ -10,6 +10,7 @@ import '../services/media_store.dart';
 import '../state/fit_state.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
+import '../theme/tokens.dart';
 import '../widgets/dialogs.dart';
 import '../widgets/glass.dart';
 import '../widgets/note_kit.dart';
@@ -136,7 +137,7 @@ class _NoteEditScreenState extends State<NoteEditScreen> {
                   Container(
                     decoration: BoxDecoration(
                       color: gc.bgRaised,
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(GymRadius.lg),
                     ),
                     padding: const EdgeInsets.fromLTRB(16, 6, 16, 6),
                     child: TextField(
@@ -159,7 +160,7 @@ class _NoteEditScreenState extends State<NoteEditScreen> {
                   ),
                   const SizedBox(height: 14),
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(GymRadius.lg),
                     child: ColoredBox(
                       color: gc.bgRaised,
                       child: Column(children: [
@@ -285,7 +286,7 @@ class _NoteEditScreenState extends State<NoteEditScreen> {
               height: 74,
               decoration: BoxDecoration(
                 color: gc.bgRaised,
-                borderRadius: BorderRadius.circular(18),
+                borderRadius: BorderRadius.circular(GymRadius.lg),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

@@ -1269,6 +1269,28 @@ class AppLocalizationsIt extends AppLocalizations {
   String get bgDots => 'Puntini';
 
   @override
+  String get bgAncient => 'Carta washi';
+
+  @override
+  String get bgZoom => 'Zoom';
+
+  @override
+  String get bgOpacity => 'Opacità';
+
+  @override
+  String get bgOverlay => 'Velo';
+
+  @override
+  String get bgBlur => 'Sfocatura';
+
+  @override
+  String get bgDragHint => 'Trascina l\'anteprima per posizionare l\'immagine.';
+
+  @override
+  String get bgGuardHint =>
+      'Il testo resta sempre leggibile: il velo aumenta da solo con immagini molto chiare o scure.';
+
+  @override
   String get bgGrid => 'Griglia';
 
   @override

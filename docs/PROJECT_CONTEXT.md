@@ -18,7 +18,7 @@ Entry point for AI coding agents. Everything here was derived from the source at
 | Product type | Single-user native-feeling mobile app built with Flutter. No backend, no accounts | code (no network code) |
 | Target users | Recreational lifters who want a private logger; also people migrating from Hevy / Strong / Lyfta / Fitbod / FitNotes / openGym | `lib/services/workout_import.dart` |
 | Author / maintainer | InlitX (`github.com/InlitX/GymMane`); community-contributed translations | `README.md`, git log |
-| Licence | Code GPL-3.0; exercise art CC BY-SA 4.0 (Workout Guide / Everkinetic); Nunito font SIL OFL | `LICENSE`, `CREDITS.md` |
+| Licence | Code GPL-3.0; exercise art CC BY-SA 4.0 (Workout Guide / Everkinetic); Manrope font SIL OFL | `LICENSE`, `CREDITS.md` |
 | Distribution | F-Droid (reproducible build), IzzyOnDroid, OpenAPK, Obtainium, GitHub Releases | `README.md`, `.github/workflows/build-apk.yml` |
 
 ### Platform support (verified)
@@ -56,7 +56,7 @@ first-class concern: full ZIP backup, CSV export, and importers for six other ap
 | Layer | Technology | How it is actually used |
 |---|---|---|
 | Language / SDK | Dart `^3.11.5`, Flutter (CI pins `3.41.9`) | `pubspec.yaml`, workflow `FLUTTER_VERSION` |
-| UI | Flutter + Material 3 (`useMaterial3`) with a fully custom look (glass surfaces, custom painters); Nunito font; Phosphor icons | `lib/theme/*`, `lib/widgets/*` |
+| UI | Flutter + Material 3 (`useMaterial3`) with a fully custom look (glass surfaces, custom painters); Manrope font; Phosphor icons | `lib/theme/*`, `lib/widgets/*` |
 | State | One hand-rolled `ChangeNotifier` singleton `fit` (`FitState`), split via `part`/`mixin` files. **No Provider/Riverpod/BLoC** | `lib/state/fit_state.dart` |
 | Navigation | A `String route` + back-stack inside `FitState`; `AppShell` switches screens with `AnimatedSwitcher`. `Navigator` is used only for dialogs/sheets and three full-screen overlay viewers/editors | `lib/state/fit_core.dart`, `lib/app/app_shell.dart` |
 | Persistence | `shared_preferences`: **one JSON string** under key `gymmane_v1` (+ a few `gm_*` string keys); media as files in `<documents>/exercise_media`; alarm sound in `<documents>/alarm` | `lib/services/local_store.dart`, `media_store.dart`, `alarm_store.dart` |
@@ -209,6 +209,8 @@ Tracked as 61 cards (`GM-01…GM-86`, labels `P0-Critical…P3-Low` + category l
 | 7 | QA & stabilization: offline, accessibility, migrations, performance, localization, persistence port, docs | GM-80…GM-86 |
 
 Progress (Testing, unmerged): GM-01…05 (data safety), GM-11 (contrast + semantic colors), GM-30…34, GM-36, GM-40, GM-84 (questionnaire: goal/experience/days/duration/place/focus, `TrainingProfile`, taxonomy schema, Home opt-in card). Partially done: GM-10 (tokens exist; only `ui_kit`/`dialogs`/`choice` migrated), GM-12 (only `ChoiceCard`/`SelectChip`/`StepProgress`). Not started: everything else, incl. the plan generator — the questionnaire currently stores answers but does not yet change what the app suggests.
+
+**Kaizan redesign brief (PLANNED, not implemented).** The owner plans to rebrand the app as *Kaizan — "Soft but not weak."* with a calm, premium, Japanese-*inspired* (not themed) look: vermilion/sumi/washi/matcha/indigo palette, mature typography with tabular numerals, small-to-medium radii, five background modes (none, grid, dots, ancient washi texture, custom upload with readability guard), calm completion feedback (no confetti), Home built around "Today's Focus". It is tracked as GM-90…GM-101 plus Kaizan sections appended to the existing UI cards. Constraints recorded there: keep `applicationId com.gymmane.app`, prefs key and backup entry name (old backups must import); keep navigation structure unless a usability problem is shown; no business-logic or data-model changes for styling; the brief mentions login, marketing screens and workout generation, which do not exist in the app today. Today's code still uses the GymMane name, Nunito, a terracotta accent, pill-shaped controls, glass blur in 6 files and `Confetti`.
 
 Audit facts behind the roadmap (verified): the exercise data has no compound/isolation, movement-pattern,
 goal or impact data (only `primary`, `secondary` 0–3, equipment, difficulty, steps); onboarding has no physique

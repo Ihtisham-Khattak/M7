@@ -7,6 +7,7 @@ import '../models/note.dart';
 import '../state/fit_state.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
+import '../theme/tokens.dart';
 import '../widgets/note_kit.dart';
 import '../widgets/ui_kit.dart';
 
@@ -83,7 +84,7 @@ class NotesScreen extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
       children: [
         SoftCard(
-          radius: 22,
+          radius: GymRadius.lg,
           padding: const EdgeInsets.fromLTRB(12, 14, 12, 10),
           child: NoteCalendar(
             month: fit.noteMonth,
@@ -127,7 +128,7 @@ class NotesScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 26, horizontal: 20),
             decoration: BoxDecoration(
               color: gc.bgRaised.withValues(alpha: 0.5),
-              borderRadius: BorderRadius.circular(18),
+              borderRadius: BorderRadius.circular(GymRadius.lg),
             ),
             child: Row(
               children: [

@@ -10,6 +10,7 @@ import '../services/media_store.dart';
 import '../state/fit_state.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
+import '../theme/tokens.dart';
 import '../widgets/dialogs.dart';
 import '../widgets/photo_source_sheet.dart';
 import '../widgets/ui_kit.dart';
@@ -181,7 +182,7 @@ class _MomentsScreenState extends State<MomentsScreen> {
       onTap: () => _open(moment),
       onLongPress: () => _remove(moment),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(GymRadius.lg),
         child: Hero(
           tag: moment.file,
           child: Image.file(File(path),
@@ -221,7 +222,7 @@ class _MomentsScreenState extends State<MomentsScreen> {
       onTap: () => _open(moment),
       onLongPress: () => _remove(moment),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(GymRadius.md),
         child: Stack(
           fit: StackFit.expand,
           children: [
@@ -283,7 +284,7 @@ class _PhotoView extends StatelessWidget {
                     child: Hero(
                       tag: moment.file,
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(22),
+                        borderRadius: BorderRadius.circular(GymRadius.lg),
                         child: Image.file(File(path), fit: BoxFit.contain),
                       ),
                     ),

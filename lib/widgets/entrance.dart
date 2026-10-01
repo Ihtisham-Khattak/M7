@@ -66,9 +66,9 @@ class Rise extends StatefulWidget {
 }
 
 class _RiseState extends State<Rise> with SingleTickerProviderStateMixin {
-  static const _motion = 560;
+  static const _motion = 300;
 
-  late final int _delay = 40 + widget.index.clamp(0, 7) * 70;
+  late final int _delay = 30 + widget.index.clamp(0, 7) * 45;
   late final AnimationController _c =
       AnimationController(vsync: this, duration: Duration(milliseconds: _delay + _motion));
   late final Animation<double> _v = CurvedAnimation(

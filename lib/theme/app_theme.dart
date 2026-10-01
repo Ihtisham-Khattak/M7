@@ -5,9 +5,11 @@ import 'app_colors.dart';
 class AppTheme {
   AppTheme._();
 
-  static const String disp = 'Nunito';
-  static const String sans = 'Nunito';
-  static const String round = 'Nunito';
+  static const List<FontFeature> tabularFigures = [FontFeature.tabularFigures()];
+
+  static const String disp = 'Manrope';
+  static const String sans = 'Manrope';
+  static const String round = 'Manrope';
 
   static ThemeData get dark => _build(Brightness.dark, GymColors.dark);
   static ThemeData get light => _build(Brightness.light, GymColors.light);
@@ -49,6 +51,7 @@ class AppTheme {
         color: color,
         letterSpacing: letterSpacing,
         height: height,
+        fontFeatures: tabularFigures,
       );
 
   static TextStyle f(
@@ -65,6 +68,7 @@ class AppTheme {
         color: color,
         letterSpacing: letterSpacing,
         height: height,
+        fontFeatures: tabularFigures,
       );
 
   static TextStyle s(
@@ -81,5 +85,6 @@ class AppTheme {
         color: color,
         letterSpacing: letterSpacing,
         height: height,
+        fontFeatures: tabularFigures,
       );
 }

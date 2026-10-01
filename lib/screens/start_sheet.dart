@@ -6,6 +6,7 @@ import '../models/workout.dart';
 import '../state/fit_state.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
+import '../theme/tokens.dart';
 import '../widgets/glass.dart';
 import '../widgets/ui_kit.dart';
 
@@ -102,7 +103,7 @@ class StartSheet extends StatelessWidget {
         decoration: BoxDecoration(
           color: gc.emberSoft,
           border: Border.all(color: gc.ember.withValues(alpha: 0.4)),
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(GymRadius.lg),
         ),
         child: Row(children: [
           Expanded(
@@ -139,7 +140,7 @@ class StartSheet extends StatelessWidget {
       behavior: HitTestBehavior.opaque,
       onTap: () => _go(context, () => fit.startRoutine(r, on: day)),
       child: SoftCard(
-        radius: 16,
+        radius: GymRadius.lg,
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 13),
         child: Row(children: [
           Expanded(
@@ -169,7 +170,7 @@ class StartSheet extends StatelessWidget {
       behavior: HitTestBehavior.opaque,
       onTap: () => _go(context, action),
       child: SoftCard(
-        radius: 16,
+        radius: GymRadius.lg,
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
         child: Row(children: [
           Icon(icon, size: 19, color: gc.textSecondary),

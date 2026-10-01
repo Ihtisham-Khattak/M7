@@ -11,6 +11,7 @@ import '../services/media_store.dart';
 import '../state/fit_state.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
+import '../theme/tokens.dart';
 import 'glass.dart';
 import 'ui_kit.dart';
 
@@ -145,7 +146,7 @@ class NoteCalendar extends StatelessWidget {
           margin: const EdgeInsets.all(1.5),
           decoration: BoxDecoration(
             color: on ? gc.emberSoft : Colors.transparent,
-            borderRadius: BorderRadius.circular(13),
+            borderRadius: BorderRadius.circular(GymRadius.md),
             border: Border.all(color: on ? gc.ember : Colors.transparent),
           ),
           child: Column(
@@ -234,7 +235,7 @@ class NoteKindBadge extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: compact ? 7 : 9, vertical: compact ? 3 : 4),
       decoration: BoxDecoration(
         color: color.withValues(alpha: 0.14),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(GymRadius.xs),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -277,7 +278,7 @@ class NoteKindPicker extends StatelessWidget {
                     color: selected == kind
                         ? noteKindColor(gc, kind).withValues(alpha: 0.16)
                         : gc.bgRaised,
-                    borderRadius: BorderRadius.circular(18),
+                    borderRadius: BorderRadius.circular(GymRadius.lg),
                   ),
                   child: Column(
                     children: [
@@ -405,7 +406,7 @@ class NoteCard extends StatelessWidget {
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
           color: gc.bgRaised,
-          borderRadius: BorderRadius.circular(18),
+          borderRadius: BorderRadius.circular(GymRadius.lg),
         ),
         child: Stack(
           children: [
@@ -578,11 +579,11 @@ class NoteThumb extends StatelessWidget {
     if (photo && tag != null) inner = Hero(tag: noteHeroTag(tag, name), child: inner);
 
     final tile = natural && photo
-        ? ClipRRect(borderRadius: BorderRadius.circular(16), child: inner)
+        ? ClipRRect(borderRadius: BorderRadius.circular(GymRadius.lg), child: inner)
         : Container(
             width: size,
             height: size,
-            decoration: BoxDecoration(color: gc.bgRaised2, borderRadius: BorderRadius.circular(16)),
+            decoration: BoxDecoration(color: gc.bgRaised2, borderRadius: BorderRadius.circular(GymRadius.lg)),
             clipBehavior: Clip.antiAlias,
             child: Center(child: inner),
           );
@@ -598,7 +599,7 @@ class NoteThumb extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   color: const Color(0xA6000000),
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(GymRadius.lg),
                 ),
                 alignment: Alignment.center,
                 child: Text(badge!,

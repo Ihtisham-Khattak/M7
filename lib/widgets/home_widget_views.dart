@@ -5,11 +5,12 @@ import 'package:flutter/material.dart';
 import '../l10n/l10n.dart';
 import '../state/fit_state.dart';
 import '../theme/app_colors.dart';
+import '../theme/tokens.dart';
 import 'body_map.dart';
 import 'ui_kit.dart';
 
-const _kDisplay = 'Nunito';
-const _kBody = 'Nunito';
+const _kDisplay = 'Manrope';
+const _kBody = 'Manrope';
 const _kBorder = 1.0;
 
 Color _heat(int level, GymColors gc) =>
@@ -212,7 +213,7 @@ class StatsWidgetView extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 9),
         decoration: BoxDecoration(
           color: gc.bgRaised2,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(GymRadius.md),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

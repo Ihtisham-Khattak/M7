@@ -6,12 +6,14 @@ import '../models/exercise.dart';
 import '../state/fit_state.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
+import '../theme/tokens.dart';
 import '../widgets/charts.dart';
 import '../widgets/entrance.dart';
 import '../widgets/exercise_media.dart';
 import '../widgets/glass.dart';
 import '../widgets/home_folder.dart';
 import '../widgets/svg_icon.dart';
+import '../widgets/components.dart';
 import '../widgets/ui_kit.dart';
 import 'progress_screen.dart';
 
@@ -50,14 +52,14 @@ class HomeScreen extends StatelessWidget {
               _photoNudge(gc),
             ],
             const SizedBox(height: 30),
-            _heading(gc, t.thisWeek),
+            SectionHeader(t.thisWeek),
             const SizedBox(height: 14),
             _weekStats(context, gc),
             const SizedBox(height: 30),
-            _heading(gc, t.activityLabel, onMore: fit.goProgress),
+            SectionHeader(t.activityLabel, onMore: fit.goProgress),
             const SizedBox(height: 14),
-            SoftCard(
-              radius: 22,
+            GymCard(
+              radius: GymRadius.lg,
               padding: const EdgeInsets.fromLTRB(18, 18, 18, 16),
               child: Heatmap(
                 levels: fit.heatmapLevels,
@@ -66,7 +68,7 @@ class HomeScreen extends StatelessWidget {
             ),
             if (fit.showRecommended && recommended.isNotEmpty) ...[
               const SizedBox(height: 30),
-              _heading(gc, t.recommended, onMore: fit.goExercises),
+              SectionHeader(t.recommended, onMore: fit.goExercises),
               const SizedBox(height: 14),
               SizedBox(
                 height: 158,
@@ -159,21 +161,6 @@ class HomeScreen extends StatelessWidget {
 
   String _tc(String s) => titleCase(s);
 
-  Widget _heading(GymColors gc, String title, {VoidCallback? onMore}) {
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: onMore,
-      child: Row(
-        children: [
-          Text(_tc(title), style: AppTheme.f(19, color: gc.text)),
-          const Spacer(),
-          if (onMore != null)
-            Icon(PhosphorIconsBold.caretRight, size: 14, color: gc.textTertiary),
-        ],
-      ),
-    );
-  }
-
   Widget _hero(BuildContext context, GymColors gc) {
     final routine = fit.todayRoutine;
     final focus = fit.suggestedFocus;
@@ -191,11 +178,11 @@ class HomeScreen extends StatelessWidget {
             : t.firstSessionHint);
 
     return ClipRRect(
-      borderRadius: BorderRadius.circular(26),
+      borderRadius: BorderRadius.circular(GymRadius.xl),
       child: Container(
         decoration: BoxDecoration(
           color: gc.bgRaised,
-          borderRadius: BorderRadius.circular(26),
+          borderRadius: BorderRadius.circular(GymRadius.xl),
         ),
         child: Stack(
           children: [
@@ -265,8 +252,8 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _weekCard(BuildContext context, GymColors gc) {
-    return SoftCard(
-      radius: 22,
+    return GymCard(
+      radius: GymRadius.lg,
       padding: const EdgeInsets.fromLTRB(14, 16, 14, 16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -317,8 +304,8 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _weekStats(BuildContext context, GymColors gc) {
-    return SoftCard(
-      radius: 22,
+    return GymCard(
+      radius: GymRadius.lg,
       padding: const EdgeInsets.fromLTRB(18, 18, 18, 18),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -386,8 +373,8 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _personalizeNudge(GymColors gc) {
-    return SoftCard(
-      radius: 22,
+    return GymCard(
+      radius: GymRadius.lg,
       padding: const EdgeInsets.fromLTRB(18, 16, 12, 16),
       child: Row(
         children: [
@@ -439,8 +426,8 @@ class HomeScreen extends StatelessWidget {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: fit.goMoments,
-      child: SoftCard(
-        radius: 22,
+      child: GymCard(
+        radius: GymRadius.lg,
         padding: const EdgeInsets.fromLTRB(18, 16, 18, 16),
         child: Row(
           children: [
@@ -465,26 +452,23 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _recCard(GymColors gc, Exercise ex) {
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: () => fit.openExercise(ex.id),
-      child: Container(
-        width: 132,
-        padding: const EdgeInsets.all(9),
-        decoration: BoxDecoration(
-          color: gc.bgRaised,
-          borderRadius: BorderRadius.circular(18),
-        ),
+    return SizedBox(
+      width: 132,
+      child: GymCard(
+        borderless: true,
+        padding: const EdgeInsets.all(GymSpace.sm),
+        onTap: () => fit.openExercise(ex.id),
+        semanticLabel: exerciseName(ex),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            ExerciseMedia(ex: ex, height: 88, radius: 12),
-            const SizedBox(height: 9),
+            ExerciseMedia(ex: ex, height: 88, radius: GymRadius.md),
+            const SizedBox(height: GymSpace.sm),
             Expanded(
               child: Text(exerciseName(ex),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: AppTheme.f(12, weight: FontWeight.w600, color: gc.text, height: 1.25)),
+                  style: GymText.caption(color: gc.text, weight: FontWeight.w600)),
             ),
           ],
         ),

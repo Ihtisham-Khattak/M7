@@ -6,6 +6,7 @@ import '../models/measure.dart';
 import '../state/fit_state.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
+import '../theme/tokens.dart';
 import '../widgets/charts.dart';
 import '../widgets/dialogs.dart';
 import '../widgets/glass.dart';
@@ -63,7 +64,7 @@ class _MeasureRow extends StatelessWidget {
         behavior: HitTestBehavior.opaque,
         onTap: () => showMeasureSheet(context, measureKey),
         child: SoftCard(
-          radius: 18,
+          radius: GymRadius.lg,
           padding: const EdgeInsets.fromLTRB(18, 16, 18, 16),
           child: Row(
             children: [

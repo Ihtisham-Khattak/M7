@@ -9,6 +9,7 @@ import '../services/media_store.dart';
 import '../state/fit_state.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
+import '../theme/tokens.dart';
 import '../widgets/share_cards.dart';
 import '../widgets/ui_kit.dart';
 import 'share_sheet.dart';
@@ -134,7 +135,7 @@ class CompareScreen extends StatelessWidget {
             width: double.infinity,
             decoration: BoxDecoration(
               color: gc.bgRaised2,
-              borderRadius: BorderRadius.circular(18),
+              borderRadius: BorderRadius.circular(GymRadius.lg),
               border: Border.all(color: gc.border),
             ),
             clipBehavior: Clip.antiAlias,

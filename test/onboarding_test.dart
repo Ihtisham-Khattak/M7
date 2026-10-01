@@ -16,8 +16,12 @@ import 'package:gymmane/widgets/choice.dart';
 import 'package:gymmane/widgets/ui_kit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'support/fonts.dart';
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
+
+  setUpAll(loadAppFonts);
 
   setUp(() async {
     SharedPreferences.setMockInitialValues({});
@@ -271,6 +275,11 @@ void main() {
       await tapNext(tester);
       expect(find.text(t.onbTrainTitle), findsOneWidget, reason: 'experience is required');
 
+      for (final chip in tester.widgetList<SelectChip>(find.byType(SelectChip))) {
+        final size = tester.getSize(find.byWidget(chip));
+        expect(size.width, lessThan(160), reason: 'chips must hug their label, not fill the row');
+        expect(size.height, greaterThanOrEqualTo(48));
+      }
       await tapText(tester, t.expBeginner);
       await tapText(tester, '3');
       await tapText(tester, t.minutesOption(60));

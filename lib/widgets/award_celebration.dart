@@ -12,6 +12,7 @@ import '../services/gallery.dart';
 import '../state/fit_state.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
+import '../theme/motion.dart';
 import 'medal.dart';
 import 'profile_avatar.dart';
 import 'ui_kit.dart';
@@ -41,11 +42,13 @@ class _AwardCelebrationState extends State<AwardCelebration> with TickerProvider
   late final AnimationController _in = AnimationController(
     vsync: this,
     duration: const Duration(milliseconds: 900),
-  )..forward();
+  );
   late final AnimationController _fall = AnimationController(
     vsync: this,
     duration: const Duration(milliseconds: 5200),
-  )..forward();
+  );
+  bool _reduced = false;
+  bool _started = false;
   late final List<_Bit> _bits = _seedBits(widget.id);
   bool _saving = false;
   String? _toast;
@@ -54,6 +57,21 @@ class _AwardCelebrationState extends State<AwardCelebration> with TickerProvider
   void initState() {
     super.initState();
     HapticFeedback.mediumImpact();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_started) return;
+    _started = true;
+    _reduced = GymMotion.reduced(context);
+    if (_reduced) {
+      _in.duration = GymMotion.reducedFade;
+      _in.forward();
+    } else {
+      _in.forward();
+      _fall.forward();
+    }
   }
 
   @override
@@ -125,11 +143,12 @@ class _AwardCelebrationState extends State<AwardCelebration> with TickerProvider
                   child: _SaveCard(id: widget.id, gc: gc, bits: _bits),
                 ),
               ),
-              Positioned.fill(
-                child: RepaintBoundary(
-                  child: CustomPaint(painter: _ConfettiPainter(_fall, _bits)),
+              if (!_reduced)
+                Positioned.fill(
+                  child: RepaintBoundary(
+                    child: CustomPaint(painter: _ConfettiPainter(_fall, _bits)),
+                  ),
                 ),
-              ),
               Positioned.fill(
                 child: SafeArea(
                   child: Padding(
@@ -138,7 +157,7 @@ class _AwardCelebrationState extends State<AwardCelebration> with TickerProvider
                       children: [
                         const Spacer(),
                         Transform.scale(
-                          scale: 0.74 + 0.26 * _stagger(0, 0.55),
+                          scale: _reduced ? 1 : 0.74 + 0.26 * _stagger(0, 0.55),
                           child: Opacity(
                             opacity: _stagger(0, 0.3),
                             child: SizedBox(
@@ -161,7 +180,7 @@ class _AwardCelebrationState extends State<AwardCelebration> with TickerProvider
                                     child: const SizedBox.expand(),
                                   ),
                                   MedalSpin(
-                                      id: widget.id, size: medal, spinIn: true, faceFront: true),
+                                      id: widget.id, size: medal, spinIn: !_reduced, faceFront: true),
                                 ],
                               ),
                             ),
@@ -246,7 +265,7 @@ class _AwardCelebrationState extends State<AwardCelebration> with TickerProvider
     final v = _stagger(from, to);
     return Opacity(
       opacity: v,
-      child: Transform.translate(offset: Offset(0, 16 * (1 - v)), child: child),
+      child: Transform.translate(offset: Offset(0, _reduced ? 0 : 16 * (1 - v)), child: child),
     );
   }
 }

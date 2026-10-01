@@ -7,6 +7,7 @@ import '../l10n/l10n.dart';
 import '../state/fit_state.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
+import '../theme/tokens.dart';
 import 'svg_icon.dart';
 import 'ui_kit.dart';
 
@@ -57,7 +58,7 @@ class _MuscleRadarCardState extends State<MuscleRadarCard> {
     ].take(3).toList();
 
     return SoftCard(
-      radius: 20,
+      radius: GymRadius.lg,
       borderColor: Colors.transparent,
       padding: const EdgeInsets.fromLTRB(18, 20, 18, 18),
       child: Column(

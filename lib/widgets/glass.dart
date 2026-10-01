@@ -3,6 +3,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 
 import '../theme/app_colors.dart';
+import '../theme/tokens.dart';
 
 const double kSheetBlur = 14;
 
@@ -237,7 +238,7 @@ class GlassSurface extends StatelessWidget {
   const GlassSurface({
     super.key,
     required this.child,
-    this.radius = 28,
+    this.radius = GymRadius.xl,
     this.blur = 22,
     this.tint,
     this.padding,

@@ -27,6 +27,11 @@ mixin SettingsState on FitCore, ToolsState, LibraryState {
 
   String bgPattern = 'dots';
   double bgDim = 0.55;
+  double bgZoom = 1;
+  double bgDx = 0;
+  double bgDy = 0;
+  double bgOpacity = 1;
+  double bgBlur = 0;
   bool showFocus = true;
   bool showRecommended = true;
   bool autoAdvance = true;
@@ -410,7 +415,7 @@ mixin SettingsState on FitCore, ToolsState, LibraryState {
     notifyListeners();
   }
 
-  static const bgPatterns = ['none', 'dots', 'grid', 'photo'];
+  static const bgPatterns = ['none', 'dots', 'grid', 'ancient', 'photo'];
 
   void setBgPattern(String v) {
     if (!bgPatterns.contains(v)) return;
@@ -426,6 +431,7 @@ mixin SettingsState on FitCore, ToolsState, LibraryState {
 
   Future<void> setBgPhoto(String srcPath) async {
     await attachExerciseMedia(kBgPhotoId, srcPath);
+    resetBgFraming();
     if (bgPhoto != null) bgPattern = 'photo';
     _persist();
     notifyListeners();
@@ -433,9 +439,43 @@ mixin SettingsState on FitCore, ToolsState, LibraryState {
 
   void clearBgPhoto() {
     clearExerciseMedia(kBgPhotoId);
+    resetBgFraming();
     if (bgPattern == 'photo') bgPattern = 'dots';
     _persist();
     notifyListeners();
+  }
+
+  void setBgZoom(double v) {
+    bgZoom = v.clamp(1.0, 3.0);
+    _persist();
+    notifyListeners();
+  }
+
+  void setBgOffset(double dx, double dy) {
+    bgDx = dx.clamp(-1.0, 1.0);
+    bgDy = dy.clamp(-1.0, 1.0);
+    _persist();
+    notifyListeners();
+  }
+
+  void setBgOpacity(double v) {
+    bgOpacity = v.clamp(0.35, 1.0);
+    _persist();
+    notifyListeners();
+  }
+
+  void setBgBlur(double v) {
+    bgBlur = v.clamp(0.0, 12.0);
+    _persist();
+    notifyListeners();
+  }
+
+  void resetBgFraming() {
+    bgZoom = 1;
+    bgDx = 0;
+    bgDy = 0;
+    bgOpacity = 1;
+    bgBlur = 0;
   }
 
   void setBgDim(double v) {

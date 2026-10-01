@@ -7,6 +7,7 @@ import '../models/workout.dart';
 import '../state/fit_state.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
+import '../theme/tokens.dart';
 import '../widgets/dialogs.dart';
 import '../widgets/glass.dart';
 import '../widgets/liquid_notch.dart';
@@ -59,7 +60,7 @@ class RoutinesScreen extends StatelessWidget {
             Text(t.weeklyPlan, style: AppTheme.f(12, weight: FontWeight.w600, color: gc.textSecondary, letterSpacing: 1.5)),
             const SizedBox(height: 10),
             SoftCard(
-              radius: 20,
+              radius: GymRadius.lg,
               borderColor: Colors.transparent,
               padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
               child: Column(children: [for (int i = 0; i < 7; i++) _dayRow(context, gc, i)]),
@@ -170,12 +171,12 @@ class RoutinesScreen extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.only(bottom: 8),
         padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(color: gc.bgRaised2, borderRadius: BorderRadius.circular(16)),
+        decoration: BoxDecoration(color: gc.bgRaised2, borderRadius: BorderRadius.circular(GymRadius.lg)),
         child: Row(children: [
           Container(
             width: 38,
             height: 38,
-            decoration: BoxDecoration(color: gc.emberSoft, borderRadius: BorderRadius.circular(11)),
+            decoration: BoxDecoration(color: gc.emberSoft, borderRadius: BorderRadius.circular(GymRadius.sm)),
             child: Icon(icon, size: 19, color: gc.ember),
           ),
           const SizedBox(width: 12),
@@ -248,14 +249,14 @@ class RoutinesScreen extends StatelessWidget {
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
           color: gc.bgRaised2,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(GymRadius.lg),
         ),
         child: Row(
           children: [
             Container(
               width: 42,
               height: 42,
-              decoration: BoxDecoration(color: gc.emberSoft, borderRadius: BorderRadius.circular(12)),
+              decoration: BoxDecoration(color: gc.emberSoft, borderRadius: BorderRadius.circular(GymRadius.md)),
               child: Icon(PhosphorIconsRegular.stack, size: 20, color: gc.ember),
             ),
             const SizedBox(width: 14),

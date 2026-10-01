@@ -14,6 +14,7 @@ import '../services/plan_share.dart';
 import '../state/fit_state.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
+import '../theme/tokens.dart';
 import '../widgets/glass.dart';
 import '../widgets/liquid_notch.dart';
 import '../widgets/ui_kit.dart';
@@ -163,7 +164,7 @@ class _PlanImportSheetState extends State<_PlanImportSheet> {
                   filled: true,
                   fillColor: gc.bgRaised2,
                   contentPadding: const EdgeInsets.all(14),
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none),
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(GymRadius.lg), borderSide: BorderSide.none),
                 ),
               ),
               const SizedBox(height: 10),
@@ -268,12 +269,12 @@ class _PlanImportSheetState extends State<_PlanImportSheet> {
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(color: gc.bgRaised2, borderRadius: BorderRadius.circular(16)),
+      decoration: BoxDecoration(color: gc.bgRaised2, borderRadius: BorderRadius.circular(GymRadius.lg)),
       child: Row(children: [
         Container(
           width: 38,
           height: 38,
-          decoration: BoxDecoration(color: gc.emberSoft, borderRadius: BorderRadius.circular(11)),
+          decoration: BoxDecoration(color: gc.emberSoft, borderRadius: BorderRadius.circular(GymRadius.sm)),
           child: Icon(PhosphorIconsRegular.listChecks, size: 19, color: gc.ember),
         ),
         const SizedBox(width: 12),

@@ -11,6 +11,7 @@ import '../services/media_store.dart';
 import '../state/fit_state.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
+import '../theme/tokens.dart';
 import '../widgets/body_map.dart';
 import '../widgets/dialogs.dart';
 import '../widgets/glass.dart';
@@ -201,7 +202,7 @@ class _TimelineScreenState extends State<TimelineScreen> {
         decoration: BoxDecoration(
           color: gc.bgRaised,
           border: Border.all(color: gc.border),
-          borderRadius: BorderRadius.circular(22),
+          borderRadius: BorderRadius.circular(GymRadius.lg),
         ),
         child: Column(
           children: [
@@ -259,7 +260,7 @@ class _TimelineScreenState extends State<TimelineScreen> {
                     ),
                     const SizedBox(height: 10),
                     SoftCard(
-                      radius: 18,
+                      radius: GymRadius.lg,
                       padding: const EdgeInsets.symmetric(vertical: 12),
                       child: Center(
                         child: BodyHeatArt(
@@ -323,7 +324,7 @@ class _TimelineScreenState extends State<TimelineScreen> {
         decoration: BoxDecoration(
           color: gc.bgRaised,
           border: Border.all(color: gc.border),
-          borderRadius: BorderRadius.circular(22),
+          borderRadius: BorderRadius.circular(GymRadius.lg),
         ),
         child: Column(
           children: [
@@ -353,7 +354,7 @@ class _TimelineScreenState extends State<TimelineScreen> {
         height: 72,
         decoration: BoxDecoration(
           color: gc.bgRaised2,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(GymRadius.md),
           border: Border.all(color: gc.border),
         ),
         child: Center(
@@ -370,7 +371,7 @@ class _TimelineScreenState extends State<TimelineScreen> {
         decoration: BoxDecoration(
           color: gc.bgRaised,
           border: Border.all(color: gc.border),
-          borderRadius: BorderRadius.circular(22),
+          borderRadius: BorderRadius.circular(GymRadius.lg),
         ),
         child: Row(
           children: [
@@ -400,7 +401,7 @@ class _TimelineScreenState extends State<TimelineScreen> {
         decoration: BoxDecoration(
           color: gc.bgRaised,
           border: Border.all(color: gc.border),
-          borderRadius: BorderRadius.circular(22),
+          borderRadius: BorderRadius.circular(GymRadius.lg),
         ),
         child: Column(
           children: [
@@ -624,7 +625,7 @@ class _TimelineScreenState extends State<TimelineScreen> {
         child: Container(
           decoration: BoxDecoration(
             color: gc.bgRaised2,
-            borderRadius: BorderRadius.circular(14),
+            borderRadius: BorderRadius.circular(GymRadius.md),
             border: Border.all(color: gc.border),
           ),
           clipBehavior: Clip.antiAlias,
@@ -670,7 +671,7 @@ class _TimelineScreenState extends State<TimelineScreen> {
       height: h,
       decoration: BoxDecoration(
         color: gc.bgRaised2,
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(GymRadius.md),
         border: Border.all(color: gc.border),
       ),
       clipBehavior: Clip.antiAlias,
@@ -705,7 +706,7 @@ class _TimelineScreenState extends State<TimelineScreen> {
                 behavior: HitTestBehavior.opaque,
                 onTap: () => Navigator.of(sheet).pop(p),
                 child: SoftCard(
-                  radius: 16,
+                  radius: GymRadius.lg,
                   padding: const EdgeInsets.all(16),
                   child: Row(children: [
                     Icon(PhosphorIconsRegular.person, size: 20, color: gc.textSecondary),

@@ -11,6 +11,7 @@ import '../services/media_store.dart';
 import '../state/fit_state.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
+import '../theme/tokens.dart';
 import 'exercise_media.dart';
 import 'glass.dart';
 import 'shimmer.dart';
@@ -89,7 +90,7 @@ class _ExercisePreviewState extends State<_ExercisePreview> {
         color: gc.bgRaised,
         clipBehavior: Clip.antiAlias,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(28),
+          borderRadius: BorderRadius.circular(GymRadius.xl),
           side: BorderSide(color: gc.border),
         ),
         child: AnimatedBuilder(
@@ -280,7 +281,7 @@ class _VideoStage extends StatelessWidget {
     final gc = context.gc;
     final maxHeight = MediaQuery.sizeOf(context).height * 0.5;
     return ClipRRect(
-      borderRadius: BorderRadius.circular(20),
+      borderRadius: BorderRadius.circular(GymRadius.lg),
       child: ColoredBox(
         color: gc.bgRaised2,
         child: ValueListenableBuilder<VideoPlayerValue>(

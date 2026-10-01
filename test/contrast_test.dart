@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gymmane/theme/app_colors.dart';
+import 'package:gymmane/widgets/body_map.dart';
 
 double _channel(double c) => c <= 0.03928 ? c / 12.92 : math.pow((c + 0.055) / 1.055, 2.4).toDouble();
 
@@ -43,6 +44,7 @@ void main() {
 
       test('accent and status colors used as text reach 4.5:1 on the main surfaces', () {
         final colors = {
+          'ember': gc.ember,
           'accent': gc.accent,
           'brass': gc.brass,
           'sage': gc.sage,
@@ -70,9 +72,39 @@ void main() {
         }
       });
 
+      test('the brand color is not mistaken for the danger color', () {
+        double dist(Color a, Color b) {
+          final dr = (a.r - b.r) * 255, dg = (a.g - b.g) * 255, db = (a.b - b.b) * 255;
+          return math.sqrt(dr * dr + dg * dg + db * db);
+        }
+
+        expect(dist(gc.ember, gc.danger), greaterThan(30));
+        expect(dist(gc.success, gc.danger), greaterThan(60));
+        expect(gc.progress, gc.ember, reason: 'key progress uses the brand color');
+      });
+
       test('text on the accent button is readable', () {
         expect(contrast(gc.onEmber, gc.ember), greaterThanOrEqualTo(4.5));
       });
+    });
+  }
+
+  for (final entry in {'dark': kHeatRampsDark, 'light': kHeatRampsLight}.entries) {
+    test('${entry.key} heat-map ramps have four distinct steps that stand out from an empty cell', () {
+      final gc = entry.key == 'dark' ? GymColors.dark : GymColors.light;
+      for (final ramp in entry.value.entries) {
+        final steps = ramp.value;
+        expect(steps.length, 4, reason: ramp.key);
+        expect(contrast(steps.first, gc.heatEmpty), greaterThanOrEqualTo(1.3), reason: '${ramp.key}: first step vs empty');
+        for (var i = 1; i < steps.length; i++) {
+          expect(contrast(steps[i], steps[i - 1]), greaterThanOrEqualTo(1.2), reason: '${ramp.key}: step $i vs ${i - 1}');
+        }
+        final lum = [for (final c in steps) c.computeLuminance()];
+        final ordered = entry.key == 'dark' ? lum : lum.reversed.toList();
+        for (var i = 1; i < ordered.length; i++) {
+          expect(ordered[i], greaterThan(ordered[i - 1]), reason: '${ramp.key}: intensity must rise with level');
+        }
+      }
     });
   }
 

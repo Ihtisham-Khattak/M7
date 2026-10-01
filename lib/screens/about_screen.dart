@@ -7,6 +7,7 @@ import '../l10n/l10n.dart';
 import '../state/fit_state.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
+import '../theme/tokens.dart';
 import '../widgets/entrance.dart';
 import '../widgets/ui_kit.dart';
 
@@ -78,7 +79,7 @@ class AboutScreen extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         color: gc.bgRaised,
-        borderRadius: BorderRadius.circular(22),
+        borderRadius: BorderRadius.circular(GymRadius.lg),
       ),
       child: Stack(
         children: [
@@ -140,7 +141,7 @@ class AboutScreen extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         color: gc.bgRaised,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(GymRadius.lg),
       ),
       child: Column(
         children: [
@@ -192,7 +193,7 @@ class AboutScreen extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         color: gc.bgRaised,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(GymRadius.lg),
       ),
       child: Column(
         children: [

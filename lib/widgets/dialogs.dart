@@ -15,8 +15,8 @@ AlertDialog appDialog(
 }) =>
     AlertDialog(
       backgroundColor: gc.bgRaised,
-      insetPadding: const EdgeInsets.symmetric(horizontal: 28),
-      titlePadding: const EdgeInsets.fromLTRB(GymSpace.xxl, GymSpace.xxl, GymSpace.xxl, 10),
+      insetPadding: const EdgeInsets.symmetric(horizontal: GymSpace.xxl),
+      titlePadding: const EdgeInsets.fromLTRB(GymSpace.xxl, GymSpace.xxl, GymSpace.xxl, GymSpace.md),
       contentPadding: const EdgeInsets.fromLTRB(GymSpace.xxl, 0, GymSpace.xxl, GymSpace.sm),
       actionsPadding: const EdgeInsets.fromLTRB(GymSpace.lg, 0, GymSpace.lg, GymSpace.md),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(GymRadius.xl)),
@@ -30,7 +30,7 @@ Widget dialogAction(String label, Color color, VoidCallback onPressed, {bool str
       onPressed: onPressed,
       style: TextButton.styleFrom(
         padding: const EdgeInsets.symmetric(horizontal: GymSpace.lg, vertical: GymSpace.md),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(GymRadius.pill)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(GymRadius.md)),
       ),
       child: Text(titleCase(label),
           style: AppTheme.f(GymText.bodySize,
@@ -129,7 +129,7 @@ Future<double?> askNumber(
         decoration: InputDecoration(
           filled: true,
           fillColor: gc.bgRaised2,
-          contentPadding: const EdgeInsets.symmetric(vertical: 18, horizontal: GymSpace.lg),
+          contentPadding: const EdgeInsets.symmetric(vertical: GymSpace.lg, horizontal: GymSpace.lg),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(GymRadius.md), borderSide: BorderSide.none),
         ),
       ),

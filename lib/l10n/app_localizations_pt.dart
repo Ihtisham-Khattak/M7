@@ -1272,6 +1272,28 @@ class AppLocalizationsPt extends AppLocalizations {
   String get bgDots => 'Pontos';
 
   @override
+  String get bgAncient => 'Papel washi';
+
+  @override
+  String get bgZoom => 'Zoom';
+
+  @override
+  String get bgOpacity => 'Opacidade';
+
+  @override
+  String get bgOverlay => 'Sobreposição';
+
+  @override
+  String get bgBlur => 'Desfoque';
+
+  @override
+  String get bgDragHint => 'Arraste a prévia para posicionar a imagem.';
+
+  @override
+  String get bgGuardHint =>
+      'O texto sempre fica legível: a sobreposição aumenta sozinha com imagens muito claras ou escuras.';
+
+  @override
   String get bgGrid => 'Grade';
 
   @override

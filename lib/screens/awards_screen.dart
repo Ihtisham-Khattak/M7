@@ -5,6 +5,7 @@ import '../l10n/l10n.dart';
 import '../state/fit_state.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
+import '../theme/tokens.dart';
 import '../widgets/medal.dart';
 import '../widgets/medal_shelf.dart';
 import '../widgets/ui_kit.dart';
@@ -81,7 +82,7 @@ class AwardsScreen extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(12, 16, 12, 14),
         decoration: BoxDecoration(
           color: gc.bgRaised,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(GymRadius.lg),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

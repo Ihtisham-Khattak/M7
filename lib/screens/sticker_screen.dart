@@ -16,6 +16,7 @@ import '../services/gallery.dart';
 import '../state/fit_state.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
+import '../theme/tokens.dart';
 import '../widgets/liquid_notch.dart';
 import '../widgets/ui_kit.dart';
 
@@ -155,7 +156,7 @@ class _StickerEditorState extends State<StickerEditor> {
                   child: AspectRatio(
                     aspectRatio: 9 / 16,
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(22),
+                      borderRadius: BorderRadius.circular(GymRadius.lg),
                       child: LayoutBuilder(builder: (context, c) => _stage(gc, c.biggest, color)),
                     ),
                   ),
@@ -330,7 +331,7 @@ class _StickerEditorState extends State<StickerEditor> {
             padding: const EdgeInsets.symmetric(horizontal: 8),
             decoration: BoxDecoration(
               color: on ? gc.emberSoft : gc.bgRaised2,
-              borderRadius: BorderRadius.circular(14),
+              borderRadius: BorderRadius.circular(GymRadius.md),
             ),
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               Icon(icon, size: 16, color: on ? gc.text : gc.textSecondary),
@@ -353,7 +354,7 @@ class _StickerEditorState extends State<StickerEditor> {
           height: 38,
           decoration: BoxDecoration(
             color: on ? gc.emberSoft : gc.bgRaised2,
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(GymRadius.md),
           ),
           child: Icon(icon, size: 17, color: on ? gc.text : gc.textTertiary),
         ),
@@ -436,7 +437,7 @@ class _Sticker extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(18, 16, 18, 16),
         decoration: BoxDecoration(
           color: (_light ? Colors.black : Colors.white).withValues(alpha: 0.34),
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(GymRadius.xl),
           border: Border.all(color: color.withValues(alpha: 0.18)),
         ),
         child: child,

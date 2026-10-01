@@ -8,6 +8,7 @@ import '../models/workout.dart';
 import '../state/fit_state.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
+import '../theme/tokens.dart';
 import '../widgets/charts.dart';
 import '../widgets/entrance.dart';
 import '../widgets/exercise_media.dart';
@@ -203,7 +204,7 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
                       padding: const EdgeInsets.all(18),
                       decoration: BoxDecoration(
                         color: gc.bgRaised,
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(GymRadius.lg),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -316,7 +317,7 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
       decoration: BoxDecoration(
         color: gc.bgRaised,
         border: Border.all(color: gc.warn.withValues(alpha: 0.5)),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(GymRadius.lg),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -441,7 +442,7 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 13),
           decoration: BoxDecoration(
             color: gc.bgRaised,
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(GymRadius.lg),
           ),
           child: Row(
             children: [
@@ -476,7 +477,7 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
         padding: const EdgeInsets.fromLTRB(12, 9, 14, 9),
         decoration: BoxDecoration(
           color: gc.bgRaised,
-          borderRadius: BorderRadius.circular(18),
+          borderRadius: BorderRadius.circular(GymRadius.lg),
         ),
         child: Row(
           children: [
@@ -539,7 +540,7 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
 
   Widget _archivedBanner(GymColors gc, Exercise ex) => Container(
         padding: const EdgeInsets.fromLTRB(16, 12, 8, 12),
-        decoration: BoxDecoration(color: gc.accentSoft, borderRadius: BorderRadius.circular(16)),
+        decoration: BoxDecoration(color: gc.accentSoft, borderRadius: BorderRadius.circular(GymRadius.lg)),
         child: Row(children: [
           Icon(PhosphorIconsFill.archive, size: 17, color: gc.accent),
           const SizedBox(width: 12),
@@ -567,7 +568,7 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
 
   Widget _group(GymColors gc, List<Widget> rows) {
     return Container(
-      decoration: BoxDecoration(color: gc.bgRaised, borderRadius: BorderRadius.circular(20)),
+      decoration: BoxDecoration(color: gc.bgRaised, borderRadius: BorderRadius.circular(GymRadius.lg)),
       clipBehavior: Clip.antiAlias,
       child: Column(
         children: [
@@ -686,7 +687,7 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
       decoration: BoxDecoration(
         color: gc.bgRaised,
         border: Border.all(color: target.up ? gc.ember : gc.border),
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(GymRadius.lg),
       ),
       child: Row(
         children: [

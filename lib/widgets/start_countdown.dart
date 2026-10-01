@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 
 import '../l10n/l10n.dart';
 import '../state/fit_state.dart';
+import '../theme/motion.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
 
@@ -37,6 +38,16 @@ class _StartCountdownState extends State<StartCountdown> with TickerProviderStat
     super.initState();
     _left = _remaining;
     _step();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (GymMotion.reduced(context)) {
+      _beat.duration = Duration.zero;
+      _veil.duration = Duration.zero;
+      _veil.value = 1;
+    }
   }
 
   void _step() {

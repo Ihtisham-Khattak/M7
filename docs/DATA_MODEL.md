@@ -70,7 +70,8 @@ Owner prefixes in media file names: an exercise id (incl. `bg`, the background p
 | `language` | resolved locale code (e.g. `es`, `zh_Hant`) | ✓ (adopts device language if key absent) | ✓ |
 | `rest` | default rest seconds (0 or 15–600) | ✓ | ✓ |
 | `alarmSound`, `alarmSoundName` | basename in AlarmStore + display name | ✓ (cleared if file missing) | ZIP only (`setAlarmSound`/`clearAlarmSound`) |
-| `bg`, `bgDim` | background pattern `none|dots|grid|photo`, dim 0.3–0.85 | ✓ | ✓ |
+| `bgZoom`, `bgDx`, `bgDy`, `bgOp`, `bgBlur` | custom-picture framing: zoom 1–3, pan −1…1 on each axis, opacity 0.35–1, blur sigma 0–12. Each key is read independently (a bad value falls back to its default without affecting the others); choosing, replacing or removing the picture and reset-all return them to neutral (1, 0, 0, 1, 0) | ✓ | ✓ |
+| `bg`, `bgDim` | background mode `none|dots|grid|ancient|photo` (`photo` = custom image, file in `media['bg']`; `ancient` reserved for the washi texture), dim 0.3–0.85. Unknown values fall back to `dots`; `photo` without a stored photo falls back to `dots`; reset also leaves photo mode | ✓ | ✓ |
 | `heatTone` | `ember|green|blue|mono` | ✓ | ✓ |
 | `showFocus`, `showRecs` | home card switches | ✓ | ✓ |
 | `weekStart` | 1 (Mon) / 6 (Sat) / 7 (Sun) | ✓ (validated) | ✓ |

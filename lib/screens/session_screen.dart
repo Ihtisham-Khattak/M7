@@ -9,6 +9,7 @@ import '../models/workout.dart';
 import '../state/fit_state.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
+import '../theme/tokens.dart';
 import '../widgets/celebration.dart';
 import '../widgets/dialogs.dart';
 import '../widgets/entrance.dart';
@@ -118,7 +119,7 @@ class SessionScreen extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(_cardPad, 16, _cardPad, 16),
             decoration: BoxDecoration(
               color: gc.bgRaised,
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(GymRadius.lg),
             ),
             child: Column(
               children: [
@@ -175,7 +176,7 @@ class SessionScreen extends StatelessWidget {
                   height: 46,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(14),
+                    borderRadius: BorderRadius.circular(GymRadius.md),
                   ),
                   child: Icon(PhosphorIconsRegular.notePencil, size: 17, color: gc.ember),
                 ),
@@ -338,7 +339,7 @@ class SessionScreen extends StatelessWidget {
         alignment: Alignment.centerRight,
         decoration: BoxDecoration(
           color: gc.danger.withValues(alpha: 0.16),
-          borderRadius: BorderRadius.circular(14),
+          borderRadius: BorderRadius.circular(GymRadius.md),
         ),
         child: Icon(PhosphorIconsRegular.trash, size: 18, color: gc.danger),
       ),
@@ -677,7 +678,7 @@ class SessionScreen extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: _rowPad, vertical: 10),
       decoration: BoxDecoration(
         color: st.done ? gc.sageSoft : Colors.transparent,
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(GymRadius.md),
       ),
       child: Row(children: [
         SizedBox(
@@ -764,7 +765,7 @@ class SessionScreen extends StatelessWidget {
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: rpe == null ? Colors.transparent : gc.bgRaised2,
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(GymRadius.xs),
                   border: Border.all(
                     color: waiting ? gc.ember : (rpe == null ? gc.border : Colors.transparent),
                     width: waiting ? 1.6 : 1,
@@ -805,7 +806,7 @@ class SessionScreen extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(GymRadius.md),
           ),
           child: FittedBox(
             fit: BoxFit.scaleDown,
@@ -914,7 +915,7 @@ class SessionScreen extends StatelessWidget {
                         padding: const EdgeInsets.all(15),
                         decoration: BoxDecoration(
                           color: kind == kindNow ? gc.bgRaised2 : Colors.transparent,
-                          borderRadius: BorderRadius.circular(14),
+                          borderRadius: BorderRadius.circular(GymRadius.md),
                           border:
                               Border.all(color: kind == kindNow ? _kindColor(gc, kind) : gc.border),
                         ),
@@ -986,7 +987,7 @@ class SessionScreen extends StatelessWidget {
                 child: Container(
                   width: 28,
                   height: 28,
-                  decoration: BoxDecoration(color: gc.bgRaised2, borderRadius: BorderRadius.circular(8)),
+                  decoration: BoxDecoration(color: gc.bgRaised2, borderRadius: BorderRadius.circular(GymRadius.xs)),
                   alignment: Alignment.center,
                   child: Text(g, style: TextStyle(color: gc.text, fontSize: 17, height: 1)),
                 ),
@@ -1310,12 +1311,12 @@ class SessionScreen extends StatelessWidget {
 
   Widget _finishHero(GymColors gc, {required int prs, required int streak, required bool goalHit}) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(24),
+      borderRadius: BorderRadius.circular(GymRadius.xl),
       child: Container(
         decoration: BoxDecoration(
           color: gc.bgRaised,
 
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(GymRadius.xl),
         ),
         child: Stack(
           children: [
@@ -1382,7 +1383,7 @@ class SessionScreen extends StatelessWidget {
     final up = diff >= 0;
     final pct = ((diff / before) * 100).round();
     return SoftCard(
-      radius: 16,
+      radius: GymRadius.lg,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       child: Row(children: [
         SvgPathIcon(Ic.trendUp, size: 16, color: up ? gc.sage : gc.textTertiary),
@@ -1399,7 +1400,7 @@ class SessionScreen extends StatelessWidget {
 
   Widget _firstTimeCard(GymColors gc) {
     return SoftCard(
-      radius: 16,
+      radius: GymRadius.lg,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       child: Row(children: [
         SvgPathIcon(Ic.flame, size: 16, color: gc.accent),
@@ -1411,7 +1412,7 @@ class SessionScreen extends StatelessWidget {
 
   Widget _sumCard(GymColors gc, String label, String value) {
     return SoftCard(
-      radius: 16,
+      radius: GymRadius.lg,
       padding: const EdgeInsets.all(14),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1522,7 +1523,7 @@ Widget _addRow(BuildContext sheetCtx, GymColors gc, Exercise ex) {
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             color: gc.bgRaised2,
-            borderRadius: BorderRadius.circular(14),
+            borderRadius: BorderRadius.circular(GymRadius.md),
           ),
           child: Row(children: [
             GestureDetector(
@@ -1688,7 +1689,7 @@ Widget _overviewRow(BuildContext sheet, GymColors gc, WorkoutSession s, int i) {
     margin: const EdgeInsets.only(bottom: 8),
     decoration: BoxDecoration(
       color: current ? gc.bgRaised2 : Colors.transparent,
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(GymRadius.lg),
       border: Border.all(
           color: current ? gc.ember.withValues(alpha: 0.6) : gc.border.withValues(alpha: 0.6)),
     ),

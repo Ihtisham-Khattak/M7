@@ -7,6 +7,7 @@ import '../models/place.dart';
 import '../state/fit_state.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
+import '../theme/tokens.dart';
 import '../widgets/dialogs.dart';
 import '../widgets/glass.dart';
 import '../widgets/ui_kit.dart';
@@ -51,7 +52,7 @@ class PlacesScreen extends StatelessWidget {
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       border: Border.all(color: gc.border),
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(GymRadius.lg),
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
@@ -79,7 +80,7 @@ class PlacesScreen extends StatelessWidget {
         decoration: BoxDecoration(
           color: gc.bgRaised,
           border: Border.all(color: gc.border),
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(GymRadius.lg),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -104,7 +105,7 @@ class PlacesScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: gc.bgRaised2,
                           border: Border.all(color: gc.border),
-                          borderRadius: BorderRadius.circular(14),
+                          borderRadius: BorderRadius.circular(GymRadius.md),
                         ),
                         child: FittedBox(
                           fit: BoxFit.scaleDown,
@@ -133,7 +134,7 @@ class PlacesScreen extends StatelessWidget {
       decoration: BoxDecoration(
         color: gc.bgRaised,
         border: Border.all(color: on ? gc.ember : gc.border),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(GymRadius.lg),
       ),
       child: Column(
         children: [
@@ -233,7 +234,7 @@ class PlacesScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
                       decoration: BoxDecoration(
                         color: gc.bgRaised2,
-                        borderRadius: BorderRadius.circular(14),
+                        borderRadius: BorderRadius.circular(GymRadius.md),
                       ),
                       child: Row(
                         children: [

@@ -1215,6 +1215,27 @@ class AppLocalizationsZh extends AppLocalizations {
   String get bgDots => '点阵';
 
   @override
+  String get bgAncient => '和纸';
+
+  @override
+  String get bgZoom => '缩放';
+
+  @override
+  String get bgOpacity => '不透明度';
+
+  @override
+  String get bgOverlay => '叠加层';
+
+  @override
+  String get bgBlur => '模糊';
+
+  @override
+  String get bgDragHint => '拖动预览以调整图片位置。';
+
+  @override
+  String get bgGuardHint => '文字始终清晰可读：遇到过亮或过暗的图片，叠加层会自动加深。';
+
+  @override
   String get bgGrid => '网格';
 
   @override
@@ -4297,6 +4318,27 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get bgDots => '圓點';
+
+  @override
+  String get bgAncient => '和紙';
+
+  @override
+  String get bgZoom => '縮放';
+
+  @override
+  String get bgOpacity => '不透明度';
+
+  @override
+  String get bgOverlay => '疊加層';
+
+  @override
+  String get bgBlur => '模糊';
+
+  @override
+  String get bgDragHint => '拖曳預覽以調整圖片位置。';
+
+  @override
+  String get bgGuardHint => '文字始終清晰可讀：遇到過亮或過暗的圖片，疊加層會自動加深。';
 
   @override
   String get bgGrid => '格線';

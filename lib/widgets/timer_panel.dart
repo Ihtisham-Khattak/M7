@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
+import '../theme/tokens.dart';
 import 'rolling_text.dart';
 
 String clockLabel(int seconds) {
@@ -86,7 +87,7 @@ class TimerPanel extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(18, 16, 18, 14),
               decoration: BoxDecoration(
                 color: gc.bgRaised,
-                borderRadius: BorderRadius.circular(26),
+                borderRadius: BorderRadius.circular(GymRadius.xl),
                 border: Border.all(color: gc.border.withValues(alpha: 0.5)),
               ),
               child: Column(

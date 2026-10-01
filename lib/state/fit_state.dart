@@ -99,6 +99,9 @@ class FitState extends FitCore
     return out;
   }
 
+  String _validBg(Object? value, String fallback) =>
+      value is String && SettingsState.bgPatterns.contains(value) ? value : fallback;
+
   void loadFromStore() {
     var data = Store.instance.load();
     loadSkipped = 0;
@@ -151,7 +154,7 @@ class FitState extends FitCore
       }
     });
     _guard(() {
-      bgPattern = data['bg'] as String? ?? 'dots';
+      bgPattern = _validBg(data['bg'], 'dots');
       heatTone = data['heatTone'] as String? ?? 'ember';
     });
     _loadToggles(data);
@@ -182,6 +185,7 @@ class FitState extends FitCore
       ..clear()
       ..addAll(_readAll(data['custom'], Exercise.fromJson));
     _loadMedia(data);
+    if (bgPattern == 'photo' && bgPhoto == null) bgPattern = 'dots';
     _loadRepsOnly(data);
     _loadExerciseRest(data);
     sessions
@@ -252,7 +256,17 @@ class FitState extends FitCore
       });
     });
     _guard(() {
-      bgDim = (data['bgDim'] as num?)?.toDouble() ?? 0.55;
+      double bgNum(String key, double fallback, double lo, double hi) {
+        final v = data[key];
+        return v is num && v.isFinite ? v.toDouble().clamp(lo, hi) : fallback;
+      }
+
+      bgDim = bgNum('bgDim', 0.55, 0.0, 1.0);
+      bgZoom = bgNum('bgZoom', 1, 1, 3);
+      bgDx = bgNum('bgDx', 0, -1, 1);
+      bgDy = bgNum('bgDy', 0, -1, 1);
+      bgOpacity = bgNum('bgOp', 1, 0.35, 1);
+      bgBlur = bgNum('bgBlur', 0, 0, 12);
       showFocus = data['showFocus'] as bool? ?? true;
       showRecommended = data['showRecs'] as bool? ?? true;
       multiPlan = data['multiPlan'] as bool? ?? false;
@@ -433,6 +447,11 @@ class FitState extends FitCore
     'bg': bgPattern,
     'heatTone': heatTone,
     'bgDim': bgDim,
+    'bgZoom': bgZoom,
+    'bgDx': bgDx,
+    'bgDy': bgDy,
+    'bgOp': bgOpacity,
+    'bgBlur': bgBlur,
     'showFocus': showFocus,
     'showRecs': showRecommended,
     'weekStart': weekStartDay,
@@ -517,6 +536,8 @@ class FitState extends FitCore
     multiPlan = false;
     customExercises.clear();
     exerciseMedia.clear();
+    resetBgFraming();
+    if (bgPattern == 'photo') bgPattern = 'dots';
     repsOnly.clear();
     repsOnlyOff.clear();
     exerciseRest.clear();
@@ -634,7 +655,7 @@ class FitState extends FitCore
     units = map['units'] as String? ?? units;
     _applyLanguage(map['language'] as String? ?? language);
     restSeconds = (map['rest'] as num?)?.toInt() ?? restSeconds;
-    bgPattern = map['bg'] as String? ?? bgPattern;
+    bgPattern = _validBg(map['bg'], bgPattern);
     heatTone = map['heatTone'] as String? ?? heatTone;
     _loadToggles(map);
     onboarded = map['onboarded'] as bool? ?? onboarded;
@@ -658,6 +679,7 @@ class FitState extends FitCore
       ..clear()
       ..addAll(_readAll(map['custom'], Exercise.fromJson));
     _loadMedia(map, restored: restoredMedia);
+    if (bgPattern == 'photo' && bgPhoto == null) bgPattern = 'dots';
     _loadRepsOnly(map);
     _loadExerciseRest(map);
     sessions

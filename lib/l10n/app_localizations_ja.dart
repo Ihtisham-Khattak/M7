@@ -1220,6 +1220,27 @@ class AppLocalizationsJa extends AppLocalizations {
   String get bgDots => 'ドット';
 
   @override
+  String get bgAncient => '和紙';
+
+  @override
+  String get bgZoom => 'ズーム';
+
+  @override
+  String get bgOpacity => '不透明度';
+
+  @override
+  String get bgOverlay => 'オーバーレイ';
+
+  @override
+  String get bgBlur => 'ぼかし';
+
+  @override
+  String get bgDragHint => 'プレビューをドラッグして画像の位置を調整します。';
+
+  @override
+  String get bgGuardHint => '文字は常に読みやすいまま。とても明るい・暗い画像では、オーバーレイが自動で濃くなります。';
+
+  @override
   String get bgGrid => 'グリッド';
 
   @override

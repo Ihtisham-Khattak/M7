@@ -1269,6 +1269,28 @@ class AppLocalizationsUk extends AppLocalizations {
   String get bgDots => 'Крапки';
 
   @override
+  String get bgAncient => 'Папір васі';
+
+  @override
+  String get bgZoom => 'Масштаб';
+
+  @override
+  String get bgOpacity => 'Прозорість';
+
+  @override
+  String get bgOverlay => 'Накладка';
+
+  @override
+  String get bgBlur => 'Розмиття';
+
+  @override
+  String get bgDragHint => 'Перетягни попередній перегляд, щоб розмістити зображення.';
+
+  @override
+  String get bgGuardHint =>
+      'Текст завжди читається: накладка сама посилюється для дуже світлих чи темних зображень.';
+
+  @override
   String get bgGrid => 'Сітка';
 
   @override

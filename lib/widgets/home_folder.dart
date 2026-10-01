@@ -6,6 +6,7 @@ import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import '../state/fit_state.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
+import '../theme/tokens.dart';
 import 'routine_folder.dart';
 import 'ui_kit.dart';
 
@@ -282,7 +283,7 @@ class ToolsPeek extends StatelessWidget {
             padding: const EdgeInsets.only(top: 9),
             decoration: BoxDecoration(
               color: Color.lerp(base, tint, dark ? 0.16 : 0.12),
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(GymRadius.md),
               border: Border.all(color: Colors.white.withValues(alpha: dark ? 0.06 : 0)),
               boxShadow: [
                 BoxShadow(color: Colors.black.withValues(alpha: dark ? 0.35 : 0.1), blurRadius: 6, offset: const Offset(0, 2)),

@@ -35,7 +35,7 @@ Key characteristics (all verified):
 
 ```
 GymMane/
-├── pubspec.yaml / pubspec.lock     dependencies; version 1.3.0+4; assets, shaders, Nunito fonts; launcher-icon config
+├── pubspec.yaml / pubspec.lock     dependencies; version 1.3.0+4; assets, shaders, Manrope fonts; launcher-icon config
 ├── analysis_options.yaml           flutter_lints + prefer_single_quotes; excludes generated l10n; formatter page_width 110
 ├── l10n.yaml                       gen-l10n config (arb-dir lib/l10n, template app_en.arb, output committed)
 ├── crowdin.yml                     Crowdin mapping (zh-TW → zh_Hant); see PROJECT_CONTEXT §8.3
@@ -50,7 +50,7 @@ GymMane/
 │   ├── art/       302 *.txt files: 3 lines each = 3 SVG-path frames (512×512) of an exercise animation
 │   ├── badges/    20 medals × {name.webp, name_off.webp} (+ spin/ variants referenced by medalSpinAsset)
 │   ├── audio/rest_over.wav         default rest-over sound
-│   ├── fonts/     Nunito (8 weights) + OFL
+│   ├── fonts/     Manrope (static 400/500/600/700/800, generated from the OFL variable font) + OFL
 │   ├── icon/, img/ (default profile/banner, runner.png), shaders/ (medal.frag, edge_fade.frag)
 ├── android/                        Gradle Kotlin DSL; app/src/main/{AndroidManifest.xml,kotlin,res}
 │   └── app/src/main/kotlin/com/gymmane/app/
@@ -157,8 +157,18 @@ Implemented in `FitCore` (`lib/state/fit_core.dart`) and `AppShell`:
 | `notes`, `note-edit` | journal | `note-edit` keyed by `editingNoteId` |
 | `places`, `moments`, `awards`, `about` | misc | |
 
+- **Navigation map and decisions (GM-17).** The structure stays as is — 4 tabs plus the centre ▶ action — because no usability problem was shown and the Kaizan brief forbids changing navigation for visual reasons. Where things live:
+  - **Home** (tab): today's routine and the primary action, week strip, stats; entry cards to *Routines*, *Tools* (calculators) and *Notes* (journal); *Snapshots*; the personalize nudge.
+  - **Progress** (tab): records, activity heat-map, body measures (`measures`) and the body timeline (`timeline`/`compare`).
+  - **Exercises** (tab): library, filters, favourites, exercise detail; *Places* is reached from here and from Preferences.
+  - **Profile** (tab, route `settings`): identity, awards, snapshots, and the gear button → **Preferences** (route `preferences`, `SettingsScreen`) → data, widgets, support, *About*.
+  - ▶ (centre): start today's planned routine, resume a parked session, or open the body-map picker (`train`).
+  - Route names `settings` (= Profile) and `preferences` (= Settings screen) are historically swapped; they are internal only (never persisted or shown), so they are documented here rather than renamed — a rename would touch back-handling in every mixin for no user-visible gain.
+  - Nav bar: labels are shown in one sentence-case style in every language (`titleCase`), 10.5 sp, and `test/nav_labels_test.dart` holds them to a 70 % maximum shrink at 1.15× text in all locales (Arabic's profile label is "حسابي" for that reason). The active tab uses the brand accent (`ember`) for icon and label.
+  - Glass nav: **kept** (`GlassSurface` is on the GM-93 allowlist because the bar floats over scrolling content and the blur protects legibility); the drag/long-press pill slider stays as a secondary gesture, but its overshoot curve and 460 ms glide were removed (GM-19). Revisit only if a device test shows the blur costs frames (GM-83).
+  - `test/navigation_map_test.dart` fails if a screen in `AppShell._screen()` has no way in, or if a route is missing from the table above.
 - Back button: `PopScope(canPop:false)` in `AppShell` → if session locked: haptic only; active session: confirm discard; completed session: `saveAndExit`; else `fit.handleBack()` (a `switch` on route with per-route back functions) or `SystemNavigator.pop()`.
-- Screen transition: `AnimatedSwitcher` (380 ms) with blur/slide/scale; sideways for tab↔tab, vertical for depth changes. Both `_NavBarState._routes` and `handleBack` must stay in sync with the route list.
+- Screen transition: `ScreenSwitcher` (`widgets/screen_switcher.dart`) with the budget from `theme/motion.dart` — 160 ms crossfade for tab↔tab, 240 ms fade + small vertical shift for depth changes, 100 ms fade under reduced motion; no blur/scale. Both `_NavBarState._routes` and `handleBack` must stay in sync with the route list.
 - Sheets/dialogs use Flutter's `Navigator` through helpers (`showAppSheet`, `showAppDialog`, `askConfirm/askText/askNumber` in `lib/widgets/`). They are not part of `fit.route`. Three full-screen overlays are also pushed with `Navigator.of(context).push(PageRouteBuilder…)` and therefore sit outside `fit.route`: the sticker editor (`showStickerEditor`), the snapshot viewer (`moments_screen.dart`) and the note-media viewer (`note_kit.dart`).
 - Deep links: Android intent filters accept `VIEW` of `content:`/`file:` JSON and `SEND` of `application/json`/`text/plain`; `MainActivity` reads the text (≤ 2 MB) and passes it through `gymmane/incoming` to `AppShell`, which opens `showPlanImportSheet` (only when onboarded and no active session).
 
@@ -230,7 +240,7 @@ Features are **not** directory-modularised. A feature = (a mixin in `lib/state/`
 - **Shell** (`app_shell.dart`): stacked layers — solid bg, `AppBackground` (pattern `none|dots|grid|photo` with dim), `Scaffold` (current screen), top/bottom `EdgeBlur` fades, custom bottom **liquid nav bar** (`_NavBar`: 4 tabs + centre play FAB; drag/long-press slides a `_LiquidPill`), parked-session pill, start countdown overlay, award celebration overlay. The nav bar is forced LTR.
 - **Screens** are large `StatelessWidget`/`StatefulWidget`s that read `fit.*` directly and contain layout + private sub-widgets (`_Card`, `_Sheet` classes in the same file). Business calls go to `fit`. Files > 40 KB: `session_screen` (73 KB), `progress_screen` (65 KB), `settings_screen` (58 KB), `routine_edit_screen` (42 KB), `wear_shell` (41 KB).
 - **Shared kit** (`lib/widgets/`): `ui_kit.dart` (SoftCard, SearchField, TinySwitch, Pressable, GhostButton, SheetHandle/Title, OptionGroup, RoundBtn, ScreenHeader/Title, Kicker, StepperControl, SegToggle, Pill, PrimaryButton, string helpers `sentenceCase/titleCase`), `glass.dart` (GlassSurface, EdgeBlur, `showAppSheet`, `showAppDialog`), `dialogs.dart`, `charts.dart` (GoalRing, VolumeChart, Sparkline, TrendChart, Heatmap, SplitBars, Emblem), `ruler_picker.dart`/`body_rulers.dart`, `body_map.dart` + `muscle_radar.dart`, `exercise_art.dart` (animated vector frames), `exercise_media.dart`/`exercise_preview.dart` (user media, video step marks), `medal.dart`/`medal_shelf.dart`/`award_celebration.dart`, `entrance.dart` (`RiseScope`/`Rise` staggered entrance, once per day per screen using `Store.note`), `home_widget_views.dart`, `share_cards.dart`, `timer_panel.dart`, `stopwatch_card.dart`, `home_folder.dart`/`routine_folder.dart`, `note_kit.dart`, `profile_avatar.dart`, `photo_source_sheet.dart`, `set_kind.dart`, `start_countdown.dart`, `svg_icon.dart` (`svgPath` cache, `SvgPathIcon`), `shimmer.dart`, `rolling_text.dart`, `liquid_notch.dart` (`showNotchToast`).
-- **Theme**: `GymColors` `ThemeExtension` (tokens: `pageBg, bg, bgRaised, bgRaised2, border, navBg, text/secondary/tertiary, ember(+Deep/Soft/Shadow, onEmber), accent(+Soft), brass, sage(+Soft), mutedFill, heatEmpty, info, warn, danger`) accessed as `context.gc`. `AppTheme.f/s/d(size, weight, color…)` return `TextStyle`s (all Nunito). Dark default (`themePref = 'dark'`; also `light`, `system`). Heat-map colour ramps `ember|green|blue|mono` in `body_map.dart`.
+- **Theme**: `GymColors` `ThemeExtension` (tokens: `pageBg, bg, bgRaised, bgRaised2, border, navBg, text/secondary/tertiary, ember(+Deep/Soft/Shadow, onEmber), accent(+Soft), brass, sage(+Soft), mutedFill, heatEmpty, info, warn, danger`) accessed as `context.gc`. `AppTheme.f/s/d(size, weight, color…)` return `TextStyle`s (all Manrope). Dark default (`themePref = 'dark'`; also `light`, `system`). Palette is the Kaizan palette (sumi/paper neutrals, vermilion `ember` accent) — see DEVELOPMENT_GUIDELINES §9; WCAG AA is enforced by `test/contrast_test.dart`. Heat-map colour ramps `ember|green|blue|mono` in `body_map.dart`.
 - **Layout conventions**: hard-coded pixel sizes in screens (no spacing tokens); `Pressable` for tappable cards; sheets via `showAppSheet`; toasts via `showNotchToast`.
 - **RTL**: Arabic (and, once registered, Persian) work through Flutter's locale directionality; the nav bar overrides to LTR.
 - **Accessibility**: `Semantics(...)` wrappers appear ~85 times across 10 screen/shell files (e.g. the parked pill: `button: true, label`); text scale is clamped at 1.15; there is no accessibility-specific test.

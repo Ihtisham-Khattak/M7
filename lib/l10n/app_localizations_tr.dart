@@ -1270,6 +1270,28 @@ class AppLocalizationsTr extends AppLocalizations {
   String get bgDots => 'Noktalar';
 
   @override
+  String get bgAncient => 'Washi kâğıdı';
+
+  @override
+  String get bgZoom => 'Yakınlaştırma';
+
+  @override
+  String get bgOpacity => 'Opaklık';
+
+  @override
+  String get bgOverlay => 'Katman';
+
+  @override
+  String get bgBlur => 'Bulanıklık';
+
+  @override
+  String get bgDragHint => 'Görseli konumlandırmak için önizlemeyi sürükle.';
+
+  @override
+  String get bgGuardHint =>
+      'Metin her zaman okunur kalır: çok parlak veya koyu görsellerde katman kendiliğinden güçlenir.';
+
+  @override
   String get bgGrid => 'Izgara';
 
   @override

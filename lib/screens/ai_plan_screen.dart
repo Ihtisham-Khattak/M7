@@ -11,6 +11,7 @@ import '../services/plan_share.dart';
 import '../state/fit_state.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
+import '../theme/tokens.dart';
 import '../widgets/liquid_notch.dart';
 import '../widgets/ui_kit.dart';
 import 'plan_import_sheet.dart';
@@ -50,7 +51,7 @@ class _AiPlanScreenState extends State<AiPlanScreen> {
             ScreenHeader(title: t.aiRoutine, onBack: fit.backFromAiPlan, titleSize: 22),
             const SizedBox(height: 20),
             SoftCard(
-              radius: 20,
+              radius: GymRadius.lg,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -92,7 +93,7 @@ class _AiPlanScreenState extends State<AiPlanScreen> {
                 filled: true,
                 fillColor: gc.bgRaised,
                 contentPadding: const EdgeInsets.all(16),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide.none),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(GymRadius.lg), borderSide: BorderSide.none),
               ),
             ),
             const SizedBox(height: 10),
@@ -115,7 +116,7 @@ class _AiPlanScreenState extends State<AiPlanScreen> {
               const SizedBox(height: 8),
               Container(
                 padding: const EdgeInsets.all(14),
-                decoration: BoxDecoration(color: gc.bgRaised, borderRadius: BorderRadius.circular(16)),
+                decoration: BoxDecoration(color: gc.bgRaised, borderRadius: BorderRadius.circular(GymRadius.lg)),
                 child: SelectableText(FitState.planTemplate,
                     style: TextStyle(fontFamily: 'monospace', fontSize: 11.5, color: gc.textSecondary, height: 1.4)),
               ),
@@ -178,7 +179,7 @@ class _AiPlanScreenState extends State<AiPlanScreen> {
       decoration: BoxDecoration(
         color: gc.bgRaised,
         border: Border.all(color: good ? gc.sage : gc.border),
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(GymRadius.lg),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

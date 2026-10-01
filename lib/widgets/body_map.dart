@@ -21,17 +21,17 @@ String? muscleAt(Offset p) {
 Color idleMuscle(GymColors gc) => Color.lerp(gc.bgRaised2, gc.textSecondary, 0.32)!;
 
 const Map<String, List<Color>> kHeatRampsDark = {
-  'ember': [Color(0xFF7A4028), Color(0xFFB4632C), Color(0xFFE38B3A), Color(0xFFFFC168)],
-  'green': [Color(0xFF1B4B2C), Color(0xFF2C7A44), Color(0xFF3FA95C), Color(0xFF63D67F)],
-  'blue': [Color(0xFF1E3A5C), Color(0xFF2C5E96), Color(0xFF3D86C9), Color(0xFF6EB4F0)],
-  'mono': [Color(0xFF3A3A3A), Color(0xFF5E5E5E), Color(0xFF8C8C8C), Color(0xFFD8D8D8)],
+  'ember': [Color(0xFF5E2A21), Color(0xFF93392A), Color(0xFFC84630), Color(0xFFE8553D)],
+  'green': [Color(0xFF2E3F2A), Color(0xFF4A6B3A), Color(0xFF6F9460), Color(0xFF9DB387)],
+  'blue': [Color(0xFF2E3C6B), Color(0xFF3C5090), Color(0xFF5E78C4), Color(0xFF93A7DB)],
+  'mono': [Color(0xFF3A3835), Color(0xFF5E5B56), Color(0xFF8C8880), Color(0xFFD8D3C9)],
 };
 
 const Map<String, List<Color>> kHeatRampsLight = {
-  'ember': [Color(0xFFD9B48A), Color(0xFFC07A3C), Color(0xFF9E4A24), Color(0xFF6E2A16)],
-  'green': [Color(0xFFBBD9BE), Color(0xFF7FB88A), Color(0xFF488C58), Color(0xFF255E32)],
-  'blue': [Color(0xFFBACFE8), Color(0xFF7EA5D2), Color(0xFF3F74AE), Color(0xFF1F4876)],
-  'mono': [Color(0xFFCFC8BC), Color(0xFF9C958A), Color(0xFF6B655C), Color(0xFF3A352F)],
+  'ember': [Color(0xFFE8AB9C), Color(0xFFDD8B79), Color(0xFFC85A42), Color(0xFF8F2815)],
+  'green': [Color(0xFFA9C79A), Color(0xFF7FA66F), Color(0xFF5F8A4E), Color(0xFF365A29)],
+  'blue': [Color(0xFFAEBBE0), Color(0xFF8EA2D6), Color(0xFF4F6AB0), Color(0xFF2F4A8A)],
+  'mono': [Color(0xFFBDB5A4), Color(0xFF8E8674), Color(0xFF6D6657), Color(0xFF3A352D)],
 };
 
 const List<String> kHeatTones = ['ember', 'green', 'blue', 'mono'];

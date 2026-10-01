@@ -4,6 +4,7 @@ import '../l10n/l10n.dart';
 import '../state/fit_state.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
+import '../theme/tokens.dart';
 import '../widgets/dialogs.dart';
 import '../widgets/glass.dart';
 import '../widgets/ui_kit.dart';
@@ -31,7 +32,7 @@ class ToolDetailScreen extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(22, 24, 22, 24),
               decoration: BoxDecoration(
                 color: gc.bgRaised,
-                borderRadius: BorderRadius.circular(24),
+                borderRadius: BorderRadius.circular(GymRadius.xl),
               ),
               child: Column(children: [
                 Text(t.result.toUpperCase(),
@@ -189,7 +190,7 @@ class ToolDetailScreen extends StatelessWidget {
     }
 
     return SoftCard(
-      radius: 20,
+      radius: GymRadius.lg,
       borderColor: Colors.transparent,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       child: Column(
@@ -211,7 +212,7 @@ class ToolDetailScreen extends StatelessWidget {
   Widget _macros(GymColors gc) {
     Widget card(String label, String value) => Expanded(
           child: SoftCard(
-            radius: 20,
+            radius: GymRadius.lg,
             borderColor: Colors.transparent,
             padding: const EdgeInsets.all(12),
             child: Column(children: [
@@ -239,7 +240,7 @@ class ToolDetailScreen extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(8),
             alignment: Alignment.center,
-            decoration: BoxDecoration(color: active ? gc.ember : gc.bgRaised2, borderRadius: BorderRadius.circular(10)),
+            decoration: BoxDecoration(color: active ? gc.ember : gc.bgRaised2, borderRadius: BorderRadius.circular(GymRadius.sm)),
             child: Text('${fmt(v)} ${fit.units}',
                 style: AppTheme.f(13, weight: FontWeight.w600, color: active ? gc.onEmber : gc.textSecondary)),
           ),
@@ -249,7 +250,7 @@ class ToolDetailScreen extends StatelessWidget {
 
     final bars = fit.barOptions;
     return SoftCard(
-      radius: 20,
+      radius: GymRadius.lg,
       borderColor: Colors.transparent,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       child: Column(
@@ -273,7 +274,7 @@ class ToolDetailScreen extends StatelessWidget {
     final target = fit.toDisplayWeight(fit.plateTarget);
     final loadable = fit.loadableTotal(target, fit.plateBarDisplay);
     return SoftCard(
-      radius: 20,
+      radius: GymRadius.lg,
       borderColor: Colors.transparent,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       child: Column(
@@ -306,7 +307,7 @@ class ToolDetailScreen extends StatelessWidget {
   Widget _warmupCard(GymColors gc) {
     final sets = fit.warmupSets;
     return SoftCard(
-      radius: 20,
+      radius: GymRadius.lg,
       borderColor: Colors.transparent,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Column(
@@ -374,7 +375,7 @@ void showPlateSheet(BuildContext context, double displayTarget) {
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                           color: bar == option ? gc.ember : gc.bgRaised2,
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(GymRadius.sm),
                         ),
                         child: Text('${fmt(option)} ${fit.units}',
                             style: AppTheme.f(13,

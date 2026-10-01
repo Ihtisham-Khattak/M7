@@ -115,7 +115,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         body: Stack(
           children: [
             Positioned.fill(child: _Glow(gc)),
-            const Positioned.fill(child: AppBackground(pattern: 'dots')),
+            Positioned.fill(child: AppBackground(
+          pattern: fit.bgPattern,
+          photo: fit.bgPhotoPath,
+          dim: fit.bgDim,
+          zoom: fit.bgZoom,
+          dx: fit.bgDx,
+          dy: fit.bgDy,
+          opacity: fit.bgOpacity,
+          blur: fit.bgBlur,
+        )),
             SafeArea(
               child: Column(
                 children: [
@@ -272,7 +281,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Widget _group(GymColors gc, List<Widget> rows) {
     return Container(
       clipBehavior: Clip.antiAlias,
-      decoration: BoxDecoration(color: gc.bgRaised, borderRadius: BorderRadius.circular(20)),
+      decoration: BoxDecoration(color: gc.bgRaised, borderRadius: BorderRadius.circular(GymRadius.lg)),
       child: Column(
         children: [
           for (var i = 0; i < rows.length; i++) ...[

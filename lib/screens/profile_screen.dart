@@ -11,6 +11,7 @@ import '../services/media_store.dart';
 import '../state/fit_state.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
+import '../theme/tokens.dart';
 import '../widgets/entrance.dart';
 import '../widgets/medal_shelf.dart';
 import '../widgets/photo_source_sheet.dart';
@@ -151,7 +152,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     return Container(
       padding: const EdgeInsets.fromLTRB(18, 18, 18, 16),
-      decoration: BoxDecoration(color: gc.bgRaised, borderRadius: BorderRadius.circular(22)),
+      decoration: BoxDecoration(color: gc.bgRaised, borderRadius: BorderRadius.circular(GymRadius.lg)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -360,7 +361,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       onTap: onTap,
       child: Container(
         height: 168,
-        decoration: BoxDecoration(color: gc.bgRaised, borderRadius: BorderRadius.circular(22)),
+        decoration: BoxDecoration(color: gc.bgRaised, borderRadius: BorderRadius.circular(GymRadius.lg)),
         child: Column(
           children: [
             Expanded(child: Center(child: child)),
@@ -418,7 +419,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       height: 86,
       decoration: BoxDecoration(
         color: gc.bgRaised2,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(GymRadius.md),
         border: raised ? null : Border.all(color: gc.bgRaised, width: 2.5),
         boxShadow: raised
             ? [BoxShadow(color: Colors.black.withValues(alpha: 0.45), blurRadius: 14)]

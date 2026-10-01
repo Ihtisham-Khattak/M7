@@ -7,6 +7,7 @@ import '../models/exercise.dart';
 import '../state/fit_state.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
+import '../theme/tokens.dart';
 import '../widgets/ui_kit.dart';
 
 IconData _toolIcon(String id) => switch (id) {
@@ -62,7 +63,7 @@ class ToolsScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: gc.bgRaised,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(GymRadius.lg),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,7 +73,7 @@ class ToolsScreen extends StatelessWidget {
               width: 36,
               height: 36,
               decoration:
-                  BoxDecoration(color: gc.bgRaised2, borderRadius: BorderRadius.circular(12)),
+                  BoxDecoration(color: gc.bgRaised2, borderRadius: BorderRadius.circular(GymRadius.md)),
               child: Center(child: Icon(_toolIcon(tool.id), size: 19, color: gc.textSecondary)),
             ),
             const Spacer(),

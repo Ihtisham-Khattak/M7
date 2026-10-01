@@ -25,5 +25,6 @@ with different equipment.
 
 ## Fonts
 
-Nunito, by the Nunito Project Authors, under the SIL Open Font License
-(`assets/fonts/Nunito-OFL.txt`).
+Manrope, by The Manrope Project Authors, under the SIL Open Font License
+(`assets/fonts/Manrope-OFL.txt`). The five static weights (400-800) were generated from the
+variable font `Manrope[wght].ttf` with fontTools' `varLib.instancer`; no outlines were changed.

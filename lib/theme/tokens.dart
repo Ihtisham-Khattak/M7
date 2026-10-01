@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'app_colors.dart';
 import 'app_theme.dart';
 
 class GymSpace {
@@ -20,15 +21,37 @@ class GymSpace {
 class GymRadius {
   GymRadius._();
 
-  static const double xs = 8;
-  static const double sm = 12;
-  static const double md = 16;
-  static const double lg = 20;
-  static const double xl = 24;
-  static const double xxl = 28;
+  static const double xs = 6;
+  static const double sm = 10;
+  static const double md = 12;
+  static const double lg = 16;
+  static const double xl = 20;
+  static const double xxl = 24;
   static const double pill = 100;
+  static const double hair = 2;
 
   static BorderRadius all(double r) => BorderRadius.circular(r);
+}
+
+class GymBorder {
+  GymBorder._();
+
+  static const double hairline = 1;
+  static const double emphasis = 1.6;
+}
+
+class GymElevation {
+  GymElevation._();
+
+  static const List<BoxShadow> none = [];
+
+  static List<BoxShadow> raised(GymColors gc) => [
+        BoxShadow(color: gc.emberShadow.withValues(alpha: gc.emberShadow.a * 0.55), blurRadius: 16, offset: const Offset(0, 5)),
+      ];
+
+  static List<BoxShadow> overlay(GymColors gc) => [
+        BoxShadow(color: gc.emberShadow.withValues(alpha: gc.emberShadow.a * 0.8), blurRadius: 24, offset: const Offset(0, 10)),
+      ];
 }
 
 class GymText {
@@ -61,6 +84,9 @@ class GymText {
 
   static TextStyle headline({Color? color, FontWeight weight = FontWeight.w700}) =>
       AppTheme.f(headlineSize, weight: weight, color: color);
+
+  static TextStyle numeric(double size, {Color? color, FontWeight weight = FontWeight.w700}) =>
+      AppTheme.f(size, weight: weight, color: color, height: 1.0);
 
   static TextStyle display({Color? color, FontWeight weight = FontWeight.w800}) =>
       AppTheme.f(displaySize, weight: weight, color: color);

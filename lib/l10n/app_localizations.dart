@@ -2278,6 +2278,48 @@ abstract class AppLocalizations {
   /// **'Dots'**
   String get bgDots;
 
+  /// No description provided for @bgAncient.
+  ///
+  /// In en, this message translates to:
+  /// **'Washi paper'**
+  String get bgAncient;
+
+  /// No description provided for @bgZoom.
+  ///
+  /// In en, this message translates to:
+  /// **'Zoom'**
+  String get bgZoom;
+
+  /// No description provided for @bgOpacity.
+  ///
+  /// In en, this message translates to:
+  /// **'Opacity'**
+  String get bgOpacity;
+
+  /// No description provided for @bgOverlay.
+  ///
+  /// In en, this message translates to:
+  /// **'Overlay'**
+  String get bgOverlay;
+
+  /// No description provided for @bgBlur.
+  ///
+  /// In en, this message translates to:
+  /// **'Blur'**
+  String get bgBlur;
+
+  /// No description provided for @bgDragHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Drag the preview to position the picture.'**
+  String get bgDragHint;
+
+  /// No description provided for @bgGuardHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Text always stays readable: the overlay rises on its own for very bright or dark pictures.'**
+  String get bgGuardHint;
+
   /// No description provided for @bgGrid.
   ///
   /// In en, this message translates to:

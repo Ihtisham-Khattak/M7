@@ -9,6 +9,7 @@ import '../models/workout.dart';
 import '../state/fit_state.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
+import '../theme/tokens.dart';
 import '../widgets/dialogs.dart';
 import '../widgets/exercise_media.dart';
 import '../widgets/exercise_preview.dart';
@@ -243,7 +244,7 @@ class _RoutineEditScreenState extends State<RoutineEditScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
             decoration: BoxDecoration(
               color: gc.bgRaised,
-              borderRadius: BorderRadius.circular(14),
+              borderRadius: BorderRadius.circular(GymRadius.md),
             ),
             child: Row(
               children: [
@@ -474,7 +475,7 @@ class _RoutineEditScreenState extends State<RoutineEditScreen> {
               const SizedBox(height: 18),
               Container(
                 padding: const EdgeInsets.fromLTRB(14, 12, 14, 12),
-                decoration: BoxDecoration(color: gc.bgRaised2, borderRadius: BorderRadius.circular(16)),
+                decoration: BoxDecoration(color: gc.bgRaised2, borderRadius: BorderRadius.circular(GymRadius.lg)),
                 child: Row(children: [
                   Icon(PhosphorIconsFill.listChecks, size: 20, color: gc.ember),
                   const SizedBox(width: 12),
@@ -522,7 +523,7 @@ class _RoutineEditScreenState extends State<RoutineEditScreen> {
           margin: EdgeInsets.only(bottom: linksNext ? 4 : 0),
           alignment: Alignment.centerRight,
           padding: const EdgeInsets.only(right: 22),
-          decoration: BoxDecoration(color: gc.warn.withValues(alpha: 0.16), borderRadius: BorderRadius.circular(14)),
+          decoration: BoxDecoration(color: gc.warn.withValues(alpha: 0.16), borderRadius: BorderRadius.circular(GymRadius.md)),
           child: Icon(PhosphorIconsFill.trash, size: 20, color: gc.warn),
         ),
         child: IntrinsicHeight(
@@ -549,7 +550,7 @@ class _RoutineEditScreenState extends State<RoutineEditScreen> {
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: gc.bgRaised,
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(GymRadius.md),
       ),
       child: Row(children: [
         ReorderableDragStartListener(
@@ -670,7 +671,7 @@ class _RoutineEditScreenState extends State<RoutineEditScreen> {
         decoration: BoxDecoration(
           color: gc.bgRaised,
           border: Border.all(color: inRoutine ? gc.ember : gc.border),
-          borderRadius: BorderRadius.circular(14),
+          borderRadius: BorderRadius.circular(GymRadius.md),
         ),
         child: Row(children: [
           GestureDetector(
@@ -929,7 +930,7 @@ class _RoutineEditScreenState extends State<RoutineEditScreen> {
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: gc.bgRaised2,
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(GymRadius.sm),
                 border: Border.all(
                     color: p.kind == SetKind.normal ? Colors.transparent : setKindColor(gc, p.kind)),
               ),
@@ -1028,7 +1029,7 @@ class _RoutineEditScreenState extends State<RoutineEditScreen> {
             fillColor: gc.bgRaised2,
             contentPadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
             border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(18), borderSide: BorderSide.none),
+                borderRadius: BorderRadius.circular(GymRadius.lg), borderSide: BorderSide.none),
           ),
           onSubmitted: (v) => Navigator.of(dctx).pop(v),
         ),
@@ -1111,7 +1112,7 @@ class _ShareArt extends StatelessWidget {
             height: 80,
             decoration: BoxDecoration(
               color: gc.emberSoft,
-              borderRadius: BorderRadius.circular(26),
+              borderRadius: BorderRadius.circular(GymRadius.xl),
               border: Border.all(color: gc.bgRaised, width: 3),
             ),
             child: Icon(PhosphorIconsFill.paperPlaneTilt, size: 34, color: gc.ember),

@@ -1261,6 +1261,28 @@ class AppLocalizationsAr extends AppLocalizations {
   String get bgDots => 'نقاط';
 
   @override
+  String get bgAncient => 'ورق واشي';
+
+  @override
+  String get bgZoom => 'تكبير';
+
+  @override
+  String get bgOpacity => 'التعتيم';
+
+  @override
+  String get bgOverlay => 'الطبقة';
+
+  @override
+  String get bgBlur => 'التمويه';
+
+  @override
+  String get bgDragHint => 'اسحب المعاينة لتحديد موضع الصورة.';
+
+  @override
+  String get bgGuardHint =>
+      'يبقى النص مقروءًا دائمًا: تزداد الطبقة تلقائيًا مع الصور الساطعة جدًا أو المظلمة.';
+
+  @override
   String get bgGrid => 'شبكة';
 
   @override
@@ -2373,7 +2395,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get awardSets1000Line => 'مجموعة تلو الأخرى حتى الألف.';
 
   @override
-  String get profile => 'الملف الشخصي';
+  String get profile => 'حسابي';
 
   @override
   String get editProfile => 'تعديل الملف الشخصي';

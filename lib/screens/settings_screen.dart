@@ -23,6 +23,7 @@ import '../services/workout_import.dart';
 import '../state/fit_state.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
+import '../theme/tokens.dart';
 import '../widgets/body_rulers.dart';
 import '../widgets/dialogs.dart';
 import '../widgets/entrance.dart';
@@ -33,6 +34,9 @@ import '../widgets/profile_avatar.dart';
 import '../widgets/ruler_picker.dart';
 import '../widgets/timer_panel.dart';
 import 'profile_screen.dart';
+import '../widgets/background_preview.dart';
+import '../widgets/components.dart';
+import '../widgets/choice.dart';
 import '../widgets/ui_kit.dart';
 
 const _kRepoUrl = 'https://github.com/InlitX/GymMane';
@@ -74,10 +78,7 @@ class SettingsScreen extends StatelessWidget {
                 fit.setThemePref,
                 hint: t.themeAutoHint,
               ),
-              GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () => _editLanguage(context),
-                child: _prefRow(
+              _prefRow(
                   gc,
                   PhosphorIconsRegular.translate,
                   t.languageLabel,
@@ -89,7 +90,7 @@ class SettingsScreen extends StatelessWidget {
                     const SizedBox(width: 6),
                     Icon(PhosphorIconsRegular.caretRight, size: 15, color: gc.textTertiary),
                   ]),
-                ),
+                onTap: () => _editLanguage(context),
               ),
               _prefRow(gc, PhosphorIconsRegular.scales, t.unitsLabel, SegToggle([
                 SegOption('kg', fit.units == 'kg', () => fit.setUnits('kg')),
@@ -104,10 +105,7 @@ class SettingsScreen extends StatelessWidget {
                 () => '${fit.weekStartDay}',
                 (v) => fit.setWeekStart(int.parse(v)),
               ),
-              GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () => _editBackground(context),
-                child: _prefRow(
+              _prefRow(
                   gc,
                   PhosphorIconsRegular.image,
                   t.background,
@@ -117,7 +115,7 @@ class SettingsScreen extends StatelessWidget {
                     const SizedBox(width: 6),
                     Icon(PhosphorIconsRegular.caretRight, size: 15, color: gc.textTertiary),
                   ]),
-                ),
+                onTap: () => _editBackground(context),
               ),
             ]),
             const SizedBox(height: 18),
@@ -162,29 +160,21 @@ class SettingsScreen extends StatelessWidget {
                 fit.setEffortMode,
                 hint: t.effortHint,
               ),
-              GestureDetector(
-                behavior: HitTestBehavior.opaque,
+              _prefRow(gc, PhosphorIconsRegular.skipForward, t.autoAdvance,
+                    TinySwitch(on: fit.autoAdvance),
                 onTap: fit.toggleAutoAdvance,
-                child: _prefRow(gc, PhosphorIconsRegular.skipForward, t.autoAdvance,
-                    TinySwitch(on: fit.autoAdvance)),
               ),
-              GestureDetector(
-                behavior: HitTestBehavior.opaque,
+              _prefRow(gc, PhosphorIconsRegular.timer, t.countdownSetting,
+                    TinySwitch(on: fit.startCountdown),
                 onTap: fit.toggleStartCountdown,
-                child: _prefRow(gc, PhosphorIconsRegular.timer, t.countdownSetting,
-                    TinySwitch(on: fit.startCountdown)),
               ),
-              GestureDetector(
-                behavior: HitTestBehavior.opaque,
+              _prefRow(gc, PhosphorIconsRegular.sun, t.keepScreenOn,
+                    TinySwitch(on: fit.keepScreenOn),
                 onTap: fit.toggleKeepScreenOn,
-                child: _prefRow(gc, PhosphorIconsRegular.sun, t.keepScreenOn,
-                    TinySwitch(on: fit.keepScreenOn)),
               ),
-              GestureDetector(
-                behavior: HitTestBehavior.opaque,
+              _prefRow(gc, PhosphorIconsRegular.stack, t.multiPlanSetting,
+                    TinySwitch(on: fit.multiPlan),
                 onTap: fit.toggleMultiPlan,
-                child: _prefRow(gc, PhosphorIconsRegular.stack, t.multiPlanSetting,
-                    TinySwitch(on: fit.multiPlan)),
               ),
               _choiceRow(
                 context,
@@ -206,10 +196,7 @@ class SettingsScreen extends StatelessWidget {
             ]),
             const SizedBox(height: 18),
             _group(gc, t.sectionAlerts, [
-              GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () => _editTrainReminder(context),
-                child: _prefRow(
+              _prefRow(
                   gc,
                   PhosphorIconsRegular.bellSimple,
                   t.trainReminder,
@@ -226,12 +213,9 @@ class SettingsScreen extends StatelessWidget {
                     const SizedBox(width: 6),
                     Icon(PhosphorIconsRegular.caretRight, size: 15, color: gc.textTertiary),
                   ]),
-                ),
+                onTap: () => _editTrainReminder(context),
               ),
-              GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () => _editAlarmSound(context),
-                child: _prefRow(
+              _prefRow(
                   gc,
                   PhosphorIconsRegular.speakerHigh,
                   t.alarmSound,
@@ -249,7 +233,7 @@ class SettingsScreen extends StatelessWidget {
                     const SizedBox(width: 6),
                     Icon(PhosphorIconsRegular.caretRight, size: 15, color: gc.textTertiary),
                   ]),
-                ),
+                onTap: () => _editAlarmSound(context),
               ),
               _choiceRow(
                 context,
@@ -272,28 +256,22 @@ class SettingsScreen extends StatelessWidget {
             ]),
             const SizedBox(height: 18),
             _group(gc, t.sectionHome, [
-              GestureDetector(
-                behavior: HitTestBehavior.opaque,
+              _prefRow(gc, PhosphorIconsRegular.target, t.focusCard,
+                    TinySwitch(on: fit.showFocus),
                 onTap: fit.toggleFocusCard,
-                child: _prefRow(gc, PhosphorIconsRegular.target, t.focusCard,
-                    TinySwitch(on: fit.showFocus)),
               ),
-              GestureDetector(
-                behavior: HitTestBehavior.opaque,
+              _prefRow(gc, PhosphorIconsRegular.sparkle, t.homeRecommended,
+                    TinySwitch(on: fit.showRecommended),
                 onTap: fit.toggleRecommended,
-                child: _prefRow(gc, PhosphorIconsRegular.sparkle, t.homeRecommended,
-                    TinySwitch(on: fit.showRecommended)),
               ),
-              GestureDetector(
-                behavior: HitTestBehavior.opaque,
+              _prefRow(gc, PhosphorIconsRegular.medal, t.gamificationSetting,
+                    TinySwitch(on: fit.gamification),
                 onTap: fit.toggleGamification,
-                child: _prefRow(gc, PhosphorIconsRegular.medal, t.gamificationSetting,
-                    TinySwitch(on: fit.gamification)),
               ),
             ]),
             const SizedBox(height: 18),
             if (Platform.isAndroid || Platform.isIOS) ...[
-              _sectionLabel(gc, t.sectionWidgets),
+              SectionHeader.label(t.sectionWidgets),
               const SizedBox(height: 8),
               _linkGroup(gc, [
                 (PhosphorIconsRegular.squaresFour, t.addActivityWidget, () => _addWidget(context, 'HeatmapWidgetProvider')),
@@ -304,7 +282,7 @@ class SettingsScreen extends StatelessWidget {
               ]),
               const SizedBox(height: 18),
             ],
-            _sectionLabel(gc, t.sectionData),
+            SectionHeader.label(t.sectionData),
             const SizedBox(height: 8),
             _linkGroup(gc, [
               (PhosphorIconsRegular.fileCsv, t.exportCsv, () => _exportCsv(context)),
@@ -314,7 +292,7 @@ class SettingsScreen extends StatelessWidget {
               (PhosphorIconsRegular.trash, t.resetData, () => _resetAll(context)),
             ], danger: 4),
             const SizedBox(height: 18),
-            _sectionLabel(gc, t.support),
+            SectionHeader.label(t.support),
             const SizedBox(height: 8),
             _linkGroup(gc, [
               (PhosphorIconsRegular.bug, t.reportBug, () => _open(context, _kBugUrl)),
@@ -336,34 +314,19 @@ class SettingsScreen extends StatelessWidget {
   Widget _group(GymColors gc, String label, List<Widget> rows) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _sectionLabel(gc, label),
-          const SizedBox(height: 8),
-          SoftCard(
-            radius: 20,
-            borderColor: Colors.transparent,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+          SectionHeader.label(label),
+          const SizedBox(height: GymSpace.sm),
+          GymCard(
+            borderless: true,
+            clip: true,
+            padding: EdgeInsets.zero,
             child: Column(children: rows),
           ),
         ],
       );
 
-  Widget _sectionLabel(GymColors gc, String t) =>
-      Text(t.toUpperCase(),
-          style: AppTheme.f(10.5, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.3));
-
-  Widget _prefRow(GymColors gc, IconData icon, String label, Widget control) {
-    return SizedBox(
-      height: 52,
-      child: Row(
-        children: [
-          _rowIcon(gc, icon),
-          Expanded(child: Text(label, style: AppTheme.f(14.5, weight: FontWeight.w500, color: gc.text))),
-          const SizedBox(width: 12),
-          control,
-        ],
-      ),
-    );
-  }
+  Widget _prefRow(GymColors gc, IconData icon, String label, Widget control, {VoidCallback? onTap}) =>
+      ListRow(icon: icon, title: label, trailing: control, onTap: onTap);
 
   Widget _choiceRow(
     BuildContext context,
@@ -377,10 +340,7 @@ class SettingsScreen extends StatelessWidget {
   }) {
     final now = current();
     final shown = options.firstWhere((o) => o.$1 == now, orElse: () => options.first);
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: () => _choiceSheet(context, label, options, current, onPick, hint: hint),
-      child: _prefRow(
+    return _prefRow(
         gc,
         icon,
         label,
@@ -398,7 +358,7 @@ class SettingsScreen extends StatelessWidget {
           const SizedBox(width: 6),
           Icon(PhosphorIconsRegular.caretRight, size: 15, color: gc.textTertiary),
         ]),
-      ),
+      onTap: () => _choiceSheet(context, label, options, current, onPick, hint: hint),
     );
   }
 
@@ -461,46 +421,21 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  Widget _rowIcon(GymColors gc, IconData icon, {Color? color}) => Padding(
-        padding: const EdgeInsets.only(right: 14),
-        child: SizedBox(
-          width: 22,
-          child: Icon(icon, size: 19, color: color ?? gc.textSecondary),
-        ),
-      );
-
   Widget _linkGroup(GymColors gc, List<(IconData, String, VoidCallback)> items, {int? danger}) {
-    return Container(
-      decoration: BoxDecoration(
-        color: gc.bgRaised,
-        borderRadius: BorderRadius.circular(20),
-      ),
-      clipBehavior: Clip.antiAlias,
+    return GymCard(
+      borderless: true,
+      clip: true,
+      padding: EdgeInsets.zero,
       child: Column(
         children: [
           for (int i = 0; i < items.length; i++)
-            GestureDetector(
-              behavior: HitTestBehavior.opaque,
+            ListRow(
+              icon: items[i].$1,
+              title: items[i].$2,
+              chevron: true,
+              destructive: i == danger,
+              divider: i < items.length - 1,
               onTap: items[i].$3,
-              child: Container(
-                height: 52,
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                decoration: BoxDecoration(
-                  border: i < items.length - 1
-                      ? Border(bottom: BorderSide(color: gc.border.withValues(alpha: 0.6)))
-                      : null,
-                ),
-                child: Row(
-                  children: [
-                    _rowIcon(gc, items[i].$1, color: i == danger ? gc.danger : null),
-                    Expanded(
-                        child: Text(items[i].$2,
-                            style: AppTheme.f(14.5,
-                                weight: FontWeight.w500, color: i == danger ? gc.danger : gc.text))),
-                    Icon(PhosphorIconsRegular.caretRight, size: 15, color: gc.textTertiary),
-                  ],
-                ),
-              ),
             ),
         ],
       ),
@@ -582,35 +517,29 @@ class SettingsScreen extends StatelessWidget {
   }
 
   Widget _alarmWarning(BuildContext context, GymColors gc) {
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
+    return GymCard(
+      radius: GymRadius.md,
+      color: gc.accentSoft,
+      borderColor: gc.accent.withValues(alpha: .3),
+      padding: const EdgeInsets.symmetric(horizontal: GymSpace.md, vertical: GymSpace.md),
       onTap: fit.openNotificationSettings,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 11),
-        decoration: BoxDecoration(
-          color: gc.accentSoft,
-          borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: gc.accent.withValues(alpha: .3)),
-        ),
-        child: Row(children: [
-          Icon(PhosphorIconsRegular.bellSlash, size: 18, color: gc.accent),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(t.alarmBlockedTitle,
-                    style: AppTheme.f(13, weight: FontWeight.w600, color: gc.text)),
-                const SizedBox(height: 2),
-                Text(t.alarmBlockedBody, style: AppTheme.f(11.5, weight: FontWeight.w500, color: gc.textSecondary)),
-              ],
-            ),
+      child: Row(children: [
+        Icon(PhosphorIconsRegular.bellSlash, size: 18, color: gc.accent),
+        const SizedBox(width: 10),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(t.alarmBlockedTitle, style: GymText.label(color: gc.text)),
+              const SizedBox(height: 2),
+              Text(t.alarmBlockedBody, style: GymText.caption(color: gc.textSecondary)),
+            ],
           ),
-          const SizedBox(width: 8),
-          Text(t.alarmBlockedAction,
-              style: AppTheme.f(12, weight: FontWeight.w700, color: gc.accent, letterSpacing: 1)),
-        ]),
-      ),
+        ),
+        const SizedBox(width: GymSpace.sm),
+        Text(t.alarmBlockedAction,
+            style: GymText.caption(color: gc.accent, weight: FontWeight.w700).copyWith(letterSpacing: 1)),
+      ]),
     );
   }
 
@@ -639,7 +568,7 @@ class SettingsScreen extends StatelessWidget {
                   style: AppTheme.f(10, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.5)),
               const SizedBox(height: 10),
               ClipRRect(
-                borderRadius: BorderRadius.circular(18),
+                borderRadius: BorderRadius.circular(GymRadius.lg),
                 child: ColoredBox(
                   color: gc.bgRaised2,
                   child: Column(children: [
@@ -960,6 +889,7 @@ class SettingsScreen extends StatelessWidget {
   String _bgName(String pattern) => switch (pattern) {
         'none' => t.bgNone,
         'grid' => t.bgGrid,
+        'ancient' => t.bgAncient,
         'photo' => t.bgPhoto,
         _ => t.bgDots,
       };
@@ -993,6 +923,7 @@ class SettingsScreen extends StatelessWidget {
                       ('none', PhosphorIconsRegular.square),
                       ('dots', PhosphorIconsRegular.dotsNine),
                       ('grid', PhosphorIconsRegular.gridFour),
+                      ('ancient', PhosphorIconsRegular.notepad),
                     ])
                       OptionItem(
                         _bgName(pattern),
@@ -1016,18 +947,60 @@ class SettingsScreen extends StatelessWidget {
                       ),
                   ]),
                   const SizedBox(height: 16),
-                  if (photo != null) ...[
-                    Text(t.bgDim,
-                        style: AppTheme.f(10, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.5)),
-                    const SizedBox(height: 8),
-                    Center(
-                      child: SegToggle([
-                        SegOption(t.dimSoft, fit.bgDim < 0.5, () => setSheet(() => fit.setBgDim(0.4))),
-                        SegOption(t.dimMedium, fit.bgDim >= 0.5 && fit.bgDim < 0.65,
-                            () => setSheet(() => fit.setBgDim(0.55))),
-                        SegOption(t.dimStrong, fit.bgDim >= 0.65, () => setSheet(() => fit.setBgDim(0.72))),
-                      ]),
+                  if (photo != null && fit.bgPattern == 'photo') ...[
+                    BackgroundPreview(
+                      pattern: 'photo',
+                      photo: photo,
+                      dim: fit.bgDim,
+                      zoom: fit.bgZoom,
+                      dx: fit.bgDx,
+                      dy: fit.bgDy,
+                      opacity: fit.bgOpacity,
+                      blur: fit.bgBlur,
+                      title: t.today,
+                      onMove: (x, y) => setSheet(() => fit.setBgOffset(x, y)),
                     ),
+                    const SizedBox(height: 6),
+                    Text(t.bgDragHint,
+                        textAlign: TextAlign.center,
+                        style: AppTheme.f(11.5, weight: FontWeight.w500, color: gc.textTertiary, height: 1.4)),
+                    const SizedBox(height: 10),
+                    GymSlider(
+                      label: t.bgZoom,
+                      value: fit.bgZoom,
+                      min: 1,
+                      max: 3,
+                      display: '${fit.bgZoom.toStringAsFixed(1)}×',
+                      onChanged: (v) => setSheet(() => fit.setBgZoom(v)),
+                    ),
+                    GymSlider(
+                      label: t.bgOpacity,
+                      value: fit.bgOpacity,
+                      min: 0.35,
+                      max: 1,
+                      display: '${(fit.bgOpacity * 100).round()}%',
+                      onChanged: (v) => setSheet(() => fit.setBgOpacity(v)),
+                    ),
+                    GymSlider(
+                      label: t.bgOverlay,
+                      value: fit.bgDim,
+                      min: 0.3,
+                      max: 0.85,
+                      display: '${(fit.bgDim * 100).round()}%',
+                      onChanged: (v) => setSheet(() => fit.setBgDim(v)),
+                    ),
+                    GymSlider(
+                      label: t.bgBlur,
+                      value: fit.bgBlur,
+                      min: 0,
+                      max: 12,
+                      display: fit.bgBlur < 0.5 ? '0' : fit.bgBlur.toStringAsFixed(0),
+                      onChanged: (v) => setSheet(() => fit.setBgBlur(v)),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(t.bgGuardHint,
+                        textAlign: TextAlign.center,
+                        style: AppTheme.f(11.5, weight: FontWeight.w500, color: gc.textTertiary, height: 1.4)),
                     const SizedBox(height: 14),
                   ],
                   GhostButton(
@@ -1289,7 +1262,7 @@ class _ProfileSheetState extends State<_ProfileSheet> {
             const SizedBox(height: 18),
             _coverPicker(gc),
             const SizedBox(height: 20),
-            _label(gc, t.nameLabel),
+            SectionHeader.label(t.nameLabel),
             const SizedBox(height: 8),
             TextField(
               controller: _name,
@@ -1303,11 +1276,11 @@ class _ProfileSheetState extends State<_ProfileSheet> {
                 filled: true,
                 fillColor: gc.bgRaised2,
                 contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: BorderSide.none),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(GymRadius.md), borderSide: BorderSide.none),
               ),
             ),
             const SizedBox(height: 16),
-            _label(gc, t.handleLabel),
+            SectionHeader.label(t.handleLabel),
             const SizedBox(height: 8),
             TextField(
               controller: _handle,
@@ -1327,7 +1300,7 @@ class _ProfileSheetState extends State<_ProfileSheet> {
                 prefixIconConstraints: const BoxConstraints(minWidth: 0, minHeight: 0),
                 contentPadding: const EdgeInsets.symmetric(horizontal: 4, vertical: 14),
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(14), borderSide: BorderSide.none),
+                    borderRadius: BorderRadius.circular(GymRadius.md), borderSide: BorderSide.none),
               ),
             ),
             const SizedBox(height: 16),
@@ -1349,7 +1322,7 @@ class _ProfileSheetState extends State<_ProfileSheet> {
             const SizedBox(height: 12),
             _stepRow(gc, t.weeklyGoal, '${p.weeklyGoal}×', () => _up(() => fit.updateProfile(weeklyGoalDelta: -1)), () => _up(() => fit.updateProfile(weeklyGoalDelta: 1))),
             const SizedBox(height: 12),
-            _label(gc, t.activityLabel),
+            SectionHeader.label(t.activityLabel),
             const SizedBox(height: 8),
             Wrap(spacing: 8, runSpacing: 8, children: [
               _act(gc, t.activityName('Sedentary'), 1.2),
@@ -1409,7 +1382,7 @@ class _ProfileSheetState extends State<_ProfileSheet> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        _label(gc, t.coverLabel),
+        SectionHeader.label(t.coverLabel),
         const SizedBox(height: 8),
         GestureDetector(
           onTap: _pickBanner,
@@ -1417,7 +1390,7 @@ class _ProfileSheetState extends State<_ProfileSheet> {
             height: 96,
             decoration: BoxDecoration(
               color: gc.bgRaised2,
-              borderRadius: BorderRadius.circular(14),
+              borderRadius: BorderRadius.circular(GymRadius.md),
               image: DecorationImage(
                 image: bytes == null ? kDefaultBanner : MemoryImage(bytes),
                 fit: BoxFit.cover,
@@ -1500,21 +1473,11 @@ class _ProfileSheetState extends State<_ProfileSheet> {
     );
   }
 
-  Widget _label(GymColors gc, String t) =>
-      Text(t.toUpperCase(),
-          style: AppTheme.f(10.5, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.3));
-
   Widget _row(GymColors gc, String label, Widget control) {
-    return SoftCard(
-      radius: 14,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(label, style: AppTheme.f(13, weight: FontWeight.w600, color: gc.textSecondary)),
-          control,
-        ],
-      ),
+    return GymCard(
+      radius: GymRadius.md,
+      padding: EdgeInsets.zero,
+      child: ListRow(title: label, trailing: control),
     );
   }
 

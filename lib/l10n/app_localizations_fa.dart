@@ -1262,6 +1262,28 @@ class AppLocalizationsFa extends AppLocalizations {
   String get bgDots => 'نقطه‌ها';
 
   @override
+  String get bgAncient => 'کاغذ واشی';
+
+  @override
+  String get bgZoom => 'بزرگ‌نمایی';
+
+  @override
+  String get bgOpacity => 'شفافیت';
+
+  @override
+  String get bgOverlay => 'لایه';
+
+  @override
+  String get bgBlur => 'محو';
+
+  @override
+  String get bgDragHint => 'پیش‌نمایش را بکش تا جای تصویر را تنظیم کنی.';
+
+  @override
+  String get bgGuardHint =>
+      'متن همیشه خوانا می‌ماند: برای تصویرهای خیلی روشن یا تیره، لایه خودکار پررنگ‌تر می‌شود.';
+
+  @override
   String get bgGrid => 'شبکه';
 
   @override

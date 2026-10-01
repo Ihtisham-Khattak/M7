@@ -1238,6 +1238,27 @@ class AppLocalizationsKo extends AppLocalizations {
   String get bgDots => '점';
 
   @override
+  String get bgAncient => '와시 종이';
+
+  @override
+  String get bgZoom => '확대';
+
+  @override
+  String get bgOpacity => '불투명도';
+
+  @override
+  String get bgOverlay => '오버레이';
+
+  @override
+  String get bgBlur => '흐림';
+
+  @override
+  String get bgDragHint => '미리보기를 드래그해 이미지 위치를 맞추세요.';
+
+  @override
+  String get bgGuardHint => '글자는 항상 잘 보여요. 아주 밝거나 어두운 이미지에서는 오버레이가 자동으로 진해져요.';
+
+  @override
   String get bgGrid => '그리드';
 
   @override

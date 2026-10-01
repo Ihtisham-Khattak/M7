@@ -8,6 +8,7 @@ import '../services/media_store.dart';
 import '../state/fit_state.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
+import '../theme/tokens.dart';
 import 'body_map.dart';
 import 'charts.dart';
 import 'profile_avatar.dart';
@@ -35,7 +36,7 @@ class ShareCard extends StatelessWidget {
             end: Alignment.bottomRight,
             colors: [gc.bgRaised, gc.bg],
           ),
-          borderRadius: BorderRadius.circular(28),
+          borderRadius: BorderRadius.circular(GymRadius.xl),
         ),
         child: Padding(
           padding: const EdgeInsets.fromLTRB(24, 22, 24, 20),
@@ -228,7 +229,7 @@ class ShareCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: gc.bgRaised2,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(GymRadius.lg),
       ),
       clipBehavior: Clip.antiAlias,
       child: path == null

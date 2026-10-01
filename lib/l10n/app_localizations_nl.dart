@@ -1271,6 +1271,28 @@ class AppLocalizationsNl extends AppLocalizations {
   String get bgDots => 'Punten';
 
   @override
+  String get bgAncient => 'Washi-papier';
+
+  @override
+  String get bgZoom => 'Zoom';
+
+  @override
+  String get bgOpacity => 'Dekking';
+
+  @override
+  String get bgOverlay => 'Overlay';
+
+  @override
+  String get bgBlur => 'Vervaging';
+
+  @override
+  String get bgDragHint => 'Sleep het voorbeeld om de afbeelding te plaatsen.';
+
+  @override
+  String get bgGuardHint =>
+      'Tekst blijft altijd leesbaar: de overlay wordt vanzelf sterker bij erg lichte of donkere afbeeldingen.';
+
+  @override
   String get bgGrid => 'Raster';
 
   @override

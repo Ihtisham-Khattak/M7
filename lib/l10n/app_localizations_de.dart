@@ -1275,6 +1275,28 @@ class AppLocalizationsDe extends AppLocalizations {
   String get bgDots => 'Punkte';
 
   @override
+  String get bgAncient => 'Washi-Papier';
+
+  @override
+  String get bgZoom => 'Zoom';
+
+  @override
+  String get bgOpacity => 'Deckkraft';
+
+  @override
+  String get bgOverlay => 'Überlagerung';
+
+  @override
+  String get bgBlur => 'Unschärfe';
+
+  @override
+  String get bgDragHint => 'Ziehe die Vorschau, um das Bild zu positionieren.';
+
+  @override
+  String get bgGuardHint =>
+      'Text bleibt immer lesbar: Die Überlagerung wird bei sehr hellen oder dunklen Bildern automatisch stärker.';
+
+  @override
   String get bgGrid => 'Raster';
 
   @override

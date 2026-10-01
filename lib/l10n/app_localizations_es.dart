@@ -1268,6 +1268,28 @@ class AppLocalizationsEs extends AppLocalizations {
   String get bgDots => 'Puntos';
 
   @override
+  String get bgAncient => 'Papel washi';
+
+  @override
+  String get bgZoom => 'Zoom';
+
+  @override
+  String get bgOpacity => 'Opacidad';
+
+  @override
+  String get bgOverlay => 'Capa';
+
+  @override
+  String get bgBlur => 'Desenfoque';
+
+  @override
+  String get bgDragHint => 'Arrastra la vista previa para colocar la imagen.';
+
+  @override
+  String get bgGuardHint =>
+      'El texto siempre se lee bien: la capa sube sola con imágenes muy claras u oscuras.';
+
+  @override
   String get bgGrid => 'Rejilla';
 
   @override

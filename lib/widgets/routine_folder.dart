@@ -6,6 +6,7 @@ import '../models/workout.dart';
 import '../state/fit_state.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
+import '../theme/tokens.dart';
 import 'ui_kit.dart';
 
 const kFolderHues = [
@@ -79,7 +80,7 @@ class RoutineFolder extends StatelessWidget {
               child: Transform.rotate(
                 angle: -0.018,
                 child: DecoratedBox(
-                  decoration: BoxDecoration(color: back, borderRadius: BorderRadius.circular(12)),
+                  decoration: BoxDecoration(color: back, borderRadius: BorderRadius.circular(GymRadius.md)),
                 ),
               ),
             ),
@@ -90,7 +91,7 @@ class RoutineFolder extends StatelessWidget {
               height: 64,
               child: Container(
                 padding: const EdgeInsets.fromLTRB(14, 12, 40, 0),
-                decoration: BoxDecoration(color: hue, borderRadius: BorderRadius.circular(12)),
+                decoration: BoxDecoration(color: hue, borderRadius: BorderRadius.circular(GymRadius.md)),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -110,7 +111,7 @@ class RoutineFolder extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(14, 12, 8, 10),
                 decoration: BoxDecoration(
                   color: front,
-                  borderRadius: BorderRadius.circular(18),
+                  borderRadius: BorderRadius.circular(GymRadius.lg),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withValues(alpha: dark ? 0.35 : 0.1),
