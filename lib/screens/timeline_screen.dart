@@ -18,6 +18,7 @@ import '../widgets/glass.dart';
 import '../widgets/note_kit.dart';
 import '../widgets/photo_source_sheet.dart';
 import '../widgets/svg_icon.dart';
+import '../widgets/states.dart';
 import '../widgets/ui_kit.dart';
 
 class TimelineScreen extends StatefulWidget {
@@ -319,32 +320,19 @@ class _TimelineScreenState extends State<TimelineScreen> {
     );
   }
 
-  Widget _empty(GymColors gc) => Container(
-        padding: const EdgeInsets.fromLTRB(22, 26, 22, 26),
-        decoration: BoxDecoration(
-          color: gc.bgRaised,
-          border: Border.all(color: gc.border),
-          borderRadius: BorderRadius.circular(GymRadius.lg),
-        ),
-        child: Column(
+  Widget _empty(GymColors gc) => EmptyState(
+        icon: PhosphorIconsRegular.camera,
+        title: t.timelineEmptyTitle,
+        body: t.timelineHint,
+        actionLabel: t.snapNow,
+        onAction: () => _poseSheet(DateTime.now()),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                for (final pose in kPoses) ...[
-                  if (pose != kPoses.first) const SizedBox(width: 10),
-                  _ghostTile(gc, pose),
-                ],
-              ],
-            ),
-            const SizedBox(height: 20),
-            Text(t.timelineEmptyTitle,
-                textAlign: TextAlign.center,
-                style: AppTheme.d(18, weight: FontWeight.w700, color: gc.text, height: 1.25)),
-            const SizedBox(height: 8),
-            Text(t.timelineHint,
-                textAlign: TextAlign.center,
-                style: AppTheme.s(13, color: gc.textSecondary, height: 1.5)),
+            for (final pose in kPoses) ...[
+              if (pose != kPoses.first) const SizedBox(width: GymSpace.sm),
+              _ghostTile(gc, pose),
+            ],
           ],
         ),
       );

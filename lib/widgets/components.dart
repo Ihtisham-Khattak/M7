@@ -200,7 +200,11 @@ class SectionHeader extends StatelessWidget {
     if (onMore == null) return row;
     return Semantics(
       button: true,
-      child: GestureDetector(behavior: HitTestBehavior.opaque, onTap: onMore, child: row),
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: onMore,
+        child: MinTarget(alignment: AlignmentDirectional.centerStart, child: row),
+      ),
     );
   }
 }

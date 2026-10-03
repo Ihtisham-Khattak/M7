@@ -330,6 +330,37 @@ class AppLocalizationsJa extends AppLocalizations {
   String get restOverBody => '再開しよう — 次のセットが待っています。';
 
   @override
+  String goalRingLabel(int pct) {
+    return '週間目標の達成率は$pctパーセント';
+  }
+
+  @override
+  String heatmapLabel(int days) {
+    return 'アクティビティマップ：過去12週間で$days日トレーニング';
+  }
+
+  @override
+  String bodyMapLabel(String names) {
+    return 'ボディマップ。強調：$names';
+  }
+
+  @override
+  String get bodyMapNone => '強調されている筋肉はありません';
+
+  @override
+  String trendChartLabel(String first, String last) {
+    return '$firstから$lastへの推移';
+  }
+
+  @override
+  String restLeftAnnounce(int seconds) {
+    return '休憩の残りは$seconds秒';
+  }
+
+  @override
+  String get tagline => 'やわらかく、けれど弱くない。';
+
+  @override
   String get totalVolume30d => '総ボリューム · 30日';
 
   @override
@@ -1253,7 +1284,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get importBackup => 'バックアップを読み込む';
 
   @override
-  String get importHint => 'GymManeから書き出した.zip（または旧.json）バックアップを選択してください。メディアを含む現在のデータが置き換わります。';
+  String get importHint => 'Kaizanから書き出した.zip（または旧.json）バックアップを選択してください。メディアを含む現在のデータが置き換わります。';
 
   @override
   String get import => '読み込む';
@@ -1305,7 +1336,7 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
-  String get aboutGymmane => 'GymManeについて';
+  String get aboutGymmane => 'Kaizanについて';
 
   @override
   String get yourProfile => 'プロフィール';
@@ -1374,7 +1405,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get dataSkippedNotice => '保存されたデータの一部を読み込めず、スキップしました。データのコピーは保管してあります。';
 
   @override
-  String get dataNewerNotice => 'データは新しいバージョンの GymMane で保存されています。アプリを更新すると表示されます。何も変更されていません。';
+  String get dataNewerNotice => 'データは新しいバージョンの Kaizan で保存されています。アプリを更新すると表示されます。何も変更されていません。';
 
   @override
   String get nothingToExport => 'まだ書き出すデータがありません — まずワークアウトを記録してください';
@@ -2006,7 +2037,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get planNothing => 'このファイルの種目はライブラリに一致しません';
 
   @override
-  String get planFailed => 'このファイルはGymManeが読み込めるルーティンではありません';
+  String get planFailed => 'このファイルはKaizanが読み込めるルーティンではありません';
 
   @override
   String get routineGroup => 'グループ';
@@ -2149,7 +2180,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get aiIntro =>
-      'GymManeがAIと直接通信することはありません。種目リストを書き出し、普段使っているAIアシスタントに貼り付け、その回答を読み込みます。端末から自動で送信されるものはありません。';
+      'KaizanがAIと直接通信することはありません。種目リストを書き出し、普段使っているAIアシスタントに貼り付け、その回答を読み込みます。端末から自動で送信されるものはありません。';
 
   @override
   String get aiStep1 => '種目リストを書き出します。場所を選択している場合、その場所でできる種目だけが含まれます。';
@@ -2187,7 +2218,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get awardFirstStepName => '最初の一歩';
 
   @override
-  String get awardFirstStepLine => 'GymManeへようこそ。これはプレゼントです。';
+  String get awardFirstStepLine => 'Kaizanへようこそ。これはプレゼントです。';
 
   @override
   String get awardFirstWorkoutName => '最初のワークアウト';
@@ -2775,14 +2806,14 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String shareMessage(String name) {
-    return '$name — GymMane でファイルを開いて追加してください。';
+    return '$name — Kaizan でファイルを開いて追加してください。';
   }
 
   @override
   String get importRoutines => 'ルーティンを読み込む';
 
   @override
-  String get importPasteHint => 'ここにルーティンを貼り付け：GymMane から共有されたもの、AIの回答、JSON、CSV。';
+  String get importPasteHint => 'ここにルーティンを貼り付け：Kaizan から共有されたもの、AIの回答、JSON、CSV。';
 
   @override
   String get pasteAction => '貼り付け';
@@ -2809,10 +2840,10 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
-  String get nothingToImport => 'GymMane が読み込めるものがありません';
+  String get nothingToImport => 'Kaizan が読み込めるものがありません';
 
   @override
-  String get aiStepCopy => '依頼文をコピーします。あなたの種目リストと GymMane が読む形式が入っています。';
+  String get aiStepCopy => '依頼文をコピーします。あなたの種目リストと Kaizan が読む形式が入っています。';
 
   @override
   String get aiStepAsk => '好きなAIに貼り付けて、希望を伝えましょう：週の日数、目標、何週間か。';
@@ -2951,7 +2982,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get shareIntroTitle => 'このルーティンを共有';
 
   @override
-  String get shareIntroBody => 'パートナーや友だち、家族に送りましょう。GymMane で開ける小さなファイルが届き、セットや重量ごとワンタップで追加できます。';
+  String get shareIntroBody => 'パートナーや友だち、家族に送りましょう。Kaizan で開ける小さなファイルが届き、セットや重量ごとワンタップで追加できます。';
 
   @override
   String get removedFromRoutine => 'ルーティンから外しました';

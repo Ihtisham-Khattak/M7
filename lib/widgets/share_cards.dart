@@ -1,3 +1,4 @@
+import '../app/brand.dart';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -51,7 +52,7 @@ class ShareCard extends StatelessWidget {
                     decoration: BoxDecoration(color: gc.accent, shape: BoxShape.circle),
                   ),
                   const SizedBox(width: 8),
-                  Text('GymMane',
+                  Text(kAppName,
                       style: AppTheme.f(13,
                           weight: FontWeight.w800, color: gc.text, letterSpacing: 0.4)),
                   const Spacer(),

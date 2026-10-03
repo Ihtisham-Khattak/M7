@@ -364,6 +364,7 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text(t.personalizeTitle), findsNothing);
       expect(fit.personalizeDismissed, true);
+      fit.persistNow();
     });
 
     testWidgets('the whole flow fits a 320dp phone with large text', (tester) async {

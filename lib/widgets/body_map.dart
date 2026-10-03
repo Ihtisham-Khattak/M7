@@ -1,6 +1,8 @@
+import 'package:flutter/semantics.dart';
 import 'package:flutter/material.dart';
 
 import '../catalog/body_svg.dart';
+import '../l10n/l10n.dart';
 import '../state/fit_state.dart';
 import '../theme/app_colors.dart';
 import 'svg_icon.dart';
@@ -64,12 +66,17 @@ class BodyMap extends StatelessWidget {
   Widget build(BuildContext context) {
     final gc = context.gc;
     final muscle = idleMuscle(gc);
+    final names = (selected.toList()..sort()).map(t.muscle).join(', ');
     return _BodyCanvas(
       onTap: onToggle,
+      summary: selected.isEmpty ? t.bodyMapNone : t.bodyMapLabel(names),
       painter: BodyPainter(
         gc: gc,
         token: (selected.toList()..sort()).join(','),
         color: (id) => selected.contains(id) ? gc.ember : muscle,
+        picked: selected,
+        onPick: onToggle,
+        direction: Directionality.of(context),
       ),
     );
   }
@@ -94,6 +101,9 @@ class BodyHeatMap extends StatelessWidget {
         token: _token,
         color: (id) => heatColor(gc, intensity[id] ?? 0),
         outline: focus,
+        picked: {?focus},
+        onPick: onTap,
+        direction: Directionality.of(context),
       ),
     );
   }
@@ -123,6 +133,9 @@ class BodyRecoveryMap extends StatelessWidget {
         token: 'r${heatToken(recovery)}',
         color: (id) => recoveryColor(gc, recovery[id] ?? 1),
         outline: focus,
+        picked: {?focus},
+        onPick: onTap,
+        direction: Directionality.of(context),
       ),
     );
   }
@@ -149,17 +162,21 @@ class BodyHeatArt extends StatelessWidget {
 }
 
 class _BodyCanvas extends StatelessWidget {
-  const _BodyCanvas({required this.painter, this.onTap});
+  const _BodyCanvas({required this.painter, this.onTap, this.summary});
 
   final BodyPainter painter;
   final ValueChanged<String>? onTap;
+  final String? summary;
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, c) {
       final w = c.maxWidth;
       final scale = w / bodyViewW;
-      return GestureDetector(
+      return Semantics(
+        container: true,
+        label: summary,
+        child: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTapUp: onTap == null
             ? null
@@ -169,14 +186,27 @@ class _BodyCanvas extends StatelessWidget {
                 if (id != null) onTap!(id);
               },
         child: CustomPaint(size: Size(w, w * kBodyAspect), painter: painter),
+      ),
       );
     });
   }
 }
 
 class BodyPainter extends CustomPainter {
-  BodyPainter({required this.gc, required this.color, required this.token, this.outline});
+  BodyPainter({
+    required this.gc,
+    required this.color,
+    required this.token,
+    this.outline,
+    this.picked = const {},
+    this.onPick,
+    this.direction = TextDirection.ltr,
+  });
 
+  /// Muscles shown as selected to a screen reader, and what a double tap on one does.
+  final Set<String> picked;
+  final ValueChanged<String>? onPick;
+  final TextDirection direction;
   final GymColors gc;
   final Color Function(String id) color;
   final String token;
@@ -217,6 +247,38 @@ class BodyPainter extends CustomPainter {
       }
     }
   }
+
+  @override
+  SemanticsBuilderCallback? get semanticsBuilder => onPick == null
+      ? null
+      : (size) {
+          final scale = size.width / bodyViewW;
+          final out = <CustomPainterSemantics>[];
+          for (final entry in muscleFills.entries) {
+            Rect? box;
+            for (final d in entry.value) {
+              final b = svgPath(d).getBounds();
+              box = box == null ? b : box.expandToInclude(b);
+            }
+            if (box == null) continue;
+            final id = entry.key;
+            out.add(CustomPainterSemantics(
+              key: ValueKey(id),
+              rect: Rect.fromLTRB(box.left * scale, box.top * scale, box.right * scale, box.bottom * scale),
+              properties: SemanticsProperties(
+                label: t.muscle(id),
+                textDirection: direction,
+                button: true,
+                selected: picked.contains(id),
+                onTap: () => onPick!(id),
+              ),
+            ));
+          }
+          return out;
+        };
+
+  @override
+  bool shouldRebuildSemantics(BodyPainter old) => old.token != token || old.outline != outline || old.picked != picked;
 
   @override
   bool shouldRepaint(BodyPainter old) =>

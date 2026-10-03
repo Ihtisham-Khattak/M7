@@ -1,3 +1,4 @@
+import '../app/brand.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math' as math;
@@ -268,7 +269,7 @@ class FitState extends FitCore
       bgOpacity = bgNum('bgOp', 1, 0.35, 1);
       bgBlur = bgNum('bgBlur', 0, 0, 12);
       showFocus = data['showFocus'] as bool? ?? true;
-      showRecommended = data['showRecs'] as bool? ?? true;
+      showRecommended = data['showRecs'] as bool? ?? false;
       multiPlan = data['multiPlan'] as bool? ?? false;
       final weekStart = data['weekStart'];
       weekStartDay = SettingsState.weekStarts.contains(weekStart) ? weekStart as int : DateTime.monday;
@@ -554,7 +555,7 @@ class FitState extends FitCore
     selectedMuscles.clear();
     profile = Profile();
     showFocus = true;
-    showRecommended = true;
+    showRecommended = false;
     weekStartDay = DateTime.monday;
     autoAdvance = true;
     startCountdown = true;
@@ -832,7 +833,7 @@ class FitState extends FitCore
     final recent = sessions.where((s) => s.date.isAfter(month)).length;
     final records = personalRecords.take(5).toList();
     final lines = <String>[
-      'GymMane · ${activePlace?.name ?? t.placeAll}',
+      '$kAppName · ${activePlace?.name ?? t.placeAll}',
       t.planAboutMe,
       '- ${t.planBody(profile.sex == 'female' ? t.female : t.male, profile.age, heightLabel(profile.heightCm), weightLabel(profile.weightKg))}',
       '- ${t.planDays(weeklyTarget)}',

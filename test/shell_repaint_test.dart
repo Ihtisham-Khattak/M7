@@ -1,3 +1,4 @@
+import 'dart:ui' show Size;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gymmane/widgets/ui_kit.dart';
 import 'package:gymmane/app/gymmane_app.dart';
@@ -33,6 +34,9 @@ void main() {
   }
 
   testWidgets('the timeline repaints when its own buttons change the state', (tester) async {
+    tester.view.physicalSize = const Size(800, 1600);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
     await open(tester, 'timeline');
 
     await tester.tap(find.text(titleCase(t.timelineBody)));

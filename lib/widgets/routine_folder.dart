@@ -8,6 +8,7 @@ import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
 import '../theme/tokens.dart';
 import 'ui_kit.dart';
+import 'workout_card.dart';
 
 const kFolderHues = [
   Color(0xFFF3C7B1),
@@ -40,7 +41,11 @@ class RoutineFolder extends StatelessWidget {
     final front = Color.lerp(gc.bgRaised2, hue, dark ? 0.14 : 0.3)!;
     final ink = Color.lerp(hue, Colors.black, 0.35)!;
 
-    return Pressable(
+    final summary = WorkoutSummary.of(r);
+    return Semantics(
+      button: true,
+      label: summary.spoken,
+      child: Pressable(
       onTap: () => fit.openRoutine(r.id),
       scale: 0.975,
       child: SizedBox(
@@ -149,11 +154,14 @@ class RoutineFolder extends StatelessWidget {
                           child: GestureDetector(
                             behavior: HitTestBehavior.opaque,
                             onTap: onMenu,
-                            child: Container(
-                              width: 30,
-                              height: 30,
-                              decoration: BoxDecoration(color: gc.text.withValues(alpha: 0.1), shape: BoxShape.circle),
-                              child: Icon(PhosphorIconsBold.dotsThreeVertical, size: 16, color: gc.text),
+                            child: MinTarget(
+                              alignment: Alignment.topRight,
+                              child: Container(
+                                width: 30,
+                                height: 30,
+                                decoration: BoxDecoration(color: gc.text.withValues(alpha: 0.1), shape: BoxShape.circle),
+                                child: Icon(PhosphorIconsBold.dotsThreeVertical, size: 16, color: gc.text),
+                              ),
                             ),
                           ),
                         ),
@@ -161,7 +169,7 @@ class RoutineFolder extends StatelessWidget {
                     ),
                     const Spacer(),
                     Text(
-                      [if (r.group.isNotEmpty) r.group, t.exerciseCount(n)].join(' · '),
+                      [if (r.group.isNotEmpty) r.group, summary.meta].join(' · '),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: AppTheme.f(11.5, weight: FontWeight.w600, color: gc.textSecondary),
@@ -190,6 +198,7 @@ class RoutineFolder extends StatelessWidget {
             ),
           ],
         ),
+      ),
       ),
     );
   }

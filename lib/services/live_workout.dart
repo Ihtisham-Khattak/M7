@@ -1,3 +1,4 @@
+import '../app/brand.dart';
 import 'dart:io' show Platform;
 
 import 'package:flutter/foundation.dart';
@@ -58,7 +59,7 @@ class LiveWorkout {
     final restEnd = paused ? null : s.restEndsAt;
     final resting = restEnd != null && s.restRemaining != null;
 
-    final name = ex == null ? 'GymMane' : t.catalogName(ex.id, ex.name);
+    final name = ex == null ? kAppName : t.catalogName(ex.id, ex.name);
     String detail;
     if (paused) {
       detail = titleCase(t.paused);

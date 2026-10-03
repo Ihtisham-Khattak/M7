@@ -330,6 +330,37 @@ class AppLocalizationsKo extends AppLocalizations {
   String get restOverBody => '다시 시작해요 — 다음 세트가 기다립니다.';
 
   @override
+  String goalRingLabel(int pct) {
+    return '주간 목표 $pct퍼센트 달성';
+  }
+
+  @override
+  String heatmapLabel(int days) {
+    return '활동 지도: 최근 12주 중 $days일 운동';
+  }
+
+  @override
+  String bodyMapLabel(String names) {
+    return '바디 맵. 강조됨: $names';
+  }
+
+  @override
+  String get bodyMapNone => '강조된 근육 없음';
+
+  @override
+  String trendChartLabel(String first, String last) {
+    return '$first에서 $last까지의 추이';
+  }
+
+  @override
+  String restLeftAnnounce(int seconds) {
+    return '휴식 $seconds초 남음';
+  }
+
+  @override
+  String get tagline => '부드럽지만, 약하지 않게.';
+
+  @override
   String get totalVolume30d => '총 볼륨 · 30일';
 
   @override
@@ -1271,7 +1302,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get importBackup => '백업 가져오기';
 
   @override
-  String get importHint => 'GymMane에서 내보낸 .zip(또는 이전 .json) 백업을 선택하세요. 미디어를 포함한 현재 데이터가 대체됩니다.';
+  String get importHint => 'Kaizan에서 내보낸 .zip(또는 이전 .json) 백업을 선택하세요. 미디어를 포함한 현재 데이터가 대체됩니다.';
 
   @override
   String get import => '가져오기';
@@ -1318,7 +1349,7 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
-  String get aboutGymmane => 'GymMane 정보';
+  String get aboutGymmane => 'Kaizan 정보';
 
   @override
   String get yourProfile => '내 프로필';
@@ -1387,7 +1418,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get dataSkippedNotice => '저장된 항목 일부를 읽지 못해 건너뛰었어요. 데이터 사본은 보관해 두었어요.';
 
   @override
-  String get dataNewerNotice => '더 새로운 버전의 GymMane에서 저장한 데이터예요. 앱을 업데이트하면 볼 수 있어요. 아무것도 변경되지 않았어요.';
+  String get dataNewerNotice => '더 새로운 버전의 Kaizan에서 저장한 데이터예요. 앱을 업데이트하면 볼 수 있어요. 아무것도 변경되지 않았어요.';
 
   @override
   String get nothingToExport => '아직 내보낼 내용이 없습니다 — 먼저 운동을 기록하세요';
@@ -2024,7 +2055,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get planNothing => '이 파일의 운동이 라이브러리와 일치하지 않습니다';
 
   @override
-  String get planFailed => '이 파일은 GymMane이 읽을 수 있는 루틴이 아닙니다';
+  String get planFailed => '이 파일은 Kaizan이 읽을 수 있는 루틴이 아닙니다';
 
   @override
   String get routineGroup => '그룹';
@@ -2167,7 +2198,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get aiIntro =>
-      'GymMane은 AI와 직접 통신하지 않습니다. 운동 목록을 내보내고 이미 사용하는 AI 도우미에 붙여넣은 뒤 응답을 다시 가져옵니다. 어떤 데이터도 자동으로 휴대전화 밖으로 나가지 않습니다.';
+      'Kaizan은 AI와 직접 통신하지 않습니다. 운동 목록을 내보내고 이미 사용하는 AI 도우미에 붙여넣은 뒤 응답을 다시 가져옵니다. 어떤 데이터도 자동으로 휴대전화 밖으로 나가지 않습니다.';
 
   @override
   String get aiStep1 => '운동 목록을 내보냅니다. 장소를 선택했다면 그곳에서 할 수 있는 운동만 포함됩니다.';
@@ -2205,7 +2236,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get awardFirstStepName => '첫걸음';
 
   @override
-  String get awardFirstStepLine => 'GymMane에 오신 것을 환영합니다. 이건 선물입니다.';
+  String get awardFirstStepLine => 'Kaizan에 오신 것을 환영합니다. 이건 선물입니다.';
 
   @override
   String get awardFirstWorkoutName => '첫 운동';
@@ -2789,14 +2820,14 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String shareMessage(String name) {
-    return '$name — GymMane으로 파일을 열어 추가하세요.';
+    return '$name — Kaizan으로 파일을 열어 추가하세요.';
   }
 
   @override
   String get importRoutines => '루틴 가져오기';
 
   @override
-  String get importPasteHint => '여기에 루틴을 붙여 넣으세요: GymMane에서 공유한 루틴, AI 답변, JSON 또는 CSV.';
+  String get importPasteHint => '여기에 루틴을 붙여 넣으세요: Kaizan에서 공유한 루틴, AI 답변, JSON 또는 CSV.';
 
   @override
   String get pasteAction => '붙여 넣기';
@@ -2823,10 +2854,10 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
-  String get nothingToImport => 'GymMane이 가져올 수 있는 내용이 없어요';
+  String get nothingToImport => 'Kaizan이 가져올 수 있는 내용이 없어요';
 
   @override
-  String get aiStepCopy => '요청을 복사하세요. 내 운동 목록과 GymMane이 읽는 형식이 들어 있어요.';
+  String get aiStepCopy => '요청을 복사하세요. 내 운동 목록과 Kaizan이 읽는 형식이 들어 있어요.';
 
   @override
   String get aiStepAsk => '아무 AI에나 붙여 넣고 원하는 걸 말하세요: 주당 일수, 목표, 몇 주인지.';
@@ -2965,7 +2996,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get shareIntroTitle => '이 루틴 공유하기';
 
   @override
-  String get shareIntroBody => '연인, 친구, 가족에게 보내 보세요. GymMane으로 열리는 작은 파일이 가고, 세트와 무게까지 한 번에 추가돼요.';
+  String get shareIntroBody => '연인, 친구, 가족에게 보내 보세요. Kaizan으로 열리는 작은 파일이 가고, 세트와 무게까지 한 번에 추가돼요.';
 
   @override
   String get removedFromRoutine => '루틴에서 뺐어요';

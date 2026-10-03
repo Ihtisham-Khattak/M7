@@ -498,10 +498,7 @@ class _ParkedPill extends StatelessWidget {
 
 /// Tab labels read the same in every language: cased scripts that ship in capitals
 /// ("HOME", "ПРОГРЕСС") are shown in sentence case, whatever their length.
-String navLabel(String s) {
-  if (s.isEmpty || s != s.toUpperCase() || s == s.toLowerCase()) return s;
-  return s[0] + s.substring(1).toLowerCase();
-}
+String navLabel(String s) => sentenceCase(s);
 
 /// Tab label metrics, shared with the label-fit test.
 const double kNavLabelSize = 10.5;
@@ -671,8 +668,10 @@ class _NavBarState extends State<_NavBar> {
         curve: GymMotion.curve,
         child: SizedBox(
         width: _iw,
+        height: height,
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TweenAnimationBuilder<double>(
               tween: Tween(begin: selected ? 1 : 0, end: selected ? 1 : 0),

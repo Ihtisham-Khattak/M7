@@ -9,6 +9,7 @@ import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
 import '../theme/tokens.dart';
 import '../widgets/note_kit.dart';
+import '../widgets/states.dart';
 import '../widgets/ui_kit.dart';
 
 class NotesScreen extends StatelessWidget {
@@ -124,22 +125,12 @@ class NotesScreen extends StatelessWidget {
         ),
         const SizedBox(height: 14),
         if (notes.isEmpty)
-          Container(
-            padding: const EdgeInsets.symmetric(vertical: 26, horizontal: 20),
-            decoration: BoxDecoration(
-              color: gc.bgRaised.withValues(alpha: 0.5),
-              borderRadius: BorderRadius.circular(GymRadius.lg),
-            ),
-            child: Row(
-              children: [
-                Icon(PhosphorIconsRegular.notebook, size: 20, color: gc.textTertiary),
-                const SizedBox(width: 14),
-                Expanded(
-                  child: Text(t.noteNoneOnDay,
-                      style: AppTheme.f(13, weight: FontWeight.w500, color: gc.textSecondary, height: 1.4)),
-                ),
-              ],
-            ),
+          EmptyState(
+            icon: PhosphorIconsRegular.notebook,
+            title: t.noteNoneOnDay,
+            compact: true,
+            actionLabel: t.noteAddOnDay,
+            onAction: () => fit.openNoteEditor(exerciseId: fit.noteScope, date: day),
           )
         else
           for (final n in notes) NoteCard(note: n, showExercise: showExercise, showDate: false),
@@ -210,21 +201,14 @@ class NotesScreen extends StatelessWidget {
   }
 
   Widget _empty(GymColors gc) => Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 44),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(PhosphorIconsRegular.notebook, size: 38, color: gc.textTertiary),
-              const SizedBox(height: 16),
-              Text(t.noteEmptyTitle,
-                  textAlign: TextAlign.center,
-                  style: AppTheme.f(17, weight: FontWeight.w600, color: gc.text)),
-              const SizedBox(height: 8),
-              Text(t.noteEmptyBody,
-                  textAlign: TextAlign.center,
-                  style: AppTheme.f(13, weight: FontWeight.w500, color: gc.textSecondary, height: 1.5)),
-            ],
+        child: EmptyState(
+          icon: PhosphorIconsRegular.notebook,
+          title: t.noteEmptyTitle,
+          body: t.noteEmptyBody,
+          actionLabel: t.newNote,
+          onAction: () => fit.openNoteEditor(
+            exerciseId: fit.noteScope,
+            date: fit.notesAllView ? DateTime.now() : fit.noteDay,
           ),
         ),
       );

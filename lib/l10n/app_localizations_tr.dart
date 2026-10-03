@@ -340,6 +340,37 @@ class AppLocalizationsTr extends AppLocalizations {
   String get restOverBody => 'Devam — sıradaki set seni bekliyor.';
 
   @override
+  String goalRingLabel(int pct) {
+    return 'Haftalık hedef yüzde $pct tamamlandı';
+  }
+
+  @override
+  String heatmapLabel(int days) {
+    return 'Etkinlik haritası: son 12 haftada $days aktif gün';
+  }
+
+  @override
+  String bodyMapLabel(String names) {
+    return 'Vücut haritası. Vurgulananlar: $names';
+  }
+
+  @override
+  String get bodyMapNone => 'Vurgulanan kas yok';
+
+  @override
+  String trendChartLabel(String first, String last) {
+    return '$first değerinden $last değerine eğilim';
+  }
+
+  @override
+  String restLeftAnnounce(int seconds) {
+    return '$seconds saniye dinlenme kaldı';
+  }
+
+  @override
+  String get tagline => 'Yumuşak ama zayıf değil.';
+
+  @override
   String get totalVolume30d => 'TOPLAM HACİM · 30 GÜN';
 
   @override
@@ -1305,7 +1336,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get importHint =>
-      'GymMane\'den dışa aktarılmış bir .zip (veya eski .json) yedeği seç. Medya dâhil mevcut verilerinin üzerine yazılacak.';
+      'Kaizan\'den dışa aktarılmış bir .zip (veya eski .json) yedeği seç. Medya dâhil mevcut verilerinin üzerine yazılacak.';
 
   @override
   String get import => 'İçe aktar';
@@ -1357,7 +1388,7 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
-  String get aboutGymmane => 'GymMane hakkında';
+  String get aboutGymmane => 'Kaizan hakkında';
 
   @override
   String get yourProfile => 'PROFİLİN';
@@ -1428,7 +1459,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get dataNewerNotice =>
-      'Verilerin GymMane\'in daha yeni bir sürümüyle kaydedilmiş. Görmek için uygulamayı güncelle — hiçbir şey değiştirilmedi.';
+      'Verilerin Kaizan\'in daha yeni bir sürümüyle kaydedilmiş. Görmek için uygulamayı güncelle — hiçbir şey değiştirilmedi.';
 
   @override
   String get nothingToExport => 'Henüz dışa aktarılacak bir şey yok — önce bir antrenman kaydet';
@@ -2081,7 +2112,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get planNothing => 'Bu dosyadaki hiçbir egzersiz kütüphanenle eşleşmedi';
 
   @override
-  String get planFailed => 'Bu dosya GymMane\'in okuyabileceği bir program içermiyor';
+  String get planFailed => 'Bu dosya Kaizan\'in okuyabileceği bir program içermiyor';
 
   @override
   String get routineGroup => 'Grup';
@@ -2233,7 +2264,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get aiIntro =>
-      'GymMane hiçbir zaman doğrudan bir yapay zekâyla iletişim kurmaz. Egzersiz listesini dışa aktarır, kullandığın asistana yapıştırır ve yanıtını yeniden içe aktarırsın. Hiçbir şey kendiliğinden telefondan çıkmaz.';
+      'Kaizan hiçbir zaman doğrudan bir yapay zekâyla iletişim kurmaz. Egzersiz listesini dışa aktarır, kullandığın asistana yapıştırır ve yanıtını yeniden içe aktarırsın. Hiçbir şey kendiliğinden telefondan çıkmaz.';
 
   @override
   String get aiStep1 =>
@@ -2272,7 +2303,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get awardFirstStepName => 'İlk adım';
 
   @override
-  String get awardFirstStepLine => 'GymMane\'e hoş geldin. Bu bizden.';
+  String get awardFirstStepLine => 'Kaizan\'e hoş geldin. Bu bizden.';
 
   @override
   String get awardFirstWorkoutName => 'İlk antrenman';
@@ -2865,7 +2896,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String shareMessage(String name) {
-    return '$name — eklemek için dosyayı GymMane ile aç.';
+    return '$name — eklemek için dosyayı Kaizan ile aç.';
   }
 
   @override
@@ -2873,7 +2904,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get importPasteHint =>
-      'Buraya bir program yapıştır: GymMane\'den paylaşılan bir program, yapay zekâ yanıtı, JSON veya CSV olabilir.';
+      'Buraya bir program yapıştır: Kaizan\'den paylaşılan bir program, yapay zekâ yanıtı, JSON veya CSV olabilir.';
 
   @override
   String get pasteAction => 'Yapıştır';
@@ -2905,10 +2936,10 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
-  String get nothingToImport => 'Burada GymMane\'in içe aktarabileceği bir şey yok';
+  String get nothingToImport => 'Burada Kaizan\'in içe aktarabileceği bir şey yok';
 
   @override
-  String get aiStepCopy => 'İsteği kopyala. Egzersiz listeni ve GymMane\'in okuduğu biçimi içerir.';
+  String get aiStepCopy => 'İsteği kopyala. Egzersiz listeni ve Kaizan\'in okuduğu biçimi içerir.';
 
   @override
   String get aiStepAsk =>
@@ -3051,7 +3082,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get shareIntroBody =>
-      'Partnerine, bir arkadaşına ya da ailene gönder. GymMane ile açılan küçük dosyayı, setleri ve ağırlıklarıyla birlikte tek dokunuşla ekleyebilirler.';
+      'Partnerine, bir arkadaşına ya da ailene gönder. Kaizan ile açılan küçük dosyayı, setleri ve ağırlıklarıyla birlikte tek dokunuşla ekleyebilirler.';
 
   @override
   String get removedFromRoutine => 'Programdan çıkarıldı';

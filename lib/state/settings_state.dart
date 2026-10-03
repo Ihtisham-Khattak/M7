@@ -33,7 +33,7 @@ mixin SettingsState on FitCore, ToolsState, LibraryState {
   double bgOpacity = 1;
   double bgBlur = 0;
   bool showFocus = true;
-  bool showRecommended = true;
+  bool showRecommended = false;
   bool autoAdvance = true;
   bool keepScreenOn = true;
   bool startCountdown = true;

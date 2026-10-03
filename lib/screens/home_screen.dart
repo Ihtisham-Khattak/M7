@@ -7,13 +7,14 @@ import '../state/fit_state.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
 import '../theme/tokens.dart';
-import '../widgets/charts.dart';
 import '../widgets/entrance.dart';
-import '../widgets/exercise_media.dart';
+import '../widgets/exercise_card.dart';
 import '../widgets/glass.dart';
-import '../widgets/home_folder.dart';
 import '../widgets/svg_icon.dart';
 import '../widgets/components.dart';
+import '../widgets/metric_card.dart';
+import '../widgets/progress_ring.dart';
+import '../widgets/workout_card.dart';
 import '../widgets/ui_kit.dart';
 import 'progress_screen.dart';
 
@@ -28,93 +29,48 @@ class HomeScreen extends StatelessWidget {
     return RiseScope(
       id: 'home',
       child: SafeArea(
-      bottom: false,
-      child: SingleChildScrollView(
-        key: const PageStorageKey('home'),
-        clipBehavior: Clip.none,
-        padding: const EdgeInsets.fromLTRB(20, 14, 20, 116),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: riseAll([
-            _topBar(gc),
-            const SizedBox(height: 20),
-            if (fit.showFocus || fit.todayRoutine?.exerciseIds.isNotEmpty == true) ...[
-              _hero(context, gc),
-              const SizedBox(height: 14),
-            ],
-            _weekCard(context, gc),
-            if (fit.canOfferPersonalize) ...[
-              const SizedBox(height: 14),
-              _personalizeNudge(gc),
-            ],
-            if (fit.photoDue) ...[
-              const SizedBox(height: 14),
-              _photoNudge(gc),
-            ],
-            const SizedBox(height: 30),
-            SectionHeader(t.thisWeek),
-            const SizedBox(height: 14),
-            _weekStats(context, gc),
-            const SizedBox(height: 30),
-            SectionHeader(t.activityLabel, onMore: fit.goProgress),
-            const SizedBox(height: 14),
-            GymCard(
-              radius: GymRadius.lg,
-              padding: const EdgeInsets.fromLTRB(18, 18, 18, 16),
-              child: Heatmap(
-                levels: fit.heatmapLevels,
-                onTapDay: (i) => showDaySheet(context, fit.heatmapDate(i)),
-              ),
-            ),
-            if (fit.showRecommended && recommended.isNotEmpty) ...[
-              const SizedBox(height: 30),
-              SectionHeader(t.recommended, onMore: fit.goExercises),
-              const SizedBox(height: 14),
-              SizedBox(
-                height: 158,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: recommended.length,
-                  separatorBuilder: (_, _) => const SizedBox(width: 12),
-                  itemBuilder: (_, i) => _recCard(gc, recommended[i]),
-                ),
-              ),
-            ],
-            const SizedBox(height: 30),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Expanded(
-                  child: HomeFolder(
-                    title: _tc(t.routines),
-                    detail: t.routineCount(fit.routines.length),
-                    peek: const RoutinesPeek(),
-                    onTap: fit.goRoutines,
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: HomeFolder(
-                    title: _tc(t.tools),
-                    detail: t.calculatorsInside,
-                    peek: const ToolsPeek(),
-                    onTap: fit.goTools,
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: HomeFolder(
-                    title: _tc(t.journal),
-                    detail: t.noteCount(fit.notes.length),
-                    peek: const NotesPeek(),
-                    onTap: fit.goNotes,
+        bottom: false,
+        child: SingleChildScrollView(
+          key: const PageStorageKey('home'),
+          clipBehavior: Clip.none,
+          padding: const EdgeInsets.fromLTRB(GymSpace.pageGutter, GymSpace.md, GymSpace.pageGutter, 116),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: riseAll([
+              _topBar(gc),
+              const SizedBox(height: GymSpace.lg),
+              if (fit.showFocus || fit.todayRoutine?.exerciseIds.isNotEmpty == true) ...[
+                _hero(context, gc),
+                const SizedBox(height: GymSpace.md),
+              ],
+              if (fit.canOfferPersonalize) ...[
+                _personalizeNudge(gc),
+                const SizedBox(height: GymSpace.md),
+              ],
+              if (fit.photoDue) ...[
+                _photoNudge(gc),
+                const SizedBox(height: GymSpace.md),
+              ],
+              _progressCard(context, gc),
+              if (fit.showRecommended && recommended.isNotEmpty) ...[
+                const SizedBox(height: GymSpace.xxl),
+                SectionHeader(t.recommended, onMore: fit.goExercises),
+                const SizedBox(height: GymSpace.md),
+                SizedBox(
+                  height: 158,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: recommended.length,
+                    separatorBuilder: (_, _) => const SizedBox(width: GymSpace.md),
+                    itemBuilder: (_, i) => _recCard(gc, recommended[i]),
                   ),
                 ),
               ],
-            ),
-          ]),
+              const SizedBox(height: GymSpace.xxl),
+              _shortcuts(gc),
+            ]),
+          ),
         ),
-      ),
       ),
     );
   }
@@ -139,19 +95,27 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 12),
-        GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          onTap: fit.goProgress,
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 9),
-            decoration: BoxDecoration(color: gc.bgRaised, borderRadius: BorderRadius.circular(100)),
-            child: Row(
-              children: [
-                SvgPathIcon(Ic.flame, size: 15, color: gc.accent),
-                const SizedBox(width: 6),
-                Text('${fit.currentStreak}',
-                    style: AppTheme.f(14, weight: FontWeight.w800, color: gc.text)),
-              ],
+        Semantics(
+          button: true,
+          label: '${fit.currentStreak}',
+          child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: fit.goProgress,
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(minHeight: GymSpace.minTarget),
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: GymSpace.md),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(color: gc.bgRaised, borderRadius: BorderRadius.circular(GymRadius.md)),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SvgPathIcon(Ic.flame, size: 15, color: gc.accent),
+                    const SizedBox(width: GymSpace.sm - 2),
+                    Text('${fit.currentStreak}', style: GymText.numeric(GymText.bodySize, color: gc.text, weight: FontWeight.w800)),
+                  ],
+                ),
+              ),
             ),
           ),
         ),
@@ -165,100 +129,27 @@ class HomeScreen extends StatelessWidget {
     final routine = fit.todayRoutine;
     final focus = fit.suggestedFocus;
     final isRoutine = routine != null && routine.exerciseIds.isNotEmpty;
-    final label = isRoutine ? t.todaysRoutine : t.todaysFocus;
-    final title = isRoutine ? fit.routineTitle(routine) : focus.title;
     final today = fit.routinesOn(DateTime.now());
-    final subtitle = isRoutine
-        ? [
-            t.exerciseCount(routine.exerciseIds.length),
-            if (today.length > 1) t.routineOfDay(today.indexOf(routine) + 1, today.length),
-          ].join(' · ')
-        : (fit.hasData
-            ? '${focus.subtitle} · ${t.exerciseCount(fit.getFilteredExercises(focus.muscles).length)}'
-            : t.firstSessionHint);
+    final trained = fit.trainedToday;
 
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(GymRadius.xl),
-      child: Container(
-        decoration: BoxDecoration(
-          color: gc.bgRaised,
-          borderRadius: BorderRadius.circular(GymRadius.xl),
-        ),
-        child: Stack(
-          children: [
-            Positioned(
-              left: -52,
-              top: 34,
-              child: Container(
-                width: 176,
-                height: 176,
-                decoration: BoxDecoration(color: gc.accentSoft, shape: BoxShape.circle),
-              ),
-            ),
-            Positioned(
-              left: 150,
-              top: -44,
-              child: Container(
-                width: 92,
-                height: 92,
-                decoration: BoxDecoration(color: gc.emberSoft, shape: BoxShape.circle),
-              ),
-            ),
-            Positioned(
-              right: 4,
-              top: 12,
-              bottom: 76,
-              child: Opacity(
-                opacity: 0.6,
-                child: Image.asset('assets/img/runner.png', fit: BoxFit.fitHeight),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(22, 22, 22, 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(label.toUpperCase(),
-                      style: AppTheme.f(10.5,
-                          weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.4)),
-                  const SizedBox(height: 9),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 96),
-                    child: Text(title,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: AppTheme.f(30,
-                            weight: FontWeight.w800, color: gc.text, height: 1.1)),
-                  ),
-                  const SizedBox(height: 7),
-                  Text(subtitle,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: AppTheme.f(13, weight: FontWeight.w500, color: gc.textSecondary)),
-                  const SizedBox(height: 20),
-                  PrimaryButton(
-                    label: t.startWorkout,
-                    icon: Ic.play,
-                    height: 52,
-                    onTap: isRoutine ? () => fit.startRoutine(routine) : fit.startFocusWorkout,
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+    final summary = isRoutine
+        ? WorkoutSummary.of(routine,
+            status: trained ? WorkoutStatus.done : WorkoutStatus.planned)
+        : null;
+    final meta = [
+      if (summary != null) summary.meta else if (fit.hasData) '${focus.subtitle} · ${t.exerciseCount(fit.getFilteredExercises(focus.muscles).length)}' else t.firstSessionHint,
+      if (summary != null && today.length > 1) t.routineOfDay(today.indexOf(routine!) + 1, today.length),
+    ].join(' · ');
 
-  Widget _weekCard(BuildContext context, GymColors gc) {
-    return GymCard(
-      radius: GymRadius.lg,
-      padding: const EdgeInsets.fromLTRB(14, 16, 14, 16),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [for (int i = 0; i < 7; i++) _weekDay(context, gc, i)],
-      ),
+    return WorkoutCard(
+      label: isRoutine ? t.todaysRoutine : t.todaysFocus,
+      title: summary?.title ?? focus.title,
+      muscles: summary?.muscles,
+      meta: meta,
+      status: summary?.statusLabel ?? (trained ? t.done : null),
+      done: trained,
+      startLabel: t.startWorkout,
+      onStart: isRoutine ? () => fit.startRoutine(routine) : fit.startFocusWorkout,
     );
   }
 
@@ -303,71 +194,94 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _weekStats(BuildContext context, GymColors gc) {
+  Widget _progressCard(BuildContext context, GymColors gc) {
     return GymCard(
       radius: GymRadius.lg,
-      padding: const EdgeInsets.fromLTRB(18, 18, 18, 18),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
+      padding: const EdgeInsets.all(GymSpace.lg),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Expanded(
-            child: Row(
-              children: [
-                Expanded(
-                  child: _stat(gc, t.volume, fit.volumeValue(fit.volumeThisWeekKg),
-                      unit: fit.volumeUnit),
-                ),
-                Expanded(child: _stat(gc, t.setsToday, '${fit.setsToday}')),
-                Expanded(child: _stat(gc, t.prs, '${fit.prsThisWeek}')),
-              ],
-            ),
+          SectionHeader.label(t.thisWeek),
+          const SizedBox(height: GymSpace.md),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [for (int i = 0; i < 7; i++) Expanded(child: _weekDay(context, gc, i))],
           ),
-          GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: () => showWeeklyGoalSheet(context),
-            child: Column(
-              children: [
-                GoalRing(pct: fit.goalPct.toDouble(), size: 44),
-                const SizedBox(height: 7),
-                Text('${fit.daysDoneThisWeek}/${fit.weeklyTarget}',
-                    style: AppTheme.f(11, weight: FontWeight.w700, color: gc.textSecondary)),
-              ],
-            ),
+          const SizedBox(height: GymSpace.lg),
+          Container(height: GymBorder.hairline, color: gc.border),
+          const SizedBox(height: GymSpace.lg),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Row(
+                  children: [
+                    Expanded(child: MetricCard(label: t.statWorkouts, value: '${fit.sessionsThisWeek}')),
+                    Expanded(
+                      child: MetricCard(label: t.volume, value: fit.volumeValue(fit.volumeThisWeekKg), unit: fit.volumeUnit),
+                    ),
+                    Expanded(child: MetricCard(label: t.prs, value: '${fit.prsThisWeek}')),
+                  ],
+                ),
+              ),
+              Semantics(
+                button: true,
+                label: t.weeklyGoal,
+                child: GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () => showWeeklyGoalSheet(context),
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(minWidth: GymSpace.minTarget, minHeight: GymSpace.minTarget),
+                    child: Column(
+                      children: [
+                        ProgressRing(value: fit.goalPct / 100, size: 44, semanticLabel: t.goalRingLabel(fit.goalPct.clamp(0, 100))),
+                        const SizedBox(height: GymSpace.sm - 1),
+                        Text('${fit.daysDoneThisWeek}/${fit.weeklyTarget}',
+                            style: GymText.caption(color: gc.textSecondary, weight: FontWeight.w700)),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),
     );
   }
 
-  Widget _stat(GymColors gc, String label, String value, {String unit = ''}) {
-    return Padding(
-      padding: const EdgeInsetsDirectional.only(end: 8),
-      child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        FitText(label.toUpperCase(),
-            style: AppTheme.f(9.5,
-                weight: FontWeight.w600, color: gc.textTertiary, letterSpacing: 0.9)),
-        const SizedBox(height: 6),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.baseline,
-          textBaseline: TextBaseline.alphabetic,
-          children: [
-            Flexible(
-              child: FittedBox(
-                fit: BoxFit.scaleDown,
-                alignment: Alignment.centerLeft,
-                child: RollIn(value, style: AppTheme.f(23, weight: FontWeight.w800, color: gc.text)),
-              ),
+  Widget _shortcuts(GymColors gc) {
+    Widget tile(IconData icon, String title, String detail, VoidCallback onTap) => Expanded(
+          child: GymCard(
+            radius: GymRadius.md,
+            padding: const EdgeInsets.all(GymSpace.md),
+            onTap: onTap,
+            semanticLabel: '$title, $detail',
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(icon, size: 20, color: gc.textSecondary),
+                const SizedBox(height: GymSpace.sm),
+                Text(_tc(title), maxLines: 1, overflow: TextOverflow.ellipsis, style: GymText.label(color: gc.text)),
+                const SizedBox(height: GymSpace.xs),
+                Text(detail,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: GymText.caption(color: gc.textTertiary)),
+              ],
             ),
-            if (unit.isNotEmpty) ...[
-              const SizedBox(width: 3),
-              Text(unit,
-                  style: AppTheme.f(11, weight: FontWeight.w600, color: gc.textSecondary)),
-            ],
-          ],
-        ),
-      ],
+          ),
+        );
+    return IntrinsicHeight(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          tile(PhosphorIconsRegular.listChecks, t.routines, t.routineCount(fit.routines.length), fit.goRoutines),
+          const SizedBox(width: GymSpace.sm),
+          tile(PhosphorIconsRegular.calculator, t.tools, t.calculatorsInside, fit.goTools),
+          const SizedBox(width: GymSpace.sm),
+          tile(PhosphorIconsRegular.notePencil, t.journal, t.noteCount(fit.notes.length), fit.goNotes),
+        ],
       ),
     );
   }
@@ -451,30 +365,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _recCard(GymColors gc, Exercise ex) {
-    return SizedBox(
-      width: 132,
-      child: GymCard(
-        borderless: true,
-        padding: const EdgeInsets.all(GymSpace.sm),
-        onTap: () => fit.openExercise(ex.id),
-        semanticLabel: exerciseName(ex),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            ExerciseMedia(ex: ex, height: 88, radius: GymRadius.md),
-            const SizedBox(height: GymSpace.sm),
-            Expanded(
-              child: Text(exerciseName(ex),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: GymText.caption(color: gc.text, weight: FontWeight.w600)),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+  Widget _recCard(GymColors gc, Exercise ex) => ExerciseTile(exercise: ex, onTap: () => fit.openExercise(ex.id));
 }
 
 void showWeeklyGoalSheet(BuildContext context) {

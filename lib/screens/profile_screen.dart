@@ -16,6 +16,7 @@ import '../widgets/entrance.dart';
 import '../widgets/medal_shelf.dart';
 import '../widgets/photo_source_sheet.dart';
 import '../widgets/profile_avatar.dart';
+import '../widgets/ui_kit.dart';
 import 'settings_screen.dart';
 import 'share_sheet.dart';
 
@@ -252,19 +253,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget _heading(GymColors gc, String title, {String? count, VoidCallback? onMore}) {
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: onMore,
-      child: Row(
-        children: [
-          Text(title, style: AppTheme.f(21, color: gc.text)),
-          if (count != null) ...[
-            const SizedBox(width: 9),
-            Text(count, style: AppTheme.f(17, weight: FontWeight.w600, color: gc.textTertiary)),
-          ],
-          const Spacer(),
-          if (onMore != null) Icon(PhosphorIconsBold.caretRight, size: 16, color: gc.textTertiary),
-        ],
+    return Semantics(
+      button: onMore != null,
+      header: true,
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: onMore,
+        child: MinTarget(
+          alignment: AlignmentDirectional.centerStart,
+          child: Row(
+            children: [
+              Text(title, style: AppTheme.f(21, color: gc.text)),
+              if (count != null) ...[
+                const SizedBox(width: 9),
+                Text(count, style: AppTheme.f(17, weight: FontWeight.w600, color: gc.textTertiary)),
+              ],
+              const Spacer(),
+              if (onMore != null) Icon(PhosphorIconsBold.caretRight, size: 16, color: gc.textTertiary),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -522,9 +530,9 @@ class _ProfileHeader extends SliverPersistentHeaderDelegate {
             top: top + 9,
             right: 16,
             child: Row(children: [
-              _round(PhosphorIconsRegular.shareNetwork, onShare),
+              _round(PhosphorIconsRegular.shareNetwork, t.share, onShare),
               const SizedBox(width: 10),
-              _round(PhosphorIconsRegular.gearSix, fit.goPreferences),
+              _round(PhosphorIconsRegular.gearSix, sentenceCase(t.settings), fit.goPreferences),
             ]),
           ),
           Positioned(
@@ -550,16 +558,24 @@ class _ProfileHeader extends SliverPersistentHeaderDelegate {
     );
   }
 
-  Widget _round(IconData icon, VoidCallback onTap) {
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
+  Widget _round(IconData icon, String label, VoidCallback onTap) {
+    return Semantics(
+      button: true,
+      label: label,
+      excludeSemantics: true,
       onTap: onTap,
-      child: Container(
-        width: 38,
-        height: 38,
-        decoration:
-            BoxDecoration(color: Colors.black.withValues(alpha: 0.5), shape: BoxShape.circle),
-        child: Icon(icon, size: 18, color: Colors.white),
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: onTap,
+        child: MinTarget(
+          child: Container(
+            width: 38,
+            height: 38,
+            decoration:
+                BoxDecoration(color: Colors.black.withValues(alpha: 0.5), shape: BoxShape.circle),
+            child: Icon(icon, size: 18, color: Colors.white),
+          ),
+        ),
       ),
     );
   }
@@ -602,14 +618,16 @@ class _ProfileHeader extends SliverPersistentHeaderDelegate {
             GestureDetector(
               behavior: HitTestBehavior.opaque,
               onTap: onEdit,
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-                decoration: BoxDecoration(
-                  color: gc.bgRaised2,
-                  borderRadius: BorderRadius.circular(100),
+              child: MinTarget(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+                  decoration: BoxDecoration(
+                    color: gc.bgRaised2,
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                  child: Text(t.editProfile,
+                      style: AppTheme.f(13.5, weight: FontWeight.w600, color: gc.text)),
                 ),
-                child: Text(t.editProfile,
-                    style: AppTheme.f(13.5, weight: FontWeight.w600, color: gc.text)),
               ),
             ),
           ],

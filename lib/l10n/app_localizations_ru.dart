@@ -358,6 +358,37 @@ class AppLocalizationsRu extends AppLocalizations {
   String get restOverBody => 'Возвращайся — следующий подход ждёт.';
 
   @override
+  String goalRingLabel(int pct) {
+    return 'Недельная цель выполнена на $pct процентов';
+  }
+
+  @override
+  String heatmapLabel(int days) {
+    return 'Карта активности: $days активных дней за последние 12 недель';
+  }
+
+  @override
+  String bodyMapLabel(String names) {
+    return 'Карта тела. Выделено: $names';
+  }
+
+  @override
+  String get bodyMapNone => 'Мышцы не выделены';
+
+  @override
+  String trendChartLabel(String first, String last) {
+    return 'Динамика от $first до $last';
+  }
+
+  @override
+  String restLeftAnnounce(int seconds) {
+    return 'Осталось $seconds секунд отдыха';
+  }
+
+  @override
+  String get tagline => 'Мягко, но не слабо.';
+
+  @override
   String get totalVolume30d => 'ОБЩИЙ ОБЪЁМ · 30 ДНЕЙ';
 
   @override
@@ -1348,7 +1379,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get importHint =>
-      'Выбери .zip (или старый .json), выгруженный из GymMane. Это заменит текущие данные вместе с медиа.';
+      'Выбери .zip (или старый .json), выгруженный из Kaizan. Это заменит текущие данные вместе с медиа.';
 
   @override
   String get import => 'Загрузить';
@@ -1404,7 +1435,7 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String get aboutGymmane => 'О GymMane';
+  String get aboutGymmane => 'О Kaizan';
 
   @override
   String get yourProfile => 'ТВОЙ ПРОФИЛЬ';
@@ -1475,7 +1506,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get dataNewerNotice =>
-      'Твои данные сохранены более новой версией GymMane. Обнови приложение, чтобы их увидеть, — ничего не изменено.';
+      'Твои данные сохранены более новой версией Kaizan. Обнови приложение, чтобы их увидеть, — ничего не изменено.';
 
   @override
   String get nothingToExport => 'Выгружать пока нечего — сначала запиши тренировку';
@@ -2301,7 +2332,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get aiIntro =>
-      'GymMane ни с каким ИИ не общается. Ты сам выгружаешь список упражнений, вставляешь его в тот ассистент, которым уже пользуешься, и приносишь ответ обратно. С телефона само ничего не уходит.';
+      'Kaizan ни с каким ИИ не общается. Ты сам выгружаешь список упражнений, вставляешь его в тот ассистент, которым уже пользуешься, и приносишь ответ обратно. С телефона само ничего не уходит.';
 
   @override
   String get aiStep1 =>
@@ -2342,7 +2373,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get awardFirstStepName => 'Первый шаг';
 
   @override
-  String get awardFirstStepLine => 'Добро пожаловать в GymMane. Эта — от заведения.';
+  String get awardFirstStepLine => 'Добро пожаловать в Kaizan. Эта — от заведения.';
 
   @override
   String get awardFirstWorkoutName => 'Первая тренировка';
@@ -2940,14 +2971,14 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String shareMessage(String name) {
-    return '$name — открой файл в GymMane, чтобы добавить.';
+    return '$name — открой файл в Kaizan, чтобы добавить.';
   }
 
   @override
   String get importRoutines => 'Импорт тренировок';
 
   @override
-  String get importPasteHint => 'Вставь сюда тренировку: отправленную из GymMane, ответ ИИ, JSON или CSV.';
+  String get importPasteHint => 'Вставь сюда тренировку: отправленную из Kaizan, ответ ИИ, JSON или CSV.';
 
   @override
   String get pasteAction => 'Вставить';
@@ -2988,11 +3019,10 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String get nothingToImport => 'Здесь нет ничего, что GymMane может импортировать';
+  String get nothingToImport => 'Здесь нет ничего, что Kaizan может импортировать';
 
   @override
-  String get aiStepCopy =>
-      'Скопируй запрос. В нём твой список упражнений и формат, который понимает GymMane.';
+  String get aiStepCopy => 'Скопируй запрос. В нём твой список упражнений и формат, который понимает Kaizan.';
 
   @override
   String get aiStepAsk => 'Вставь его в любой ИИ и скажи, что нужно: дни в неделю, цель, сколько недель.';
@@ -3133,7 +3163,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get shareIntroBody =>
-      'Отправь её партнёру, другу или семье. Они получат небольшой файл, который открывается в GymMane и добавляет программу одним касанием, с подходами и весами.';
+      'Отправь её партнёру, другу или семье. Они получат небольшой файл, который открывается в Kaizan и добавляет программу одним касанием, с подходами и весами.';
 
   @override
   String get removedFromRoutine => 'Убрано из программы';

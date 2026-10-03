@@ -9,10 +9,10 @@ import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
 import '../theme/tokens.dart';
 import '../widgets/body_map.dart';
-import '../widgets/exercise_media.dart';
 import '../widgets/exercise_preview.dart';
 import '../widgets/svg_icon.dart';
 import '../widgets/glass.dart';
+import '../widgets/exercise_card.dart';
 import '../widgets/ui_kit.dart';
 import 'exercises_screen.dart' show showCreateExerciseSheet;
 
@@ -177,17 +177,26 @@ class _TrainScreenState extends State<TrainScreen> {
       );
 
   Widget _chip(GymColors gc, String id) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      decoration: BoxDecoration(color: gc.emberSoft, borderRadius: BorderRadius.circular(100)),
-      child: Row(mainAxisSize: MainAxisSize.min, children: [
-        Text(t.muscle(id), style: AppTheme.f(13, weight: FontWeight.w600, color: gc.ember)),
-        const SizedBox(width: 6),
-        GestureDetector(
-          onTap: () => fit.toggleMuscle(id),
-          child: SvgPathIcon(Ic.closeThin, size: 12, color: gc.ember),
+    return Semantics(
+      button: true,
+      selected: true,
+      label: t.muscle(id),
+      excludeSemantics: true,
+      onTap: () => fit.toggleMuscle(id),
+      child: Pressable(
+        onTap: () => fit.toggleMuscle(id),
+        child: MinTarget(
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            decoration: BoxDecoration(color: gc.emberSoft, borderRadius: BorderRadius.circular(GymRadius.pill)),
+            child: Row(mainAxisSize: MainAxisSize.min, children: [
+              Text(t.muscle(id), style: AppTheme.f(13, weight: FontWeight.w600, color: gc.ember)),
+              const SizedBox(width: 6),
+              SvgPathIcon(Ic.closeThin, size: 12, color: gc.ember),
+            ]),
+          ),
         ),
-      ]),
+      ),
     );
   }
 
@@ -208,19 +217,35 @@ class _TrainScreenState extends State<TrainScreen> {
       children: [
         Row(
           children: [
-            GestureDetector(
+            Semantics(
+              button: true,
+              label: sentenceCase(t.back),
+              excludeSemantics: true,
               onTap: fit.trainBack,
-              child: SvgPathIcon(Ic.chevronLeft, size: 20, color: gc.textSecondary),
+              child: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: fit.trainBack,
+                child: MinTarget(
+                  alignment: AlignmentDirectional.centerStart,
+                  minWidth: GymSpace.minTarget - 10,
+                  child: SvgPathIcon(Ic.chevronLeft, size: 20, color: gc.textSecondary),
+                ),
+              ),
             ),
             const SizedBox(width: 10),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(t.step2.toUpperCase(),
-                    style: AppTheme.f(10.5,
-                        weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.5)),
-                Text(t.buildSession, style: AppTheme.f(22, weight: FontWeight.w800, color: gc.text)),
-              ],
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(t.step2.toUpperCase(),
+                      style: AppTheme.f(10.5,
+                          weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.5)),
+                  Text(t.buildSession,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTheme.f(22, weight: FontWeight.w800, color: gc.text)),
+                ],
+              ),
             ),
           ],
         ),
@@ -406,49 +431,22 @@ class _TrainScreenState extends State<TrainScreen> {
 
   Widget _pickRow(BuildContext context, GymColors gc, Exercise ex) {
     final picked = fit.isPicked(ex.id);
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
+    return ExerciseCard(
+      exercise: ex,
+      selected: picked,
+      subtitle: fit.lastSummaryFor(ex.id),
       onTap: () => fit.togglePick(ex.id),
       onLongPress: () => showExercisePreview(context, ex, suggestions: true),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 160),
-        padding: const EdgeInsets.all(14),
+      onThumbTap: () => showExercisePreview(context, ex, suggestions: true),
+      trailing: Container(
+        width: 26,
+        height: 26,
         decoration: BoxDecoration(
-          color: gc.bgRaised,
-          border: Border.all(color: picked ? gc.ember : gc.border),
-          borderRadius: BorderRadius.circular(GymRadius.lg),
+          color: picked ? gc.ember : Colors.transparent,
+          shape: BoxShape.circle,
+          border: Border.all(color: picked ? gc.ember : gc.textTertiary, width: 2),
         ),
-        child: Row(children: [
-          GestureDetector(
-            onTap: () => showExercisePreview(context, ex, suggestions: true),
-            child: SizedBox(width: 44, child: ExerciseMedia(ex: ex, height: 44, radius: 12)),
-          ),
-          const SizedBox(width: 14),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(exerciseName(ex), style: AppTheme.f(14, weight: FontWeight.w600, color: gc.text)),
-                const SizedBox(height: 2),
-                Text(fit.lastSummaryFor(ex.id) ?? muscleLabel(ex.primary),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: AppTheme.f(12, weight: FontWeight.w500, color: gc.textSecondary)),
-              ],
-            ),
-          ),
-          const SizedBox(width: 10),
-          Container(
-            width: 26,
-            height: 26,
-            decoration: BoxDecoration(
-              color: picked ? gc.ember : Colors.transparent,
-              shape: BoxShape.circle,
-              border: Border.all(color: picked ? gc.ember : gc.textTertiary, width: 2),
-            ),
-            child: picked ? Center(child: SvgPathIcon(Ic.checkBold, size: 13, color: gc.onEmber)) : null,
-          ),
-        ]),
+        child: picked ? Center(child: SvgPathIcon(Ic.checkBold, size: 13, color: gc.onEmber)) : null,
       ),
     );
   }

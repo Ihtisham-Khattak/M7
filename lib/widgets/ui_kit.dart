@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 
+import '../l10n/l10n.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
 import '../theme/tokens.dart';
@@ -150,6 +151,30 @@ class TinySwitch extends StatelessWidget {
       ),
     );
   }
+}
+
+/// Keeps the look of [child] but makes the tappable box at least 48x48dp (GM-20).
+/// Wrap the visual, put the gesture handler outside.
+class MinTarget extends StatelessWidget {
+  const MinTarget({
+    super.key,
+    required this.child,
+    this.minWidth = GymSpace.minTarget,
+    this.minHeight = GymSpace.minTarget,
+    this.alignment = Alignment.center,
+  });
+
+  final Widget child;
+  final double minWidth;
+  final double minHeight;
+  final AlignmentGeometry alignment;
+
+  @override
+  Widget build(BuildContext context) => Container(
+        constraints: BoxConstraints(minWidth: minWidth, minHeight: minHeight),
+        alignment: alignment,
+        child: child,
+      );
 }
 
 class Pressable extends StatefulWidget {
@@ -385,15 +410,17 @@ class RoundAction extends StatelessWidget {
     final button = Pressable(
       onTap: onTap,
       scale: 0.9,
-      child: Container(
-        width: size,
-        height: size,
-        decoration: BoxDecoration(
-          color: filled ? gc.ember : gc.bgRaised,
-          shape: BoxShape.circle,
-          border: Border.all(color: filled ? gc.ember : gc.border),
+      child: MinTarget(
+        child: Container(
+          width: size,
+          height: size,
+          decoration: BoxDecoration(
+            color: filled ? gc.ember : gc.bgRaised,
+            shape: BoxShape.circle,
+            border: Border.all(color: filled ? gc.ember : gc.border),
+          ),
+          child: Center(child: child),
         ),
-        child: Center(child: child),
       ),
     );
     return label == null ? button : Semantics(button: true, label: label, child: button);
@@ -535,14 +562,23 @@ class StepperControl extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final gc = context.gc;
-    Widget btn(String glyph, VoidCallback onTap) => GestureDetector(
+    Widget btn(String glyph, String semantic, VoidCallback onTap) => Semantics(
+          button: true,
+          label: semantic,
+          excludeSemantics: true,
           onTap: onTap,
-          child: Container(
-            width: btnSize,
-            height: btnSize,
-            decoration: BoxDecoration(color: gc.bgRaised2, borderRadius: BorderRadius.circular(btnRadius)),
-            alignment: Alignment.center,
-            child: Text(glyph, style: TextStyle(color: gc.text, fontSize: fontSize + 2, height: 1, fontWeight: FontWeight.w500)),
+          child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: onTap,
+            child: MinTarget(
+              child: Container(
+                width: btnSize,
+                height: btnSize,
+                decoration: BoxDecoration(color: gc.bgRaised2, borderRadius: BorderRadius.circular(btnRadius)),
+                alignment: Alignment.center,
+                child: Text(glyph, style: TextStyle(color: gc.text, fontSize: fontSize + 2, height: 1, fontWeight: FontWeight.w500)),
+              ),
+            ),
           ),
         );
     Widget label = Container(
@@ -551,16 +587,16 @@ class StepperControl extends StatelessWidget {
       child: RollingText(value, style: AppTheme.f(fontSize, weight: FontWeight.w700, color: gc.text)),
     );
     if (onEdit != null) {
-      label = GestureDetector(behavior: HitTestBehavior.opaque, onTap: onEdit, child: label);
+      label = GestureDetector(behavior: HitTestBehavior.opaque, onTap: onEdit, child: MinTarget(child: label));
     }
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        btn('–', onDec),
-        SizedBox(width: gap),
+        btn('–', t.decrease, onDec),
+        SizedBox(width: gap - 6 < 0 ? 0 : gap - 6),
         label,
-        SizedBox(width: gap),
-        btn('+', onInc),
+        SizedBox(width: gap - 6 < 0 ? 0 : gap - 6),
+        btn('+', t.increase, onInc),
       ],
     );
   }
@@ -639,28 +675,46 @@ class SegToggle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final gc = context.gc;
-    return Container(
-      padding: const EdgeInsets.all(GymSpace.xs),
-      decoration: BoxDecoration(color: gc.bgRaised2, borderRadius: BorderRadius.circular(GymRadius.sm)),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          for (final o in options)
-            GestureDetector(
-              onTap: o.onTap,
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: hPad, vertical: vPad),
-                decoration: BoxDecoration(
-                  color: o.selected ? gc.ember : Colors.transparent,
-                  borderRadius: BorderRadius.circular(GymRadius.xs),
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Positioned.fill(
+          top: GymSpace.sm - 2,
+          bottom: GymSpace.sm - 2,
+          child: DecoratedBox(
+            decoration: BoxDecoration(color: gc.bgRaised2, borderRadius: BorderRadius.circular(GymRadius.sm)),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: GymSpace.xs),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              for (final o in options)
+                Semantics(
+                  button: true,
+                  selected: o.selected,
+                  child: GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onTap: o.onTap,
+                    child: MinTarget(
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: hPad, vertical: vPad),
+                        decoration: BoxDecoration(
+                          color: o.selected ? gc.ember : Colors.transparent,
+                          borderRadius: BorderRadius.circular(GymRadius.xs),
+                        ),
+                        child: Text(o.label,
+                            style: AppTheme.f(fontSize,
+                                weight: FontWeight.w600, color: o.selected ? gc.onEmber : gc.textSecondary)),
+                      ),
+                    ),
+                  ),
                 ),
-                child: Text(o.label,
-                    style: AppTheme.f(fontSize,
-                        weight: FontWeight.w600, color: o.selected ? gc.onEmber : gc.textSecondary)),
-              ),
-            ),
-        ],
-      ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
@@ -733,11 +787,13 @@ class Pill extends StatelessWidget {
     return Pressable(
       onTap: onTap,
       scale: 0.94,
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: hPad, vertical: vPad),
-        decoration: BoxDecoration(color: bg, borderRadius: BorderRadius.circular(GymRadius.sm)),
-        child: Text(titleCase(label),
-            style: AppTheme.f(fontSize, weight: FontWeight.w600, color: fg)),
+      child: MinTarget(
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: hPad, vertical: vPad),
+          decoration: BoxDecoration(color: bg, borderRadius: BorderRadius.circular(GymRadius.sm)),
+          child: Text(titleCase(label),
+              style: AppTheme.f(fontSize, weight: FontWeight.w600, color: fg)),
+        ),
       ),
     );
   }

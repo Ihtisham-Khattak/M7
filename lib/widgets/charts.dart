@@ -2,9 +2,11 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
+import '../l10n/l10n.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
 import 'body_map.dart';
+import 'progress_ring.dart';
 import 'svg_icon.dart';
 
 class GoalRing extends StatelessWidget {
@@ -12,42 +14,11 @@ class GoalRing extends StatelessWidget {
   final double pct;
   final double size;
   @override
-  Widget build(BuildContext context) {
-    final gc = context.gc;
-    return SizedBox(
-      width: size,
-      height: size,
-      child: TweenAnimationBuilder<double>(
-        tween: Tween(begin: 0, end: pct),
-        duration: const Duration(milliseconds: 700),
-        curve: Curves.easeOutCubic,
-        builder: (context, v, _) => CustomPaint(painter: _RingPainter(v, gc.bgRaised2, gc.accent)),
-      ),
-    );
-  }
-}
-
-class _RingPainter extends CustomPainter {
-  _RingPainter(this.pct, this.track, this.accent);
-  final double pct;
-  final Color track, accent;
-  @override
-  void paint(Canvas canvas, Size size) {
-    canvas.scale(size.width / 40);
-    const center = Offset(20, 20);
-    const r = 16.0;
-    final t = Paint()..style = PaintingStyle.stroke..strokeWidth = 4..color = track;
-    canvas.drawCircle(center, r, t);
-    final a = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 4
-      ..strokeCap = StrokeCap.round
-      ..color = accent;
-    canvas.drawArc(Rect.fromCircle(center: center, radius: r), -math.pi / 2, pct / 100 * 2 * math.pi, false, a);
-  }
-
-  @override
-  bool shouldRepaint(_RingPainter o) => o.pct != pct || o.accent != accent || o.track != track;
+  Widget build(BuildContext context) => ProgressRing(
+        value: pct / 100,
+        size: size,
+        semanticLabel: t.goalRingLabel(pct.round().clamp(0, 100)),
+      );
 }
 
 class VolumeChart extends StatelessWidget {
@@ -74,7 +45,10 @@ class VolumeChart extends StatelessWidget {
     final top = points.isEmpty ? 0.0 : points.reduce(math.max);
     final style = AppTheme.d(10, weight: FontWeight.w600, color: gc.textTertiary);
 
-    return Column(
+    return Semantics(
+      label: points.length < 2 ? null : t.trendChartLabel(label(points.first), label(points.last)),
+      child: ExcludeSemantics(
+        child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         SizedBox(
@@ -114,6 +88,8 @@ class VolumeChart extends StatelessWidget {
           ),
         ],
       ],
+        ),
+      ),
     );
   }
 }
@@ -254,6 +230,8 @@ class ChartScale extends StatelessWidget {
   }
 }
 
+String _plain(double v) => v == v.roundToDouble() ? v.round().toString() : v.toStringAsFixed(1);
+
 class Sparkline extends StatelessWidget {
   const Sparkline({super.key, required this.values, this.height = 48, this.color, this.scale});
   final List<double> values;
@@ -266,12 +244,17 @@ class Sparkline extends StatelessWidget {
     final label = scale;
     final bounds = label == null || values.length < 2 ? null : niceBounds(values);
     final chart = CustomPaint(painter: _SparkPainter(values, color ?? gc.accent, gc.bgRaised, bounds));
-    return SizedBox(
-      height: height,
-      width: double.infinity,
-      child: label == null || bounds == null
-          ? chart
-          : ChartScale(bounds: bounds, stops: (0.15, 0.85), label: label, fontSize: 9, child: chart),
+    return Semantics(
+      label: values.length < 2 ? null : t.trendChartLabel((label ?? _plain)(values.first), (label ?? _plain)(values.last)),
+      child: ExcludeSemantics(
+        child: SizedBox(
+          height: height,
+          width: double.infinity,
+          child: label == null || bounds == null
+              ? chart
+              : ChartScale(bounds: bounds, stops: (0.15, 0.85), label: label, fontSize: 9, child: chart),
+        ),
+      ),
     );
   }
 }
@@ -331,12 +314,17 @@ class TrendChart extends StatelessWidget {
     final label = scale;
     final bounds = label == null || values.length < 2 ? null : niceBounds(values);
     final chart = CustomPaint(painter: _TrendPainter(values, color ?? gc.accent, gc.bgRaised, gc.border, bounds));
-    return SizedBox(
-      height: height,
-      width: double.infinity,
-      child: label == null || bounds == null
-          ? chart
-          : ChartScale(bounds: bounds, stops: (0.12, 0.88), label: label, child: chart),
+    return Semantics(
+      label: values.length < 2 ? null : t.trendChartLabel((label ?? _plain)(values.first), (label ?? _plain)(values.last)),
+      child: ExcludeSemantics(
+        child: SizedBox(
+          height: height,
+          width: double.infinity,
+          child: label == null || bounds == null
+              ? chart
+              : ChartScale(bounds: bounds, stops: (0.12, 0.88), label: label, child: chart),
+        ),
+      ),
     );
   }
 }
@@ -444,7 +432,9 @@ class Heatmap extends StatelessWidget {
   Widget build(BuildContext context) {
     final gc = context.gc;
     const cols = 12, gap = 4.0;
-    return LayoutBuilder(builder: (context, c) {
+    return Semantics(
+      label: t.heatmapLabel(levels.where((l) => l > 0).length),
+      child: ExcludeSemantics(child: LayoutBuilder(builder: (context, c) {
       final cell = (c.maxWidth - gap * (cols - 1)) / cols;
       return Wrap(
         spacing: gap,
@@ -463,7 +453,8 @@ class Heatmap extends StatelessWidget {
             ),
         ],
       );
-    });
+    })),
+    );
   }
 }
 

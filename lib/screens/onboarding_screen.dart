@@ -1,3 +1,4 @@
+import '../app/brand.dart';
 import 'package:flutter/material.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 
@@ -311,10 +312,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             children: [
               _in(
                 0,
-                Center(
-                  child: Image.asset('assets/img/runner.png',
-                      height: 196, opacity: const AlwaysStoppedAnimation(0.9)),
-                ),
+                const Center(child: KaizanMark(size: 120)),
               ),
               const SizedBox(height: 26),
               _in(
@@ -330,8 +328,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 2,
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 4),
-                  child: Text('GymMane',
-                      style: AppTheme.f(44, weight: FontWeight.w800, color: gc.text, height: 1)),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const KaizanWordmark(size: 34),
+                      const SizedBox(height: 10),
+                      Text(t.tagline, style: AppTheme.f(15, weight: FontWeight.w500, color: gc.textSecondary)),
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(height: 12),

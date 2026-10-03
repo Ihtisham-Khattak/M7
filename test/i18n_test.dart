@@ -16,6 +16,17 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   tearDown(() => setAppLanguage('en'));
 
+  test('no ARB file defines the same key twice', () {
+    final dupes = <String>[];
+    for (final f in Directory('lib/l10n').listSync().whereType<File>().where((f) => f.path.endsWith('.arb'))) {
+      final seen = <String>{};
+      for (final m in RegExp(r'^  "([^"@][^"]*)":', multiLine: true).allMatches(f.readAsStringSync())) {
+        if (!seen.add(m.group(1)!)) dupes.add('${f.uri.pathSegments.last}: ${m.group(1)}');
+      }
+    }
+    expect(dupes, isEmpty, reason: 'a repeated key silently overrides the first one');
+  });
+
   test('every ARB file in lib/l10n ships as a language of the app', () {
     final arbs = Directory('lib/l10n')
         .listSync()

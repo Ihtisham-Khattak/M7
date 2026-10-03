@@ -706,6 +706,48 @@ abstract class AppLocalizations {
   /// **'Back to it — next set is waiting.'**
   String get restOverBody;
 
+  /// No description provided for @goalRingLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Weekly goal {pct} percent complete'**
+  String goalRingLabel(int pct);
+
+  /// No description provided for @heatmapLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Activity map: {days} active days in the last 12 weeks'**
+  String heatmapLabel(int days);
+
+  /// No description provided for @bodyMapLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Body map. Highlighted: {names}'**
+  String bodyMapLabel(String names);
+
+  /// No description provided for @bodyMapNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No muscles highlighted'**
+  String get bodyMapNone;
+
+  /// No description provided for @trendChartLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Trend from {first} to {last}'**
+  String trendChartLabel(String first, String last);
+
+  /// No description provided for @restLeftAnnounce.
+  ///
+  /// In en, this message translates to:
+  /// **'{seconds} seconds of rest left'**
+  String restLeftAnnounce(int seconds);
+
+  /// No description provided for @tagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Soft but not weak.'**
+  String get tagline;
+
   /// No description provided for @totalVolume30d.
   ///
   /// In en, this message translates to:
@@ -2347,7 +2389,7 @@ abstract class AppLocalizations {
   /// No description provided for @importHint.
   ///
   /// In en, this message translates to:
-  /// **'Choose a .zip (or older .json) backup exported from GymMane. This replaces your current data, media included.'**
+  /// **'Choose a .zip (or older .json) backup exported from Kaizan. This replaces your current data, media included.'**
   String get importHint;
 
   /// No description provided for @import.
@@ -2419,7 +2461,7 @@ abstract class AppLocalizations {
   /// No description provided for @aboutGymmane.
   ///
   /// In en, this message translates to:
-  /// **'About GymMane'**
+  /// **'About Kaizan'**
   String get aboutGymmane;
 
   /// No description provided for @yourProfile.
@@ -2557,7 +2599,7 @@ abstract class AppLocalizations {
   /// No description provided for @dataNewerNotice.
   ///
   /// In en, this message translates to:
-  /// **'Your data was saved by a newer version of GymMane. Update the app to see it — nothing was changed.'**
+  /// **'Your data was saved by a newer version of Kaizan. Update the app to see it — nothing was changed.'**
   String get dataNewerNotice;
 
   /// No description provided for @nothingToExport.
@@ -4009,7 +4051,7 @@ abstract class AppLocalizations {
   /// No description provided for @aiIntro.
   ///
   /// In en, this message translates to:
-  /// **'GymMane never talks to an AI. You take your exercise list out, you paste it into whatever assistant you already use, and you bring its answer back in. Nothing leaves the phone on its own.'**
+  /// **'Kaizan never talks to an AI. You take your exercise list out, you paste it into whatever assistant you already use, and you bring its answer back in. Nothing leaves the phone on its own.'**
   String get aiIntro;
 
   /// No description provided for @aiStep1.
@@ -4069,7 +4111,7 @@ abstract class AppLocalizations {
   /// No description provided for @awardFirstStepLine.
   ///
   /// In en, this message translates to:
-  /// **'Welcome to GymMane. This one is on the house.'**
+  /// **'Welcome to Kaizan. This one is on the house.'**
   String get awardFirstStepLine;
 
   /// No description provided for @awardFirstWorkoutName.
@@ -5143,7 +5185,7 @@ abstract class AppLocalizations {
   /// No description provided for @shareMessage.
   ///
   /// In en, this message translates to:
-  /// **'{name} — open the file with GymMane to add it.'**
+  /// **'{name} — open the file with Kaizan to add it.'**
   String shareMessage(String name);
 
   /// No description provided for @importRoutines.
@@ -5155,7 +5197,7 @@ abstract class AppLocalizations {
   /// No description provided for @importPasteHint.
   ///
   /// In en, this message translates to:
-  /// **'Paste a routine here: one shared from GymMane, an AI answer, JSON or CSV.'**
+  /// **'Paste a routine here: one shared from Kaizan, an AI answer, JSON or CSV.'**
   String get importPasteHint;
 
   /// No description provided for @pasteAction.
@@ -5197,13 +5239,13 @@ abstract class AppLocalizations {
   /// No description provided for @nothingToImport.
   ///
   /// In en, this message translates to:
-  /// **'Nothing here GymMane can import'**
+  /// **'Nothing here Kaizan can import'**
   String get nothingToImport;
 
   /// No description provided for @aiStepCopy.
   ///
   /// In en, this message translates to:
-  /// **'Copy the request. It carries your exercise list and the format GymMane reads.'**
+  /// **'Copy the request. It carries your exercise list and the format Kaizan reads.'**
   String get aiStepCopy;
 
   /// No description provided for @aiStepAsk.
@@ -5461,7 +5503,7 @@ abstract class AppLocalizations {
   /// No description provided for @shareIntroBody.
   ///
   /// In en, this message translates to:
-  /// **'Send it to your partner, a friend or your family. They get a small file that opens in GymMane and adds it in one tap, with its sets and weights.'**
+  /// **'Send it to your partner, a friend or your family. They get a small file that opens in Kaizan and adds it in one tap, with its sets and weights.'**
   String get shareIntroBody;
 
   /// No description provided for @removedFromRoutine.

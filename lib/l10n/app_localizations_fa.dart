@@ -335,6 +335,37 @@ class AppLocalizationsFa extends AppLocalizations {
   String get restOverBody => 'برگرد سر تمرین — ست بعدی منتظر است.';
 
   @override
+  String goalRingLabel(int pct) {
+    return 'هدف هفتگی $pct درصد انجام شده';
+  }
+
+  @override
+  String heatmapLabel(int days) {
+    return 'نقشه فعالیت: $days روز فعال در ۱۲ هفتهٔ اخیر';
+  }
+
+  @override
+  String bodyMapLabel(String names) {
+    return 'نقشه بدن. برجسته: $names';
+  }
+
+  @override
+  String get bodyMapNone => 'هیچ عضله‌ای برجسته نیست';
+
+  @override
+  String trendChartLabel(String first, String last) {
+    return 'روند از $first تا $last';
+  }
+
+  @override
+  String restLeftAnnounce(int seconds) {
+    return '$seconds ثانیه استراحت باقی مانده';
+  }
+
+  @override
+  String get tagline => 'نرم، اما نه ضعیف.';
+
+  @override
   String get totalVolume30d => 'حجم کل · ۳۰ روز';
 
   @override
@@ -1420,7 +1451,7 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get dataNewerNotice =>
-      'داده‌هایت با نسخهٔ جدیدتری از GymMane ذخیره شده‌اند. برای دیدنشان برنامه را به‌روز کن — چیزی تغییر نکرد.';
+      'داده‌هایت با نسخهٔ جدیدتری از Kaizan ذخیره شده‌اند. برای دیدنشان برنامه را به‌روز کن — چیزی تغییر نکرد.';
 
   @override
   String get nothingToExport => 'هنوز چیزی برای خروجی نیست — اول یک جلسه تمرین ثبت کن';

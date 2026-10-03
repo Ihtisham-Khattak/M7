@@ -9,6 +9,7 @@ import '../theme/app_theme.dart';
 import '../theme/tokens.dart';
 import '../widgets/glass.dart';
 import '../widgets/ui_kit.dart';
+import '../widgets/workout_card.dart';
 
 void showStartSheet(BuildContext context, {DateTime? day}) {
   showAppSheet<void>(
@@ -94,75 +95,17 @@ class StartSheet extends StatelessWidget {
             style: AppTheme.f(10.5, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.2)),
       );
 
-  Widget _plannedCard(BuildContext context, GymColors gc, Routine r) {
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: () => _go(context, () => fit.startRoutine(r, on: day)),
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: gc.emberSoft,
-          border: Border.all(color: gc.ember.withValues(alpha: 0.4)),
-          borderRadius: BorderRadius.circular(GymRadius.lg),
-        ),
-        child: Row(children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(day == null ? t.todaysRoutine : t.plannedRoutine,
-                    style: AppTheme.f(10.5, weight: FontWeight.w700, color: gc.brass, letterSpacing: 1.2)),
-                const SizedBox(height: 6),
-                Text(fit.routineTitle(r),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: AppTheme.f(18, weight: FontWeight.w700, color: gc.text)),
-                const SizedBox(height: 2),
-                Text(t.exerciseCount(r.exerciseIds.length),
-                    style: AppTheme.f(12.5, weight: FontWeight.w500, color: gc.textSecondary)),
-              ],
-            ),
-          ),
-          const SizedBox(width: 12),
-          Container(
-            width: 46,
-            height: 46,
-            decoration: BoxDecoration(color: gc.ember, shape: BoxShape.circle),
-            child: Icon(PhosphorIconsFill.play, size: 18, color: gc.onEmber),
-          ),
-        ]),
-      ),
-    );
-  }
+  Widget _plannedCard(BuildContext context, GymColors gc, Routine r) => WorkoutTile(
+        summary: WorkoutSummary.of(r, status: WorkoutStatus.planned),
+        heading: day == null ? t.todaysRoutine : t.plannedRoutine,
+        highlighted: true,
+        onTap: () => _go(context, () => fit.startRoutine(r, on: day)),
+      );
 
-  Widget _routineRow(BuildContext context, GymColors gc, Routine r) {
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: () => _go(context, () => fit.startRoutine(r, on: day)),
-      child: SoftCard(
-        radius: GymRadius.lg,
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 13),
-        child: Row(children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(r.group.isEmpty ? fit.routineTitle(r) : '${r.group} · ${fit.routineTitle(r)}',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: AppTheme.f(14.5, weight: FontWeight.w600, color: gc.text)),
-                const SizedBox(height: 2),
-                Text(t.exerciseCount(r.exerciseIds.length),
-                    style: AppTheme.f(11.5, weight: FontWeight.w500, color: gc.textTertiary)),
-              ],
-            ),
-          ),
-          const SizedBox(width: 10),
-          Icon(PhosphorIconsFill.play, size: 14, color: gc.textSecondary),
-        ]),
-      ),
-    );
-  }
+  Widget _routineRow(BuildContext context, GymColors gc, Routine r) => WorkoutTile(
+        summary: WorkoutSummary.of(r),
+        onTap: () => _go(context, () => fit.startRoutine(r, on: day)),
+      );
 
   Widget _option(
       BuildContext context, GymColors gc, IconData icon, String label, VoidCallback action) {

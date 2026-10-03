@@ -1,3 +1,4 @@
+import '../app/brand.dart';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
@@ -453,7 +454,7 @@ class SettingsScreen extends StatelessWidget {
     await file.writeAsString(fit.exportCsv());
     if (!context.mounted) return;
     await SharePlus.instance.share(
-      ShareParams(files: [XFile(file.path)], subject: 'GymMane workouts'),
+      ShareParams(files: [XFile(file.path)], subject: '$kAppName workouts'),
     );
   }
 
@@ -476,7 +477,7 @@ class SettingsScreen extends StatelessWidget {
     await file.writeAsBytes(await buildBackupZip(), flush: true);
     if (!context.mounted) return;
     await SharePlus.instance.share(
-      ShareParams(files: [XFile(file.path)], subject: 'GymMane backup'),
+      ShareParams(files: [XFile(file.path)], subject: '$kAppName backup'),
     );
   }
 

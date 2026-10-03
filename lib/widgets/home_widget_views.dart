@@ -1,3 +1,4 @@
+import '../app/brand.dart';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -74,7 +75,7 @@ class HeatmapWidgetView extends StatelessWidget {
             child: Row(
               children: [
                 Expanded(
-                  child: Text('GymMane',
+                  child: Text(kAppName,
                       maxLines: 1,
                       overflow: TextOverflow.clip,
                       softWrap: false,

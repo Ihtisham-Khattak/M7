@@ -1,13 +1,14 @@
 <div align="center">
 
-<img src="docs/screenshots/banner-en.png" alt="GymMane — Lift. Log it. Grow." width="860" />
+<img src="docs/screenshots/banner-en.png" alt="Kaizan — Lift. Log it. Grow." width="860" />
 
 <br/>
 
-<img src="docs/screenshots/icon.png" width="94" alt="GymMane" />
+<img src="docs/screenshots/icon.png" width="94" alt="Kaizan" />
 
-# GymMane
+# Kaizan
 
+*Soft but not weak.* — formerly GymMane (the repository, package id and data format keep the old name, so updates and backups carry over).<br/><br/>
 A free, offline gym log for Android.<br/>
 Tap the muscles you want to train, log your sets and watch your numbers go up.
 
@@ -159,7 +160,7 @@ take the `arm64-v8a` APK if you're not sure which one you need.
 
 ## Privacy
 
-No account, no ads and no analytics. GymMane doesn't even have the internet
+No account, no ads and no analytics. Kaizan doesn't even have the internet
 permission, so your training stays on your phone. The permissions it does ask
 for are for the rest timer, its notification and the widgets.
 
@@ -171,14 +172,14 @@ issue first. Translations are plain files in [lib/l10n](lib/l10n), and
 
 ```bash
 git clone https://github.com/InlitX/GymMane.git
-cd GymMane
+cd Kaizan
 flutter pub get
 flutter build apk --release
 ```
 
 ## Support
 
-GymMane is free and will stay that way. A star, a translation or a clear bug
+Kaizan is free and will stay that way. A star, a translation or a clear bug
 report helps a lot. If you want to buy me a coffee:
 
 <div align="center">

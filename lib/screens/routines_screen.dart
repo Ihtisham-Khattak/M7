@@ -13,6 +13,7 @@ import '../widgets/glass.dart';
 import '../widgets/liquid_notch.dart';
 import '../widgets/routine_folder.dart';
 import '../widgets/svg_icon.dart';
+import '../widgets/states.dart';
 import '../widgets/ui_kit.dart';
 import 'plan_import_sheet.dart';
 
@@ -69,10 +70,12 @@ class RoutinesScreen extends StatelessWidget {
             Text(t.yourRoutines, style: AppTheme.f(12, weight: FontWeight.w600, color: gc.textSecondary, letterSpacing: 1.5)),
             const SizedBox(height: 10),
             if (fit.routines.isEmpty)
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 26),
-                child: Text(t.noRoutines,
-                    textAlign: TextAlign.center, style: AppTheme.f(13, weight: FontWeight.w500, color: gc.textSecondary)),
+              EmptyState(
+                icon: PhosphorIconsRegular.listChecks,
+                title: t.noRoutines,
+                compact: true,
+                actionLabel: t.templates,
+                onAction: () => _openTemplates(context),
               )
             else ...[
               for (final group in fit.routineGroups) ...[
@@ -292,7 +295,9 @@ class RoutinesScreen extends StatelessWidget {
       onTap: () => _pickRoutine(context, weekday),
       behavior: HitTestBehavior.opaque,
       child: Container(
+        constraints: const BoxConstraints(minHeight: GymSpace.minTarget),
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+        alignment: Alignment.center,
         child: Row(
           children: [
             Text(t.weekdayShort(weekday),

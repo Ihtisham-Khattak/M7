@@ -17,6 +17,7 @@ import '../theme/app_theme.dart';
 import '../theme/tokens.dart';
 import '../widgets/glass.dart';
 import '../widgets/liquid_notch.dart';
+import '../widgets/states.dart';
 import '../widgets/ui_kit.dart';
 
 const _sample = '{ "name": "Push", "exercises": [ ... ] }';
@@ -219,14 +220,7 @@ class _PlanImportSheetState extends State<_PlanImportSheet> {
               PrimaryButton(label: t.addToMyRoutines, onTap: _apply),
             ] else if (_text.text.trim().isNotEmpty) ...[
               const SizedBox(height: 16),
-              Row(children: [
-                Icon(PhosphorIconsRegular.warningCircle, size: 16, color: gc.warn),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: Text(t.nothingToImport,
-                      style: AppTheme.f(13, weight: FontWeight.w600, color: gc.textSecondary)),
-                ),
-              ]),
+              InlineError(message: t.nothingToImport),
               if (!_field) ...[
                 const SizedBox(height: 10),
                 Align(

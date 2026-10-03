@@ -1,3 +1,4 @@
+import '../app/brand.dart';
 import 'dart:io';
 import 'dart:ui' as ui;
 
@@ -111,7 +112,7 @@ class _StickerEditorState extends State<StickerEditor> {
         final dir = await getTemporaryDirectory();
         final file = File('${dir.path}/gymmane-sticker.png');
         await file.writeAsBytes(png, flush: true);
-        await SharePlus.instance.share(ShareParams(files: [XFile(file.path)], subject: 'GymMane'));
+        await SharePlus.instance.share(ShareParams(files: [XFile(file.path)], subject: kAppName));
       });
 
   Future<void> _save() => _run((png) async {
@@ -414,7 +415,7 @@ class _Sticker extends StatelessWidget {
           colorBlendMode: BlendMode.srcIn,
         ),
         const SizedBox(width: 5),
-        Text('GymMane', style: _s(size, FontWeight.w900, alpha: 0.9, spacing: 0.2)),
+        Text(kAppName, style: _s(size, FontWeight.w900, alpha: 0.9, spacing: 0.2)),
       ]);
 
   Widget _kicker(String text) =>

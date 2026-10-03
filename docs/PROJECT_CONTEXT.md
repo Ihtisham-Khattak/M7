@@ -11,7 +11,7 @@ Entry point for AI coding agents. Everything here was derived from the source at
 
 | Item | Value | Source |
 |---|---|---|
-| Name | GymMane (package `gymmane`, display name `GymMane`) | `pubspec.yaml`, `AndroidManifest.xml` |
+| Name | **Kaizan** — tagline "Soft but not weak." (GM-90). Formerly GymMane: the package (`gymmane`), application id, prefs key `gymmane_v1`, backup entry `gymmane.json`, class names and the repository keep the old spelling so updates and old backups work. Display name lives in `lib/app/brand.dart` (`kAppName`), the manifest label, the ARB files and Play metadata | `pubspec.yaml`, `AndroidManifest.xml`, `lib/app/brand.dart` |
 | Application id | `com.gymmane.app` | `android/app/build.gradle.kts` |
 | Version | `1.3.0+4` (versionCode is multiplied by 10 + ABI code 1/2/3 per split APK) | `pubspec.yaml`, `build.gradle.kts` |
 | Purpose | Offline, ad-free gym workout logger: pick muscles on a body map, log sets, watch stats grow | `README.md`, `pubspec.yaml` |
@@ -98,7 +98,7 @@ Declared but unused: `cupertino_icons` (no `CupertinoIcons` reference anywhere i
 - `applicationId`, notification channel ids, method-channel names (`gymmane/*`) and widget provider class names are wired across Dart and Kotlin; renaming one side breaks the app silently.
 - Release builds are **reproducible for F-Droid**: CI pins the Flutter version, uses `--enforce-lockfile`, patches jni build-id, and forbids passing `--build-name/--build-number`. Do not change the release job casually.
 - Generated l10n files (`lib/l10n/app_localizations*.dart`) are **committed** and must be regenerated (`flutter gen-l10n`) whenever an ARB file is added or a key changes.
-- Max text scale is clamped to `1.15` (`GymManeApp.maxTextScale`); layouts are tuned for that.
+- Max text scale is clamped to `2.0` (`GymManeApp.maxTextScale`, GM-20); core screens are tested at 200 %. Tap targets are ≥ 48 dp (see ARCHITECTURE, Accessibility).
 
 ## 7. Important Terminology
 
@@ -171,6 +171,9 @@ Before changing code:
 3. Read the relevant section of FEATURES.md
 4. Read the relevant section of DATA_MODEL.md (mandatory if you touch any persisted field)
 5. Follow DEVELOPMENT_GUIDELINES.md   (rules, tests, localisation, git)
+
+House rules from the owner: tell them BEFORE installing any new package or tool and wait for a yes
+(DEVELOPMENT_GUIDELINES §14); do not build an APK unless they ask for one.
 ```
 
 Fast orientation:

@@ -237,8 +237,10 @@ void main() {
     });
   });
 
-  test('#95 los recomendados se pueden quitar y se guarda', () {
-    expect(fit.showRecommended, isTrue);
+  test('#95 los recomendados se pueden poner y quitar, y se guarda', () {
+    expect(fit.showRecommended, isFalse, reason: 'GM-16: Home empieza con cuatro secciones como máximo');
+    fit.toggleRecommended();
+    expect(fit.toJson()['showRecs'], isTrue);
     fit.toggleRecommended();
     expect(fit.toJson()['showRecs'], isFalse);
   });

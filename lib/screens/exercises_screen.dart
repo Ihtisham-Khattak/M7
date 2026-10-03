@@ -12,10 +12,10 @@ import '../state/fit_state.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
 import '../theme/tokens.dart';
-import '../widgets/exercise_media.dart';
 import '../widgets/glass.dart';
 import '../widgets/svg_icon.dart';
-import '../widgets/components.dart';
+import '../widgets/states.dart';
+import '../widgets/exercise_card.dart';
 import '../widgets/ui_kit.dart';
 
 class ExercisesScreen extends StatefulWidget {
@@ -253,33 +253,12 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
 
   Widget _empty(GymColors gc) {
     final noFavs = fit.exFavouritesOnly && fit.favouriteCount == 0;
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 60, horizontal: 20),
-      child: Column(
-        children: [
-          if (noFavs)
-            _star(gc, false)
-          else
-            SvgPathIcon(const [IconPath('M11 11m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0', strokeWidth: 1.5), IconPath('M21 21l-4.35-4.35', strokeWidth: 1.5)], size: 40, color: gc.textTertiary),
-          const SizedBox(height: 10),
-          Text(noFavs ? t.noFavouritesYet : t.noExercisesFound,
-              style: AppTheme.f(15.5, weight: FontWeight.w700, color: gc.text)),
-          const SizedBox(height: 4),
-          Text(noFavs ? t.noFavouritesHint : t.noExercisesHint,
-              textAlign: TextAlign.center,
-              style: AppTheme.f(13, weight: FontWeight.w500, color: gc.textSecondary)),
-          const SizedBox(height: 16),
-          GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: _clearAll,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-              child: Text(t.clearFilters,
-                  style: AppTheme.f(13, weight: FontWeight.w600, color: gc.accent)),
-            ),
-          ),
-        ],
-      ),
+    return EmptyState(
+      icon: noFavs ? PhosphorIconsRegular.star : PhosphorIconsRegular.magnifyingGlass,
+      title: noFavs ? t.noFavouritesYet : t.noExercisesFound,
+      body: noFavs ? t.noFavouritesHint : t.noExercisesHint,
+      actionLabel: t.clearFilters,
+      onAction: _clearAll,
     );
   }
 
@@ -294,17 +273,12 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
           bottom: Radius.circular(last ? GymRadius.xl : 0),
         ),
       ),
-      child: ListRow(
-        leading: SizedBox(
-          width: 52,
-          child: ExerciseMedia(ex: ex, height: 52, radius: GymRadius.md, bordered: false),
-        ),
-        title: exerciseName(ex),
-        subtitle: '${t.equipment(ex.equipment)} · ${t.difficulty(ex.difficulty)}',
-        minHeight: 70,
-        padding: const EdgeInsets.fromLTRB(GymSpace.md, 0, 0, 0),
+      child: ExerciseCard(
+        exercise: ex,
+        bare: true,
         divider: !last,
-        dividerInset: 77,
+        thumbSize: 52,
+        subtitle: '${t.equipment(ex.equipment)} · ${t.difficulty(ex.difficulty)}',
         onTap: () => fit.openExercise(ex.id),
         trailing: Semantics(
           button: true,

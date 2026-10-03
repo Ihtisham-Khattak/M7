@@ -11,7 +11,6 @@ import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
 import '../theme/tokens.dart';
 import '../widgets/dialogs.dart';
-import '../widgets/exercise_media.dart';
 import '../widgets/exercise_preview.dart';
 import '../widgets/ruler_picker.dart';
 import '../widgets/glass.dart';
@@ -20,6 +19,7 @@ import '../widgets/liquid_notch.dart';
 import '../widgets/set_kind.dart';
 import '../widgets/svg_icon.dart';
 import '../widgets/timer_panel.dart';
+import '../widgets/exercise_card.dart';
 import '../widgets/ui_kit.dart';
 import 'exercises_screen.dart';
 import 'plan_import_sheet.dart';
@@ -545,163 +545,114 @@ class _RoutineEditScreenState extends State<RoutineEditScreen> {
 
   Widget _chosenCard(GymColors gc, Routine routine, Exercise ex, int index, bool inChain,
       List<PlannedSet> plan, bool linksNext) {
-    return Container(
-      margin: EdgeInsets.only(bottom: linksNext ? 4 : 0),
-      padding: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        color: gc.bgRaised,
-        borderRadius: BorderRadius.circular(GymRadius.md),
-      ),
-      child: Row(children: [
-        ReorderableDragStartListener(
+    return Padding(
+      padding: EdgeInsets.only(bottom: linksNext ? 4 : 0),
+      child: ExerciseCard(
+        exercise: ex,
+        onTap: () => _openPlan(ex),
+        onThumbTap: () => _openPlan(ex),
+        semanticHint: t.planSets,
+        leading: ReorderableDragStartListener(
           index: index,
           child: Semantics(
             label: t.reorderHandle(exerciseName(ex)),
             child: SizedBox(
               width: 34,
-              height: 44,
+              height: GymSpace.minTarget,
               child: Icon(PhosphorIconsRegular.dotsSixVertical, size: 18, color: gc.textTertiary),
             ),
           ),
         ),
-        GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          onTap: () => _openPlan(ex),
-          child: SizedBox(width: 44, child: ExerciseMedia(ex: ex, height: 44, radius: 10)),
-        ),
-        const SizedBox(width: 12),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Semantics(
-                button: true,
-                label: t.planSets,
-                child: GestureDetector(
-                  behavior: HitTestBehavior.opaque,
-                  onTap: () => _openPlan(ex),
-                  child: Row(children: [
-                    Flexible(
-                      child: Text(exerciseName(ex),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: AppTheme.f(14, weight: FontWeight.w600, color: gc.text)),
-                    ),
-                    const SizedBox(width: 5),
-                    Icon(PhosphorIconsRegular.slidersHorizontal,
-                        size: 13, color: plan.isEmpty ? gc.textTertiary : gc.ember),
-                  ]),
-                ),
-              ),
-              if (inChain) ...[
-                const SizedBox(height: 2),
-                Text(t.superset.toUpperCase(),
-                    style: AppTheme.f(9.5, weight: FontWeight.w700, color: gc.brass, letterSpacing: 1)),
-              ],
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (inChain) ...[
               const SizedBox(height: 2),
-              StepperControl(
-                value: t.setCount(fit.routineSets(routine, ex.id)),
-                minWidth: 62,
-                btnSize: 24,
-                gap: 8,
-                fontSize: 12,
-                btnRadius: 7,
-                onDec: () => fit.bumpRoutineSets(_id, ex.id, -1),
-                onInc: () => fit.bumpRoutineSets(_id, ex.id, 1),
-              ),
-              if (plan.isNotEmpty) ...[
-                const SizedBox(height: 3),
-                Text(_planLine(plan),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: AppTheme.f(11, weight: FontWeight.w500, color: gc.textSecondary)),
-              ],
+              Text(t.superset.toUpperCase(),
+                  style: AppTheme.f(9.5, weight: FontWeight.w700, color: gc.brass, letterSpacing: 1)),
             ],
-          ),
+            const SizedBox(height: 2),
+            StepperControl(
+              value: t.setCount(fit.routineSets(routine, ex.id)),
+              minWidth: 62,
+              btnSize: 24,
+              gap: 8,
+              fontSize: 12,
+              btnRadius: 7,
+              onDec: () => fit.bumpRoutineSets(_id, ex.id, -1),
+              onInc: () => fit.bumpRoutineSets(_id, ex.id, 1),
+            ),
+            if (plan.isNotEmpty) ...[
+              const SizedBox(height: 3),
+              Text(_planLine(plan),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: AppTheme.f(11, weight: FontWeight.w500, color: gc.ember)),
+            ],
+          ],
         ),
-        if (index < routine.exerciseIds.length - 1)
-          Semantics(
-            button: true,
-            toggled: routine.chained.contains(ex.id),
-            label: t.supersetLink,
-            child: GestureDetector(
-              behavior: HitTestBehavior.opaque,
-              onTap: () => fit.toggleChain(_id, ex.id),
-              child: SizedBox(
-                width: 38,
-                height: 44,
-                child: Center(
-                  child: Icon(
-                    routine.chained.contains(ex.id)
-                        ? PhosphorIconsFill.link
-                        : PhosphorIconsRegular.link,
-                    size: 17,
-                    color: routine.chained.contains(ex.id) ? gc.ember : gc.textTertiary,
+        trailing: Row(mainAxisSize: MainAxisSize.min, children: [
+          if (index < routine.exerciseIds.length - 1)
+            Semantics(
+              button: true,
+              toggled: routine.chained.contains(ex.id),
+              label: t.supersetLink,
+              child: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: () => fit.toggleChain(_id, ex.id),
+                child: SizedBox(
+                  width: 38,
+                  height: GymSpace.minTarget,
+                  child: Center(
+                    child: Icon(
+                      routine.chained.contains(ex.id) ? PhosphorIconsFill.link : PhosphorIconsRegular.link,
+                      size: 17,
+                      color: routine.chained.contains(ex.id) ? gc.ember : gc.textTertiary,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        Semantics(
-          button: true,
-          label: t.removeFromRoutine,
-          child: GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: () => _remove(ex),
-            child: SizedBox(
-              width: 38,
-              height: 44,
-              child: Center(child: Icon(PhosphorIconsRegular.trash, size: 18, color: gc.textTertiary)),
+          Semantics(
+            button: true,
+            label: t.removeFromRoutine,
+            child: GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: () => _remove(ex),
+              child: SizedBox(
+                width: 38,
+                height: GymSpace.minTarget,
+                child: Center(child: Icon(PhosphorIconsRegular.trash, size: 18, color: gc.textTertiary)),
+              ),
             ),
           ),
-        ),
-      ]),
+        ]),
+      ),
     );
   }
 
   Widget _pickRow(GymColors gc, Exercise ex) {
     final inRoutine = fit.routineHas(_id, ex.id);
-    return GestureDetector(
-      onTap: () => fit.toggleRoutineExercise(_id, ex.id),
-      onLongPress: () => showExercisePreview(context, ex),
-      behavior: HitTestBehavior.opaque,
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 8),
-        padding: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          color: gc.bgRaised,
-          border: Border.all(color: inRoutine ? gc.ember : gc.border),
-          borderRadius: BorderRadius.circular(GymRadius.md),
+    return Padding(
+      padding: const EdgeInsets.only(bottom: GymSpace.sm),
+      child: ExerciseCard(
+        exercise: ex,
+        selected: inRoutine,
+        onTap: () => fit.toggleRoutineExercise(_id, ex.id),
+        onLongPress: () => showExercisePreview(context, ex),
+        onThumbTap: () => showExercisePreview(context, ex),
+        trailing: Container(
+          width: 30,
+          height: 30,
+          decoration: BoxDecoration(
+            color: inRoutine ? gc.ember : Colors.transparent,
+            shape: BoxShape.circle,
+            border: Border.all(color: inRoutine ? gc.ember : gc.border, width: 2),
+          ),
+          child: inRoutine
+              ? SvgPathIcon(Ic.checkBold, size: 14, color: gc.onEmber)
+              : Icon(PhosphorIconsRegular.plus, size: 15, color: gc.textSecondary),
         ),
-        child: Row(children: [
-          GestureDetector(
-            onTap: () => showExercisePreview(context, ex),
-            child: SizedBox(width: 44, child: ExerciseMedia(ex: ex, height: 44, radius: 10)),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(exerciseName(ex), style: AppTheme.f(14, weight: FontWeight.w600, color: gc.text)),
-                const SizedBox(height: 2),
-                Text('${muscleLabel(ex.primary)} · ${t.equipment(ex.equipment)}', style: AppTheme.f(12, weight: FontWeight.w500, color: gc.textSecondary)),
-              ],
-            ),
-          ),
-          Container(
-            width: 30,
-            height: 30,
-            decoration: BoxDecoration(
-              color: inRoutine ? gc.ember : Colors.transparent,
-              shape: BoxShape.circle,
-              border: Border.all(color: inRoutine ? gc.ember : gc.border, width: 2),
-            ),
-            child: inRoutine
-                ? SvgPathIcon(Ic.checkBold, size: 14, color: gc.onEmber)
-                : Icon(PhosphorIconsRegular.plus, size: 15, color: gc.textSecondary),
-          ),
-        ]),
       ),
     );
   }

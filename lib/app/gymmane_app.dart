@@ -1,3 +1,4 @@
+import 'brand.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -10,14 +11,14 @@ import 'app_shell.dart';
 class GymManeApp extends StatelessWidget {
   const GymManeApp({super.key});
 
-  static const maxTextScale = 1.15;
+  static const maxTextScale = 2.0;
 
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: fit,
       builder: (context, _) => MaterialApp(
-        title: 'GymMane',
+        title: kAppName,
         debugShowCheckedModeBanner: false,
         theme: AppTheme.light,
         darkTheme: AppTheme.dark,

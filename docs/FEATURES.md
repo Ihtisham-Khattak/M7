@@ -97,7 +97,7 @@ Route `session`. A 5-second start countdown overlay (`countdownUntil`, disabled 
 "Step out" (`stepOutOfSession`) pauses and parks the session; a pill above the nav bar resumes it. The session survives app kill and reboot.
 
 ### Implementation
-State: `WorkoutState` (see [ARCHITECTURE.md](ARCHITECTURE.md) §5). UI: `lib/screens/session_screen.dart` (`SessionScreen`, `_ExerciseStage`, `_LockGuard`, `_HoldToUnlock`, `_Celebrate`), `widgets/timer_panel.dart`, `start_countdown.dart`, `set_kind.dart`, `stopwatch_card.dart` (used on exercise detail). Model: `lib/models/live_session.dart`.
+State: `WorkoutState` (see [ARCHITECTURE.md](ARCHITECTURE.md) §5). UI: `lib/screens/session_screen.dart` + `lib/screens/session/*` (`SessionScreen`, `_ExerciseStage`, `_LockGuard`, `_HoldToUnlock`, `_Celebrate`), `widgets/timer_panel.dart`, `start_countdown.dart`, `set_kind.dart`, `stopwatch_card.dart` (used on exercise detail). Model: `lib/models/live_session.dart`.
 
 ### Business Rules
 - **Opening sets** (`_openingSets` / `_workingOpeners`): from the routine plan if present (`_fromPlan`, warm-ups get 50% of first working weight rounded to `weightStep`); otherwise mirror the last logged working sets of that exercise (+ `progressStep` if every previous working set reached the first set's reps — `_progressBump`); otherwise 3×10 at 20 kg (0 for reps-only). Mode exercises use `_modeOpeners` (cardio default 1200 s, time default 30 s ×3). Optional auto warm-up (`warmsUp(id)`): 40%×10, 60%×5, 80%×3 of the top weight rounded to the unit step (`_warmupSpec`), or a half-reps set for bodyweight.
@@ -174,7 +174,7 @@ Review, fix and manage past workouts.
 Progress screen calendar/heatmap → `_DaySheet` for a date: day summary (`daySummary`), list of sessions, delete session, resume a logged session (`resumeLoggedSession`), edit exercise sets (reps/weight steppers, add/remove set, remove exercise), log a workout on that day.
 
 ### Implementation
-`progress_screen.dart` (`_DaySheet` and editors ~L1266–1700), `stats_state.dart` (`deleteSession`, `deleteLoggedExercise`, `setLoggedReps`, `setLoggedWeight`, `addLoggedSet`, `removeLoggedSet`), `workout_state.dart` (`resumeLoggedSession`).
+`progress_screen.dart` + `progress/day_sheet.dart`, `progress/log_sheets.dart` (`_DaySheet` and editors), `stats_state.dart` (`deleteSession`, `deleteLoggedExercise`, `setLoggedReps`, `setLoggedWeight`, `addLoggedSet`, `removeLoggedSet`), `workout_state.dart` (`resumeLoggedSession`).
 
 ### Business Rules
 - Removing the last set of an exercise removes the exercise; removing the last exercise removes the session.
@@ -348,7 +348,7 @@ Move plans between people/tools, including LLMs, without any network access.
 Show training consistency and load, computed only from logged data.
 
 ### User Flow
-Home: focus card, week strip with check-ins, today's routine, weekly numbers, recommended exercises, photo-due card, folders (routines/tools/notes), snapshots. Progress: weekly goal ring, streak, 30-day cumulative volume chart with % change, activity heatmap (84 days, 4 levels, selectable colour tone), all-time totals (sessions / sets / time), muscle-split and radar cards, records, strength curves, bodyweight, and entry points to measures and the photo timeline. Profile: level, this-year sessions per month chart, best month, months trained, lifted volume, all-time trained time / sets / lifted, medals.
+Home (GM-16, workout-first, four sections by default): header (date + streak chip) → **Today's focus** (`WorkoutCard`: routine or suggested focus, the two most-trained muscles, exercise count, estimated time, status Planned/Done, one Start button; rules in `services/home_focus.dart` — time = Σ sets × (45 s + the exercise's rest), rounded to 5 min, shown as "~N min") → **This week** (week strip with check-ins, workouts / volume / PRs, weekly-goal ring that opens the goal sheet) → **shortcuts** (Routines, Tools, Journal). Conditional banners: personalize nudge, photo-due. Opt-in section: recommended exercises (setting *Recommended*, now off by default; existing choices are kept). The heat-map and snapshots moved off Home: heat-map = Progress (1 tap), snapshots = Profile (1 tap). Progress: weekly goal ring, streak, 30-day cumulative volume chart with % change, activity heatmap (84 days, 4 levels, selectable colour tone), all-time totals (sessions / sets / time), muscle-split and radar cards, records, strength curves, bodyweight, and entry points to measures and the photo timeline. Profile: level, this-year sessions per month chart, best month, months trained, lifted volume, all-time trained time / sets / lifted, medals.
 
 ### Implementation
 `stats_state.dart`, `fit_core.dart` (`heatLevel`, `kHeatmapDays = 84`), `screens/home_screen.dart`, `progress_screen.dart`, `widgets/charts.dart`.

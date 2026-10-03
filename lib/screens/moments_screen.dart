@@ -13,6 +13,7 @@ import '../theme/app_theme.dart';
 import '../theme/tokens.dart';
 import '../widgets/dialogs.dart';
 import '../widgets/photo_source_sheet.dart';
+import '../widgets/states.dart';
 import '../widgets/ui_kit.dart';
 
 class MomentsScreen extends StatefulWidget {
@@ -193,28 +194,15 @@ class _MomentsScreenState extends State<MomentsScreen> {
     );
   }
 
-  Widget _empty(GymColors gc) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(PhosphorIconsRegular.camera, size: 34, color: gc.textTertiary),
-          const SizedBox(height: 14),
-          Text(t.momentsEmptyTitle, style: AppTheme.f(16, color: gc.text)),
-          const SizedBox(height: 6),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40),
-            child: Text(t.momentsEmptyHint,
-                textAlign: TextAlign.center,
-                style: AppTheme.f(12.5,
-                    weight: FontWeight.w500, color: gc.textTertiary, height: 1.45)),
-          ),
-          const SizedBox(height: 18),
-          GhostButton(label: t.snapNow, icon: PhosphorIconsRegular.camera, onTap: _add),
-        ],
-      ),
-    );
-  }
+  Widget _empty(GymColors gc) => Center(
+        child: EmptyState(
+          icon: PhosphorIconsRegular.camera,
+          title: t.momentsEmptyTitle,
+          body: t.momentsEmptyHint,
+          actionLabel: t.snapNow,
+          onAction: _add,
+        ),
+      );
 
   Widget _tile(GymColors gc, Moment moment) {
     final path = MediaStore.pathFor(moment.file) ?? '';

@@ -119,11 +119,13 @@ class NoteCalendar extends StatelessWidget {
         child: GestureDetector(
           behavior: HitTestBehavior.opaque,
           onTap: onTap,
-          child: Container(
-            width: 34,
-            height: 34,
-            decoration: BoxDecoration(color: gc.bgRaised2, shape: BoxShape.circle),
-            child: Icon(icon, size: 13, color: gc.text),
+          child: MinTarget(
+            child: Container(
+              width: 34,
+              height: 34,
+              decoration: BoxDecoration(color: gc.bgRaised2, shape: BoxShape.circle),
+              child: Icon(icon, size: 13, color: gc.text),
+            ),
           ),
         ),
       );

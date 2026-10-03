@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
 import '../theme/tokens.dart';
+import 'ui_kit.dart';
 import 'rolling_text.dart';
 
 String clockLabel(int seconds) {
@@ -60,7 +61,7 @@ class TimerPanel extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             SizedBox(
-              height: 40,
+              height: GymSpace.minTarget,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
@@ -100,9 +101,12 @@ class TimerPanel extends StatelessWidget {
                       Expanded(child: _stat(gc, elapsed, elapsedLabel, CrossAxisAlignment.start)),
                       Column(
                         children: [
-                          RollingText(clockLabel(remaining),
-                              countsDown: true,
-                              style: AppTheme.f(36, weight: FontWeight.w800, color: gc.text, height: 1.05)),
+                          MediaQuery.withClampedTextScaling(
+                            maxScaleFactor: 1.3,
+                            child: RollingText(clockLabel(remaining),
+                                countsDown: true,
+                                style: AppTheme.f(36, weight: FontWeight.w800, color: gc.text, height: 1.05)),
+                          ),
                           const SizedBox(height: 4),
                           Text(hint.toUpperCase(),
                               style: AppTheme.f(10, weight: FontWeight.w800, color: accent, letterSpacing: 1.6)),
@@ -123,7 +127,11 @@ class TimerPanel extends StatelessWidget {
   Widget _stat(GymColors gc, String value, String caption, CrossAxisAlignment align) => Column(
         crossAxisAlignment: align,
         children: [
-          RollingText(value, style: AppTheme.f(19, weight: FontWeight.w800, color: gc.text, height: 1.1)),
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: align == CrossAxisAlignment.end ? Alignment.centerRight : Alignment.centerLeft,
+            child: RollingText(value, style: AppTheme.f(19, weight: FontWeight.w800, color: gc.text, height: 1.1)),
+          ),
           const SizedBox(height: 3),
           Text(caption.toUpperCase(),
               style: AppTheme.f(9.5, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.5)),
@@ -141,13 +149,17 @@ class TimerPanel extends StatelessWidget {
           HapticFeedback.selectionClick();
           onTap();
         },
-        child: Container(
-          width: 56,
-          height: 32,
-          margin: const EdgeInsets.only(bottom: 4),
-          alignment: Alignment.center,
-          decoration: BoxDecoration(color: gc.bgRaised, borderRadius: BorderRadius.circular(100)),
-          child: Text(glyph, style: AppTheme.f(12.5, weight: FontWeight.w800, color: gc.textSecondary)),
+        child: MinTarget(
+          minWidth: 56,
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            width: 56,
+            height: 32,
+            margin: const EdgeInsets.only(bottom: 4),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(color: gc.bgRaised, borderRadius: BorderRadius.circular(100)),
+            child: Text(glyph, style: AppTheme.f(12.5, weight: FontWeight.w800, color: gc.textSecondary)),
+          ),
         ),
       ),
     );

@@ -10,6 +10,8 @@ import '../theme/app_theme.dart';
 import '../theme/tokens.dart';
 import '../widgets/dialogs.dart';
 import '../widgets/glass.dart';
+import '../widgets/states.dart';
+import '../widgets/components.dart';
 import '../widgets/ui_kit.dart';
 
 class PlacesScreen extends StatelessWidget {
@@ -74,55 +76,23 @@ class PlacesScreen extends StatelessWidget {
     );
   }
 
-  Widget _empty(BuildContext context, GymColors gc) => Container(
-        margin: const EdgeInsets.only(bottom: 16),
-        padding: const EdgeInsets.fromLTRB(20, 22, 20, 20),
-        decoration: BoxDecoration(
-          color: gc.bgRaised,
-          border: Border.all(color: gc.border),
-          borderRadius: BorderRadius.circular(GymRadius.lg),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+  Widget _empty(BuildContext context, GymColors gc) => EmptyState(
+        icon: PhosphorIconsRegular.mapPin,
+        title: t.placeEmptyTitle,
+        body: t.placeEmptyBody,
+        child: Row(
           children: [
-            Text(t.placeEmptyTitle,
-                style: AppTheme.d(17, weight: FontWeight.w700, color: gc.text)),
-            const SizedBox(height: 6),
-            Text(t.placeEmptyBody,
-                style: AppTheme.s(13, color: gc.textSecondary, height: 1.5)),
-            const SizedBox(height: 16),
-            Row(
-              children: [
-                for (final preset in kPlacePresets) ...[
-                  if (preset != kPlacePresets.first) const SizedBox(width: 8),
-                  Expanded(
-                    child: GestureDetector(
-                      behavior: HitTestBehavior.opaque,
-                      onTap: () => fit.setActivePlace(fit.addPresetPlace(preset)),
-                      child: Container(
-                        height: 44,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: gc.bgRaised2,
-                          border: Border.all(color: gc.border),
-                          borderRadius: BorderRadius.circular(GymRadius.md),
-                        ),
-                        child: FittedBox(
-                          fit: BoxFit.scaleDown,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8),
-                            child: Text(t.placePresetName(preset),
-                                maxLines: 1,
-                                style: AppTheme.s(13,
-                                    weight: FontWeight.w600, color: gc.text)),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ],
-            ),
+            for (final preset in kPlacePresets) ...[
+              if (preset != kPlacePresets.first) const SizedBox(width: GymSpace.sm),
+              Expanded(
+                child: GymButton(
+                  label: t.placePresetName(preset),
+                  kind: GymButtonKind.secondary,
+                  size: GymButtonSize.compact,
+                  onTap: () => fit.setActivePlace(fit.addPresetPlace(preset)),
+                ),
+              ),
+            ],
           ],
         ),
       );
