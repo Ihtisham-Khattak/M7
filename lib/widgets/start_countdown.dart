@@ -140,7 +140,7 @@ class _StartCountdownState extends State<StartCountdown> with TickerProviderStat
                         ),
                       const Spacer(flex: 4),
                       Text(t.countdownSkip,
-                          style: AppTheme.f(12.5, weight: FontWeight.w600, color: gc.textTertiary)),
+                          style: AppTheme.f(12, weight: FontWeight.w600, color: gc.textTertiary)),
                       const SizedBox(height: 28),
                     ],
                   ),

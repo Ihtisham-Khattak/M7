@@ -384,7 +384,7 @@ class SettingsScreen extends StatelessWidget {
             padding: sheetPad(sheet),
             decoration: BoxDecoration(
               color: gc.bgRaised,
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(GymRadius.xxl)),
             ),
             child: SingleChildScrollView(
               child: Column(
@@ -411,7 +411,7 @@ class SettingsScreen extends StatelessWidget {
                     const SizedBox(height: 12),
                     Text(hint,
                         textAlign: TextAlign.center,
-                        style: AppTheme.f(11.5, weight: FontWeight.w500, color: gc.textTertiary, height: 1.4)),
+                        style: AppTheme.f(11, weight: FontWeight.w500, color: gc.textTertiary, height: 1.4)),
                   ],
                 ],
               ),
@@ -554,7 +554,7 @@ class SettingsScreen extends StatelessWidget {
         padding: sheetPad(sheet),
         decoration: BoxDecoration(
           color: gc.bgRaised,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(GymRadius.xxl)),
         ),
         child: SingleChildScrollView(
           child: Column(
@@ -566,7 +566,7 @@ class SettingsScreen extends StatelessWidget {
               SheetTitle(t.importFromApp),
               const SizedBox(height: 16),
               Text(t.importApps,
-                  style: AppTheme.f(10, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.5)),
+                  style: AppTheme.f(11, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.5)),
               const SizedBox(height: 10),
               ClipRRect(
                 borderRadius: BorderRadius.circular(GymRadius.lg),
@@ -588,7 +588,7 @@ class SettingsScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 12),
-              Text(t.importHint, style: AppTheme.f(11.5, weight: FontWeight.w500, color: gc.textTertiary, height: 1.4)),
+              Text(t.importHint, style: AppTheme.f(11, weight: FontWeight.w500, color: gc.textTertiary, height: 1.4)),
               const SizedBox(height: 18),
               PrimaryButton(
                 label: t.chooseFile,
@@ -633,13 +633,13 @@ class SettingsScreen extends StatelessWidget {
         children: [
           SizedBox(
             width: 80,
-            child: Text(name, style: AppTheme.f(14.5, weight: FontWeight.w700, color: gc.text)),
+            child: Text(name, style: AppTheme.f(14, weight: FontWeight.w700, color: gc.text)),
           ),
           const SizedBox(width: 8),
           Expanded(
             child: Text(what,
                 textAlign: TextAlign.right,
-                style: AppTheme.f(12.5, weight: FontWeight.w500, color: gc.textSecondary, height: 1.35)),
+                style: AppTheme.f(12, weight: FontWeight.w500, color: gc.textSecondary, height: 1.35)),
           ),
         ],
       ),
@@ -726,7 +726,7 @@ class SettingsScreen extends StatelessWidget {
       context: context,
       builder: (dctx) => appDialog(
         gc,
-        title: Text(t.importUnitTitle, style: AppTheme.f(18, weight: FontWeight.w700, color: gc.text)),
+        title: Text(t.importUnitTitle, style: AppTheme.f(17, weight: FontWeight.w700, color: gc.text)),
         content: Text(t.importUnitBody, style: AppTheme.f(13, weight: FontWeight.w500, color: gc.textSecondary)),
         actions: [
           dialogAction('kg', gc.accent, () => Navigator.of(dctx).pop(false)),
@@ -790,7 +790,7 @@ class SettingsScreen extends StatelessWidget {
           padding: sheetPad(sheet),
           decoration: BoxDecoration(
             color: gc.bgRaised,
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(GymRadius.xxl)),
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -811,7 +811,7 @@ class SettingsScreen extends StatelessWidget {
                 Text(_habitLabel(sheet) ?? t.reminderSmartEmpty,
                     textAlign: TextAlign.center,
                     style: _habitLabel(sheet) == null
-                        ? AppTheme.f(12.5, weight: FontWeight.w500, color: gc.textSecondary)
+                        ? AppTheme.f(12, weight: FontWeight.w500, color: gc.textSecondary)
                         : AppTheme.f(22, weight: FontWeight.w700, color: gc.ember)),
                 const SizedBox(height: 12),
                 Text(t.reminderSmartHint,
@@ -849,7 +849,7 @@ class SettingsScreen extends StatelessWidget {
               const SizedBox(height: 8),
               Text(_clockLabel(sheet, minutes),
                   textAlign: TextAlign.center,
-                  style: AppTheme.f(12.5, weight: FontWeight.w600, color: gc.ember)),
+                  style: AppTheme.f(12, weight: FontWeight.w600, color: gc.ember)),
               const SizedBox(height: 14),
               Text(t.trainReminderHint,
                   textAlign: TextAlign.center,
@@ -908,7 +908,7 @@ class SettingsScreen extends StatelessWidget {
             padding: sheetPad(sheet),
             decoration: BoxDecoration(
               color: gc.bgRaised,
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(GymRadius.xxl)),
             ),
             child: SingleChildScrollView(
               child: Column(
@@ -937,7 +937,7 @@ class SettingsScreen extends StatelessWidget {
                         t.bgPhoto,
                         selected: fit.bgPattern == 'photo',
                         leading: ClipRRect(
-                          borderRadius: BorderRadius.circular(6),
+                          borderRadius: BorderRadius.circular(GymRadius.xs),
                           child: Image.file(File(photo),
                               width: 26,
                               height: 20,
@@ -964,7 +964,7 @@ class SettingsScreen extends StatelessWidget {
                     const SizedBox(height: 6),
                     Text(t.bgDragHint,
                         textAlign: TextAlign.center,
-                        style: AppTheme.f(11.5, weight: FontWeight.w500, color: gc.textTertiary, height: 1.4)),
+                        style: AppTheme.f(11, weight: FontWeight.w500, color: gc.textTertiary, height: 1.4)),
                     const SizedBox(height: 10),
                     GymSlider(
                       label: t.bgZoom,
@@ -1001,7 +1001,7 @@ class SettingsScreen extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(t.bgGuardHint,
                         textAlign: TextAlign.center,
-                        style: AppTheme.f(11.5, weight: FontWeight.w500, color: gc.textTertiary, height: 1.4)),
+                        style: AppTheme.f(11, weight: FontWeight.w500, color: gc.textTertiary, height: 1.4)),
                     const SizedBox(height: 14),
                   ],
                   GhostButton(
@@ -1028,7 +1028,7 @@ class SettingsScreen extends StatelessWidget {
                   const SizedBox(height: 6),
                   Text(t.bgPhotoHint,
                       textAlign: TextAlign.center,
-                      style: AppTheme.f(11.5, weight: FontWeight.w500, color: gc.textTertiary, height: 1.4)),
+                      style: AppTheme.f(11, weight: FontWeight.w500, color: gc.textTertiary, height: 1.4)),
                   const SizedBox(height: 16),
                   PrimaryButton(label: t.done, onTap: () => Navigator.of(sheet).pop()),
                 ],
@@ -1142,7 +1142,7 @@ class _LanguageSheet extends StatelessWidget {
       padding: sheetPad(context),
       decoration: BoxDecoration(
         color: context.gc.bgRaised,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(GymRadius.xxl)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -1188,7 +1188,7 @@ class _AlarmSoundSheet extends StatelessWidget {
       padding: sheetPad(context),
       decoration: BoxDecoration(
         color: context.gc.bgRaised,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(GymRadius.xxl)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -1244,7 +1244,7 @@ class _ProfileSheetState extends State<_ProfileSheet> {
       padding: EdgeInsets.fromLTRB(20, 12, 20, 20 + MediaQuery.of(context).viewInsets.bottom + MediaQuery.paddingOf(context).bottom),
       decoration: BoxDecoration(
         color: gc.bgRaised,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(GymRadius.xxl)),
       ),
       child: SingleChildScrollView(
         child: Column(

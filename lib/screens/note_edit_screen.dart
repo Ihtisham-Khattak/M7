@@ -149,11 +149,11 @@ class _NoteEditScreenState extends State<NoteEditScreen> {
                       textCapitalization: TextCapitalization.sentences,
                       onChanged: (_) => setState(() {}),
                       cursorColor: gc.accent,
-                      style: AppTheme.f(14.5, weight: FontWeight.w500, color: gc.text, height: 1.45),
+                      style: AppTheme.f(14, weight: FontWeight.w500, color: gc.text, height: 1.45),
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: t.notePlaceholder,
-                        hintStyle: AppTheme.f(14.5, weight: FontWeight.w500, color: gc.textTertiary),
+                        hintStyle: AppTheme.f(14, weight: FontWeight.w500, color: gc.textTertiary),
                         counterStyle: AppTheme.f(11, weight: FontWeight.w500, color: gc.textTertiary),
                       ),
                     ),
@@ -242,7 +242,7 @@ class _NoteEditScreenState extends State<NoteEditScreen> {
               children: [
                 Icon(icon, size: 19, color: gc.textSecondary),
                 const SizedBox(width: 14),
-                Text(sentenceCase(label), style: AppTheme.f(14.5, weight: FontWeight.w500, color: gc.text)),
+                Text(sentenceCase(label), style: AppTheme.f(14, weight: FontWeight.w500, color: gc.text)),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Text(value,
@@ -293,7 +293,7 @@ class _NoteEditScreenState extends State<NoteEditScreen> {
                 children: [
                   Icon(PhosphorIconsRegular.images, size: 20, color: gc.textSecondary),
                   const SizedBox(height: 5),
-                  Text(t.noteAttach, style: AppTheme.f(10.5, weight: FontWeight.w500, color: gc.textTertiary)),
+                  Text(t.noteAttach, style: AppTheme.f(11, weight: FontWeight.w500, color: gc.textTertiary)),
                 ],
               ),
             ),
@@ -350,7 +350,7 @@ class _ExercisePickerSheetState extends State<_ExercisePickerSheet> {
         padding: sheetPad(context, bottom: 16),
         decoration: BoxDecoration(
           color: gc.bgRaised,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(GymRadius.xxl)),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,

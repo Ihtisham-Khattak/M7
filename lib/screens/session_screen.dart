@@ -240,12 +240,12 @@ class SessionScreen extends StatelessWidget {
         if (fit.inSuperset) ...[
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-            decoration: BoxDecoration(color: gc.bgRaised2, borderRadius: BorderRadius.circular(100)),
+            decoration: BoxDecoration(color: gc.bgRaised2, borderRadius: BorderRadius.circular(GymRadius.pill)),
             child: Row(mainAxisSize: MainAxisSize.min, children: [
               Icon(PhosphorIconsRegular.link, size: 11, color: gc.brass),
               const SizedBox(width: 5),
               Text(t.superset,
-                  style: AppTheme.f(10.5, weight: FontWeight.w700, color: gc.brass, letterSpacing: 0.5)),
+                  style: AppTheme.f(11, weight: FontWeight.w700, color: gc.brass, letterSpacing: 0.5)),
             ]),
           ),
           const SizedBox(height: 8),
@@ -255,7 +255,7 @@ class SessionScreen extends StatelessWidget {
         const SizedBox(height: 8),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-          decoration: BoxDecoration(color: gc.emberSoft, borderRadius: BorderRadius.circular(100)),
+          decoration: BoxDecoration(color: gc.emberSoft, borderRadius: BorderRadius.circular(GymRadius.pill)),
           child: Text(muscleLabel(ex?.primary ?? ''),
               style: AppTheme.f(12, weight: FontWeight.w600, color: gc.ember)),
         ),
@@ -304,7 +304,7 @@ class SessionScreen extends StatelessWidget {
                   Icon(PhosphorIconsRegular.listBullets, size: 14, color: gc.textSecondary),
                   const SizedBox(width: 5),
                   Text(t.allExercisesShort,
-                      style: AppTheme.f(11.5, weight: FontWeight.w600, color: gc.textSecondary)),
+                      style: AppTheme.f(11, weight: FontWeight.w600, color: gc.textSecondary)),
                 ]),
             ]),
             const SizedBox(height: 9),
@@ -318,7 +318,7 @@ class SessionScreen extends StatelessWidget {
                     height: i == s.currentIndex ? 6 : 4,
                     decoration: BoxDecoration(
                       color: _stripColor(gc, s, i),
-                      borderRadius: BorderRadius.circular(3),
+                      borderRadius: BorderRadius.circular(GymRadius.hair),
                     ),
                   ),
                 ),
@@ -404,7 +404,7 @@ class SessionScreen extends StatelessWidget {
                   if (!target.up)
                     TextSpan(
                         text: ' · ${t.nextHold}',
-                        style: AppTheme.f(11.5, weight: FontWeight.w400, color: gc.textTertiary)),
+                        style: AppTheme.f(11, weight: FontWeight.w400, color: gc.textTertiary)),
                 ],
               ),
             ),

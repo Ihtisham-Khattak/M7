@@ -130,7 +130,7 @@ class StepProgress extends StatelessWidget {
   Widget build(BuildContext context) {
     final gc = context.gc;
     return Semantics(
-      label: '${index + 1} / $count',
+      label: '${(index + 1).clamp(0, count)} / $count',
       excludeSemantics: true,
       child: Row(
         children: [

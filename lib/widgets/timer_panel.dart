@@ -74,7 +74,7 @@ class TimerPanel extends StatelessWidget {
                       alignment: Alignment.topCenter,
                       decoration: BoxDecoration(
                         color: gc.bgRaised2,
-                        borderRadius: const BorderRadius.vertical(top: Radius.circular(18)),
+                        borderRadius: const BorderRadius.vertical(top: Radius.circular(GymRadius.lg)),
                       ),
                       child: Text(label.toUpperCase(),
                           style: AppTheme.f(11, weight: FontWeight.w800, color: gc.text, letterSpacing: 2)),
@@ -109,7 +109,7 @@ class TimerPanel extends StatelessWidget {
                           ),
                           const SizedBox(height: 4),
                           Text(hint.toUpperCase(),
-                              style: AppTheme.f(10, weight: FontWeight.w800, color: accent, letterSpacing: 1.6)),
+                              style: AppTheme.f(11, weight: FontWeight.w800, color: accent, letterSpacing: 1.6)),
                         ],
                       ),
                       Expanded(child: _stat(gc, sets, setsLabel, CrossAxisAlignment.end)),
@@ -130,11 +130,11 @@ class TimerPanel extends StatelessWidget {
           FittedBox(
             fit: BoxFit.scaleDown,
             alignment: align == CrossAxisAlignment.end ? Alignment.centerRight : Alignment.centerLeft,
-            child: RollingText(value, style: AppTheme.f(19, weight: FontWeight.w800, color: gc.text, height: 1.1)),
+            child: RollingText(value, style: AppTheme.f(20, weight: FontWeight.w800, color: gc.text, height: 1.1)),
           ),
           const SizedBox(height: 3),
           Text(caption.toUpperCase(),
-              style: AppTheme.f(9.5, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.5)),
+              style: AppTheme.f(11, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.5)),
         ],
       );
 
@@ -157,8 +157,8 @@ class TimerPanel extends StatelessWidget {
             height: 32,
             margin: const EdgeInsets.only(bottom: 4),
             alignment: Alignment.center,
-            decoration: BoxDecoration(color: gc.bgRaised, borderRadius: BorderRadius.circular(100)),
-            child: Text(glyph, style: AppTheme.f(12.5, weight: FontWeight.w800, color: gc.textSecondary)),
+            decoration: BoxDecoration(color: gc.bgRaised, borderRadius: BorderRadius.circular(GymRadius.pill)),
+            child: Text(glyph, style: AppTheme.f(12, weight: FontWeight.w800, color: gc.textSecondary)),
           ),
         ),
       ),
@@ -192,7 +192,7 @@ class _Ticks extends StatelessWidget {
                 height: i < drained ? 14 : 22,
                 decoration: BoxDecoration(
                   color: i < drained ? dim : lit,
-                  borderRadius: BorderRadius.circular(2),
+                  borderRadius: BorderRadius.circular(GymRadius.hair),
                 ),
               ),
           ],

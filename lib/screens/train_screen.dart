@@ -53,7 +53,7 @@ class _TrainScreenState extends State<TrainScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 RoundBtn(icon: Ic.closeThin, onTap: fit.closeTrain),
-                Text(titleCase(t.train), style: AppTheme.f(18, weight: FontWeight.w800, color: gc.text)),
+                Text(titleCase(t.train), style: AppTheme.f(17, weight: FontWeight.w800, color: gc.text)),
                 const SizedBox(width: 36),
               ],
             ),
@@ -98,10 +98,10 @@ class _TrainScreenState extends State<TrainScreen> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(t.step1.toUpperCase(),
-            style: AppTheme.f(10.5,
+            style: AppTheme.f(11,
                 weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.5)),
         const SizedBox(height: 4),
-        Text(t.chooseFocus, style: AppTheme.f(28, weight: FontWeight.w800, color: gc.text)),
+        Text(sentenceCase(t.chooseFocus), style: AppTheme.f(28, weight: FontWeight.w800, color: gc.text)),
         const SizedBox(height: 18),
         Container(
           padding: const EdgeInsets.all(14),
@@ -139,7 +139,7 @@ class _TrainScreenState extends State<TrainScreen> {
         ),
         const SizedBox(height: 26),
         Text(t.orStartWith.toUpperCase(),
-            style: AppTheme.f(10.5, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.5)),
+            style: AppTheme.f(11, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.5)),
         const SizedBox(height: 10),
         IntrinsicHeight(
           child: Row(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
@@ -238,7 +238,7 @@ class _TrainScreenState extends State<TrainScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(t.step2.toUpperCase(),
-                      style: AppTheme.f(10.5,
+                      style: AppTheme.f(11,
                           weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.5)),
                   Text(t.buildSession,
                       maxLines: 2,
@@ -293,7 +293,7 @@ class _TrainScreenState extends State<TrainScreen> {
   Widget _sectionLabel(GymColors gc, String label) => Padding(
         padding: const EdgeInsets.only(bottom: 10, left: 2),
         child: Text(label.toUpperCase(),
-            style: AppTheme.f(10.5, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.3)),
+            style: AppTheme.f(11, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.3)),
       );
 
   Widget _gearChip(GymColors gc, String label, bool on, String? value) => Padding(
@@ -319,7 +319,7 @@ class _TrainScreenState extends State<TrainScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             decoration: BoxDecoration(
               color: gc.bgRaised,
-              borderRadius: BorderRadius.circular(100),
+              borderRadius: BorderRadius.circular(GymRadius.pill),
             ),
             child: Row(children: [
               SvgPathIcon(Ic.search, size: 16, color: gc.textSecondary),

@@ -30,7 +30,7 @@ extension _ProgressBodyCards on ProgressScreen {
                 ),
                 if (last != null && left != null)
                   Text(fit.photoDue ? t.photoDueNow : t.photoNextIn(left),
-                      style: AppTheme.s(11.5,
+                      style: AppTheme.s(11,
                           weight: FontWeight.w600,
                           color: fit.photoDue ? gc.accent : gc.textTertiary)),
                 const SizedBox(width: 8),
@@ -127,7 +127,7 @@ extension _ProgressBodyCards on ProgressScreen {
           Text(label,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: AppTheme.d(13.5, weight: FontWeight.w700, color: gc.text)),
+              style: AppTheme.d(13, weight: FontWeight.w700, color: gc.text)),
           const SizedBox(height: 8),
         ],
         SizedBox(
@@ -211,7 +211,7 @@ extension _ProgressBodyCards on ProgressScreen {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(t.measureName(key),
-              style: AppTheme.s(10.5, weight: FontWeight.w600, color: gc.textTertiary)),
+              style: AppTheme.s(11, weight: FontWeight.w600, color: gc.textTertiary)),
           const SizedBox(height: 3),
           Text(fit.measureLabel(key, latest.value),
               style: AppTheme.d(15, weight: FontWeight.w700, color: gc.text)),

@@ -371,6 +371,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tagline => 'Soft but not weak.';
 
   @override
+  String get progressStrength => 'Strength';
+
+  @override
+  String get progressBody => 'Body';
+
+  @override
+  String get progressMuscles => 'Muscles';
+
+  @override
+  String get progressAllTime => 'All time';
+
+  @override
+  String get progressRecordsEmpty => 'Log a session and your records appear here.';
+
+  @override
+  String get progressBodyEmpty => 'Add your weight, measurements or a photo and they appear here.';
+
+  @override
   String get totalVolume30d => 'TOTAL VOLUME · 30 DAYS';
 
   @override
@@ -1793,7 +1811,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get welcomeKicker => 'WELCOME TO';
 
   @override
-  String get welcomeBlurb => 'Everything stays on your phone. No account, no internet, nothing to pay.';
+  String get welcomeBlurb =>
+      'Kaizan means steady improvement. No extremes, just one honest session, then the next.';
 
   @override
   String get welcomeStart => 'GET STARTED';

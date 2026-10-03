@@ -126,7 +126,7 @@ class RoutinesScreen extends StatelessWidget {
         constraints: BoxConstraints(maxHeight: MediaQuery.sizeOf(sheet).height * 0.85),
         decoration: BoxDecoration(
           color: gc.bgRaised,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(GymRadius.xxl)),
         ),
         child: SingleChildScrollView(
           child: Column(
@@ -144,7 +144,7 @@ class RoutinesScreen extends StatelessWidget {
               }),
               const SizedBox(height: 14),
               Text(t.shareRoutine.toUpperCase(),
-                  style: AppTheme.f(10.5, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.3)),
+                  style: AppTheme.f(11, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.3)),
               const SizedBox(height: 8),
               for (final r in [
                 for (final group in fit.routineGroups) ...fit.routinesInGroup(group),
@@ -195,7 +195,7 @@ class RoutinesScreen extends StatelessWidget {
                 Text(hint,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: AppTheme.f(11.5, weight: FontWeight.w500, color: gc.textSecondary)),
+                    style: AppTheme.f(11, weight: FontWeight.w500, color: gc.textSecondary)),
               ],
             ),
           ),
@@ -216,7 +216,7 @@ class RoutinesScreen extends StatelessWidget {
         constraints: BoxConstraints(maxHeight: MediaQuery.sizeOf(sheet).height * 0.85),
         decoration: BoxDecoration(
           color: gc.bgRaised,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(GymRadius.xxl)),
         ),
         child: SingleChildScrollView(
           child: Column(
@@ -366,7 +366,7 @@ class RoutinesScreen extends StatelessWidget {
         padding: sheetPad(sheet),
         decoration: BoxDecoration(
           color: gc.bgRaised,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(GymRadius.xxl)),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -429,7 +429,7 @@ class RoutinesScreen extends StatelessWidget {
         padding: sheetPad(sheet),
         decoration: BoxDecoration(
           color: gc.bgRaised,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(GymRadius.xxl)),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -440,7 +440,7 @@ class RoutinesScreen extends StatelessWidget {
             SheetTitle(titleCase(t.setDay(t.weekday(weekday).toUpperCase()))),
             if (fit.multiPlan) ...[
               const SizedBox(height: 4),
-              Text(t.multiPlanHint, style: AppTheme.f(12.5, weight: FontWeight.w500, color: gc.textSecondary)),
+              Text(t.multiPlanHint, style: AppTheme.f(12, weight: FontWeight.w500, color: gc.textSecondary)),
             ],
             const SizedBox(height: 14),
             Flexible(

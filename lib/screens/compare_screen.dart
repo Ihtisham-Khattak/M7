@@ -75,7 +75,7 @@ class CompareScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(t.daysApart(fit.compareDays),
-                          style: AppTheme.d(18, weight: FontWeight.w700, color: gc.text)),
+                          style: AppTheme.d(17, weight: FontWeight.w700, color: gc.text)),
                       if (delta != null) ...[
                         const SizedBox(height: 2),
                         Text('${delta > 0 ? '+' : ''}${fmt(delta)} ${fit.units}',
@@ -148,7 +148,7 @@ class CompareScreen extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Text(t.shortDateYear(entry.date),
-            style: AppTheme.s(11.5, weight: FontWeight.w600, color: gc.textSecondary)),
+            style: AppTheme.s(11, weight: FontWeight.w600, color: gc.textSecondary)),
       ],
     );
   }

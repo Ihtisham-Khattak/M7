@@ -114,8 +114,8 @@ class _RoutineEditScreenState extends State<RoutineEditScreen> {
                     child: Container(
                       height: 56,
                       alignment: Alignment.center,
-                      decoration: BoxDecoration(color: gc.bgRaised2, borderRadius: BorderRadius.circular(100)),
-                      child: Text(t.save, style: AppTheme.f(15.5, weight: FontWeight.w700, color: gc.text)),
+                      decoration: BoxDecoration(color: gc.bgRaised2, borderRadius: BorderRadius.circular(GymRadius.pill)),
+                      child: Text(t.save, style: AppTheme.f(15, weight: FontWeight.w700, color: gc.text)),
                     ),
                   ),
                 ),
@@ -255,7 +255,7 @@ class _RoutineEditScreenState extends State<RoutineEditScreen> {
                       style: AppTheme.f(13, weight: FontWeight.w600, color: gc.text)),
                 ),
                 Text(routine.group.isEmpty ? t.noGroup : routine.group,
-                    style: AppTheme.f(12.5, weight: FontWeight.w500, color: gc.textSecondary)),
+                    style: AppTheme.f(12, weight: FontWeight.w500, color: gc.textSecondary)),
                 const SizedBox(width: 6),
                 Icon(PhosphorIconsRegular.caretRight, size: 14, color: gc.textTertiary),
               ],
@@ -455,7 +455,7 @@ class _RoutineEditScreenState extends State<RoutineEditScreen> {
           padding: sheetPad(sheet),
           decoration: BoxDecoration(
             color: gc.bgRaised,
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(GymRadius.xxl)),
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -467,11 +467,11 @@ class _RoutineEditScreenState extends State<RoutineEditScreen> {
               const SizedBox(height: 18),
               Text(t.shareIntroTitle,
                   textAlign: TextAlign.center,
-                  style: AppTheme.f(21, weight: FontWeight.w800, color: gc.text)),
+                  style: AppTheme.f(20, weight: FontWeight.w800, color: gc.text)),
               const SizedBox(height: 8),
               Text(t.shareIntroBody,
                   textAlign: TextAlign.center,
-                  style: AppTheme.f(13.5, weight: FontWeight.w500, color: gc.textSecondary, height: 1.4)),
+                  style: AppTheme.f(13, weight: FontWeight.w500, color: gc.textSecondary, height: 1.4)),
               const SizedBox(height: 18),
               Container(
                 padding: const EdgeInsets.fromLTRB(14, 12, 14, 12),
@@ -569,7 +569,7 @@ class _RoutineEditScreenState extends State<RoutineEditScreen> {
             if (inChain) ...[
               const SizedBox(height: 2),
               Text(t.superset.toUpperCase(),
-                  style: AppTheme.f(9.5, weight: FontWeight.w700, color: gc.brass, letterSpacing: 1)),
+                  style: AppTheme.f(11, weight: FontWeight.w700, color: gc.brass, letterSpacing: 1)),
             ],
             const SizedBox(height: 2),
             StepperControl(
@@ -681,7 +681,7 @@ class _RoutineEditScreenState extends State<RoutineEditScreen> {
             constraints: BoxConstraints(maxHeight: MediaQuery.sizeOf(sheet).height * 0.9),
             decoration: BoxDecoration(
               color: gc.bgRaised,
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(GymRadius.xxl)),
             ),
             child: SingleChildScrollView(
               child: Column(
@@ -690,7 +690,7 @@ class _RoutineEditScreenState extends State<RoutineEditScreen> {
                 children: [
                   const SheetHandle(),
                   const SizedBox(height: 18),
-                  Text(exerciseName(ex), style: AppTheme.f(19, weight: FontWeight.w800, color: gc.text)),
+                  Text(exerciseName(ex), style: AppTheme.f(20, weight: FontWeight.w800, color: gc.text)),
                   const SizedBox(height: 4),
                   Text(t.planSetsHint,
                       style: AppTheme.f(12, weight: FontWeight.w500, color: gc.textSecondary, height: 1.4)),
@@ -752,7 +752,7 @@ class _RoutineEditScreenState extends State<RoutineEditScreen> {
       'time' => [t.timeCol, if (!repsOnly) t.weightCol(fit.units.toUpperCase())],
       _ => [t.repsCol, if (!repsOnly) t.weightCol(fit.units.toUpperCase())],
     };
-    final style = AppTheme.f(10.5, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1);
+    final style = AppTheme.f(11, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1);
     return Row(children: [
       SizedBox(width: 40, child: Center(child: Text(t.setCol, style: style))),
       const SizedBox(width: 8),
@@ -886,7 +886,7 @@ class _RoutineEditScreenState extends State<RoutineEditScreen> {
                     color: p.kind == SetKind.normal ? Colors.transparent : setKindColor(gc, p.kind)),
               ),
               child: Text(p.kind == SetKind.warmup ? tag : (tag.isEmpty ? '$number' : '$number$tag'),
-                  style: AppTheme.f(12.5, weight: FontWeight.w700, color: setKindColor(gc, p.kind))),
+                  style: AppTheme.f(12, weight: FontWeight.w700, color: setKindColor(gc, p.kind))),
             ),
           ),
         ),
@@ -915,7 +915,7 @@ class _RoutineEditScreenState extends State<RoutineEditScreen> {
         padding: sheetPad(sheet),
         decoration: BoxDecoration(
           color: gc.bgRaised,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(GymRadius.xxl)),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -966,7 +966,7 @@ class _RoutineEditScreenState extends State<RoutineEditScreen> {
       context: context,
       builder: (dctx) => appDialog(
         gc,
-        title: Text(t.newGroup, style: AppTheme.f(19, weight: FontWeight.w800, color: gc.text)),
+        title: Text(t.newGroup, style: AppTheme.f(20, weight: FontWeight.w800, color: gc.text)),
         content: TextField(
           controller: controller,
           autofocus: true,
@@ -999,7 +999,7 @@ class _RoutineEditScreenState extends State<RoutineEditScreen> {
     showAppSheet<void>(
       context: context,
       backgroundColor: gc.bgRaised,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(GymRadius.xxl))),
       builder: (_) => SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),

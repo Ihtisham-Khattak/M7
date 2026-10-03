@@ -131,7 +131,7 @@ extension _SessionSummary on SessionScreen {
       builder: (dctx) => appDialog(
         gc,
         title: Text(t.saveChangesTitle(fit.routineTitle(routine)),
-            style: AppTheme.f(19, weight: FontWeight.w800, color: gc.text)),
+            style: AppTheme.f(20, weight: FontWeight.w800, color: gc.text)),
         content: ConstrainedBox(
           constraints: BoxConstraints(maxHeight: MediaQuery.sizeOf(dctx).height * 0.45),
           child: SingleChildScrollView(
@@ -140,7 +140,7 @@ extension _SessionSummary on SessionScreen {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(t.saveChangesBody,
-                    style: AppTheme.f(13.5, weight: FontWeight.w500, color: gc.textSecondary, height: 1.45)),
+                    style: AppTheme.f(13, weight: FontWeight.w500, color: gc.textSecondary, height: 1.45)),
                 const SizedBox(height: 12),
                 for (final e in changes.added) row(PhosphorIconsBold.plus, gc.sage, exerciseName(e)),
                 for (final e in changes.removed) row(PhosphorIconsBold.minus, gc.danger, exerciseName(e)),
@@ -207,9 +207,9 @@ extension _SessionSummary on SessionScreen {
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                         decoration:
-                            BoxDecoration(color: gc.accentSoft, borderRadius: BorderRadius.circular(100)),
+                            BoxDecoration(color: gc.accentSoft, borderRadius: BorderRadius.circular(GymRadius.pill)),
                         child: Text(t.prCount(prs),
-                            style: AppTheme.f(10, weight: FontWeight.w700, color: gc.accent)),
+                            style: AppTheme.f(11, weight: FontWeight.w700, color: gc.accent)),
                       ),
                     ],
                   ]),
@@ -249,7 +249,7 @@ extension _SessionSummary on SessionScreen {
               style: AppTheme.f(11, weight: FontWeight.w600, color: gc.textSecondary, letterSpacing: 0.4)),
         ),
         Text('${up ? '+' : ''}$pct%',
-            style: AppTheme.f(16, weight: FontWeight.w700, color: up ? gc.sage : gc.textSecondary)),
+            style: AppTheme.f(15, weight: FontWeight.w700, color: up ? gc.sage : gc.textSecondary)),
       ]),
     );
   }
@@ -274,9 +274,9 @@ extension _SessionSummary on SessionScreen {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           FitText(label,
-              style: AppTheme.f(10, weight: FontWeight.w600, color: gc.textSecondary, letterSpacing: 0.4)),
+              style: AppTheme.f(11, weight: FontWeight.w600, color: gc.textSecondary, letterSpacing: 0.4)),
           const SizedBox(height: 4),
-          FitText(value, style: AppTheme.f(18, weight: FontWeight.w700, color: gc.text)),
+          FitText(value, style: AppTheme.f(17, weight: FontWeight.w700, color: gc.text)),
         ],
       ),
     );

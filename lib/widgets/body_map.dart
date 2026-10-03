@@ -278,7 +278,8 @@ class BodyPainter extends CustomPainter {
         };
 
   @override
-  bool shouldRebuildSemantics(BodyPainter old) => old.token != token || old.outline != outline || old.picked != picked;
+  bool shouldRebuildSemantics(BodyPainter oldDelegate) =>
+      oldDelegate.token != token || oldDelegate.outline != outline || oldDelegate.picked != picked;
 
   @override
   bool shouldRepaint(BodyPainter old) =>

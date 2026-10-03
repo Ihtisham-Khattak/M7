@@ -86,7 +86,7 @@ class _AiPlanScreenState extends State<AiPlanScreen> {
               maxLines: 16,
               keyboardType: TextInputType.multiline,
               onChanged: (_) => setState(() {}),
-              style: AppTheme.f(12.5, weight: FontWeight.w500, color: gc.text, height: 1.35),
+              style: AppTheme.f(12, weight: FontWeight.w500, color: gc.text, height: 1.35),
               cursorColor: gc.accent,
               decoration: InputDecoration(
                 hintText: t.aiPasteHint,
@@ -109,7 +109,7 @@ class _AiPlanScreenState extends State<AiPlanScreen> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
                   child: Text(t.showFormat,
-                      style: AppTheme.f(12.5, weight: FontWeight.w600, color: gc.accent)),
+                      style: AppTheme.f(12, weight: FontWeight.w600, color: gc.accent)),
                 ),
               ),
             ]),
@@ -146,11 +146,11 @@ class _AiPlanScreenState extends State<AiPlanScreen> {
         onTap: onTap,
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
-          decoration: BoxDecoration(color: gc.bgRaised, borderRadius: BorderRadius.circular(100)),
+          decoration: BoxDecoration(color: gc.bgRaised, borderRadius: BorderRadius.circular(GymRadius.pill)),
           child: Row(mainAxisSize: MainAxisSize.min, children: [
             Icon(icon, size: 15, color: gc.text),
             const SizedBox(width: 7),
-            Text(label, style: AppTheme.f(12.5, weight: FontWeight.w600, color: gc.text)),
+            Text(label, style: AppTheme.f(12, weight: FontWeight.w600, color: gc.text)),
           ]),
         ),
       );
@@ -191,7 +191,7 @@ class _AiPlanScreenState extends State<AiPlanScreen> {
                 : good
                     ? '${t.routinesAdded(_routines)} · ${t.exerciseCount(_added)}'
                     : t.planNothing,
-            style: AppTheme.f(13.5, weight: FontWeight.w600, color: good ? gc.sage : gc.text),
+            style: AppTheme.f(13, weight: FontWeight.w600, color: good ? gc.sage : gc.text),
           ),
           if (_missed.isNotEmpty) ...[
             const SizedBox(height: 8),

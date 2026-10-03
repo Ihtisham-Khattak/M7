@@ -61,7 +61,7 @@ class AboutScreen extends StatelessWidget {
             const SizedBox(height: 22),
             Text(t.aboutBlurb,
                 textAlign: TextAlign.center,
-                style: AppTheme.f(12.5, weight: FontWeight.w500, color: gc.textTertiary, height: 1.6)),
+                style: AppTheme.f(12, weight: FontWeight.w500, color: gc.textTertiary, height: 1.6)),
             const SizedBox(height: 20),
             _credits(gc),
           ]),
@@ -72,7 +72,7 @@ class AboutScreen extends StatelessWidget {
   }
 
   Widget _sectionLabel(GymColors gc, String label) => Text(label.toUpperCase(),
-      style: AppTheme.f(10.5, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.3));
+      style: AppTheme.f(11, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.3));
 
   Widget _hero(GymColors gc) {
     return Container(
@@ -98,16 +98,16 @@ class AboutScreen extends StatelessWidget {
               children: [
                 const KaizanWordmark(size: 26),
                 const SizedBox(height: 8),
-                Text(t.tagline, style: AppTheme.f(13.5, weight: FontWeight.w500, color: gc.textSecondary)),
+                Text(t.tagline, style: AppTheme.f(13, weight: FontWeight.w500, color: gc.textSecondary)),
                 const SizedBox(height: 12),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 5),
                   decoration: BoxDecoration(
                     color: gc.bgRaised2,
-                    borderRadius: BorderRadius.circular(100),
+                    borderRadius: BorderRadius.circular(GymRadius.pill),
                   ),
                   child: Text(t.version(_kVersion),
-                      style: AppTheme.f(11.5, weight: FontWeight.w600, color: gc.textSecondary)),
+                      style: AppTheme.f(11, weight: FontWeight.w600, color: gc.textSecondary)),
                 ),
               ],
             ),
@@ -148,10 +148,10 @@ class AboutScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(rows[i].$2, style: AppTheme.f(14.5, weight: FontWeight.w600, color: gc.text)),
+                        Text(rows[i].$2, style: AppTheme.f(14, weight: FontWeight.w600, color: gc.text)),
                         const SizedBox(height: 3),
                         Text(rows[i].$3,
-                            style: AppTheme.f(12.5,
+                            style: AppTheme.f(12,
                                 weight: FontWeight.w500, color: gc.textSecondary, height: 1.4)),
                       ],
                     ),
@@ -206,11 +206,11 @@ class AboutScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(rows[i].$2.toUpperCase(),
-                                style: AppTheme.f(10,
+                                style: AppTheme.f(11,
                                     weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.3)),
                             const SizedBox(height: 4),
                             Text(rows[i].$3,
-                                style: AppTheme.f(15.5, weight: FontWeight.w700, color: gc.text)),
+                                style: AppTheme.f(15, weight: FontWeight.w700, color: gc.text)),
                           ],
                         ),
                       ),

@@ -366,6 +366,24 @@ class AppLocalizationsFa extends AppLocalizations {
   String get tagline => 'نرم، اما نه ضعیف.';
 
   @override
+  String get progressStrength => 'قدرت';
+
+  @override
+  String get progressBody => 'بدن';
+
+  @override
+  String get progressMuscles => 'عضله‌ها';
+
+  @override
+  String get progressAllTime => 'کل';
+
+  @override
+  String get progressRecordsEmpty => 'یک تمرین ثبت کن تا رکوردهایت اینجا بیایند.';
+
+  @override
+  String get progressBodyEmpty => 'وزن، اندازه‌ها یا یک عکس اضافه کن تا اینجا نمایش داده شوند.';
+
+  @override
   String get totalVolume30d => 'حجم کل · ۳۰ روز';
 
   @override
@@ -1785,7 +1803,7 @@ class AppLocalizationsFa extends AppLocalizations {
   String get welcomeKicker => 'خوش‌آمدی به';
 
   @override
-  String get welcomeBlurb => 'همه‌چیز روی گوشی‌ات می‌ماند. بدون حساب، بدون اینترنت، بدون پرداخت.';
+  String get welcomeBlurb => 'کایزان یعنی بهبود پیوسته. بدون افراط: یک تمرین صادقانه، بعد تمرین بعدی.';
 
   @override
   String get welcomeStart => 'شروع کن';

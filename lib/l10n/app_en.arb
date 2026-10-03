@@ -134,6 +134,12 @@
   "@trendChartLabel": {"placeholders": {"first": {"type": "String"}, "last": {"type": "String"}}},
   "restLeftAnnounce": "{seconds} seconds of rest left",
   "tagline": "Soft but not weak.",
+  "progressStrength": "Strength",
+  "progressBody": "Body",
+  "progressMuscles": "Muscles",
+  "progressAllTime": "All time",
+  "progressRecordsEmpty": "Log a session and your records appear here.",
+  "progressBodyEmpty": "Add your weight, measurements or a photo and they appear here.",
   "@restLeftAnnounce": {"placeholders": {"seconds": {"type": "int"}}},
 
   "totalVolume30d": "TOTAL VOLUME · 30 DAYS",
@@ -618,7 +624,7 @@
   "reset": "RESET",
 
   "welcomeKicker": "WELCOME TO",
-  "welcomeBlurb": "Everything stays on your phone. No account, no internet, nothing to pay.",
+  "welcomeBlurb": "Kaizan means steady improvement. No extremes, just one honest session, then the next.",
   "welcomeStart": "GET STARTED",
   "onbGoalQTitle": "What's your goal?",
   "onbGoalQWhy": "Pick what fits best. You can change it any time.",

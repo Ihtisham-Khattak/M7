@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../l10n/l10n.dart';
 import '../theme/app_colors.dart';
+import '../theme/tokens.dart';
 import '../theme/app_theme.dart';
 import 'body_map.dart';
 import 'progress_ring.dart';
@@ -43,7 +44,7 @@ class VolumeChart extends StatelessWidget {
   Widget build(BuildContext context) {
     final gc = context.gc;
     final top = points.isEmpty ? 0.0 : points.reduce(math.max);
-    final style = AppTheme.d(10, weight: FontWeight.w600, color: gc.textTertiary);
+    final style = AppTheme.d(11, weight: FontWeight.w600, color: gc.textTertiary);
 
     return Semantics(
       label: points.length < 2 ? null : t.trendChartLabel(label(points.first), label(points.last)),
@@ -448,7 +449,7 @@ class Heatmap extends StatelessWidget {
                 width: cell,
                 height: cell,
                 decoration:
-                    BoxDecoration(color: _color(levels[i], gc), borderRadius: BorderRadius.circular(3)),
+                    BoxDecoration(color: _color(levels[i], gc), borderRadius: BorderRadius.circular(GymRadius.hair)),
               ),
             ),
         ],
@@ -477,7 +478,7 @@ class SplitBars extends StatelessWidget {
           ),
           const SizedBox(height: 5),
           ClipRRect(
-            borderRadius: BorderRadius.circular(3),
+            borderRadius: BorderRadius.circular(GymRadius.hair),
             child: LinearProgressIndicator(
               value: e.pct / 100,
               minHeight: 6,

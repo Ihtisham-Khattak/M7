@@ -21,12 +21,16 @@ import '../widgets/glass.dart';
 import '../widgets/muscle_radar.dart';
 import '../widgets/rolling_text.dart';
 import '../widgets/ruler_picker.dart';
+import '../widgets/disclosure.dart';
+import '../widgets/metric_card.dart';
+import '../widgets/components.dart';
 import '../widgets/states.dart';
 import '../widgets/ui_kit.dart';
 import 'share_sheet.dart';
 import 'start_sheet.dart';
 
 part 'progress/body_cards.dart';
+part 'progress/overview.dart';
 part 'progress/muscle_map.dart';
 part 'progress/strength_card.dart';
 part 'progress/day_sheet.dart';
@@ -40,7 +44,6 @@ class ProgressScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final gc = context.gc;
     final change = fit.volumeChangePct;
-    final split = fit.muscleSplit;
     final prs = fit.personalRecords;
     final bw = fit.bodyweightSeries;
 
@@ -58,7 +61,7 @@ class ProgressScreen extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(t.progressTitle,
-                      style: AppTheme.f(27, weight: FontWeight.w800, color: gc.text)),
+                      style: AppTheme.f(26, weight: FontWeight.w800, color: gc.text)),
                 ),
                 RoundAction(
                   label: t.share,
@@ -72,22 +75,14 @@ class ProgressScreen extends StatelessWidget {
               _setupCard(context, gc),
               const SizedBox(height: 12),
             ],
-            _heroRow(context, gc, change, bw),
+            _headline(context, gc, change),
             if (fit.sessions.isNotEmpty) ...[
               const SizedBox(height: 12),
               _consistency(context, gc),
             ],
-            const SizedBox(height: 12),
-            _totals(gc),
-            const SizedBox(height: 12),
-            const _MuscleMapCard(),
-            if (fit.sessions.isNotEmpty) ...[
-              const SizedBox(height: 12),
-              const MuscleRadarCard(),
-            ],
-            for (final block in _blocks(context, gc, bw, split, prs)) ...[
-              const SizedBox(height: 12),
-              block,
+            for (final group in _groups(context, gc, bw, prs)) ...[
+              const SizedBox(height: 8),
+              group,
             ],
             if (fit.sessions.isNotEmpty && _missing.isNotEmpty) ...[
               const SizedBox(height: 12),
@@ -122,7 +117,7 @@ class ProgressScreen extends StatelessWidget {
           Row(children: [
             Expanded(
               child: FitText(label.toUpperCase(),
-                  style: AppTheme.f(10,
+                  style: AppTheme.f(11,
                       weight: FontWeight.w600, color: gc.textTertiary, letterSpacing: 0.9)),
             ),
             ?badge,
@@ -148,7 +143,7 @@ class ProgressScreen extends StatelessWidget {
             Text(note,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: AppTheme.f(11.5, weight: FontWeight.w500, color: gc.textTertiary)),
+                style: AppTheme.f(11, weight: FontWeight.w500, color: gc.textTertiary)),
           ],
           if (chart != null) ...[
             const SizedBox(height: 12),
@@ -170,59 +165,6 @@ class ProgressScreen extends StatelessWidget {
     ]);
   }
 
-  Widget _heroRow(BuildContext context, GymColors gc, int? change, List<double> bw) {
-    final weight = fit.latestBodyweight;
-    return IntrinsicHeight(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Expanded(
-            child: _tile(
-              gc,
-              label: t.tileVolume30,
-              value: fit.volumeValue(fit.volume30dKg),
-              unit: fit.volumeUnit,
-              badge: change == null ? null : _delta(gc, change),
-              chart: fit.sessions.isEmpty
-                  ? const SizedBox(height: 40)
-                  : Sparkline(
-                      values: [for (final v in fit.volumeChartPoints) fit.toDisplayWeight(v) / 1000],
-                      height: 40,
-                      color: gc.textSecondary,
-                      scale: fmt,
-                    ),
-            ),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: weight == null
-                ? _tile(gc,
-                    label: t.weightLabel,
-                    value: '—',
-                    note: t.tileAddWeight,
-                    onTap: () => _logBodyweight(context))
-                : _tile(
-                    gc,
-                    label: t.weightLabel,
-                    value: fit.weightValue(weight.kg),
-                    unit: fit.units,
-                    note: t.shortDate(weight.date),
-                    chart: bw.length < 2
-                        ? const SizedBox(height: 40)
-                        : Sparkline(
-                            values: [for (final v in bw) fit.toDisplayWeight(v)],
-                            height: 40,
-                            color: gc.textSecondary,
-                            scale: fmt,
-                          ),
-                    onTap: () => _logBodyweight(context),
-                  ),
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget _consistency(BuildContext context, GymColors gc) {
     return Container(
       padding: const EdgeInsets.fromLTRB(18, 16, 18, 18),
@@ -233,7 +175,7 @@ class ProgressScreen extends StatelessWidget {
           Row(
             children: [
               Text(t.consistency.toUpperCase(),
-                  style: AppTheme.f(10,
+                  style: AppTheme.f(11,
                       weight: FontWeight.w600, color: gc.textTertiary, letterSpacing: 0.9)),
               const Spacer(),
               GestureDetector(
@@ -249,7 +191,7 @@ class ProgressScreen extends StatelessWidget {
                         height: 9,
                         margin: const EdgeInsets.only(left: 3),
                         decoration:
-                            BoxDecoration(color: c, borderRadius: BorderRadius.circular(3)),
+                            BoxDecoration(color: c, borderRadius: BorderRadius.circular(GymRadius.hair)),
                       ),
                     const SizedBox(width: 7),
                     Icon(PhosphorIconsRegular.caretDown, size: 11, color: gc.textTertiary),
@@ -265,7 +207,7 @@ class ProgressScreen extends StatelessWidget {
             Icon(PhosphorIconsFill.fire, size: 14, color: gc.accent),
             const SizedBox(width: 7),
             Text(t.streakDays(fit.currentStreak),
-                style: AppTheme.f(12.5, weight: FontWeight.w600, color: gc.text)),
+                style: AppTheme.f(12, weight: FontWeight.w600, color: gc.text)),
             const Spacer(),
             Text(t.weekOfGoal(fit.daysDoneThisWeek, fit.weeklyTarget),
                 style: AppTheme.f(12, weight: FontWeight.w500, color: gc.textTertiary)),
@@ -318,11 +260,11 @@ class ProgressScreen extends StatelessWidget {
         children: [
           Row(children: [
             Text(t.thisWeekTitle.toUpperCase(),
-                style: AppTheme.f(10,
+                style: AppTheme.f(11,
                     weight: FontWeight.w600, color: gc.textTertiary, letterSpacing: 0.9)),
             const Spacer(),
             Text(t.setsThisWeek(sets.fold(0, (a, b) => a + b)),
-                style: AppTheme.f(11.5, weight: FontWeight.w600, color: gc.textSecondary)),
+                style: AppTheme.f(11, weight: FontWeight.w600, color: gc.textSecondary)),
           ]),
           const SizedBox(height: 18),
           SizedBox(
@@ -346,7 +288,7 @@ class ProgressScreen extends StatelessWidget {
                             color: sets[i] == 0
                                 ? gc.bgRaised2
                                 : (i == todayIndex ? gc.text : gc.text.withValues(alpha: 0.32)),
-                            borderRadius: BorderRadius.circular(7),
+                            borderRadius: BorderRadius.circular(GymRadius.xs),
                           ),
                         ),
                       ],
@@ -413,7 +355,7 @@ class ProgressScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(t.setupTitle, style: AppTheme.f(15.5, color: gc.text)),
+          Text(t.setupTitle, style: AppTheme.f(15, color: gc.text)),
           const SizedBox(height: 4),
           Text(t.setupHint,
               style: AppTheme.f(12, weight: FontWeight.w500, color: gc.textTertiary, height: 1.4)),
@@ -446,28 +388,6 @@ class ProgressScreen extends StatelessWidget {
       ),
     );
   }
-
-  List<Widget> _blocks(
-    BuildContext context,
-    GymColors gc,
-    List<double> bw,
-    List<({String name, int pct})> split,
-    List<PersonalRecord> prs,
-  ) {
-    return [
-      if (fit.sessions.isNotEmpty) _thisWeek(gc),
-      if (fit.trackedExercises.isNotEmpty) _StrengthCard(),
-      if (prs.isNotEmpty) _PrCard(prs),
-      if (fit.shotCount > 0) _timelineCard(gc),
-      if (fit.measures.isNotEmpty) _measuresCard(gc),
-    ];
-  }
-
-
-
-
-
-
 
   void _showDay(BuildContext context, int index) => showDaySheet(context, fit.heatmapDate(index));
 

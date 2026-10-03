@@ -371,6 +371,24 @@ class AppLocalizationsFr extends AppLocalizations {
   String get tagline => 'Doux, mais pas faible.';
 
   @override
+  String get progressStrength => 'Force';
+
+  @override
+  String get progressBody => 'Corps';
+
+  @override
+  String get progressMuscles => 'Muscles';
+
+  @override
+  String get progressAllTime => 'Total';
+
+  @override
+  String get progressRecordsEmpty => 'Enregistre une séance et tes records apparaîtront ici.';
+
+  @override
+  String get progressBodyEmpty => 'Ajoute ton poids, tes mensurations ou une photo et ils apparaîtront ici.';
+
+  @override
   String get totalVolume30d => 'VOLUME TOTAL · 30 JOURS';
 
   @override
@@ -1799,7 +1817,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get welcomeKicker => 'BIENVENUE SUR';
 
   @override
-  String get welcomeBlurb => 'Tout reste sur ton téléphone. Aucun compte, pas d’Internet, rien à payer.';
+  String get welcomeBlurb =>
+      'Kaizan, c\'est progresser avec régularité. Pas d\'extrêmes : une séance honnête, puis la suivante.';
 
   @override
   String get welcomeStart => 'COMMENCER';

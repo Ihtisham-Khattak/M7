@@ -18,7 +18,7 @@ class _LogBodyweightSheetState extends State<_LogBodyweightSheet> {
       decoration: BoxDecoration(
         color: gc.bgRaised,
         border: Border.all(color: gc.border),
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(GymRadius.xxl)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -38,7 +38,7 @@ class _LogBodyweightSheetState extends State<_LogBodyweightSheet> {
               RollingText(_shown.toStringAsFixed(1),
                   style: AppTheme.f(52, weight: FontWeight.w800, color: gc.text, height: 1.1)),
               const SizedBox(width: 6),
-              Text(fit.units, style: AppTheme.f(18, weight: FontWeight.w700, color: gc.textSecondary)),
+              Text(fit.units, style: AppTheme.f(17, weight: FontWeight.w700, color: gc.textSecondary)),
             ],
           ),
           const SizedBox(height: 16),
@@ -86,7 +86,7 @@ void showEditLoggedSheet(BuildContext context, LoggedSession s, LoggedExercise e
           decoration: BoxDecoration(
             color: gc.bgRaised,
             border: Border.all(color: gc.border),
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(GymRadius.xxl)),
           ),
           child: SafeArea(
             child: SingleChildScrollView(
@@ -148,7 +148,7 @@ Widget _editSetRow(GymColors gc, LoggedSession s, LoggedExercise e, int i, bool 
           child: Column(
             children: [
               Text(t.repsCol,
-                  style: AppTheme.s(9.5, weight: FontWeight.w600, color: gc.textTertiary, letterSpacing: 1)),
+                  style: AppTheme.s(11, weight: FontWeight.w600, color: gc.textTertiary, letterSpacing: 1)),
               const SizedBox(height: 2),
               StepperControl(
                 value: '${set.reps}',
@@ -168,7 +168,7 @@ Widget _editSetRow(GymColors gc, LoggedSession s, LoggedExercise e, int i, bool 
               children: [
                 Text(t.weightCol(fit.units.toUpperCase()),
                     style:
-                        AppTheme.s(9.5, weight: FontWeight.w600, color: gc.textTertiary, letterSpacing: 1)),
+                        AppTheme.s(11, weight: FontWeight.w600, color: gc.textTertiary, letterSpacing: 1)),
                 const SizedBox(height: 2),
                 StepperControl(
                   value: fit.weightValue(set.weight),
@@ -224,18 +224,18 @@ class _HeatToneSheetState extends State<_HeatToneSheet> {
       decoration: BoxDecoration(
         color: gc.bgRaised,
         border: Border.all(color: gc.border),
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(GymRadius.xxl)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           const SheetHandle(),
           const SizedBox(height: 16),
-          Text(t.heatToneTitle, style: AppTheme.f(19, color: gc.text)),
+          Text(t.heatToneTitle, style: AppTheme.f(20, color: gc.text)),
           const SizedBox(height: 8),
           Text(t.heatToneHint,
               textAlign: TextAlign.center,
-              style: AppTheme.f(12.5, weight: FontWeight.w500, color: gc.textSecondary)),
+              style: AppTheme.f(12, weight: FontWeight.w500, color: gc.textSecondary)),
           const SizedBox(height: 20),
           for (final tone in kHeatTones)
             GestureDetector(
@@ -256,7 +256,7 @@ class _HeatToneSheetState extends State<_HeatToneSheet> {
                       width: 20,
                       height: 20,
                       margin: const EdgeInsets.only(right: 6),
-                      decoration: BoxDecoration(color: c, borderRadius: BorderRadius.circular(6)),
+                      decoration: BoxDecoration(color: c, borderRadius: BorderRadius.circular(GymRadius.xs)),
                     ),
                   const SizedBox(width: 8),
                   Expanded(

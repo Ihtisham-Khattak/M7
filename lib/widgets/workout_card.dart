@@ -59,7 +59,7 @@ class WorkoutSummary {
       ].join(' · ');
 
   /// One sentence for a screen reader.
-  String get spoken => [title, if (statusLabel != null) statusLabel!, if (muscles.isNotEmpty) muscles, meta].join('. ');
+  String get spoken => [title, ?statusLabel, if (muscles.isNotEmpty) muscles, meta].join('. ');
 }
 
 /// A compact one-line workout, for lists and sheets.

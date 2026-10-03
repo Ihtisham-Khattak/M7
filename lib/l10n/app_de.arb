@@ -130,6 +130,12 @@
   "trendChartLabel": "Verlauf von {first} bis {last}",
   "restLeftAnnounce": "Noch {seconds} Sekunden Pause",
   "tagline": "Sanft, aber nicht schwach.",
+  "progressStrength": "Kraft",
+  "progressBody": "Körper",
+  "progressMuscles": "Muskeln",
+  "progressAllTime": "Gesamt",
+  "progressRecordsEmpty": "Protokolliere eine Einheit, dann erscheinen hier deine Rekorde.",
+  "progressBodyEmpty": "Füge Gewicht, Maße oder ein Foto hinzu, dann erscheinen sie hier.",
 
   "totalVolume30d": "GESAMT VOLUMEN · 30 TAGE",
   "volumeCumulative": "Laufende Summe jedes bewegten Kilos",
@@ -611,7 +617,7 @@
   "reset": "ZURÜCKSETZEN",
 
   "welcomeKicker": "WILLKOMMEN BEI",
-  "welcomeBlurb": "Alles bleibt auf deinem Handy. Kein Konto, kein Internet, nichts zu bezahlen.",
+  "welcomeBlurb": "Kaizan bedeutet stetige Verbesserung. Keine Extreme, nur eine ehrliche Einheit nach der anderen.",
   "welcomeStart": "LOSLEGEN",
   "onbGoalQTitle": "Was ist dein Ziel?",
   "onbGoalQWhy": "Wähle, was am besten passt. Du kannst es jederzeit ändern.",

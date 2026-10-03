@@ -38,7 +38,7 @@ extension _SessionLiveBar on SessionScreen {
             builder: (context) => MediaQuery.withClampedTextScaling(
               maxScaleFactor: 1.4,
               child: RollingText(fit.elapsedLabel,
-                  style: AppTheme.f(18,
+                  style: AppTheme.f(17,
                       weight: FontWeight.w700, color: fit.sessionPaused ? gc.textSecondary : gc.text)),
             ),
           ),
@@ -124,7 +124,7 @@ extension _SessionLiveBar on SessionScreen {
           '${t.logging} · ${t.longDate(s.loggedAt ?? DateTime.now())}',
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: AppTheme.f(12.5, weight: FontWeight.w700, color: gc.brass, letterSpacing: 0.6),
+          style: AppTheme.f(12, weight: FontWeight.w700, color: gc.brass, letterSpacing: 0.6),
         ),
       ),
     ]);

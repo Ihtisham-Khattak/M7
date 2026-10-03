@@ -366,6 +366,24 @@ class AppLocalizationsAr extends AppLocalizations {
   String get tagline => 'لطيف، لكن غير ضعيف.';
 
   @override
+  String get progressStrength => 'القوة';
+
+  @override
+  String get progressBody => 'الجسم';
+
+  @override
+  String get progressMuscles => 'العضلات';
+
+  @override
+  String get progressAllTime => 'الإجمالي';
+
+  @override
+  String get progressRecordsEmpty => 'سجّل حصة تدريب وستظهر أرقامك القياسية هنا.';
+
+  @override
+  String get progressBodyEmpty => 'أضف وزنك أو قياساتك أو صورة وستظهر هنا.';
+
+  @override
   String get totalVolume30d => 'الحجم الإجمالي · 30 يومًا';
 
   @override
@@ -1785,7 +1803,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get welcomeKicker => 'مرحبًا بك في';
 
   @override
-  String get welcomeBlurb => 'كل شيء يبقى على هاتفك. لا حساب ولا إنترنت ولا دفع.';
+  String get welcomeBlurb => 'كايزان تعني التحسّن المستمر. بلا تطرّف: حصة تدريب صادقة، ثم التي تليها.';
 
   @override
   String get welcomeStart => 'ابدأ';

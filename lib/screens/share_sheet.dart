@@ -11,6 +11,7 @@ import 'package:share_plus/share_plus.dart';
 import '../l10n/l10n.dart';
 import '../state/fit_state.dart';
 import '../theme/app_colors.dart';
+import '../theme/tokens.dart';
 import '../theme/app_theme.dart';
 import '../widgets/glass.dart';
 import '../widgets/liquid_notch.dart';
@@ -87,7 +88,7 @@ class _ShareSheetState extends State<_ShareSheet> {
       decoration: BoxDecoration(
         color: gc.bg,
 
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(26)),
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(GymRadius.xxl)),
       ),
       clipBehavior: Clip.antiAlias,
       child: SafeArea(
@@ -146,7 +147,7 @@ class _ShareSheetState extends State<_ShareSheet> {
               padding: const EdgeInsets.fromLTRB(20, 10, 20, 6),
               child: Text(t.shareHint,
                   textAlign: TextAlign.center,
-                  style: AppTheme.f(11.5, weight: FontWeight.w500, color: gc.textTertiary, height: 1.4)),
+                  style: AppTheme.f(11, weight: FontWeight.w500, color: gc.textTertiary, height: 1.4)),
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 6, 20, 16),

@@ -14,7 +14,7 @@ class _StrengthCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(t.strength1rm,
-              style: AppTheme.f(10, weight: FontWeight.w600, color: gc.textTertiary, letterSpacing: 0.9)),
+              style: AppTheme.f(11, weight: FontWeight.w600, color: gc.textTertiary, letterSpacing: 0.9)),
           const SizedBox(height: 14),
           if (id == null)
             Text(t.strengthEmpty, style: AppTheme.s(13, color: gc.textSecondary))
@@ -91,13 +91,13 @@ class _StrengthCard extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 5),
                 decoration: BoxDecoration(
-                    color: up ? gc.sageSoft : gc.accentSoft, borderRadius: BorderRadius.circular(100)),
+                    color: up ? gc.sageSoft : gc.accentSoft, borderRadius: BorderRadius.circular(GymRadius.pill)),
                 child: Row(mainAxisSize: MainAxisSize.min, children: [
                   Icon(up ? PhosphorIconsBold.trendUp : PhosphorIconsBold.trendDown,
                       size: 12, color: up ? gc.sage : gc.accent),
                   const SizedBox(width: 4),
                   Text('${up ? '+' : ''}${fit.weightLabel(delta)}',
-                      style: AppTheme.s(11.5, weight: FontWeight.w700, color: up ? gc.sage : gc.accent)),
+                      style: AppTheme.s(11, weight: FontWeight.w700, color: up ? gc.sage : gc.accent)),
                 ]),
               ),
             ),
@@ -133,7 +133,7 @@ class _StrengthCard extends StatelessWidget {
           constraints: BoxConstraints(maxHeight: MediaQuery.sizeOf(sheet).height * 0.8),
           decoration: BoxDecoration(
             color: gc.bgRaised,
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(GymRadius.xxl)),
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -222,7 +222,7 @@ class _PrCardState extends State<_PrCard> {
             const SizedBox(width: 7),
             Expanded(
               child: Text(t.personalRecords,
-                  style: AppTheme.f(10, weight: FontWeight.w600, color: gc.textTertiary, letterSpacing: 0.9)),
+                  style: AppTheme.f(11, weight: FontWeight.w600, color: gc.textTertiary, letterSpacing: 0.9)),
             ),
             Text('${prs.length}', style: AppTheme.f(12, weight: FontWeight.w700, color: gc.textSecondary)),
           ]),
@@ -248,7 +248,7 @@ class _PrCardState extends State<_PrCard> {
                   child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                     if (!_all)
                       Text('+$hidden',
-                          style: AppTheme.f(12.5, weight: FontWeight.w700, color: gc.textSecondary)),
+                          style: AppTheme.f(12, weight: FontWeight.w700, color: gc.textSecondary)),
                     const SizedBox(width: 6),
                     AnimatedRotation(
                       turns: _all ? 0.5 : 0,
@@ -290,7 +290,7 @@ class _PrCardState extends State<_PrCard> {
                       shape: BoxShape.circle,
                       border: Border.all(color: gc.bgRaised, width: 2),
                     ),
-                    child: Text('${rank + 1}', style: AppTheme.f(9, weight: FontWeight.w800, color: gc.bgRaised)),
+                    child: Text('${rank + 1}', style: AppTheme.f(11, weight: FontWeight.w800, color: gc.bgRaised)),
                   ),
                 ),
             ],
@@ -306,12 +306,12 @@ class _PrCardState extends State<_PrCard> {
                     style: AppTheme.s(14, weight: FontWeight.w600, color: gc.text, height: 1.25)),
                 const SizedBox(height: 3),
                 Text(fit.recordDetail(pr),
-                    style: AppTheme.s(11.5, weight: FontWeight.w500, color: gc.textTertiary)),
+                    style: AppTheme.s(11, weight: FontWeight.w500, color: gc.textTertiary)),
               ],
             ),
           ),
           const SizedBox(width: 12),
-          Text(fit.recordLabel(pr), style: AppTheme.d(19, weight: FontWeight.w800, color: gc.text)),
+          Text(fit.recordLabel(pr), style: AppTheme.d(20, weight: FontWeight.w800, color: gc.text)),
         ],
       ),
     );

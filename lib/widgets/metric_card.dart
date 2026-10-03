@@ -28,7 +28,9 @@ class MetricCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final gc = context.gc;
-    final style = GymText.numeric(GymText.headlineSize + 3, color: emphasis ? gc.ember : gc.text, weight: FontWeight.w800);
+    // height 1.0 would clip the descent of rolling digits; keep the numeric role's tabular figures
+    final style = GymText.numeric(GymText.headlineSize + 3, color: emphasis ? gc.ember : gc.text, weight: FontWeight.w800)
+        .copyWith(height: 1.2);
     return Semantics(
       container: true,
       label: '$label: $value${unit.isEmpty ? '' : ' $unit'}',

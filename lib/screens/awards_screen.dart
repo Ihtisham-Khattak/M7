@@ -49,23 +49,27 @@ class AwardsScreen extends StatelessWidget {
   Widget _section(GymColors gc, String label, int count) {
     return Row(
       children: [
-        Text(label, style: AppTheme.f(19, color: gc.text)),
+        Text(label, style: AppTheme.f(20, color: gc.text)),
         const SizedBox(width: 8),
-        Text('$count', style: AppTheme.f(16, weight: FontWeight.w600, color: gc.textTertiary)),
+        Text('$count', style: AppTheme.f(15, weight: FontWeight.w600, color: gc.textTertiary)),
       ],
     );
   }
 
   Widget _grid(BuildContext context, List<AwardId> ids) {
+    // Tall enough for the medal, two lines of name and the date at the user's text size; a fixed
+    // aspect ratio overflowed on narrow phones and with large text.
+    final scaler = MediaQuery.textScalerOf(context);
+    final text = 2 * scaler.scale(14) * 1.15 + scaler.scale(11) * 1.15;
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: ids.length,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         mainAxisSpacing: 12,
         crossAxisSpacing: 12,
-        childAspectRatio: 0.86,
+        mainAxisExtent: 16 + 96 + 14 + 4 + 14 + text + 2,
       ),
       itemBuilder: (_, i) => _card(context, ids[i]),
     );
@@ -101,7 +105,7 @@ class AwardsScreen extends StatelessWidget {
               won && at != null
                   ? t.shortDateYear(at)
                   : '${medalShort(fit.awardValue(id))} / ${medalShort(fit.awardGoal(id))}',
-              style: AppTheme.f(11.5, weight: FontWeight.w600, color: gc.textTertiary),
+              style: AppTheme.f(11, weight: FontWeight.w600, color: gc.textTertiary),
             ),
           ],
         ),

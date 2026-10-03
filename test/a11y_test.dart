@@ -113,7 +113,7 @@ void main() {
       });
     }
 
-    final root = tester.binding.pipelineOwner.semanticsOwner?.rootSemanticsNode;
+    final root = tester.binding.rootPipelineOwner.semanticsOwner?.rootSemanticsNode;
     if (root != null) visit(root);
     return out;
   }
@@ -271,6 +271,7 @@ void main() {
       expect(chest, findsOneWidget);
       final node = chest.evaluate().single;
       expect(node, isSemantics(isButton: true, isSelected: true, hasTapAction: true, hasSelectedState: true));
+      // ignore: deprecated_member_use
       tester.binding.pipelineOwner.semanticsOwner!.performAction(node.id, SemanticsAction.tap);
       expect(toggled, ['chest']);
 

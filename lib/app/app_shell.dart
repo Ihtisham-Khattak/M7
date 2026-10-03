@@ -513,7 +513,8 @@ class _NavBar extends StatefulWidget {
 
 class _NavBarState extends State<_NavBar> {
   static const height = 74.0;
-  static const _iw = 58.0;
+  static const _maxIw = 58.0;
+  double _iw = _maxIw;
   static const _fabW = 54.0;
   static const _routes = ['home', 'progress', 'exercises', 'settings'];
 
@@ -572,6 +573,8 @@ class _NavBarState extends State<_NavBar> {
       child: LayoutBuilder(
         builder: (context, c) {
           _slotW = c.maxWidth - 16;
+          // four tabs and the play button must fit the narrowest phones (320dp) without overflow
+          _iw = ((_slotW - _fabW) / 4).clamp(40.0, _maxIw);
           _gap = ((_slotW - 4 * _iw - _fabW) / 4).clamp(0.0, 40.0);
           final drag = _dragX;
 

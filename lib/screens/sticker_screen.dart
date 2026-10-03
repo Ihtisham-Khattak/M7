@@ -146,7 +146,7 @@ class _StickerEditorState extends State<StickerEditor> {
                 Expanded(
                   child: Text(t.stickerHint,
                       maxLines: 2,
-                      style: AppTheme.f(11.5, weight: FontWeight.w500, color: gc.textTertiary, height: 1.3)),
+                      style: AppTheme.f(11, weight: FontWeight.w500, color: gc.textTertiary, height: 1.3)),
                 ),
               ]),
             ),
@@ -235,7 +235,7 @@ class _StickerEditorState extends State<StickerEditor> {
       padding: const EdgeInsets.fromLTRB(16, 14, 16, 12),
       decoration: BoxDecoration(
         color: gc.bgRaised,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(26)),
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(GymRadius.xxl)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,

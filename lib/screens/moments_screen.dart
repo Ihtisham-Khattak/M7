@@ -158,7 +158,7 @@ class _MomentsScreenState extends State<MomentsScreen> {
         for (final entry in groups.entries) ...[
           Padding(
             padding: const EdgeInsets.fromLTRB(2, 6, 0, 12),
-            child: Text(entry.key, style: AppTheme.f(16, color: gc.text)),
+            child: Text(entry.key, style: AppTheme.f(15, color: gc.text)),
           ),
           GridView.builder(
             shrinkWrap: true,
@@ -229,7 +229,7 @@ class _MomentsScreenState extends State<MomentsScreen> {
                 color: Colors.black.withValues(alpha: 0.45),
                 child: Text(t.shortDate(moment.date),
                     textAlign: TextAlign.center,
-                    style: AppTheme.f(10.5, weight: FontWeight.w600, color: Colors.white)),
+                    style: AppTheme.f(11, weight: FontWeight.w600, color: Colors.white)),
               ),
             ),
           ],

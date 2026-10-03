@@ -24,7 +24,7 @@ extension _SessionKindSheet on SessionScreen {
                 child: Text(t.platesPerSide(hint),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: AppTheme.f(11.5, weight: FontWeight.w500, color: gc.textTertiary)),
+                    style: AppTheme.f(11, weight: FontWeight.w500, color: gc.textTertiary)),
               ),
               const SizedBox(width: 6),
               Icon(PhosphorIconsRegular.caretRight, size: 12, color: gc.textTertiary),
@@ -58,7 +58,7 @@ extension _SessionKindSheet on SessionScreen {
       child: Text(text,
           maxLines: 1,
           softWrap: false,
-          style: AppTheme.f(16, weight: FontWeight.w700, color: _kindColor(gc, st.kind))),
+          style: AppTheme.f(15, weight: FontWeight.w700, color: _kindColor(gc, st.kind))),
     );
   }
 
@@ -76,7 +76,7 @@ extension _SessionKindSheet on SessionScreen {
             padding: sheetPad(sheet),
             decoration: BoxDecoration(
               color: gc.bgRaised,
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(GymRadius.xxl)),
             ),
             child: SingleChildScrollView(
               child: Column(
@@ -121,7 +121,7 @@ extension _SessionKindSheet on SessionScreen {
                     ),
                   ],
                   const SizedBox(height: 14),
-                  Text(t.setTypeHint, style: AppTheme.f(11.5, weight: FontWeight.w500, color: gc.textTertiary, height: 1.4)),
+                  Text(t.setTypeHint, style: AppTheme.f(11, weight: FontWeight.w500, color: gc.textTertiary, height: 1.4)),
                   const SizedBox(height: 18),
                   PrimaryButton(label: t.done, onTap: () => Navigator.of(sheet).pop()),
                   const SizedBox(height: 4),

@@ -361,6 +361,24 @@ class AppLocalizationsZh extends AppLocalizations {
   String get tagline => '温柔，但不软弱。';
 
   @override
+  String get progressStrength => '力量';
+
+  @override
+  String get progressBody => '身体';
+
+  @override
+  String get progressMuscles => '肌肉';
+
+  @override
+  String get progressAllTime => '累计';
+
+  @override
+  String get progressRecordsEmpty => '记录一次训练，你的纪录会显示在这里。';
+
+  @override
+  String get progressBodyEmpty => '添加体重、围度或照片，它们会显示在这里。';
+
+  @override
   String get totalVolume30d => '30天总容量';
 
   @override
@@ -1723,7 +1741,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get welcomeKicker => '欢迎使用';
 
   @override
-  String get welcomeBlurb => '所有数据均保存在你的手机上。无账号、无网络连接要求、无任何费用。';
+  String get welcomeBlurb => 'Kaizan 的意思是持续改进。不求极端，只求认真完成这一次训练，然后是下一次。';
 
   @override
   String get welcomeStart => '立即开始';
@@ -3497,6 +3515,24 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get tagline => '溫柔，但不軟弱。';
 
   @override
+  String get progressStrength => '力量';
+
+  @override
+  String get progressBody => '身體';
+
+  @override
+  String get progressMuscles => '肌肉';
+
+  @override
+  String get progressAllTime => '累計';
+
+  @override
+  String get progressRecordsEmpty => '記錄一次訓練，你的紀錄會顯示在這裡。';
+
+  @override
+  String get progressBodyEmpty => '新增體重、圍度或照片，它們會顯示在這裡。';
+
+  @override
   String get totalVolume30d => '總訓練量 · 30 天';
 
   @override
@@ -4859,7 +4895,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get welcomeKicker => '歡迎使用';
 
   @override
-  String get welcomeBlurb => '所有資料都留在手機上。不需帳號、不需網路、不用付費。';
+  String get welcomeBlurb => 'Kaizan 的意思是持續改進。不求極端，只求認真完成這一次訓練，然後是下一次。';
 
   @override
   String get welcomeStart => '開始';

@@ -84,13 +84,13 @@ class HomeScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(t.today.toUpperCase(),
-                  style: AppTheme.f(10.5,
+                  style: AppTheme.f(11,
                       weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.4)),
               const SizedBox(height: 3),
               Text(t.longDate(DateTime.now()),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: AppTheme.f(21, color: gc.text)),
+                  style: AppTheme.f(20, color: gc.text)),
             ],
           ),
         ),
@@ -170,7 +170,7 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             Text(t.weekdayInitial(fit.weekdayAt(i)),
-                style: AppTheme.f(10,
+                style: AppTheme.f(11,
                     weight: FontWeight.w700,
                     color: isToday ? gc.text : gc.textTertiary,
                     letterSpacing: 0.5)),
@@ -215,6 +215,7 @@ class HomeScreen extends StatelessWidget {
             children: [
               Expanded(
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(child: MetricCard(label: t.statWorkouts, value: '${fit.sessionsThisWeek}')),
                     Expanded(
@@ -306,7 +307,7 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(t.personalizeTitle, style: AppTheme.f(14.5, color: gc.text)),
+                    Text(t.personalizeTitle, style: AppTheme.f(14, color: gc.text)),
                     const SizedBox(height: 2),
                     Text(t.personalizeBody,
                         style: AppTheme.f(12, weight: FontWeight.w500, color: gc.textSecondary, height: 1.35)),
@@ -351,7 +352,7 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(t.photoDueNow, style: AppTheme.f(14.5, color: gc.text)),
+                  Text(t.photoDueNow, style: AppTheme.f(14, color: gc.text)),
                   const SizedBox(height: 2),
                   Text(t.photoInterval(fit.photoIntervalDays),
                       style: AppTheme.f(12, weight: FontWeight.w500, color: gc.textSecondary)),
@@ -378,7 +379,7 @@ void showWeeklyGoalSheet(BuildContext context) {
         padding: sheetPad(sheet),
         decoration: BoxDecoration(
           color: gc.bgRaised,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(GymRadius.xxl)),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -388,11 +389,11 @@ void showWeeklyGoalSheet(BuildContext context) {
             const SizedBox(height: 20),
             Text(t.weeklyGoal,
                 textAlign: TextAlign.center,
-                style: AppTheme.f(19, color: gc.text)),
+                style: AppTheme.f(20, color: gc.text)),
             const SizedBox(height: 6),
             Text(t.sessionsLogged(fit.sessionsThisWeek),
                 textAlign: TextAlign.center,
-                style: AppTheme.f(12.5, weight: FontWeight.w500, color: gc.textSecondary)),
+                style: AppTheme.f(12, weight: FontWeight.w500, color: gc.textSecondary)),
             const SizedBox(height: 20),
             Center(
               child: StepperControl(

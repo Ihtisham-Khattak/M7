@@ -98,6 +98,10 @@ void main() {
 
     fit.goProgress();
     await settle(tester);
+    await tester.ensureVisible(find.text(t.progressStrength));
+    await tester.pump();
+    await tester.tap(find.text(t.progressStrength));
+    await tester.pump(const Duration(milliseconds: 500));
     expect(find.text(exerciseName(bench)), findsWidgets, reason: 'the logged lift shows up under records');
     fit.persistNow();
     semantics.dispose();

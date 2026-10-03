@@ -23,7 +23,7 @@ class _DaySheet extends StatelessWidget {
       decoration: BoxDecoration(
         color: gc.bgRaised,
         border: Border.all(color: gc.border),
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(GymRadius.xxl)),
       ),
       clipBehavior: Clip.antiAlias,
       child: SingleChildScrollView(
@@ -114,7 +114,7 @@ class _DaySheet extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
                 decoration: BoxDecoration(
                   color: gc.emberSoft,
-                  borderRadius: BorderRadius.circular(100),
+                  borderRadius: BorderRadius.circular(GymRadius.pill),
                 ),
                 child: Row(mainAxisSize: MainAxisSize.min, children: [
                   Icon(PhosphorIconsFill.play, size: 11, color: gc.ember),
@@ -233,7 +233,7 @@ class _DaySheet extends StatelessWidget {
           fit1(Text(label,
               maxLines: 1,
               softWrap: false,
-              style: AppTheme.s(9, weight: FontWeight.w600, color: gc.textSecondary, letterSpacing: 1))),
+              style: AppTheme.s(11, weight: FontWeight.w600, color: gc.textSecondary, letterSpacing: 1))),
           const SizedBox(height: 4),
           fit1(Text(value,
               maxLines: 1, softWrap: false, style: AppTheme.d(17, weight: FontWeight.w700, color: gc.text))),

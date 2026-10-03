@@ -39,7 +39,7 @@ class StartSheet extends StatelessWidget {
       decoration: BoxDecoration(
         color: gc.bgRaised,
         border: Border.all(color: gc.border),
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(GymRadius.xxl)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -48,13 +48,13 @@ class StartSheet extends StatelessWidget {
           const SheetHandle(),
           const SizedBox(height: 16),
           Text(day == null ? t.startTitle : t.logTitle,
-              style: AppTheme.f(21, weight: FontWeight.w700, color: gc.text)),
+              style: AppTheme.f(20, weight: FontWeight.w700, color: gc.text)),
           const SizedBox(height: 4),
           Text(t.longDate(day ?? DateTime.now()),
-              style: AppTheme.f(12.5, weight: FontWeight.w500, color: gc.textSecondary)),
+              style: AppTheme.f(12, weight: FontWeight.w500, color: gc.textSecondary)),
           if (day != null) ...[
             const SizedBox(height: 12),
-            Text(t.logHint, style: AppTheme.f(12.5, weight: FontWeight.w500, color: gc.textTertiary)),
+            Text(t.logHint, style: AppTheme.f(12, weight: FontWeight.w500, color: gc.textTertiary)),
           ],
           const SizedBox(height: 18),
           Flexible(
@@ -92,7 +92,7 @@ class StartSheet extends StatelessWidget {
   Widget _label(GymColors gc, String text) => Padding(
         padding: const EdgeInsets.only(left: 4, bottom: 8),
         child: Text(text.toUpperCase(),
-            style: AppTheme.f(10.5, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.2)),
+            style: AppTheme.f(11, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.2)),
       );
 
   Widget _plannedCard(BuildContext context, GymColors gc, Routine r) => WorkoutTile(
@@ -118,7 +118,7 @@ class StartSheet extends StatelessWidget {
         child: Row(children: [
           Icon(icon, size: 19, color: gc.textSecondary),
           const SizedBox(width: 13),
-          Expanded(child: Text(label, style: AppTheme.f(14.5, weight: FontWeight.w600, color: gc.text))),
+          Expanded(child: Text(label, style: AppTheme.f(14, weight: FontWeight.w600, color: gc.text))),
         ]),
       ),
     );

@@ -389,6 +389,24 @@ class AppLocalizationsRu extends AppLocalizations {
   String get tagline => 'Мягко, но не слабо.';
 
   @override
+  String get progressStrength => 'Сила';
+
+  @override
+  String get progressBody => 'Тело';
+
+  @override
+  String get progressMuscles => 'Мышцы';
+
+  @override
+  String get progressAllTime => 'Всего';
+
+  @override
+  String get progressRecordsEmpty => 'Запишите тренировку — и ваши рекорды появятся здесь.';
+
+  @override
+  String get progressBodyEmpty => 'Добавьте вес, замеры или фото — они появятся здесь.';
+
+  @override
   String get totalVolume30d => 'ОБЩИЙ ОБЪЁМ · 30 ДНЕЙ';
 
   @override
@@ -1848,7 +1866,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get welcomeKicker => 'ДОБРО ПОЖАЛОВАТЬ В';
 
   @override
-  String get welcomeBlurb => 'Всё остаётся на твоём телефоне. Без аккаунта, без интернета, без оплаты.';
+  String get welcomeBlurb =>
+      'Кайдзан — это постоянное улучшение. Без крайностей: одна честная тренировка, затем следующая.';
 
   @override
   String get welcomeStart => 'НАЧАТЬ';

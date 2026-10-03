@@ -97,7 +97,7 @@ class _MeasureRow extends StatelessWidget {
                               padding: const EdgeInsets.only(bottom: 3),
                               child: Text(
                                 '${change > 0 ? '+' : ''}${fmt(change)}',
-                                style: AppTheme.s(12.5,
+                                style: AppTheme.s(12,
                                     weight: FontWeight.w600,
                                     color: change > 0 ? gc.sage : gc.accent),
                               ),
@@ -202,7 +202,7 @@ class _MeasureSheetState extends State<_MeasureSheet> {
       decoration: BoxDecoration(
         color: gc.bg,
         border: Border.all(color: gc.border),
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(26)),
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(GymRadius.xxl)),
       ),
       clipBehavior: Clip.antiAlias,
       child: SafeArea(
@@ -245,7 +245,7 @@ class _MeasureSheetState extends State<_MeasureSheet> {
                             style: AppTheme.f(54, weight: FontWeight.w800, color: gc.text, height: 1.1)),
                         const SizedBox(width: 6),
                         Text(fit.measureUnit(_key),
-                            style: AppTheme.f(18, weight: FontWeight.w700, color: gc.textSecondary)),
+                            style: AppTheme.f(17, weight: FontWeight.w700, color: gc.textSecondary)),
                       ],
                     ),
                   ),
@@ -283,10 +283,10 @@ class _MeasureSheetState extends State<_MeasureSheet> {
         child: Row(
           children: [
             Expanded(
-              child: Text(t.shortDateYear(m.date), style: AppTheme.s(12.5, color: gc.textSecondary)),
+              child: Text(t.shortDateYear(m.date), style: AppTheme.s(12, color: gc.textSecondary)),
             ),
             Text(fit.measureLabel(m.key, m.value),
-                style: AppTheme.s(13.5, weight: FontWeight.w600, color: gc.text)),
+                style: AppTheme.s(13, weight: FontWeight.w600, color: gc.text)),
             const SizedBox(width: 8),
             Semantics(
               button: true,

@@ -33,7 +33,7 @@ class GymManeApp extends StatelessWidget {
         ],
         builder: (context, child) => MediaQuery.withClampedTextScaling(
           maxScaleFactor: maxTextScale,
-          child: _ButtonNavScrim(child: child!),
+          child: ReadableWidth(child: _ButtonNavScrim(child: child!)),
         ),
         home: const AppShell(),
       ),
@@ -62,6 +62,30 @@ class _ButtonNavScrim extends StatelessWidget {
             child: IgnorePointer(child: ColoredBox(color: context.gc.bg)),
           ),
       ],
+    );
+  }
+}
+
+/// On a tablet or foldable the app keeps phone proportions: content is centred in a column of at
+/// most [maxWidth] dp instead of stretching across the screen (GM-21).
+class ReadableWidth extends StatelessWidget {
+  const ReadableWidth({super.key, required this.child, this.maxWidth = 640});
+
+  final Widget child;
+  final double maxWidth;
+
+  @override
+  Widget build(BuildContext context) {
+    final media = MediaQuery.of(context);
+    if (media.size.width <= maxWidth) return child;
+    return ColoredBox(
+      color: context.gc.bg,
+      child: Center(
+        child: SizedBox(
+          width: maxWidth,
+          child: MediaQuery(data: media.copyWith(size: Size(maxWidth, media.size.height)), child: child),
+        ),
+      ),
     );
   }
 }

@@ -83,7 +83,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(4, 0, 0, 8),
                         child: Text(muscleLabel(ex.primary).toUpperCase(),
-                            style: AppTheme.f(10.5,
+                            style: AppTheme.f(11,
                                 weight: FontWeight.w700,
                                 color: gc.textTertiary,
                                 letterSpacing: 1.3)),
@@ -333,7 +333,7 @@ void showCreateExerciseSheet(BuildContext context,
     context: context,
     isScrollControlled: true,
     backgroundColor: gc.bgRaised,
-    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
+    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(GymRadius.xxl))),
     builder: (sheetCtx) => Padding(
       padding: EdgeInsets.only(bottom: MediaQuery.of(sheetCtx).viewInsets.bottom),
       child: StatefulBuilder(
@@ -355,7 +355,7 @@ void showCreateExerciseSheet(BuildContext context,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(titleCase(editing == null ? t.newExercise : t.editExercise),
-                      style: AppTheme.f(19, weight: FontWeight.w800, color: gc.text)),
+                      style: AppTheme.f(20, weight: FontWeight.w800, color: gc.text)),
                   const SizedBox(height: 16),
                   TextField(
                     controller: nameCtrl,
@@ -493,9 +493,9 @@ void showCreateExerciseSheet(BuildContext context,
                             children: [
                               Icon(PhosphorIconsRegular.uploadSimple, size: 26, color: gc.textSecondary),
                               const SizedBox(height: 8),
-                              Text(t.addMedia, style: AppTheme.f(13.5, weight: FontWeight.w600, color: gc.textSecondary)),
+                              Text(t.addMedia, style: AppTheme.f(13, weight: FontWeight.w600, color: gc.textSecondary)),
                               const SizedBox(height: 2),
-                              Text(t.mediaHint, style: AppTheme.f(11.5, weight: FontWeight.w500, color: gc.textTertiary)),
+                              Text(t.mediaHint, style: AppTheme.f(11, weight: FontWeight.w500, color: gc.textTertiary)),
                             ],
                           ),
                         ),
@@ -541,8 +541,8 @@ void showCreateExerciseSheet(BuildContext context,
                               onTap: pickMedia,
                               child: Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                                decoration: BoxDecoration(color: gc.bg.withValues(alpha: 0.8), borderRadius: BorderRadius.circular(100)),
-                                child: Text(t.changeMedia, style: AppTheme.f(11.5, weight: FontWeight.w600, color: gc.text)),
+                                decoration: BoxDecoration(color: gc.bg.withValues(alpha: 0.8), borderRadius: BorderRadius.circular(GymRadius.pill)),
+                                child: Text(t.changeMedia, style: AppTheme.f(11, weight: FontWeight.w600, color: gc.text)),
                               ),
                             ),
                           ),
@@ -615,7 +615,7 @@ void showExerciseFilters(BuildContext context, {VoidCallback? onClear}) {
         decoration: BoxDecoration(
           color: gc.bgRaised,
           border: Border.all(color: gc.border),
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(GymRadius.xxl)),
         ),
         child: SingleChildScrollView(
           child: Column(
@@ -626,7 +626,7 @@ void showExerciseFilters(BuildContext context, {VoidCallback? onClear}) {
               const SizedBox(height: 18),
               Text(titleCase(t.filters),
                   textAlign: TextAlign.center,
-                  style: AppTheme.f(19, weight: FontWeight.w800, color: gc.text)),
+                  style: AppTheme.f(20, weight: FontWeight.w800, color: gc.text)),
               const SizedBox(height: 18),
               _filterLabel(gc, t.placeFilterLabel),
               const SizedBox(height: 8),
@@ -691,7 +691,7 @@ void showExerciseFilters(BuildContext context, {VoidCallback? onClear}) {
 }
 
 Widget _filterLabel(GymColors gc, String label) => Text(label.toUpperCase(),
-    style: AppTheme.f(10.5, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.3));
+    style: AppTheme.f(11, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.3));
 
 Widget _chipRow(List<_FilterChipData> chips, GymColors gc,
     {required double hPad, required double vPad, required double fontSize}) {

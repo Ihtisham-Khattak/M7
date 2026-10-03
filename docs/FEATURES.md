@@ -291,7 +291,7 @@ Reusable workouts with optional per-set targets, scheduled on weekdays.
 Routines screen: folders (groups), colours, duplicate, delete, open editor. Editor: add/remove/reorder exercises, set count, per-set plan (reps/weight/kind/time/distance), superset chain toggle, group, colour, day assignment (single, or multiple routines per day when "multi plan" is on). Templates sheet applies one of 8 built-in programs. Home shows today's routine.
 
 ### Implementation
-`routines_state.dart`, `fit_state.dart (applyTemplate)`, `catalog/program_templates.dart` (Full Body, PPL, Upper/Lower, ABCD, ABCDE, StrongLifts 5×5, Starting Strength, "No Kit"), `screens/routines_screen.dart`, `routine_edit_screen.dart`, `widgets/routine_folder.dart`, `home_folder.dart`.
+`routines_state.dart`, `fit_state.dart (applyTemplate)`, `catalog/program_templates.dart` (Full Body, PPL, Upper/Lower, ABCD, ABCDE, StrongLifts 5×5, Starting Strength, "No Kit"), `screens/routines_screen.dart`, `routine_edit_screen.dart`, `widgets/routine_folder.dart`.
 
 ### Business Rules
 - `weeklyPlan: Map<weekday(1=Mon..7=Sun), routineId>`; `planExtras[weekday]` = extra routine ids used only when `multiPlan`.

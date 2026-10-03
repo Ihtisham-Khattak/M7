@@ -57,6 +57,7 @@ class GymElevation {
 class GymText {
   GymText._();
 
+  static const double microSize = 11;
   static const double captionSize = 12;
   static const double labelSize = 13;
   static const double bodySize = 14;

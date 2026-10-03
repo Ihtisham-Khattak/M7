@@ -7,7 +7,7 @@ void showAddToSessionSheet(BuildContext context) {
     context: context,
     isScrollControlled: true,
     backgroundColor: gc.bgRaised,
-    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
+    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(GymRadius.xxl))),
     builder: (sheetCtx) => Padding(
       padding: EdgeInsets.only(bottom: MediaQuery.of(sheetCtx).viewInsets.bottom),
       child: StatefulBuilder(
@@ -113,7 +113,7 @@ void showSessionOverview(BuildContext context) {
           constraints: BoxConstraints(maxHeight: MediaQuery.sizeOf(sheet).height * 0.86),
           decoration: BoxDecoration(
             color: gc.bgRaised,
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(GymRadius.xxl)),
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -122,10 +122,10 @@ void showSessionOverview(BuildContext context) {
               const SheetHandle(),
               const SizedBox(height: 18),
               Text(titleCase(t.workoutOverview),
-                  style: AppTheme.f(19, weight: FontWeight.w800, color: gc.text)),
+                  style: AppTheme.f(20, weight: FontWeight.w800, color: gc.text)),
               const SizedBox(height: 4),
               Text('${t.exerciseCount(s.exercises.length)} · ${fit.elapsedLabel}',
-                  style: AppTheme.f(12.5, weight: FontWeight.w500, color: gc.textSecondary)),
+                  style: AppTheme.f(12, weight: FontWeight.w500, color: gc.textSecondary)),
               const SizedBox(height: 16),
               Flexible(
                 child: ReorderableListView.builder(
@@ -185,7 +185,7 @@ Widget _overviewRow(BuildContext sheet, GymColors gc, WorkoutSession s, int i) {
             child: all
                 ? SvgPathIcon(Ic.checkBold, size: 12, color: Colors.white)
                 : Text('${i + 1}',
-                    style: AppTheme.f(11.5,
+                    style: AppTheme.f(11,
                         weight: FontWeight.w700, color: current ? gc.onEmber : gc.textSecondary)),
           ),
           const SizedBox(width: 10),
@@ -204,12 +204,12 @@ Widget _overviewRow(BuildContext sheet, GymColors gc, WorkoutSession s, int i) {
                 const SizedBox(height: 2),
                 Row(children: [
                   Text(t.setsDoneOf(done, e.sets.length),
-                      style: AppTheme.f(11.5,
+                      style: AppTheme.f(11,
                           weight: FontWeight.w500, color: all ? gc.sage : gc.textSecondary)),
                   if (current) ...[
-                    Text(' · ', style: AppTheme.f(11.5, color: gc.textTertiary)),
+                    Text(' · ', style: AppTheme.f(11, color: gc.textTertiary)),
                     Text(t.nowLabel,
-                        style: AppTheme.f(11.5, weight: FontWeight.w700, color: gc.ember)),
+                        style: AppTheme.f(11, weight: FontWeight.w700, color: gc.ember)),
                   ],
                   if (linked) ...[
                     const SizedBox(width: 6),
@@ -246,7 +246,7 @@ void showExerciseHistorySheet(BuildContext context, String exerciseId) {
       constraints: BoxConstraints(maxHeight: MediaQuery.sizeOf(sheet).height * 0.8),
       decoration: BoxDecoration(
         color: gc.bgRaised,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(GymRadius.xxl)),
       ),
       child: SingleChildScrollView(
         child: Column(
@@ -256,10 +256,10 @@ void showExerciseHistorySheet(BuildContext context, String exerciseId) {
             const SheetHandle(),
             const SizedBox(height: 18),
             Text(ex == null ? '' : exerciseName(ex),
-                style: AppTheme.f(19, weight: FontWeight.w800, color: gc.text)),
+                style: AppTheme.f(20, weight: FontWeight.w800, color: gc.text)),
             const SizedBox(height: 4),
             Text(titleCase(t.history),
-                style: AppTheme.f(12.5, weight: FontWeight.w500, color: gc.textSecondary)),
+                style: AppTheme.f(12, weight: FontWeight.w500, color: gc.textSecondary)),
             const SizedBox(height: 14),
             if (history.isEmpty)
               Text(t.noHistory, style: AppTheme.f(13, weight: FontWeight.w500, color: gc.textSecondary)),
@@ -281,7 +281,7 @@ void showExerciseHistorySheet(BuildContext context, String exerciseId) {
                     ),
                     Expanded(
                       child: Text(fit.setsSummary(history[i].ex.sets),
-                          style: AppTheme.f(12.5,
+                          style: AppTheme.f(12,
                               weight: FontWeight.w500, color: gc.textSecondary, height: 1.4)),
                     ),
                   ],

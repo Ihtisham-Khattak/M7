@@ -130,6 +130,12 @@
   "trendChartLabel": "Andamento da {first} a {last}",
   "restLeftAnnounce": "Mancano {seconds} secondi di riposo",
   "tagline": "Gentile, ma non debole.",
+  "progressStrength": "Forza",
+  "progressBody": "Corpo",
+  "progressMuscles": "Muscoli",
+  "progressAllTime": "Totale",
+  "progressRecordsEmpty": "Registra un allenamento e i tuoi record compariranno qui.",
+  "progressBodyEmpty": "Aggiungi peso, misure o una foto e appariranno qui.",
 
   "totalVolume30d": "VOLUME TOTALE · 30 GIORNI",
   "volumeCumulative": "Somma di ogni chilo che hai spostato",
@@ -613,7 +619,7 @@
   "reset": "AZZERA",
 
   "welcomeKicker": "BENVENUTO IN",
-  "welcomeBlurb": "Tutto resta sul tuo telefono. Nessun account, niente internet, niente da pagare.",
+  "welcomeBlurb": "Kaizan significa migliorare con costanza. Niente estremi: una sessione sincera, poi la prossima.",
   "welcomeStart": "INIZIA",
   "onbGoalQTitle": "Qual è il tuo obiettivo?",
   "onbGoalQWhy": "Scegli quello che ti si addice di più. Puoi cambiarlo quando vuoi.",

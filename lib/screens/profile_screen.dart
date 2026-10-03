@@ -186,7 +186,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           color: m == thisMonth
                               ? gc.ember
                               : (months[m - 1] > 0 ? gc.textTertiary : gc.bgRaised2),
-                          borderRadius: BorderRadius.circular(5),
+                          borderRadius: BorderRadius.circular(GymRadius.xs),
                         ),
                       ),
                     ),
@@ -204,7 +204,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: Text(
                     t.monthInitial(m),
                     textAlign: TextAlign.center,
-                    style: AppTheme.f(9.5,
+                    style: AppTheme.f(11,
                         weight: FontWeight.w600,
                         color: m == thisMonth ? gc.text : gc.textTertiary),
                   ),
@@ -239,14 +239,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
             RollIn(value, style: AppTheme.f(26, weight: FontWeight.w800, color: gc.text)),
             if (unit.isNotEmpty)
               Text(unit,
-                  style: AppTheme.f(12.5, weight: FontWeight.w600, color: gc.textSecondary)),
+                  style: AppTheme.f(12, weight: FontWeight.w600, color: gc.textSecondary)),
           ],
         ),
         const SizedBox(height: 5),
         Text(label.toUpperCase(),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: AppTheme.f(9.5,
+            style: AppTheme.f(11,
                 weight: FontWeight.w600, color: gc.textTertiary, letterSpacing: 0.9)),
       ],
     );
@@ -263,7 +263,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           alignment: AlignmentDirectional.centerStart,
           child: Row(
             children: [
-              Text(title, style: AppTheme.f(21, color: gc.text)),
+              Text(title, style: AppTheme.f(20, color: gc.text)),
               if (count != null) ...[
                 const SizedBox(width: 9),
                 Text(count, style: AppTheme.f(17, weight: FontWeight.w600, color: gc.textTertiary)),
@@ -299,14 +299,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(label.toUpperCase(),
-                  style: AppTheme.f(10.5,
+                  style: AppTheme.f(11,
                       weight: FontWeight.w600, color: gc.textTertiary, letterSpacing: 0.9)),
               const SizedBox(height: 7),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.baseline,
                 textBaseline: TextBaseline.alphabetic,
                 children: [
-                  RollIn(value, style: AppTheme.f(23, weight: FontWeight.w800, color: gc.text)),
+                  RollIn(value, style: AppTheme.f(22, weight: FontWeight.w800, color: gc.text)),
                   if (unit.isNotEmpty) ...[
                     const SizedBox(width: 4),
                     Text(unit,
@@ -378,7 +378,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(label, style: AppTheme.f(14.5, color: gc.text)),
+                  Text(label, style: AppTheme.f(14, color: gc.text)),
                   if (trailing != null) ...[
                     const SizedBox(width: 7),
                     Text(trailing,
@@ -591,14 +591,14 @@ class _ProfileHeader extends SliverPersistentHeaderDelegate {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(children: [
-              Text(fit.displayName, style: AppTheme.f(15.5, color: gc.text)),
+              Text(fit.displayName, style: AppTheme.f(15, color: gc.text)),
               if (p.badge.isNotEmpty) ...[
                 const SizedBox(width: 5),
                 Icon(PhosphorIconsFill.sealCheck, size: 14, color: badgeColor(p.badge)),
               ],
             ]),
             Text('@${fit.profileHandle}',
-                style: AppTheme.f(11.5, weight: FontWeight.w500, color: gc.textSecondary)),
+                style: AppTheme.f(11, weight: FontWeight.w500, color: gc.textSecondary)),
           ],
         ),
       ],
@@ -623,10 +623,10 @@ class _ProfileHeader extends SliverPersistentHeaderDelegate {
                   padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
                   decoration: BoxDecoration(
                     color: gc.bgRaised2,
-                    borderRadius: BorderRadius.circular(100),
+                    borderRadius: BorderRadius.circular(GymRadius.pill),
                   ),
                   child: Text(t.editProfile,
-                      style: AppTheme.f(13.5, weight: FontWeight.w600, color: gc.text)),
+                      style: AppTheme.f(13, weight: FontWeight.w600, color: gc.text)),
                 ),
               ),
             ),
@@ -638,7 +638,7 @@ class _ProfileHeader extends SliverPersistentHeaderDelegate {
             child: Text(p.name,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: AppTheme.f(24, weight: FontWeight.w800, color: gc.text)),
+                style: AppTheme.f(22, weight: FontWeight.w800, color: gc.text)),
           ),
           if (p.badge.isNotEmpty) ...[
             const SizedBox(width: 7),
@@ -659,7 +659,7 @@ class _ProfileHeader extends SliverPersistentHeaderDelegate {
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             decoration: BoxDecoration(
               color: gc.bgRaised2,
-              borderRadius: BorderRadius.circular(100),
+              borderRadius: BorderRadius.circular(GymRadius.pill),
             ),
             child: Text(t.levelShort(fit.athleteLevel),
                 style: AppTheme.f(12, weight: FontWeight.w700, color: gc.text)),

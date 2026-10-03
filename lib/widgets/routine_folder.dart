@@ -10,13 +10,15 @@ import '../theme/tokens.dart';
 import 'ui_kit.dart';
 import 'workout_card.dart';
 
+/// Six muted folder colours drawn from the Kaizan palette (vermilion, stone, matcha, indigo,
+/// ochre, rose). The index is what a routine stores, so the order must not change.
 const kFolderHues = [
-  Color(0xFFF3C7B1),
-  Color(0xFFA78BDA),
-  Color(0xFFA8C99E),
-  Color(0xFF9CC2E8),
-  Color(0xFFE8CF98),
-  Color(0xFFE6A4B9),
+  Color(0xFFE0907D),
+  Color(0xFFC9BFAE),
+  Color(0xFF9DB387),
+  Color(0xFF8EA2D6),
+  Color(0xFFD9B26A),
+  Color(0xFFD79BAA),
 ];
 
 Color folderHue(Routine r) =>
@@ -60,7 +62,7 @@ class RoutineFolder extends StatelessWidget {
               child: DecoratedBox(
                 decoration: BoxDecoration(
                   color: gc.bgRaised,
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(14)),
+                  borderRadius: const BorderRadius.vertical(top: Radius.circular(GymRadius.md)),
                 ),
               ),
             ),
@@ -70,9 +72,9 @@ class RoutineFolder extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: gc.bgRaised,
                   borderRadius: const BorderRadius.only(
-                    topRight: Radius.circular(20),
-                    bottomLeft: Radius.circular(22),
-                    bottomRight: Radius.circular(22),
+                    topRight: Radius.circular(GymRadius.xl),
+                    bottomLeft: Radius.circular(GymRadius.xl),
+                    bottomRight: Radius.circular(GymRadius.xl),
                   ),
                 ),
               ),
@@ -145,7 +147,7 @@ class RoutineFolder extends StatelessWidget {
                             ]),
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
-                            style: AppTheme.f(16, weight: FontWeight.w800, color: gc.text, height: 1.15),
+                            style: AppTheme.f(15, weight: FontWeight.w800, color: gc.text, height: 1.15),
                           ),
                         ),
                         Semantics(
@@ -172,7 +174,7 @@ class RoutineFolder extends StatelessWidget {
                       [if (r.group.isNotEmpty) r.group, summary.meta].join(' · '),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: AppTheme.f(11.5, weight: FontWeight.w600, color: gc.textSecondary),
+                      style: AppTheme.f(11, weight: FontWeight.w600, color: gc.textSecondary),
                     ),
                   ],
                 ),
@@ -191,7 +193,7 @@ class RoutineFolder extends StatelessWidget {
                     Icon(n > 0 ? PhosphorIconsFill.play : PhosphorIconsBold.plus, size: 12, color: gc.textSecondary),
                     const SizedBox(width: 7),
                     Text(n > 0 ? titleCase(t.startWorkout) : t.addExercises,
-                        style: AppTheme.f(13.5, weight: FontWeight.w700, color: gc.textSecondary)),
+                        style: AppTheme.f(13, weight: FontWeight.w700, color: gc.textSecondary)),
                   ]),
                 ),
               ),
@@ -206,6 +208,6 @@ class RoutineFolder extends StatelessWidget {
   Widget _line(Color c, double width) => FractionallySizedBox(
         alignment: Alignment.centerLeft,
         widthFactor: width,
-        child: Container(height: 2.5, decoration: BoxDecoration(color: c, borderRadius: BorderRadius.circular(2))),
+        child: Container(height: 2.5, decoration: BoxDecoration(color: c, borderRadius: BorderRadius.circular(GymRadius.hair))),
       );
 }

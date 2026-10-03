@@ -137,7 +137,7 @@ class _PlanImportSheetState extends State<_PlanImportSheet> {
       constraints: BoxConstraints(maxHeight: MediaQuery.sizeOf(context).height * 0.9),
       decoration: BoxDecoration(
         color: gc.bgRaised,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(GymRadius.xxl)),
       ),
       child: SingleChildScrollView(
         child: Column(
@@ -146,10 +146,10 @@ class _PlanImportSheetState extends State<_PlanImportSheet> {
           children: [
             const SheetHandle(),
             const SizedBox(height: 18),
-            Text(titleCase(t.importRoutines), style: AppTheme.f(19, weight: FontWeight.w800, color: gc.text)),
+            Text(titleCase(t.importRoutines), style: AppTheme.f(20, weight: FontWeight.w800, color: gc.text)),
             const SizedBox(height: 6),
             Text(t.importPasteHint,
-                style: AppTheme.f(12.5, weight: FontWeight.w500, color: gc.textSecondary, height: 1.4)),
+                style: AppTheme.f(12, weight: FontWeight.w500, color: gc.textSecondary, height: 1.4)),
             const SizedBox(height: 14),
             if (_field) ...[
               TextField(
@@ -157,11 +157,11 @@ class _PlanImportSheetState extends State<_PlanImportSheet> {
                 minLines: 4,
                 maxLines: 8,
                 onChanged: (_) => _parse(),
-                style: AppTheme.f(12.5, weight: FontWeight.w500, color: gc.text, height: 1.35),
+                style: AppTheme.f(12, weight: FontWeight.w500, color: gc.text, height: 1.35),
                 cursorColor: gc.accent,
                 decoration: InputDecoration(
                   hintText: _sample,
-                  hintStyle: AppTheme.f(12.5, weight: FontWeight.w500, color: gc.textTertiary),
+                  hintStyle: AppTheme.f(12, weight: FontWeight.w500, color: gc.textTertiary),
                   filled: true,
                   fillColor: gc.bgRaised2,
                   contentPadding: const EdgeInsets.all(14),
@@ -178,7 +178,7 @@ class _PlanImportSheetState extends State<_PlanImportSheet> {
             if (preview != null && preview.routines > 0) ...[
               const SizedBox(height: 18),
               Text('${t.routineCount(preview.routines)} · ${t.exerciseCount(preview.added)}'.toUpperCase(),
-                  style: AppTheme.f(10.5, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.3)),
+                  style: AppTheme.f(11, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.3)),
               const SizedBox(height: 10),
               for (final p in _plans)
                 if (p.items.isNotEmpty) _planCard(gc, p),
@@ -206,7 +206,7 @@ class _PlanImportSheetState extends State<_PlanImportSheet> {
                                 style: AppTheme.f(14, weight: FontWeight.w600, color: gc.text)),
                             const SizedBox(height: 2),
                             Text(t.useTheirScheduleHint,
-                                style: AppTheme.f(11.5, weight: FontWeight.w500, color: gc.textSecondary)),
+                                style: AppTheme.f(11, weight: FontWeight.w500, color: gc.textSecondary)),
                           ],
                         ),
                       ),
@@ -245,11 +245,11 @@ class _PlanImportSheetState extends State<_PlanImportSheet> {
         onTap: onTap,
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
-          decoration: BoxDecoration(color: gc.bgRaised2, borderRadius: BorderRadius.circular(100)),
+          decoration: BoxDecoration(color: gc.bgRaised2, borderRadius: BorderRadius.circular(GymRadius.pill)),
           child: Row(mainAxisSize: MainAxisSize.min, children: [
             Icon(icon, size: 15, color: gc.text),
             const SizedBox(width: 7),
-            Text(label, style: AppTheme.f(12.5, weight: FontWeight.w600, color: gc.text)),
+            Text(label, style: AppTheme.f(12, weight: FontWeight.w600, color: gc.text)),
           ]),
         ),
       );
@@ -284,7 +284,7 @@ class _PlanImportSheetState extends State<_PlanImportSheet> {
               Text(meta,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: AppTheme.f(11.5, weight: FontWeight.w500, color: gc.textSecondary)),
+                  style: AppTheme.f(11, weight: FontWeight.w500, color: gc.textSecondary)),
             ],
           ),
         ),

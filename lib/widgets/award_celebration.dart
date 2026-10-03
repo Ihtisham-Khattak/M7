@@ -154,6 +154,11 @@ class _AwardCelebrationState extends State<AwardCelebration> with TickerProvider
                 child: SafeArea(
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(26, 12, 26, 22),
+                    child: LayoutBuilder(
+                      builder: (context, box) => SingleChildScrollView(
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(minHeight: box.maxHeight),
+                          child: IntrinsicHeight(
                     child: Column(
                       children: [
                         const Spacer(),
@@ -194,7 +199,7 @@ class _AwardCelebrationState extends State<AwardCelebration> with TickerProvider
                           Text(
                             t.awardUnlocked.toUpperCase(),
                             textAlign: TextAlign.center,
-                            style: AppTheme.f(11.5,
+                            style: AppTheme.f(11,
                                 weight: FontWeight.w700,
                                 color: gc.textSecondary,
                                 letterSpacing: 2.6),
@@ -217,7 +222,7 @@ class _AwardCelebrationState extends State<AwardCelebration> with TickerProvider
                           Text(
                             awardLine(widget.id),
                             textAlign: TextAlign.center,
-                            style: AppTheme.f(13.5,
+                            style: AppTheme.f(13,
                                 weight: FontWeight.w500, color: gc.textSecondary, height: 1.45),
                           ),
                         ),
@@ -228,7 +233,7 @@ class _AwardCelebrationState extends State<AwardCelebration> with TickerProvider
                           Padding(
                             padding: const EdgeInsets.only(bottom: 14),
                             child: Text(_toast!,
-                                style: AppTheme.f(12.5,
+                                style: AppTheme.f(12,
                                     weight: FontWeight.w600, color: gc.textSecondary)),
                           ),
                         _fade(0.6, 1, PrimaryButton(label: t.awardNice, onTap: widget.onClose)),
@@ -244,13 +249,17 @@ class _AwardCelebrationState extends State<AwardCelebration> with TickerProvider
                               child: Text(
                                 _saving ? '…' : t.awardSaveImage,
                                 textAlign: TextAlign.center,
-                                style: AppTheme.f(13.5,
+                                style: AppTheme.f(13,
                                     weight: FontWeight.w700, color: gc.textSecondary),
                               ),
                             ),
                           ),
                         ),
                       ],
+                    ),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -303,7 +312,7 @@ class _SaveCard extends StatelessWidget {
                   const SizedBox(height: 36),
                   Text(t.awardUnlocked.toUpperCase(),
                       textAlign: TextAlign.center,
-                      style: AppTheme.f(10.5,
+                      style: AppTheme.f(11,
                           weight: FontWeight.w700, color: gc.textSecondary, letterSpacing: 2.4)),
                   const SizedBox(height: 10),
                   Text(awardName(id),
@@ -351,7 +360,7 @@ class _Signature extends StatelessWidget {
                 Text(fit.displayName,
                     style: AppTheme.f(15, weight: FontWeight.w700, color: gc.text)),
                 Text('@${fit.profileHandle}',
-                    style: AppTheme.f(12.5, weight: FontWeight.w500, color: gc.textSecondary)),
+                    style: AppTheme.f(12, weight: FontWeight.w500, color: gc.textSecondary)),
               ],
             ),
           ],
@@ -359,7 +368,7 @@ class _Signature extends StatelessWidget {
         if (date != null) ...[
           const SizedBox(height: 16),
           Text(t.shortDateYear(date),
-              style: AppTheme.f(11.5, weight: FontWeight.w600, color: gc.textTertiary)),
+              style: AppTheme.f(11, weight: FontWeight.w600, color: gc.textTertiary)),
         ],
       ],
     );

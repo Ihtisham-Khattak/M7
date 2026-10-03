@@ -4,6 +4,7 @@ import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 
 import '../l10n/l10n.dart';
 import '../theme/app_colors.dart';
+import '../theme/tokens.dart';
 import 'glass.dart';
 import 'ui_kit.dart';
 
@@ -23,7 +24,7 @@ class PhotoSourceSheet extends StatelessWidget {
       padding: sheetPad(context),
       decoration: BoxDecoration(
         color: gc.bgRaised,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(GymRadius.xxl)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,

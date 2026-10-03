@@ -4,6 +4,7 @@ import '../catalog/awards.dart';
 import '../l10n/l10n.dart';
 import '../state/fit_state.dart';
 import '../theme/app_colors.dart';
+import '../theme/tokens.dart';
 import '../theme/app_theme.dart';
 import 'glass.dart';
 import 'medal.dart';
@@ -21,7 +22,7 @@ class MedalShelf extends StatelessWidget {
       ...AwardId.values.where((a) => !fit.hasAward(a)),
     ];
     return SizedBox(
-      height: size + 32,
+      height: size + 40,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: order.length,
@@ -72,7 +73,7 @@ class MedalShelf extends StatelessWidget {
                   maxLines: 2,
                   textAlign: TextAlign.center,
                   overflow: TextOverflow.ellipsis,
-                  style: AppTheme.f(9.5,
+                  style: AppTheme.f(11,
                       weight: FontWeight.w600, color: context.gc.textSecondary, height: 1.15),
                 ),
               ],
@@ -108,7 +109,7 @@ class _MedalSheet extends StatelessWidget {
       padding: sheetPad(context),
       decoration: BoxDecoration(
         color: gc.bgRaised,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(GymRadius.xxl)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -117,9 +118,9 @@ class _MedalSheet extends StatelessWidget {
           MedalSpin(id: id, size: 236, locked: !won),
           const SizedBox(height: 8),
           Text(t.awardSpinHint,
-              style: AppTheme.f(11.5, weight: FontWeight.w500, color: gc.textTertiary)),
+              style: AppTheme.f(11, weight: FontWeight.w500, color: gc.textTertiary)),
           const SizedBox(height: 22),
-          Text(awardName(id), textAlign: TextAlign.center, style: AppTheme.f(21, color: gc.text)),
+          Text(awardName(id), textAlign: TextAlign.center, style: AppTheme.f(20, color: gc.text)),
           const SizedBox(height: 8),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 22),
@@ -131,7 +132,7 @@ class _MedalSheet extends StatelessWidget {
           const SizedBox(height: 18),
           if (won && at != null)
             Text(t.awardWonOn(t.shortDateYear(at)),
-                style: AppTheme.f(12.5, weight: FontWeight.w600, color: gc.textTertiary))
+                style: AppTheme.f(12, weight: FontWeight.w600, color: gc.textTertiary))
           else
             _progress(gc),
         ],
@@ -147,7 +148,7 @@ class _MedalSheet extends StatelessWidget {
         SizedBox(
           width: 190,
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(100),
+            borderRadius: BorderRadius.circular(GymRadius.pill),
             child: LinearProgressIndicator(
               value: fit.awardProgress(id),
               minHeight: 5,
@@ -158,7 +159,7 @@ class _MedalSheet extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         Text('${medalShort(value)} / ${medalShort(goal)}',
-            style: AppTheme.f(12.5, weight: FontWeight.w600, color: gc.textTertiary)),
+            style: AppTheme.f(12, weight: FontWeight.w600, color: gc.textTertiary)),
       ],
     );
   }

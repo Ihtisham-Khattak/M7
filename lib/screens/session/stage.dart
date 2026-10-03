@@ -181,7 +181,7 @@ class _HoldToUnlockState extends State<_HoldToUnlock> with SingleTickerProviderS
                 padding: const EdgeInsets.fromLTRB(6, 6, 14, 6),
                 decoration: BoxDecoration(
                   color: gc.emberSoft,
-                  borderRadius: BorderRadius.circular(100),
+                  borderRadius: BorderRadius.circular(GymRadius.pill),
                 ),
                 child: Row(mainAxisSize: MainAxisSize.min, children: [
                   SizedBox(

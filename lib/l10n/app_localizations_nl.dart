@@ -371,6 +371,24 @@ class AppLocalizationsNl extends AppLocalizations {
   String get tagline => 'Zacht, maar niet zwak.';
 
   @override
+  String get progressStrength => 'Kracht';
+
+  @override
+  String get progressBody => 'Lichaam';
+
+  @override
+  String get progressMuscles => 'Spieren';
+
+  @override
+  String get progressAllTime => 'Totaal';
+
+  @override
+  String get progressRecordsEmpty => 'Log een training en je records verschijnen hier.';
+
+  @override
+  String get progressBodyEmpty => 'Voeg je gewicht, maten of een foto toe en ze verschijnen hier.';
+
+  @override
   String get totalVolume30d => 'TOTAAL VOLUME · 30 DAGEN';
 
   @override
@@ -1796,7 +1814,8 @@ class AppLocalizationsNl extends AppLocalizations {
   String get welcomeKicker => 'WELKOM BIJ';
 
   @override
-  String get welcomeBlurb => 'Alles blijft op je telefoon. Geen account, geen internet, niets te betalen.';
+  String get welcomeBlurb =>
+      'Kaizan betekent gestaag beter worden. Geen extremen, gewoon één eerlijke training, en dan de volgende.';
 
   @override
   String get welcomeStart => 'BEGINNEN';

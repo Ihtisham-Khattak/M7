@@ -371,6 +371,24 @@ class AppLocalizationsTr extends AppLocalizations {
   String get tagline => 'Yumuşak ama zayıf değil.';
 
   @override
+  String get progressStrength => 'Güç';
+
+  @override
+  String get progressBody => 'Vücut';
+
+  @override
+  String get progressMuscles => 'Kaslar';
+
+  @override
+  String get progressAllTime => 'Tüm zamanlar';
+
+  @override
+  String get progressRecordsEmpty => 'Bir antrenman kaydet, rekorların burada görünsün.';
+
+  @override
+  String get progressBodyEmpty => 'Kilonu, ölçülerini veya bir fotoğraf ekle; burada görünür.';
+
+  @override
   String get totalVolume30d => 'TOPLAM HACİM · 30 GÜN';
 
   @override
@@ -1794,7 +1812,8 @@ class AppLocalizationsTr extends AppLocalizations {
   String get welcomeKicker => 'HOŞ GELDİN';
 
   @override
-  String get welcomeBlurb => 'Her şey telefonunda kalır. Hesap yok, internet yok, ödeme yok.';
+  String get welcomeBlurb =>
+      'Kaizan, istikrarlı gelişim demek. Aşırılık yok: dürüst bir antrenman, sonra bir sonraki.';
 
   @override
   String get welcomeStart => 'BAŞLA';

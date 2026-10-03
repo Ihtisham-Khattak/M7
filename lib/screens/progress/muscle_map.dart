@@ -34,7 +34,7 @@ class _MuscleMapCardState extends State<_MuscleMapCard> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(t.muscleMap,
-                  style: AppTheme.f(10, weight: FontWeight.w600, color: gc.textTertiary, letterSpacing: 0.9)),
+                  style: AppTheme.f(11, weight: FontWeight.w600, color: gc.textTertiary, letterSpacing: 0.9)),
               _modes(),
             ],
           ),
@@ -55,7 +55,7 @@ class _MuscleMapCardState extends State<_MuscleMapCard> {
                   height: 7,
                   decoration: BoxDecoration(
                     color: heatLevelColor(gc, i),
-                    borderRadius: BorderRadius.circular(2),
+                    borderRadius: BorderRadius.circular(GymRadius.hair),
                   ),
                 ),
               ),
@@ -108,7 +108,7 @@ class _MuscleMapCardState extends State<_MuscleMapCard> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(t.muscleMap,
-                  style: AppTheme.f(10, weight: FontWeight.w600, color: gc.textTertiary, letterSpacing: 0.9)),
+                  style: AppTheme.f(11, weight: FontWeight.w600, color: gc.textTertiary, letterSpacing: 0.9)),
               _modes(),
             ],
           ),
@@ -163,7 +163,7 @@ class _MuscleMapCardState extends State<_MuscleMapCard> {
                   height: 7,
                   decoration: BoxDecoration(
                     color: recoveryColor(gc, i / 4),
-                    borderRadius: BorderRadius.circular(2),
+                    borderRadius: BorderRadius.circular(GymRadius.hair),
                   ),
                 ),
               ),

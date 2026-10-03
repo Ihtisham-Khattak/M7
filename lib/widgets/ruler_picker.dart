@@ -4,6 +4,7 @@ import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 
 import '../l10n/l10n.dart';
 import '../theme/app_colors.dart';
+import '../theme/tokens.dart';
 import '../theme/app_theme.dart';
 import 'dialogs.dart';
 import 'glass.dart';
@@ -130,7 +131,7 @@ class _RulerPickerState extends State<RulerPicker> {
               child: Container(
                 width: vertical ? 44 : 3,
                 height: vertical ? 3 : 44,
-                decoration: BoxDecoration(color: gc.accent, borderRadius: BorderRadius.circular(2)),
+                decoration: BoxDecoration(color: gc.accent, borderRadius: BorderRadius.circular(GymRadius.hair)),
               ),
             ),
           ],
@@ -273,7 +274,7 @@ Future<double?> askRuler(
             RollingText(show(current), style: AppTheme.f(54, weight: FontWeight.w800, color: gc.text, height: 1.1)),
             if (unit.isNotEmpty) ...[
               const SizedBox(width: 6),
-              Text(unit, style: AppTheme.f(18, weight: FontWeight.w700, color: gc.textSecondary)),
+              Text(unit, style: AppTheme.f(17, weight: FontWeight.w700, color: gc.textSecondary)),
             ],
           ],
         );
@@ -292,7 +293,7 @@ Future<double?> askRuler(
           padding: sheetPad(sheet),
           decoration: BoxDecoration(
             color: gc.bgRaised,
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(GymRadius.xxl)),
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,

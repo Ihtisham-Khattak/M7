@@ -6,6 +6,7 @@ import 'package:gymmane/models/workout.dart';
 import 'package:gymmane/services/local_store.dart';
 import 'package:gymmane/state/fit_state.dart';
 import 'package:gymmane/theme/app_theme.dart';
+import 'package:gymmane/widgets/entrance.dart';
 import 'package:gymmane/widgets/metric_card.dart';
 import 'package:gymmane/widgets/progress_ring.dart';
 import 'package:gymmane/widgets/routine_folder.dart';
@@ -128,6 +129,12 @@ void main() {
       }
       expect(tester.takeException(), isNull);
       handle.dispose();
+    });
+
+    testWidgets('metric digits are not clipped: the rolling number keeps a full line height', (tester) async {
+      await tester.pumpWidget(host(const MetricCard(label: 'Sets', value: '36')));
+      final roll = tester.widget<RollIn>(find.byType(RollIn));
+      expect(roll.style.height, greaterThanOrEqualTo(1.15), reason: 'height 1.0 cuts the bottom off the digits');
     });
 
     testWidgets('a metric reads as "label: value unit" and scales down instead of overflowing', (tester) async {

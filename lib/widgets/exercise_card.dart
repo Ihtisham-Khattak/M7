@@ -77,7 +77,7 @@ class ExerciseCard extends StatelessWidget {
       child: ExerciseMedia(ex: exercise, height: thumbSize, radius: GymRadius.sm, bordered: false),
     );
     final content = Row(children: [
-      if (leading != null) leading!,
+      ?leading,
       onThumbTap == null
           ? thumb
           : GestureDetector(behavior: HitTestBehavior.opaque, onTap: onThumbTap, child: thumb),

@@ -64,7 +64,7 @@ class _MuscleRadarCardState extends State<MuscleRadarCard> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(t.radarTitle, style: AppTheme.f(21, weight: FontWeight.w800, color: gc.text)),
+          Text(t.radarTitle, style: AppTheme.f(20, weight: FontWeight.w800, color: gc.text)),
           const SizedBox(height: 4),
           Text(t.radarHint, style: AppTheme.f(13, weight: FontWeight.w500, color: gc.textSecondary)),
           const SizedBox(height: 10),

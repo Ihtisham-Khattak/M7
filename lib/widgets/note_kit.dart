@@ -90,7 +90,7 @@ class NoteCalendar extends StatelessWidget {
               Expanded(
                 child: Text(t.weekdayInitial(fit.weekdayAt(i)).toUpperCase(),
                     textAlign: TextAlign.center,
-                    style: AppTheme.f(10.5,
+                    style: AppTheme.f(11,
                         weight: FontWeight.w600, color: gc.textTertiary, letterSpacing: 1)),
               ),
           ],
@@ -155,7 +155,7 @@ class NoteCalendar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text('${day.day}',
-                  style: AppTheme.f(13.5,
+                  style: AppTheme.f(13,
                       weight: isToday || on ? FontWeight.w700 : FontWeight.w500,
                       color: on
                           ? gc.text
@@ -199,7 +199,7 @@ Future<void> showNoteDaySheet(BuildContext context, DateTime day) async {
       padding: sheetPad(context, bottom: 26),
       decoration: BoxDecoration(
         color: gc.bgRaised,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(GymRadius.xxl)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -293,7 +293,7 @@ class NoteKindPicker extends StatelessWidget {
                         child: Text(
                           noteKindLabel(kind),
                           maxLines: 1,
-                          style: AppTheme.f(11.5,
+                          style: AppTheme.f(11,
                               weight: FontWeight.w600,
                               color: selected == kind
                                   ? noteKindColor(gc, kind)
@@ -342,12 +342,12 @@ class NoteFilterBar extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 8),
             decoration: BoxDecoration(
               color: on ? color.withValues(alpha: 0.16) : gc.bgRaised,
-              borderRadius: BorderRadius.circular(100),
+              borderRadius: BorderRadius.circular(GymRadius.pill),
               border: Border.all(color: on ? color : gc.border),
             ),
             child: Center(
               child: Text(label,
-                  style: AppTheme.f(12.5,
+                  style: AppTheme.f(12,
                       weight: FontWeight.w600, color: on ? color : gc.textSecondary)),
             ),
           ),
@@ -428,7 +428,7 @@ class NoteCard extends StatelessWidget {
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.right,
-                          style: AppTheme.f(11.5, weight: FontWeight.w500, color: gc.textTertiary),
+                          style: AppTheme.f(11, weight: FontWeight.w500, color: gc.textTertiary),
                         ),
                       ),
                     ],

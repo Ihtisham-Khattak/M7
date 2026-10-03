@@ -361,6 +361,24 @@ class AppLocalizationsKo extends AppLocalizations {
   String get tagline => '부드럽지만, 약하지 않게.';
 
   @override
+  String get progressStrength => '근력';
+
+  @override
+  String get progressBody => '몸';
+
+  @override
+  String get progressMuscles => '근육';
+
+  @override
+  String get progressAllTime => '전체';
+
+  @override
+  String get progressRecordsEmpty => '운동을 기록하면 기록이 여기에 나타나요.';
+
+  @override
+  String get progressBodyEmpty => '체중, 치수 또는 사진을 추가하면 여기에 나타나요.';
+
+  @override
   String get totalVolume30d => '총 볼륨 · 30일';
 
   @override
@@ -1751,7 +1769,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get welcomeKicker => '환영합니다';
 
   @override
-  String get welcomeBlurb => '모든 데이터는 휴대전화에 남습니다. 계정, 인터넷, 결제가 필요 없습니다.';
+  String get welcomeBlurb => 'Kaizan은 꾸준한 개선을 뜻해요. 무리하지 말고, 정직한 운동 한 번, 그다음 또 한 번.';
 
   @override
   String get welcomeStart => '시작';

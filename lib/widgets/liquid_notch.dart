@@ -531,7 +531,7 @@ class _ToastContent extends StatelessWidget {
   const _ToastContent({required this.request});
   final _ToastRequest request;
 
-  static final subStyle = AppTheme.f(11.5,
+  static final subStyle = AppTheme.f(11,
       weight: FontWeight.w600, color: Colors.white.withValues(alpha: 0.6), height: 1.2);
 
   @override

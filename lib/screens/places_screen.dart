@@ -184,7 +184,7 @@ class PlacesScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(t.placeGearLabel,
-                    style: AppTheme.s(10,
+                    style: AppTheme.s(11,
                         weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.5)),
                 const SizedBox(height: 10),
                 Wrap(
@@ -247,7 +247,7 @@ class PlacesScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
           decoration: BoxDecoration(
             color: on ? gc.emberSoft : gc.bgRaised2,
-            borderRadius: BorderRadius.circular(100),
+            borderRadius: BorderRadius.circular(GymRadius.pill),
             border: Border.all(color: on ? gc.ember : gc.border),
           ),
           child: Row(
@@ -257,7 +257,7 @@ class PlacesScreen extends StatelessWidget {
                   size: 10, color: on ? gc.ember : gc.textTertiary),
               const SizedBox(width: 6),
               Text(t.equipment(gear),
-                  style: AppTheme.s(12.5,
+                  style: AppTheme.s(12,
                       weight: FontWeight.w600, color: on ? gc.text : gc.textSecondary)),
             ],
           ),
@@ -281,7 +281,7 @@ class PlacesScreen extends StatelessWidget {
             decoration: BoxDecoration(
               color: gc.bgRaised,
               border: Border.all(color: gc.border),
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(GymRadius.xxl)),
             ),
             child: SingleChildScrollView(
               child: Column(
@@ -296,7 +296,7 @@ class PlacesScreen extends StatelessWidget {
                   const SizedBox(height: 4),
                   Text(current.name,
                       textAlign: TextAlign.center,
-                      style: AppTheme.s(12.5, color: gc.textSecondary)),
+                      style: AppTheme.s(12, color: gc.textSecondary)),
                   const SizedBox(height: 20),
                   ToolRow(
                     label: t.barWeight,
@@ -317,7 +317,7 @@ class PlacesScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(t.platePairs,
-                          style: AppTheme.s(10,
+                          style: AppTheme.s(11,
                               weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.5)),
                       if (current.plates.isNotEmpty)
                         GestureDetector(

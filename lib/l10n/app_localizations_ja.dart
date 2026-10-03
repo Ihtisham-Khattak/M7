@@ -361,6 +361,24 @@ class AppLocalizationsJa extends AppLocalizations {
   String get tagline => 'やわらかく、けれど弱くない。';
 
   @override
+  String get progressStrength => '筋力';
+
+  @override
+  String get progressBody => 'からだ';
+
+  @override
+  String get progressMuscles => '筋肉';
+
+  @override
+  String get progressAllTime => '通算';
+
+  @override
+  String get progressRecordsEmpty => 'トレーニングを記録すると、ここに自己ベストが表示されます。';
+
+  @override
+  String get progressBodyEmpty => '体重・サイズ・写真を追加すると、ここに表示されます。';
+
+  @override
   String get totalVolume30d => '総ボリューム · 30日';
 
   @override
@@ -1738,7 +1756,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get welcomeKicker => 'ようこそ';
 
   @override
-  String get welcomeBlurb => 'すべて端末内に保存。アカウント不要、インターネット不要、支払いなし。';
+  String get welcomeBlurb => 'Kaizanは、着実な改善のこと。無理はせず、誠実な1回のトレーニングを、また次へ。';
 
   @override
   String get welcomeStart => '始める';

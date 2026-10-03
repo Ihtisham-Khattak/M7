@@ -748,6 +748,42 @@ abstract class AppLocalizations {
   /// **'Soft but not weak.'**
   String get tagline;
 
+  /// No description provided for @progressStrength.
+  ///
+  /// In en, this message translates to:
+  /// **'Strength'**
+  String get progressStrength;
+
+  /// No description provided for @progressBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Body'**
+  String get progressBody;
+
+  /// No description provided for @progressMuscles.
+  ///
+  /// In en, this message translates to:
+  /// **'Muscles'**
+  String get progressMuscles;
+
+  /// No description provided for @progressAllTime.
+  ///
+  /// In en, this message translates to:
+  /// **'All time'**
+  String get progressAllTime;
+
+  /// No description provided for @progressRecordsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Log a session and your records appear here.'**
+  String get progressRecordsEmpty;
+
+  /// No description provided for @progressBodyEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Add your weight, measurements or a photo and they appear here.'**
+  String get progressBodyEmpty;
+
   /// No description provided for @totalVolume30d.
   ///
   /// In en, this message translates to:
@@ -3235,7 +3271,7 @@ abstract class AppLocalizations {
   /// No description provided for @welcomeBlurb.
   ///
   /// In en, this message translates to:
-  /// **'Everything stays on your phone. No account, no internet, nothing to pay.'**
+  /// **'Kaizan means steady improvement. No extremes, just one honest session, then the next.'**
   String get welcomeBlurb;
 
   /// No description provided for @welcomeStart.

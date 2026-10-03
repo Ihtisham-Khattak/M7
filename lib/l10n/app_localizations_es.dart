@@ -371,6 +371,24 @@ class AppLocalizationsEs extends AppLocalizations {
   String get tagline => 'Suave, pero no débil.';
 
   @override
+  String get progressStrength => 'Fuerza';
+
+  @override
+  String get progressBody => 'Cuerpo';
+
+  @override
+  String get progressMuscles => 'Músculos';
+
+  @override
+  String get progressAllTime => 'Total';
+
+  @override
+  String get progressRecordsEmpty => 'Registra una sesión y tus récords aparecerán aquí.';
+
+  @override
+  String get progressBodyEmpty => 'Añade tu peso, medidas o una foto y aparecerán aquí.';
+
+  @override
   String get totalVolume30d => 'VOLUMEN TOTAL · 30 DÍAS';
 
   @override
@@ -1792,7 +1810,8 @@ class AppLocalizationsEs extends AppLocalizations {
   String get welcomeKicker => 'TE DAMOS LA BIENVENIDA A';
 
   @override
-  String get welcomeBlurb => 'Todo se queda en tu móvil. Sin cuenta, sin internet, sin pagar nada.';
+  String get welcomeBlurb =>
+      'Kaizan significa mejorar poco a poco. Sin extremos: una sesión honesta, y luego la siguiente.';
 
   @override
   String get welcomeStart => 'EMPEZAR';

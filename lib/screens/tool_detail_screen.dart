@@ -36,7 +36,7 @@ class ToolDetailScreen extends StatelessWidget {
               ),
               child: Column(children: [
                 Text(t.result.toUpperCase(),
-                    style: AppTheme.f(10.5,
+                    style: AppTheme.f(11,
                         weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.6)),
                 const SizedBox(height: 8),
                 Text(meta.$2,
@@ -216,9 +216,9 @@ class ToolDetailScreen extends StatelessWidget {
             borderColor: Colors.transparent,
             padding: const EdgeInsets.all(12),
             child: Column(children: [
-              Text(label, style: AppTheme.f(10, weight: FontWeight.w600, color: gc.textSecondary)),
+              Text(label, style: AppTheme.f(11, weight: FontWeight.w600, color: gc.textSecondary)),
               const SizedBox(height: 4),
-              Text(value, style: AppTheme.f(16, weight: FontWeight.w700, color: gc.text)),
+              Text(value, style: AppTheme.f(15, weight: FontWeight.w700, color: gc.text)),
             ]),
           ),
         );
@@ -346,7 +346,7 @@ void showPlateSheet(BuildContext context, double displayTarget) {
           padding: sheetPad(sheet),
           decoration: BoxDecoration(
             color: gc.bgRaised,
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(GymRadius.xxl)),
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -361,7 +361,7 @@ void showPlateSheet(BuildContext context, double displayTarget) {
                   style: AppTheme.f(30, weight: FontWeight.w700, color: gc.ember)),
               const SizedBox(height: 18),
               Text(t.barWeight,
-                  style: AppTheme.f(10, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.5)),
+                  style: AppTheme.f(11, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.5)),
               const SizedBox(height: 8),
               Row(children: [
                 for (final option in fit.barOptions) ...[
@@ -388,7 +388,7 @@ void showPlateSheet(BuildContext context, double displayTarget) {
               ]),
               const SizedBox(height: 18),
               Text(t.perSide,
-                  style: AppTheme.f(10, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.5)),
+                  style: AppTheme.f(11, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.5)),
               const SizedBox(height: 10),
               if (rows.isEmpty)
                 Text(t.justTheBar, style: AppTheme.f(13, weight: FontWeight.w500, color: gc.textSecondary))

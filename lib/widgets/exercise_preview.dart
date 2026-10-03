@@ -124,7 +124,7 @@ class _ExercisePreviewState extends State<_ExercisePreview> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(exerciseName(ex),
-                                style: AppTheme.f(24, weight: FontWeight.w800, color: gc.text, height: 1.1)),
+                                style: AppTheme.f(22, weight: FontWeight.w800, color: gc.text, height: 1.1)),
                             const SizedBox(height: 16),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -189,7 +189,7 @@ class _ExercisePreviewState extends State<_ExercisePreview> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(label.toUpperCase(),
-                style: AppTheme.f(10.5, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.3)),
+                style: AppTheme.f(11, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.3)),
             const SizedBox(height: 5),
             Text(value,
                 maxLines: 2,
@@ -241,7 +241,7 @@ class _ExercisePreviewState extends State<_ExercisePreview> {
             height: 26,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(100),
+              borderRadius: BorderRadius.circular(GymRadius.pill),
               border: Border.all(color: gc.border),
             ),
             child: Icon(PhosphorIconsRegular.pushPin, size: 13, color: gc.textTertiary),
@@ -260,7 +260,7 @@ class _ExercisePreviewState extends State<_ExercisePreview> {
           height: 26,
           padding: const EdgeInsets.symmetric(horizontal: 10),
           alignment: Alignment.center,
-          decoration: BoxDecoration(color: gc.accentSoft, borderRadius: BorderRadius.circular(100)),
+          decoration: BoxDecoration(color: gc.accentSoft, borderRadius: BorderRadius.circular(GymRadius.pill)),
           child: Text(_clock(ms), style: AppTheme.f(12, weight: FontWeight.w700, color: gc.accent)),
         ),
       );
@@ -330,7 +330,7 @@ class _VideoStage extends StatelessWidget {
                   ),
                   const SizedBox(width: 12),
                   Text('${_clock(v.position.inMilliseconds)} / ${_clock(v.duration.inMilliseconds)}',
-                      style: AppTheme.f(11.5, weight: FontWeight.w600, color: gc.textSecondary)),
+                      style: AppTheme.f(11, weight: FontWeight.w600, color: gc.textSecondary)),
                 ]),
               ),
             ]);

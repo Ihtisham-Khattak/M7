@@ -44,7 +44,7 @@ void main() {
     for (final f in Directory('lib').listSync(recursive: true).whereType<File>().where((f) => f.path.endsWith('.dart'))) {
       if (f.path.contains('lib/l10n/')) continue;
       for (final (i, line) in f.readAsLinesSync().indexed) {
-        final text = line.replaceAll(RegExp(r"https?://\S+|InlitX/GymMane|gymmane[_.\-]\w*|com\.gymmane\.\w+"), '');
+        final text = line.replaceAll(RegExp(r'https?://\S+|InlitX/GymMane|gymmane[_.\-]\w*|com\.gymmane\.\w+'), '');
         if (RegExp(r"""['"][^'"]*GymMane[^'"]*['"]""").hasMatch(text)) left.add('${f.path}:${i + 1}: ${line.trim()}');
       }
     }
@@ -55,7 +55,7 @@ void main() {
     final gradle = File('android/app/build.gradle.kts').readAsStringSync();
     expect(gradle, contains('applicationId = "com.gymmane.app"'));
     expect(File('lib/services/local_store.dart').readAsStringSync(), contains('gymmane_v1'));
-    expect(File('lib/services/backup_zip.dart').readAsStringSync(), contains("kBackupJsonEntry = 'gymmane.json'"));
+    expect(File('lib/services/backup_zip.dart').readAsStringSync(), allOf(contains('kBackupJsonEntry'), contains('gymmane.json')));
     expect(DocumentProblem.values.map((e) => e.name), contains('notGymMane'));
   });
 

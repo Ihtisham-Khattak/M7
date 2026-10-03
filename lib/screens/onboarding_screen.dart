@@ -166,7 +166,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       padding: const EdgeInsets.fromLTRB(GymSpace.xxl, GymSpace.lg, GymSpace.lg, 0),
       child: Row(
         children: [
-          Expanded(child: StepProgress(count: count, index: _index)),
+          Expanded(child: StepProgress(count: _stepTotal, index: _stepNumber(_index) - 1)),
           const SizedBox(width: 10),
           Semantics(
             button: true,
@@ -206,7 +206,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   width: 56,
                   height: 56,
                   margin: const EdgeInsets.only(right: GymSpace.md),
-                  decoration: BoxDecoration(color: gc.bgRaised, shape: BoxShape.circle),
+                  decoration: BoxDecoration(color: gc.bgRaised, borderRadius: BorderRadius.circular(GymRadius.md)),
                   child: Icon(PhosphorIconsBold.arrowLeft, size: 18, color: gc.textSecondary),
                 ),
               ),
@@ -255,7 +255,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   header: true,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: GymSpace.xs),
-                    child: Text(title, style: AppTheme.f(30, weight: FontWeight.w800, color: gc.text, height: 1.12)),
+                    child: Text(title, style: GymText.display(color: gc.text).copyWith(fontSize: 30, height: 1.12)),
                   ),
                 ),
               ),
@@ -277,7 +277,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Widget _label(GymColors gc, String text) => Text(text.toUpperCase(),
-      style: AppTheme.f(10.5, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.3));
+      style: AppTheme.f(11, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.3));
 
   Widget _group(GymColors gc, List<Widget> rows) {
     return Container(
@@ -320,7 +320,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 4),
                   child: Text(t.welcomeKicker.toUpperCase(),
-                      style: AppTheme.f(10.5, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.6)),
+                      style: AppTheme.f(11, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.6)),
                 ),
               ),
               const SizedBox(height: 8),
@@ -344,7 +344,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 4),
                   child: Text(t.welcomeBlurb,
-                      style: AppTheme.f(14.5, weight: FontWeight.w500, color: gc.textSecondary, height: 1.5)),
+                      style: AppTheme.f(14, weight: FontWeight.w500, color: gc.textSecondary, height: 1.5)),
                 ),
               ),
               const SizedBox(height: 22),
@@ -373,10 +373,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title, style: AppTheme.f(14.5, weight: FontWeight.w600, color: gc.text)),
+                  Text(title, style: AppTheme.f(14, weight: FontWeight.w600, color: gc.text)),
                   const SizedBox(height: 3),
                   Text(why,
-                      style: AppTheme.f(12.5, weight: FontWeight.w500, color: gc.textSecondary, height: 1.4)),
+                      style: AppTheme.f(12, weight: FontWeight.w500, color: gc.textSecondary, height: 1.4)),
                 ],
               ),
             ),
@@ -393,7 +393,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               _rowIcon(gc, icon),
               Expanded(
                 child: Text(sentenceCase(label),
-                    style: AppTheme.f(14.5, weight: FontWeight.w500, color: gc.text)),
+                    style: AppTheme.f(14, weight: FontWeight.w500, color: gc.text)),
               ),
               const SizedBox(width: 12),
               control,
@@ -416,7 +416,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           icon,
           label,
           Row(mainAxisSize: MainAxisSize.min, children: [
-            Text(value, style: AppTheme.f(15.5, weight: FontWeight.w700, color: gc.text)),
+            Text(value, style: AppTheme.f(15, weight: FontWeight.w700, color: gc.text)),
             const SizedBox(width: 8),
             Icon(PhosphorIconsBold.caretRight, size: 13, color: gc.textTertiary),
           ]),
@@ -704,7 +704,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(t.placePresetName(preset),
-                        style: AppTheme.f(14.5,
+                        style: AppTheme.f(14,
                             weight: on ? FontWeight.w800 : FontWeight.w600, color: on ? gc.ember : gc.text)),
                     const SizedBox(height: 2),
                     Text(t.exerciseCount(n),

@@ -335,11 +335,11 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
           const SizedBox(height: 4),
           Padding(
             padding: const EdgeInsets.only(left: 26),
-            child: Text(t.notHereWhy, style: AppTheme.f(12.5, weight: FontWeight.w500, color: gc.textSecondary, height: 1.4)),
+            child: Text(t.notHereWhy, style: AppTheme.f(12, weight: FontWeight.w500, color: gc.textSecondary, height: 1.4)),
           ),
           const SizedBox(height: 14),
           Text(t.altHere,
-              style: AppTheme.f(10.5,
+              style: AppTheme.f(11,
                   weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.5)),
           const SizedBox(height: 6),
           for (final alt in fit.alternativesHere(ex, 3)) _similarRow(gc, alt),
@@ -381,7 +381,7 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(_fmtDate(h.date), style: AppTheme.f(14.5, weight: FontWeight.w600, color: gc.text)),
+                  Text(_fmtDate(h.date), style: AppTheme.f(14, weight: FontWeight.w600, color: gc.text)),
                   const SizedBox(height: 3),
                   Text(fit.setsSummary(e.sets),
                       maxLines: 1,
@@ -410,7 +410,7 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(_fmtDate(h.date),
-                  style: AppTheme.f(14.5, weight: FontWeight.w600, color: gc.text)),
+                  style: AppTheme.f(14, weight: FontWeight.w600, color: gc.text)),
               const SizedBox(height: 3),
               Text(_setsLine(e),
                   style: AppTheme.f(12, weight: FontWeight.w500, color: gc.textSecondary)),
@@ -423,7 +423,7 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
                   style: AppTheme.f(17, weight: FontWeight.w700, color: gc.text)),
               const SizedBox(height: 3),
               Text(t.volumeSuffix(fit.volumeLabel(e.volume)),
-                  style: AppTheme.f(11.5, weight: FontWeight.w500, color: gc.textSecondary)),
+                  style: AppTheme.f(11, weight: FontWeight.w500, color: gc.textSecondary)),
             ],
           ),
         ],
@@ -452,10 +452,10 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(titleCase(t.notes),
-                        style: AppTheme.f(14.5, weight: FontWeight.w500, color: gc.text)),
+                        style: AppTheme.f(14, weight: FontWeight.w500, color: gc.text)),
                     const SizedBox(height: 3),
                     Text(n == 0 ? t.noteNoneForExercise : t.noteCount(n),
-                        style: AppTheme.f(11.5,
+                        style: AppTheme.f(11,
                             weight: FontWeight.w500, color: gc.textSecondary)),
                   ],
                 ),
@@ -493,7 +493,7 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
                   Text(exerciseName(s),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: AppTheme.f(14.5, weight: FontWeight.w600, color: gc.text)),
+                      style: AppTheme.f(14, weight: FontWeight.w600, color: gc.text)),
                   const SizedBox(height: 4),
                   Text(t.equipment(s.equipment),
                       style: AppTheme.f(12, weight: FontWeight.w500, color: gc.textSecondary)),
@@ -517,7 +517,7 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
           Text(value,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: AppTheme.f(14.5, weight: FontWeight.w600, color: gc.text)),
+              style: AppTheme.f(14, weight: FontWeight.w600, color: gc.text)),
         ],
       ),
     );
@@ -546,7 +546,7 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
           const SizedBox(width: 12),
           Expanded(
             child: Text(t.archivedBanner,
-                style: AppTheme.f(12.5, weight: FontWeight.w600, color: gc.text, height: 1.35)),
+                style: AppTheme.f(12, weight: FontWeight.w600, color: gc.text, height: 1.35)),
           ),
           GestureDetector(
             behavior: HitTestBehavior.opaque,
@@ -561,10 +561,10 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
       );
 
   Widget _cardLabel(GymColors gc, String label) => Text(label.toUpperCase(),
-      style: AppTheme.f(10.5, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.3));
+      style: AppTheme.f(11, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.3));
 
   Widget _section(GymColors gc, String label) => Text(titleCase(label),
-      style: AppTheme.f(18, weight: FontWeight.w700, color: gc.text));
+      style: AppTheme.f(17, weight: FontWeight.w700, color: gc.text));
 
   Widget _group(GymColors gc, List<Widget> rows) {
     return Container(
@@ -631,13 +631,13 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(titleCase(t.restForExercise),
-                    style: AppTheme.f(14.5, weight: FontWeight.w500, color: gc.text)),
+                    style: AppTheme.f(14, weight: FontWeight.w500, color: gc.text)),
                 const SizedBox(height: 3),
                 GestureDetector(
                   behavior: HitTestBehavior.opaque,
                   onTap: custom ? () => fit.setExerciseRest(id, null) : null,
                   child: Text(custom ? t.restCustom : t.restUsingDefault,
-                      style: AppTheme.f(11.5,
+                      style: AppTheme.f(11,
                           weight: FontWeight.w500,
                           color: custom ? gc.accent : gc.textSecondary)),
                 ),
@@ -698,10 +698,10 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(t.nextTime,
-                    style: AppTheme.f(10.5, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.3)),
+                    style: AppTheme.f(11, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 1.3)),
                 if (!target.up) ...[
                   const SizedBox(height: 2),
-                  Text(t.nextHold, style: AppTheme.f(11.5, weight: FontWeight.w500, color: gc.textTertiary)),
+                  Text(t.nextHold, style: AppTheme.f(11, weight: FontWeight.w500, color: gc.textTertiary)),
                 ],
               ],
             ),
@@ -731,10 +731,10 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(title, style: AppTheme.f(14.5, weight: FontWeight.w500, color: gc.text)),
+                    Text(title, style: AppTheme.f(14, weight: FontWeight.w500, color: gc.text)),
                     const SizedBox(height: 3),
                     Text(hint,
-                        style: AppTheme.f(11.5,
+                        style: AppTheme.f(11,
                             weight: FontWeight.w500, color: gc.textSecondary, height: 1.3)),
                   ],
                 ),
@@ -776,14 +776,14 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(t.autoProgress,
-                            style: AppTheme.f(14.5, weight: FontWeight.w500, color: gc.text)),
+                            style: AppTheme.f(14, weight: FontWeight.w500, color: gc.text)),
                         const SizedBox(height: 3),
                         Text(
                             on
                                 ? t.autoProgressHint(step)
                                 : t.autoProgressHint(
                                     fit.weightLabel(fit.fromDisplayWeight(fit.weightStep))),
-                            style: AppTheme.f(11.5,
+                            style: AppTheme.f(11,
                                 weight: FontWeight.w500, color: gc.textSecondary, height: 1.3)),
                       ],
                     ),
@@ -835,10 +835,10 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(t.repsOnly,
-                        style: AppTheme.f(14.5, weight: FontWeight.w500, color: gc.text)),
+                        style: AppTheme.f(14, weight: FontWeight.w500, color: gc.text)),
                     const SizedBox(height: 3),
                     Text(t.repsOnlyHint,
-                        style: AppTheme.f(11.5,
+                        style: AppTheme.f(11,
                             weight: FontWeight.w500, color: gc.textSecondary, height: 1.3)),
                   ],
                 ),
@@ -870,7 +870,7 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
                 mode.isNotEmpty),
             Expanded(
               child: Text(t.exerciseTypeLabel,
-                  style: AppTheme.f(14.5, weight: FontWeight.w500, color: gc.text)),
+                  style: AppTheme.f(14, weight: FontWeight.w500, color: gc.text)),
             ),
             Text(_modeName(mode), style: AppTheme.f(13, weight: FontWeight.w600, color: gc.textSecondary)),
             const SizedBox(width: 6),
@@ -894,7 +894,7 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
             padding: sheetPad(sheet),
             decoration: BoxDecoration(
               color: gc.bgRaised,
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(GymRadius.xxl)),
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -923,7 +923,7 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
                 const SizedBox(height: 12),
                 Text(t.exerciseTypeHint,
                     textAlign: TextAlign.center,
-                    style: AppTheme.f(11.5, weight: FontWeight.w500, color: gc.textTertiary, height: 1.4)),
+                    style: AppTheme.f(11, weight: FontWeight.w500, color: gc.textTertiary, height: 1.4)),
               ],
             ),
           );
